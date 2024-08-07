@@ -1,13 +1,12 @@
 Name=Total FTEs Saved
 Description=How many FTEs time it would have taken (Last 7 Days)
 XQL=
-config timeframe between "-7d" and "now"
-| dataset = xsiam_playbookmetrics_raw
+dataset = xsiam_playbookmetrics_raw 
 | alter Tasks = Tasks->[]
 | arrayexpand Tasks
 
 // TODO apply a datamodel to these two objects instead (Tasks and Alert)
-| alter
+| alter 
 taskState = tasks->state,
 taskType = tasks->type,
 taskId = tasks->id,
@@ -35,12 +34,17 @@ playbookId = alert->playbookId
 | join type = inner (dataset = value_tags
 | fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time
 ) as vt (scriptID =  vt.value_scriptid)
-| fields value_category, value_scriptid, value_tag, value_taskname, value_time
+| fields value_category, value_scriptid, value_tag, value_taskname, value_time, _time
 
 | filter value_category  = "enrichment" or value_category  = "remediation" or value_category  = "assessment" or value_category  = "escalation" or value_category  = "triage"
-| alter soc_event_mintutes = to_integer(value_time )
-| comp sum(soc_event_mintutes) as total_soc_minutes
+| alter soc_event_minutes = to_integer(value_time )
+| comp sum(soc_event_minutes) as total_soc_minutes, first(_time) as TimeFrameBegin
+| alter TimeFrameEnds = time_frame_end()
+| alter TimeFrameWeeks = divide(timestamp_diff(TimeFrameEnds  , TimeFrameBegin  ,"DAY"),7)
+| alter TimeFrameWeeks = if(TimeFrameWeeks < 1, 1, TimeFrameWeeks )
+| alter TimeFrameHours = multiply(TimeFrameWeeks, 40)
 | alter total_soc_hours = divide(total_soc_minutes,60)
-| alter total_fte_saved = divide(total_soc_hours, 40)
+| alter total_fte_saved = round(divide(total_soc_hours, TimeFrameHours))
 
-| view graph type = single subtype = standard header = "Total FTEs Saved (last 7 days)" yaxis = total_fte_saved dataunit = "FTEs"
+
+| view graph type = single subtype = standard header = "Total FTEs Saved" yaxis = total_fte_saved dataunit = "FTEs" 
