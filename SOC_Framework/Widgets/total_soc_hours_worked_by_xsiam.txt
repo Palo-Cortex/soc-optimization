@@ -1,8 +1,7 @@
 Name=Total SOC Hours Worked by XSIAM
 Description=The number of hours worked by XSIAM automations (Last 7 Days)
 XQL=
-config timeframe between "-7d" and "now"
-| dataset = xsiam_playbookmetrics_raw
+dataset = xsiam_playbookmetrics_raw
 | alter Tasks = Tasks->[]
 | arrayexpand Tasks
 
