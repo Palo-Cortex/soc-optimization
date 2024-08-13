@@ -1,5 +1,5 @@
 Name=Total SOC Hours Worked by XSIAM
-Description=The number of hours worked by XSIAM automations (Last 7 Days)
+Description=The number of hours worked by XSIAM automations
 XQL=
 dataset = xsiam_playbookmetrics_raw
 | alter Tasks = Tasks->[]
@@ -43,4 +43,4 @@ playbookId = alert->playbookId
 
 
 
-| view graph type = single subtype = standard header = "Hours Saved by XSIAM (Last 7 Days)" yaxis = total_soc_hours dataunit = "Hours" headcolor = "#f1f7f0" font = "Arial" headerfontsize = 6
+| view graph type = single subtype = standard header = "Hours Saved by XSIAM" yaxis = total_soc_hours dataunit = "Hours" headcolor = "#f1f7f0" font = "Arial" headerfontsize = 6
