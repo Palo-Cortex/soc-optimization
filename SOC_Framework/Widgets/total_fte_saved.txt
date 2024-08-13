@@ -1,5 +1,5 @@
 Name=Total FTEs Saved
-Description=How many FTEs time it would have taken (Last 7 Days)
+Description=How many FTEs time it would have taken
 XQL=
 dataset = xsiam_playbookmetrics_raw 
 | alter Tasks = Tasks->[]
