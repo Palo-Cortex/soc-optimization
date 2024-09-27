@@ -26,7 +26,7 @@ playbookId = alert->playbookId
 | dedup dedupkey
 
 // Filter for just automation
-| filter alerttype != "Unclassified"
+//| filter alerttype != "Unclassified"
 | filter taskState = "Completed"
 | filter tasktype = "regular"
 
@@ -39,8 +39,11 @@ playbookId = alert->playbookId
 | filter value_category  = "enrichment" or value_category  = "remediation" or value_category  = "assessment" or value_category  = "escalation" or value_category  = "triage"
 | alter soc_event_mintutes = to_integer(value_time)
 | comp sum(soc_event_mintutes) as total_soc_minutes
-| alter total_soc_hours = divide(total_soc_minutes,60)
+| alter total_soc_hours = round(divide(total_soc_minutes,60))
 
 
 
-| view graph type = single subtype = standard header = "Hours Saved by XSIAM" yaxis = total_soc_hours dataunit = "Hours" headcolor = "#f1f7f0" font = "Arial" headerfontsize = 6
+
+
+
+| view graph type = single subtype = standard header = "Hours Saved by XSIAM" yaxis = total_soc_hours dataunit = "Hours" headcolor = "#f1f7f0" font = "Arial" headerfontsize = 6 
