@@ -26,7 +26,7 @@ playbookId = alert->playbookId
 | dedup dedupkey
 
 // Filter for just automation
-| filter alerttype != "Unclassified"
+//| filter alerttype != "Unclassified"
 | filter taskState = "Completed"
 | filter tasktype = "regular"
 
@@ -42,4 +42,6 @@ playbookId = alert->playbookId
 | sort desc total_soc_minutes
 
 
-| view graph type = column subtype = grouped layout = horizontal show_callouts = `true` xaxis = value_tag yaxis = total_soc_minutes,total_soc_hours seriescolor("total_soc_hours","#7cb5ec") seriescolor("total_soc_minutes","#23ae4f")
+
+
+| view graph type = column subtype = grouped layout = horizontal show_callouts = `true` xaxis = value_tag yaxis = total_soc_minutes,total_soc_hours seriescolor("total_soc_hours","#7cb5ec") seriescolor("total_soc_minutes","#23ae4f") 
