@@ -26,7 +26,7 @@ playbookId = alert->playbookId
 | dedup dedupkey
 
 // Filter for just automation
-| filter alerttype != "Unclassified"
+//| filter alerttype != "Unclassified"
 | filter taskState = "Completed"
 | filter tasktype = "regular"
 
@@ -45,6 +45,8 @@ playbookId = alert->playbookId
 | alter TimeFrameHours = multiply(TimeFrameWeeks, 40)
 | alter total_soc_hours = divide(total_soc_minutes,60)
 | alter total_fte_saved = round(divide(total_soc_hours, TimeFrameHours))
+
+
 
 
 | view graph type = single subtype = standard header = "Total FTEs Saved" yaxis = total_fte_saved dataunit = "FTEs" 
