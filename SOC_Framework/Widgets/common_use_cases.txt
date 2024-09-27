@@ -26,5 +26,8 @@ alertID = alert->id
 | alter soc_event_mintutes = to_integer(value_time )
 | comp sum(soc_event_mintutes) as total_soc_minutes by value_tag
 | alter total_soc_hours = divide(total_soc_minutes,60)
+| sort desc total_soc_hours 
 
-| view graph type = wordcloud header = "Use Case Time" xaxis = value_tag yaxis = total_soc_hours multi_color = `true`
+
+
+| view graph type = column subtype = grouped layout = horizontal header = "Use Case Time" xaxis = value_tag yaxis = total_soc_hours 
