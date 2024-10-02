@@ -34,13 +34,20 @@ playbookId = alert->playbookId
 //TODO make this a lookup table and join instead to make it scalable
 | join type = inner (dataset = value_tags
 | fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time, Product as product, Vendor as vendor
-) as vt (scriptID =  vt.value_scriptid)
+) as vt (scriptID contains vt.value_scriptid)
 | fields value_category, value_scriptid, product, value_taskname, value_time, vendor
+| filter ((value_time != null and value_time != """""")) 
+| filter ((value_scriptid != null and value_scriptid != """""")) 
+
 | alter soc_event_minutes = to_integer(value_time)
 | comp sum(soc_event_minutes) as total_soc_minutes by product, vendor
 | alter total_soc_hours = round(divide(total_soc_minutes , 60))
 | fields product, vendor, total_soc_minutes  , total_soc_hours
 | sort desc total_soc_hours
+
+
+
+
 
 
 
