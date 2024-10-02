@@ -2,44 +2,32 @@ Name=Most Common Tasks
 Description=Which tasks are most often being executed
 XQL=
 dataset = xsiam_playbookmetrics_raw
-| alter Tasks = Tasks->[]
-| arrayexpand Tasks
 
 // TODO apply a datamodel to these two objects instead (Tasks and Alert)
 | alter
-taskState = tasks->state,
-taskType = tasks->type,
-taskId = tasks->id,
-taskName = tasks->name,
-scriptID = tasks->scriptId,
 incidentID = alert->parentXDRIncident,
-alertID = alert->id,
-alertName = alert->name,
 alertType = alert->type,
-playbookId = alert->playbookId
+playbookId = alert->playbookId,
+alertID = alert->id
 
-| filter taskType not in ("start", "title", "condition")
+| fields incidentID, playbookId, alertType, alertID
 | filter playbookId != ""
+| dedup alertID
 
-// Since the job which posts this data runs every 15 min there may be duplicate data the more frequent it is run
-| alter dedupkey = concat(incidentID,taskId)
-| dedup dedupkey
-
-// Filter for just automation
-| filter alerttype != "Unclassified"
-| filter taskState = "Completed"
-| filter tasktype = "regular"
-
-//TODO make this a lookup table and join instead to make it scalable
+//Grab the value tags
 | join type = inner (dataset = value_tags
-| fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time
-) as vt (scriptID =  vt.value_scriptid)
-| fields value_category, value_scriptid, value_tag, value_taskname, value_time
+| fields Category as value_category, PlaybookID as value_playbookid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time
+) as vt (playbookId  =  vt.value_playbookid)
+| fields value_category, value_playbookid, value_tag, value_taskname, value_time
 
+// GRAPH this thing
 | fields value_time , value_tag , value_category
-| filter value_category  = "enrichment" or value_category  = "remediation" or value_category  = "triage"
-| filter value_tag  != "upon_trigger"
-| alter soc_event_mintutes = to_integer(value_time)
+| filter value_category  = "use_case"
+| alter soc_event_mintutes = to_integer(value_time )
 | comp sum(soc_event_mintutes) as total_soc_minutes by value_tag
 | alter total_soc_hours = divide(total_soc_minutes,60)
-| view graph type = wordcloud header = "Task Time" xaxis = value_tag yaxis = total_soc_hours multi_color = `true`
+| sort desc total_soc_hours 
+
+
+
+| view graph type = column subtype = grouped layout = horizontal header = "Use Case Time" xaxis = value_tag yaxis = total_soc_hours 
