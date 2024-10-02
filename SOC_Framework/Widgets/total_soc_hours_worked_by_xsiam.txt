@@ -31,15 +31,19 @@ playbookId = alert->playbookId
 | filter tasktype = "regular"
 
 //TODO make this a lookup table and join instead to make it scalable
-| join type = inner (dataset = value_tags
-| fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time
-) as vt (scriptID =  vt.value_scriptid)
-| fields value_category, value_scriptid, value_tag, value_taskname, value_time
+| join type = inner (dataset = value_tags 
+| fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time, PlaybookID as playbook_id
+) as vt (scriptID contains vt.value_scriptid)
+| fields value_category, value_scriptid, value_tag, value_taskname, value_time, _time, playbook_id 
+| filter ((value_time != null and value_time != """""")) 
+| filter ((value_scriptid != null and value_scriptid != """""")) 
 
-| filter value_category  = "enrichment" or value_category  = "remediation" or value_category  = "assessment" or value_category  = "escalation" or value_category  = "triage"
 | alter soc_event_mintutes = to_integer(value_time)
 | comp sum(soc_event_mintutes) as total_soc_minutes
 | alter total_soc_hours = round(divide(total_soc_minutes,60))
+
+
+
 
 
 
