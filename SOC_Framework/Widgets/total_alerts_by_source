@@ -1,0 +1,6 @@
+dataset = alerts 
+// Total Alerts
+| comp count_distinct(alert_id) as total_alerts by alert_source 
+| sort desc total_alerts
+
+| view graph type = pie show_callouts = `true` show_callouts_names = `true` xaxis = alert_source yaxis = total_alerts 
