@@ -1,25 +1,4 @@
-{
-	"allRead": true,
-	"allReadWrite": true,
-	"cacheVersn": 0,
-	"data": "5551\5552\5553",
-	"definitionId": "",
-	"description": "",
-	"detached": false,
-	"fromServerVersion": "",
-	"id": "Job_Utility_Bulk_Alert_Closer_ID_List",
-	"itemVersion": "",
-	"locked": false,
-	"name": "Job_Utility_Bulk_Alert_Closer_ID_List",
-	"nameLocked": false,
-	"packID": "",
-	"packName": "",
-	"previousAllRead": true,
-	"previousAllReadWrite": true,
-	"system": false,
-	"tags": null,
-	"toServerVersion": "",
-	"truncated": false,
-	"type": "plain_text",
-	"version": -1
-}
+1
+2
+3
+4
