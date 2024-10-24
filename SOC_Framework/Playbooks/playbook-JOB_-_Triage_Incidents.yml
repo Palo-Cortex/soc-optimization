@@ -50,7 +50,7 @@ tasks:
       body:
         simple: '{"request_data" : {"filters" : [{"field": "status","operator": "eq","value":
           "New"},{"operator": "lte", "value": ${TimeNowUnix}, "field": "modification_time"},{"operator":
-          "eq", "value": "true", "field": "starred"}]}}'
+          "eq", "value": "false", "field": "starred"}]}}'
       extend-context:
         simple: Found=.
       uri:
