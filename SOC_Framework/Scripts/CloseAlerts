@@ -1,0 +1,45 @@
+commonfields:
+  id: a5051b65-b8e8-4111-88e7-44e193a8ea3e
+  version: 2
+vcShouldKeepItemLegacyProdMachine: false
+name: CloseAlerts
+script: |+
+  import time
+
+  cmdResults = demisto.executeCommand("getList", {"listName":"Job_Utility_Bulk_Alert_Closer_ID_List"})
+
+  results = cmdResults[0]["Contents"]
+  uri = "/public_api/v1/alerts/update_alerts"
+  currList = "["
+  itNum = 1
+  maxNum = 99
+
+
+  totalAlerts = results.split('\n')
+
+  for item in totalAlerts:
+      if itNum < maxNum:
+          currList = currList + str(item) + ","
+          itNum = itNum + 1
+      if itNum == maxNum:
+          currList = currList + str(item) + "]"
+          body = '{"request_data":{"alert_id_list":' + str(currList) + ',"update_data":{"severity":"low","status":"resolved_other","comment":"Emergency Alert Closer"}}}'
+          print(body)
+          cmdResults = demisto.executeCommand("core-api-post", {"uri": uri, "body": body, "execution-timeout": "5"})
+          print(cmdResults)
+          currList = "["
+          itNum = 1
+
+
+type: python
+tags: []
+enabled: true
+scripttarget: 0
+subtype: python3
+timeout: 1h0m0s
+pswd: ""
+runonce: false
+dockerimage: demisto/python3:3.10.14.96411
+runas: DBotWeakRole
+engineinfo: {}
+mainengineinfo: {}
