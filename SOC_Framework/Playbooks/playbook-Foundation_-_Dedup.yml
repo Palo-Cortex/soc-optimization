@@ -1,5 +1,5 @@
 id: 7afa7e4b-9f55-4627-8381-ebd0c92b69ad
-version: 10
+version: 3
 vcShouldKeepItemLegacyProdMachine: false
 name: Foundation - Dedup
 description: A simple Dedup to insure alerts are not executed on more than once.
@@ -65,15 +65,16 @@ tasks:
     isautoswitchedtoquietmode: false
   "10":
     id: "10"
-    taskid: fdf50b61-67fa-450a-8450-0b0d9966a403
+    taskid: b12dee06-7347-4344-a724-507c1c603239
     type: regular
     task:
-      id: fdf50b61-67fa-450a-8450-0b0d9966a403
+      id: b12dee06-7347-4344-a724-507c1c603239
       version: -1
       name: DeDup Alerts from the Last "1 days ago"
-      description: Find past similar alerts based on alert fields' similarity. Includes
-        an option to also display indicators similarity.
-      scriptName: DBotFindSimilarAlerts
+      description: |-
+        Finds past similar incidents based on incident fields' similarity. Includes an option to also display indicators similarity.
+        Note: For the similarity calculation, at least one field must be provided in one of the "similarTextField", "similarCategoricalField", or "similarJsonField" arguments.
+      scriptName: DBotFindSimilarIncidents
       type: regular
       iscommand: false
       brand: ""
@@ -148,10 +149,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "15":
     id: "15"
-    taskid: f8eea1f8-0d66-477e-87f1-a1beac4651d1
+    taskid: 483c1017-f951-45ef-8b94-fc02dbc9f459
     type: regular
     task:
-      id: f8eea1f8-0d66-477e-87f1-a1beac4651d1
+      id: 483c1017-f951-45ef-8b94-fc02dbc9f459
       version: -1
       name: Print Duplicate Alerts
       description: Prints text to war room (Markdown supported)
@@ -228,8 +229,8 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 945,
-        "width": 492.5,
+        "height": 940,
+        "width": 493.5,
         "x": 50,
         "y": 50
       }
