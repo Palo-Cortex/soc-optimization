@@ -74,7 +74,7 @@ tasks:
       description: |-
         Finds past similar incidents based on incident fields' similarity. Includes an option to also display indicators similarity.
         Note: For the similarity calculation, at least one field must be provided in one of the "similarTextField", "similarCategoricalField", or "similarJsonField" arguments.
-      scriptName: DBotFindSimilarIncidents
+      script: DBotFindSimilarAlerts
       type: regular
       iscommand: false
       brand: ""
@@ -156,7 +156,7 @@ tasks:
       version: -1
       name: Print Duplicate Alerts
       description: Prints text to war room (Markdown supported)
-      scriptName: Print
+      script: Print
       type: regular
       iscommand: false
       brand: ""
