@@ -1,0 +1,58 @@
+Name=Time Saved by XSIAM per Task
+Description=
+XQL=
+dataset = xsiam_playbookmetrics_raw
+| alter Tasks = Tasks->[]
+| arrayexpand Tasks
+
+// TODO apply a datamodel to these two objects instead (Tasks and Alert)
+| alter
+taskState = tasks->state,
+taskType = tasks->type,
+taskId = tasks->id,
+taskName = tasks->name,
+scriptID = tasks->scriptId,
+incidentID = alert->parentXDRIncident,
+alertID = alert->id,
+alertName = alert->name,
+alertType = alert->type,
+playbookId = alert->playbookId
+
+| filter taskType not in ("start", "title", "condition")
+| filter playbookId != ""
+
+// Since the job which posts this data runs every 15 min there may be duplicate data the more frequent it is run
+| alter dedupkey = concat(incidentID,taskId)
+| dedup dedupkey
+
+// Filter for just automation
+//| filter alerttype != "Unclassified"
+| filter taskState = "Completed"
+| filter tasktype = "regular"
+| alter ScriptID  =  if ( scriptID  ~= "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$", "Custom", ScriptID )
+
+//TODO make this a lookup table and join instead to make it scalable
+| join type = inner (dataset = value_tags 
+| fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time, PlaybookID as playbook_id
+) as vt (scriptID contains vt.value_scriptid)
+| fields value_category, value_scriptid, value_tag, value_taskname, value_time, _time, playbook_id 
+| filter ((value_time != null and value_time != """""")) 
+| filter ((value_scriptid != null and value_scriptid != """""")) 
+
+| alter soc_event_minutes = to_integer(value_time)
+| comp sum(soc_event_minutes) as total_soc_minutes by value_tag
+| alter total_soc_hours = round(divide(total_soc_minutes , 60))
+| fields value_tag  , total_soc_minutes  , total_soc_hours
+| sort desc total_soc_minutes
+
+
+
+
+
+
+
+
+
+
+
+| view graph type = column subtype = grouped layout = horizontal show_callouts = `true` xaxis = value_tag yaxis = total_soc_minutes,total_soc_hours seriescolor("total_soc_hours","#7cb5ec") seriescolor("total_soc_minutes","#23ae4f") xaxistitle = "Time" yaxistitle = "Category" seriestitle("total_soc_minutes","Total SOC Minutes") seriestitle("total_soc_hours","Total SOC Hours") 

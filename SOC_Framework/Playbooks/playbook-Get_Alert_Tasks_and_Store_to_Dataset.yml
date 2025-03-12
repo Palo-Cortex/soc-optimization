@@ -177,7 +177,7 @@ tasks:
     quietmode: 0
     scriptarguments:
       key:
-        simple: Task,Object
+        simple: Tasks,Object
       subplaybook:
         simple: "yes"
     separatecontext: false
