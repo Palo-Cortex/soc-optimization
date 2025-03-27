@@ -82,7 +82,8 @@ script:
                 if command == 'test_module':
                     data = {"test": "test"}
                 else:
-                    data = demisto.args().get("JSON")
+                    # The docker image encoding defaults to Latin-1. Setting the encoding to UTF-8 to address Latin-1 encoding limitations.
+                    data = demisto.args().get("JSON","").encode()
 
                 res = requests.post(URL, headers=headers, data=data, verify=False)
 
