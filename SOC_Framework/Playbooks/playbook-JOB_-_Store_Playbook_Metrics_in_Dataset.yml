@@ -31,7 +31,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 450,
+          "x": 195.25,
           "y": 50
         }
       }
@@ -43,7 +43,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "2"
+      - "4"
     note: false
     quietmode: 0
     scriptarguments:
@@ -71,8 +71,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 450,
-          "y": 250
+          "x": 195.25,
+          "y": 210
         }
       }
   "2":
@@ -111,8 +111,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 450,
-          "y": 430
+          "x": 459,
+          "y": 541
         }
       }
   "3":
@@ -140,19 +140,69 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 450,
-          "y": 610
+          "x": 195.25,
+          "y": 720
         }
       }
+  "4":
+    id: "4"
+    taskid: afbf562e-0ae2-46b1-a447-c9b4505b2a36
+    type: condition
+    task:
+      id: afbf562e-0ae2-46b1-a447-c9b4505b2a36
+      version: -1
+      name: Are there alerts?
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#default#':
+      - "3"
+      "yes":
+      - "2"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: greaterThan
+          left:
+            value:
+              complex:
+                root: foundIncidents
+                accessor: id
+                transformers:
+                - operator: count
+            iscontext: true
+          right:
+            value:
+              simple: "0"
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 195.25,
+          "y": 380
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
 version: -1
 view: |-
   {
-    "linkLabelsPosition": {},
+    "linkLabelsPosition": {
+      "4_2_yes": 0.39,
+      "4_3_#default#": 0.5
+    },
     "paper": {
       "dimensions": {
-        "height": 655,
-        "width": 380,
-        "x": 450,
+        "height": 740,
+        "width": 644.75,
+        "x": 195.25,
         "y": 50
       }
     }
