@@ -1,0 +1,155 @@
+id: 'Foundation - Error Handling'
+inputs: []
+name: Foundation - Error Handling
+outputs: []
+quiet: true
+starttaskid: "0"
+tags:
+- SOC
+- PoV
+- SOC_Framework
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 065c8726-06b5-47a6-8a94-d8e841510893
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 065c8726-06b5-47a6-8a94-d8e841510893
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 195.25,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      value:
+        simple: ' ${lastCompletedTask}'
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Prints text to war room (Markdown supported)
+      id: 54aea7d8-918d-4ae1-b177-6740f4580ebc
+      iscommand: false
+      name: Print Errors to War Room
+      script: Print
+      type: regular
+      version: -1
+    taskid: 54aea7d8-918d-4ae1-b177-6740f4580ebc
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 380
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: e2092f27-62d9-4fb6-91a7-352c99980d92
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: e2092f27-62d9-4fb6-91a7-352c99980d92
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 195.25,
+          "y": 550
+        }
+      }
+  "3":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: ${lastCompletedTask}
+          operator: isExists
+      label: "yes"
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "2"
+      "yes":
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 6ed1bed3-8b11-4cc9-bec7-33d2c5908b22
+      iscommand: false
+      name: If there are Errors
+      type: condition
+      version: -1
+    taskid: 6ed1bed3-8b11-4cc9-bec7-33d2c5908b22
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 195.25,
+          "y": 210
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 560,
+        "width": 526.25,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
