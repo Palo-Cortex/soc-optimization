@@ -1,0 +1,598 @@
+dirtyInputs: true
+id: 'Foundation - Enrichment'
+inputSections:
+- description: Generic group for inputs
+  inputs: []
+  name: General (Inputs group)
+inputs: []
+name: Foundation - Enrichment
+outputSections:
+- description: Generic group for outputs
+  name: General (Outputs group)
+  outputs: []
+outputs: []
+quiet: true
+starttaskid: "0"
+tags:
+- PoV
+- SOC
+- SOC_Framework
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "12"
+      - "9"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 8492b25a-a19c-4593-8191-9cb60e4d3007
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 8492b25a-a19c-4593-8191-9cb60e4d3007
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 1362,
+          "y": 50
+        }
+      }
+  "2":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: alert.sourceip
+          operator: isExists
+      label: "yes"
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "5"
+      "yes":
+      - "10"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: ba15e72f-a381-4b97-8e51-7937092bfaf6
+      iscommand: false
+      name: Is Source IP Defined?
+      type: condition
+      version: -1
+    taskid: ba15e72f-a381-4b97-8e51-7937092bfaf6
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 976.25,
+          "y": 710
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 6b3dbf1c-9a22-4bd4-8593-bc8d49dcc7c0
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: 6b3dbf1c-9a22-4bd4-8593-bc8d49dcc7c0
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 1121.5,
+          "y": 1560
+        }
+      }
+  "5":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: alert.destinationip
+          operator: isExists
+          right:
+            value: {}
+      label: "yes"
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "4"
+      "yes":
+      - "11"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2eae8f2e-1cc9-4120-88e0-1e70e0be6069
+      iscommand: false
+      name: Is Destination IP Defined?
+      type: condition
+      version: -1
+    taskid: 2eae8f2e-1cc9-4120-88e0-1e70e0be6069
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 781,
+          "y": 1050
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 921bdd5d-2fab-4996-8682-a5e6f80b9aca
+      iscommand: false
+      name: Email Enrichment
+      type: title
+      version: -1
+    taskid: 921bdd5d-2fab-4996-8682-a5e6f80b9aca
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 150,
+          "y": 550
+        }
+      }
+  "9":
+    continueonerrortype: ""
+    id: "9"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 02dc9df5-d1cf-4475-83a6-dc33e09fc4fe
+      iscommand: false
+      name: IP Enrichment
+      type: title
+      version: -1
+    taskid: 02dc9df5-d1cf-4475-83a6-dc33e09fc4fe
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 976.25,
+          "y": 550
+        }
+      }
+  "10":
+    continueonerror: true
+    continueonerrortype: errorPath
+    id: "10"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#error#':
+      - "16"
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      ip:
+        simple: ${alert.sourceip}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Provides data enrichment for ips.
+      id: 98cf7f6d-4237-45d4-b120-8f3cf46a73d2
+      iscommand: true
+      name: Enrich Source IP
+      script: '|||ip'
+      type: regular
+      version: -1
+    taskid: 98cf7f6d-4237-45d4-b120-8f3cf46a73d2
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1412,
+          "y": 880
+        }
+      }
+  "11":
+    continueonerror: true
+    continueonerrortype: errorPath
+    id: "11"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#error#':
+      - "16"
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      ip:
+        simple: ${alert.destinationip}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Provides data enrichment for ips.
+      id: f8b98182-0fae-49fb-b0f2-28b4194942a9
+      iscommand: true
+      name: Enrich Destination IP
+      script: '|||ip'
+      type: regular
+      version: -1
+    taskid: f8b98182-0fae-49fb-b0f2-28b4194942a9
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1021.5,
+          "y": 1220
+        }
+      }
+  "12":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: alert.remoteip
+          operator: in
+          right:
+            iscontext: true
+            value:
+              complex:
+                accessor: Assets_Type
+                root: lists
+                transformers:
+                - args:
+                    expression:
+                      value:
+                        simple: Admin_Jumpboxes[].IP
+                  operator: jmespath
+      label: Admin Jumpbox
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: alert.remoteip
+          operator: in
+          right:
+            iscontext: true
+            value:
+              complex:
+                accessor: Assets_Type
+                root: lists
+                transformers:
+                - args:
+                    expression:
+                      value:
+                        simple: Admin_Workstations[].IP
+                  operator: jmespath
+      label: Admin Workstation
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: alert.remoteip
+          operator: in
+          right:
+            iscontext: true
+            value:
+              complex:
+                accessor: Assets_Type
+                root: lists
+                transformers:
+                - args:
+                    expression:
+                      value:
+                        simple: Management_Servers[].IP
+                  operator: jmespath
+      label: Management Servers
+    continueonerrortype: ""
+    id: "12"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "17"
+      Admin Jumpbox:
+      - "13"
+      Admin Workstation:
+      - "14"
+      Management Servers:
+      - "15"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      list_name:
+        simple: ${lists.Assets_Type}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Parses a list by header and value.
+      id: 0abc0b11-7db5-4213-b96b-4bfa3e6f22e5
+      iscommand: false
+      name: Known Admin Activity?
+      type: condition
+      version: -1
+    taskid: 0abc0b11-7db5-4213-b96b-4bfa3e6f22e5
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 1071.5,
+          "y": 210
+        }
+      }
+  "13":
+    continueonerror: true
+    continueonerrortype: errorPath
+    id: "13"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#error#':
+      - "16"
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: asset.type
+      value:
+        simple: '"Admin_Jumpbox"'
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Set a value in context under the key you entered.
+      id: 8436fc59-38ac-4d61-844a-4cab07e05aca
+      iscommand: false
+      name: Set Admin Jumpbox
+      script: Set
+      type: regular
+      version: -1
+    taskid: 8436fc59-38ac-4d61-844a-4cab07e05aca
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 440.5,
+          "y": 1220
+        }
+      }
+  "14":
+    continueonerror: true
+    continueonerrortype: errorPath
+    id: "14"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#error#':
+      - "16"
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: asset.type
+      value:
+        simple: '"Admin_Workstation"'
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Set a value in context under the key you entered.
+      id: 90a15668-a064-4ae4-95ec-6ef5bbe7f6ad
+      iscommand: false
+      name: Set Admin Workstation
+      script: Set
+      type: regular
+      version: -1
+    taskid: 90a15668-a064-4ae4-95ec-6ef5bbe7f6ad
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1702.5,
+          "y": 1220
+        }
+      }
+  "15":
+    continueonerror: true
+    continueonerrortype: ""
+    id: "15"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "4"
+      - "16"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: asset.type
+      value:
+        simple: '"Management_Server"'
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Set a value in context under the key you entered.
+      id: 88253ce7-6290-4ab0-8c52-e69cd829a573
+      iscommand: false
+      name: Set Management Server
+      script: Set
+      type: regular
+      version: -1
+    taskid: 88253ce7-6290-4ab0-8c52-e69cd829a573
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 2183.5,
+          "y": 1220
+        }
+      }
+  "16":
+    continueonerrortype: ""
+    id: "16"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 35dec624-d2e2-448e-a49c-62dc66589b2e
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: 'Foundation - Error Handling'
+      type: playbook
+      version: -1
+    taskid: 35dec624-d2e2-448e-a49c-62dc66589b2e
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 1412,
+          "y": 1390
+        }
+      }
+  "17":
+    continueonerrortype: ""
+    id: "17"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "9"
+      - "8"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: asset.type
+      value:
+        simple: unknown
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Set a value in context under the key you entered.
+      id: 5a511b15-7feb-4419-9b99-136dd803924e
+      iscommand: false
+      name: Set To Unknown Activity Type
+      script: Set
+      type: regular
+      version: -1
+    taskid: 5a511b15-7feb-4419-9b99-136dd803924e
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 380
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {
+      "12_15_Management Servers": 0.9
+    },
+    "paper": {
+      "dimensions": {
+        "height": 1570,
+        "width": 2514.5,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
