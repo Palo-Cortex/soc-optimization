@@ -1,86 +1,86 @@
-id: 7afa7e4b-9f55-4627-8381-ebd0c92b69ad
-version: 3
-vcShouldKeepItemLegacyProdMachine: false
-name: Foundation - Dedup
 description: A simple Dedup to insure alerts are not executed on more than once.
+dirtyInputs: true
+id: 'Foundation - Dedup'
+inputs: []
+name: Foundation - Dedup
+outputs: []
+quiet: true
+sourceplaybookid: 'Foundation - Upon Trigger'
+starttaskid: "0"
 tags:
 - SOC
-starttaskid: "0"
+- SOC_Framework
 tasks:
   "0":
+    continueonerrortype: ""
     id: "0"
-    taskid: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
-    type: start
-    task:
-      id: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
-      version: -1
-      name: ""
-      iscommand: false
-      brand: ""
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
     nexttasks:
       '#none#':
       - "10"
+    note: false
+    quietmode: 0
     separatecontext: false
-    continueonerrortype: ""
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+    timertriggers: []
+    type: start
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 245.25,
           "y": 50
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
   "8":
+    continueonerrortype: ""
     id: "8"
-    taskid: 2eb08148-d069-489a-83e1-1ab88016aac3
-    type: title
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
     task:
+      brand: ""
       id: 2eb08148-d069-489a-83e1-1ab88016aac3
-      version: -1
+      iscommand: false
       name: Done
       type: title
-      iscommand: false
-      brand: ""
-    separatecontext: false
-    continueonerrortype: ""
+      version: -1
+    taskid: 2eb08148-d069-489a-83e1-1ab88016aac3
+    timertriggers: []
+    type: title
     view: |-
       {
         "position": {
           "x": 50,
-          "y": 930
+          "y": 1060
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
   "10":
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "10"
-    taskid: b12dee06-7347-4344-a724-507c1c603239
-    type: regular
-    task:
-      id: b12dee06-7347-4344-a724-507c1c603239
-      version: -1
-      name: DeDup Alerts from the Last "1 days ago"
-      description: |-
-        Finds past similar incidents based on incident fields' similarity. Includes an option to also display indicators similarity.
-        Note: For the similarity calculation, at least one field must be provided in one of the "similarTextField", "similarCategoricalField", or "similarJsonField" arguments.
-      script: DBotFindSimilarAlerts
-      type: regular
-      iscommand: false
-      brand: ""
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
     nexttasks:
+      '#error#':
+      - "17"
       '#none#':
       - "16"
+    note: false
+    quietmode: 0
     scriptarguments:
       fromDate:
         simple: 1 days ago
@@ -93,37 +93,42 @@ tasks:
       similarTextField:
         simple: name,type
     separatecontext: false
-    continueonerrortype: ""
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Finds past similar incidents based on incident fields' similarity. Includes an option to also display indicators similarity.
+        Note: For the similarity calculation, at least one field must be provided in one of the "similarTextField", "similarCategoricalField", or "similarJsonField" arguments.
+      id: b3971d14-efa7-4b55-a858-b5aff0e97fc0
+      iscommand: false
+      name: DeDup Alerts from the Last "1 days ago"
+      script: DBotFindSimilarAlerts
+      type: regular
+      version: -1
+    taskid: b3971d14-efa7-4b55-a858-b5aff0e97fc0
+    timertriggers: []
+    type: regular
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 195
+          "x": 245.25,
+          "y": 210
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
   "14":
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "14"
-    taskid: 1aabd3a7-6f8a-4253-8719-f48488f63d62
-    type: regular
-    task:
-      id: 1aabd3a7-6f8a-4253-8719-f48488f63d62
-      version: -1
-      name: Close As Duplicates
-      description: commands.local.cmd.close.inv
-      script: Builtin|||closeInvestigation
-      type: regular
-      iscommand: true
-      brand: Builtin
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
     nexttasks:
+      '#error#':
+      - "17"
       '#none#':
       - "8"
+    note: false
+    quietmode: 2
     scriptarguments:
       closeNotes:
         simple: Auto-Close Duplicate
@@ -132,112 +137,147 @@ tasks:
       id:
         simple: ${DBotFindSimilarIncidents.similarIncident.id}
     separatecontext: false
-    continueonerrortype: ""
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.close.inv
+      id: ddcf8da0-3949-415f-8bbb-6c440ff050ee
+      iscommand: true
+      name: Close As Duplicates
+      script: Builtin|||closeInvestigation
+      type: regular
+      version: -1
+    taskid: ddcf8da0-3949-415f-8bbb-6c440ff050ee
+    timertriggers: []
+    type: regular
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 100,
           "y": 720
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 2
-    isoversize: false
-    isautoswitchedtoquietmode: false
   "15":
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "15"
-    taskid: 483c1017-f951-45ef-8b94-fc02dbc9f459
-    type: regular
-    task:
-      id: 483c1017-f951-45ef-8b94-fc02dbc9f459
-      version: -1
-      name: Print Duplicate Alerts
-      description: Prints text to war room (Markdown supported)
-      script: Print
-      type: regular
-      iscommand: false
-      brand: ""
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
     nexttasks:
+      '#error#':
+      - "17"
       '#none#':
       - "14"
+    note: false
+    quietmode: 0
     scriptarguments:
       value:
         simple: ${DBotFindSimilarIncidents.similarIncident.id}
     separatecontext: false
-    continueonerrortype: ""
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Prints text to war room (Markdown supported)
+      id: 4f2a3250-61d8-4556-aea2-4612ac251ad6
+      iscommand: false
+      name: Print Duplicate Alerts
+      script: Print
+      type: regular
+      version: -1
+    taskid: 4f2a3250-61d8-4556-aea2-4612ac251ad6
+    timertriggers: []
+    type: regular
     view: |-
       {
         "position": {
-          "x": 162.5,
-          "y": 545
+          "x": 245.25,
+          "y": 550
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
   "16":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: DBotFindSimilarIncidents.isSimilarIncidentFound
+          operator: isTrue
+          right:
+            value: {}
+      label: "yes"
+    continueonerrortype: ""
     id: "16"
-    taskid: 7adad498-fc30-4def-818b-a1d7198474c8
-    type: condition
-    task:
-      id: 7adad498-fc30-4def-818b-a1d7198474c8
-      version: -1
-      name: Are there any similar alerts?
-      type: condition
-      iscommand: false
-      brand: ""
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
     nexttasks:
       '#default#':
       - "8"
       "yes":
       - "15"
+    note: false
+    quietmode: 0
     separatecontext: false
-    conditions:
-    - label: "yes"
-      condition:
-      - - operator: isTrue
-          left:
-            value:
-              simple: DBotFindSimilarIncidents.isSimilarIncidentFound
-            iscontext: true
-          right:
-            value: {}
-    continueonerrortype: ""
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 7adad498-fc30-4def-818b-a1d7198474c8
+      iscommand: false
+      name: Are there any similar alerts?
+      type: condition
+      version: -1
+    taskid: 7adad498-fc30-4def-818b-a1d7198474c8
+    timertriggers: []
+    type: condition
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 370
+          "x": 100,
+          "y": 380
         }
       }
-    note: false
-    timertriggers: []
+  "17":
+    continueonerrortype: ""
+    id: "17"
     ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
     isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: c9a53716-a57b-4fae-8e00-d3508d482f51
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: 'Foundation - Error Handling'
+      type: playbook
+      version: -1
+    taskid: c9a53716-a57b-4fae-8e00-d3508d482f51
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 485.75,
+          "y": 890
+        }
+      }
+version: -1
 view: |-
   {
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 940,
-        "width": 493.5,
+        "height": 1070,
+        "width": 816.75,
         "x": 50,
         "y": 50
       }
     }
   }
-inputs: []
-outputs: []
-sourceplaybookid: 0c636b23-4aaa-4eb4-84d8-e2d77cc5182b
-quiet: true
-dirtyInputs: true

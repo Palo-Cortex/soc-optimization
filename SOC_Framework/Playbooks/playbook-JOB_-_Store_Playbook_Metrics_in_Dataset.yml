@@ -1,10 +1,11 @@
 dirtyInputs: true
-id: 4c10469e-e42e-43ec-8b71-901c43135c0a
+id: 'JOB - Store Playbook Metrics in Dataset'
 inputs: []
 name: JOB - Store Playbook Metrics in Dataset
 outputs: []
-quiet: true
 starttaskid: "0"
+tags:
+- SOC_Framework
 tasks:
   "0":
     continueonerrortype: ""
@@ -36,36 +37,41 @@ tasks:
         }
       }
   "1":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "1"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
-      '#none#':
+      '#error#':
       - "4"
+      '#none#':
+      - "2"
     note: false
     quietmode: 0
     scriptarguments:
       fromdate:
-        simple: 1 hours ago
+        simple: 2 days ago
+      limit:
+        simple: "500"
     separatecontext: false
     skipunavailable: false
     task:
       brand: ""
       description: |-
-        Searches Demisto alerts. A summarized version of this scrips is avilable with the summarizedversion argument.
+        Searches Demisto alerts. A summarized version of this scrips is available with the summarizedversion argument.
 
         This automation runs using the default Limited User role, unless you explicitly change the permissions.
         For more information, see the section about permissions here:
-        https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.10/Cortex-XSOAR-Administrator-Guide/Automations
-      id: d9232c5f-0925-486a-844f-03851428c83a
+        https://docs-cortex.paloaltonetworks.com/r/Cortex-XSIAM/Cortex-XSIAM-Administrator-Guide/Permission-Management
+      id: b04efe4c-cc35-4832-a4b9-8376d17c5da2
       iscommand: false
       name: Search Alerts
       script: SearchAlertsV2
       type: regular
       version: -1
-    taskid: d9232c5f-0925-486a-844f-03851428c83a
+    taskid: b04efe4c-cc35-4832-a4b9-8376d17c5da2
     timertriggers: []
     type: regular
     view: |-
@@ -102,7 +108,7 @@ tasks:
       id: 9ca61b9d-868c-4a3f-836c-d504bee3e4b3
       iscommand: false
       name: Get Alert Tasks and Store to Dataset
-      playbookId: bb2825d4-e383-4c6f-83fd-b89036f3dc6c
+      playbookId: 'Get Alert Tasks and Store to Dataset'
       type: playbook
       version: -1
     taskid: 9ca61b9d-868c-4a3f-836c-d504bee3e4b3
@@ -111,16 +117,22 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 459,
-          "y": 541
+          "x": 50,
+          "y": 380
         }
       }
   "3":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "3"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    nexttasks:
+      '#error#':
+      - "4"
+      '#none#':
+      - "5"
     note: false
     quietmode: 0
     separatecontext: false
@@ -128,81 +140,89 @@ tasks:
     task:
       brand: Builtin
       description: commands.local.cmd.close.inv
-      id: fef26ff9-4dcc-43c8-8920-a4806f69920d
+      id: e8725c45-643e-4c8b-ae39-f3142bf4ab74
       iscommand: true
       name: Close Investigation
       script: Builtin|||closeInvestigation
       type: regular
       version: -1
-    taskid: fef26ff9-4dcc-43c8-8920-a4806f69920d
+    taskid: e8725c45-643e-4c8b-ae39-f3142bf4ab74
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 195.25,
-          "y": 720
+          "x": 50,
+          "y": 550
         }
       }
   "4":
-    id: "4"
-    taskid: afbf562e-0ae2-46b1-a447-c9b4505b2a36
-    type: condition
-    task:
-      id: afbf562e-0ae2-46b1-a447-c9b4505b2a36
-      version: -1
-      name: Are there alerts?
-      type: condition
-      iscommand: false
-      brand: ""
-    nexttasks:
-      '#default#':
-      - "3"
-      "yes":
-      - "2"
-    separatecontext: false
-    conditions:
-    - label: "yes"
-      condition:
-      - - operator: greaterThan
-          left:
-            value:
-              complex:
-                root: foundIncidents
-                accessor: id
-                transformers:
-                - operator: count
-            iscontext: true
-          right:
-            value:
-              simple: "0"
     continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 883522e7-a731-48a1-88c9-867c76786028
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: 'Foundation - Error Handling'
+      type: playbook
+      version: -1
+    taskid: 883522e7-a731-48a1-88c9-867c76786028
+    timertriggers: []
+    type: playbook
     view: |-
       {
         "position": {
-          "x": 195.25,
-          "y": 380
+          "x": 390.5,
+          "y": 720
         }
       }
-    note: false
-    timertriggers: []
+  "5":
+    continueonerrortype: ""
+    id: "5"
     ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
     isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 6147a2a8-51fd-4eb7-99e2-c8821a6974d7
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: 6147a2a8-51fd-4eb7-99e2-c8821a6974d7
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 245.25,
+          "y": 890
+        }
+      }
 version: -1
 view: |-
   {
-    "linkLabelsPosition": {
-      "4_2_yes": 0.39,
-      "4_3_#default#": 0.5
-    },
+    "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 740,
-        "width": 644.75,
-        "x": 195.25,
+        "height": 900,
+        "width": 721.5,
+        "x": 50,
         "y": 50
       }
     }
