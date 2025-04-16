@@ -1,17 +1,10 @@
 dirtyInputs: true
-id: 0c636b23-4aaa-4eb4-84d8-e2d77cc5182b
+id: 'Foundation - Upon Trigger'
 inputSections:
 - description: Generic group for inputs
-  inputs:
-  - Production
+  inputs: []
   name: General (Inputs group)
-inputs:
-- description: yes or no
-  key: Production
-  playbookInputQuery: null
-  required: false
-  value:
-    simple: "yes"
+inputs: []
 name: Foundation - Upon Trigger
 outputSections:
 - description: Generic group for outputs
@@ -21,10 +14,12 @@ outputSections:
 outputs:
 - contextPath: Shadow
   type: boolean
+quiet: true
 starttaskid: "0"
 tags:
 - SOC
 - PoV
+- SOC_Framework
 tasks:
   "0":
     continueonerrortype: ""
@@ -51,7 +46,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
+          "x": 340.5,
           "y": 50
         }
       }
@@ -81,8 +76,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 195
+          "x": 340.5,
+          "y": 210
         }
       }
   "2":
@@ -111,8 +106,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 690
+          "x": 50,
+          "y": 715
         }
       }
   "3":
@@ -141,8 +136,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 835
+          "x": 50,
+          "y": 880
         }
       }
   "4":
@@ -171,8 +166,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 980
+          "x": 50,
+          "y": 1040
         }
       }
   "5":
@@ -183,7 +178,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "6"
+      - "23"
     note: false
     quietmode: 0
     separatecontext: false
@@ -201,8 +196,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 1300
+          "x": 50,
+          "y": 1370
         }
       }
   "6":
@@ -231,8 +226,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 1445
+          "x": 50,
+          "y": 1700
         }
       }
   "7":
@@ -243,7 +238,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "23"
+      - "8"
     note: false
     quietmode: 0
     separatecontext: false
@@ -261,8 +256,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 1590
+          "x": 50,
+          "y": 1860
         }
       }
   "8":
@@ -288,8 +283,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 1910
+          "x": 340.5,
+          "y": 2020
         }
       }
   "17":
@@ -298,60 +293,56 @@ tasks:
       - - left:
             iscontext: true
             value:
-              simple: ${inputs.Production}
+              simple: alert.env
           operator: isEqualString
           right:
             value:
-              simple: "yes"
+              simple: prod
       label: "yes"
-    - condition:
-      - - left:
-            iscontext: true
-            value:
-              simple: ${inputs.Production}
-          operator: isEqualString
-          right:
-            value:
-              simple: "no"
-      label: "no"
     continueonerrortype: ""
     id: "17"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
-      "no":
+      '#default#':
       - "18"
       "yes":
       - "19"
     note: false
     quietmode: 0
+    scriptarguments:
+      retry-count:
+        simple: "0"
     separatecontext: false
     skipunavailable: false
     task:
       brand: ""
-      id: b97e8221-5b48-4730-8b31-ac942ab7adf6
+      id: d1f1473c-003c-4c82-ac5a-07e0e82dad09
       iscommand: false
       name: Is this a Production Environment?
       type: condition
       version: -1
-    taskid: b97e8221-5b48-4730-8b31-ac942ab7adf6
+    taskid: d1f1473c-003c-4c82-ac5a-07e0e82dad09
     timertriggers: []
     type: condition
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 340
+          "x": 340.5,
+          "y": 371
         }
       }
   "18":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "18"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "24"
       '#none#':
       - "2"
     note: false
@@ -366,29 +357,32 @@ tasks:
     task:
       brand: ""
       description: Set a value in context under the key you entered.
-      id: 66c49472-c91c-487c-8fc7-82ecb59998c6
+      id: 67eedc50-5c07-4832-896d-f5b9780eb669
       iscommand: false
       name: Set To Shadow
       script: Set
       type: regular
       version: -1
-    taskid: 66c49472-c91c-487c-8fc7-82ecb59998c6
+    taskid: 67eedc50-5c07-4832-896d-f5b9780eb669
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 515
+          "x": 100,
+          "y": 540
         }
       }
   "19":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "19"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "24"
       '#none#':
       - "2"
     note: false
@@ -403,20 +397,20 @@ tasks:
     task:
       brand: ""
       description: Set a value in context under the key you entered.
-      id: 56ad1656-4445-4231-8a93-347adc7a1a90
+      id: 5752dc90-12fe-48dd-99df-2df4c8d2a051
       iscommand: false
       name: Set To Full Run
       script: Set
       type: regular
       version: -1
-    taskid: 56ad1656-4445-4231-8a93-347adc7a1a90
+    taskid: 5752dc90-12fe-48dd-99df-2df4c8d2a051
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 480,
-          "y": 515
+          "x": 581,
+          "y": 540
         }
       }
   "22":
@@ -443,7 +437,7 @@ tasks:
       id: affbdad4-0d9f-4822-8ff0-30bdda250e0e
       iscommand: false
       name: Foundation - Dedup
-      playbookId: 7afa7e4b-9f55-4627-8381-ebd0c92b69ad
+      playbookId: 'Foundation - Dedup'
       type: playbook
       version: -1
     taskid: affbdad4-0d9f-4822-8ff0-30bdda250e0e
@@ -452,13 +446,49 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 1125
+          "x": 50,
+          "y": 1200
         }
       }
   "23":
     continueonerrortype: ""
     id: "23"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: bf804660-d518-4cd7-87b5-4a5cbd2f4b47
+      iscommand: false
+      name: Foundation - Enrichment
+      playbookId: 'Foundation - Enrichment'
+      type: playbook
+      version: -1
+    taskid: bf804660-d518-4cd7-87b5-4a5cbd2f4b47
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1530
+        }
+      }
+  "24":
+    continueonerrortype: ""
+    id: "24"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
@@ -471,20 +501,20 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 7997dc98-7fbe-4eb1-8045-5bfa1978784a
+      id: bba69d32-a3b9-4a81-8d58-1be1e99e119f
       iscommand: false
-      name: Foundation - Enrichment
-      playbookId: 84c5e8a5-998c-4d01-801e-7d03ef3394d3
+      name: Foundation - Error Handling
+      playbookId: 'Foundation - Error Handling'
       type: playbook
       version: -1
-    taskid: 7997dc98-7fbe-4eb1-8045-5bfa1978784a
+    taskid: bba69d32-a3b9-4a81-8d58-1be1e99e119f
     timertriggers: []
     type: playbook
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 1735
+          "x": 631,
+          "y": 710
         }
       }
 version: -1
@@ -493,8 +523,8 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 1925,
-        "width": 810,
+        "height": 2030,
+        "width": 962,
         "x": 50,
         "y": 50
       }
