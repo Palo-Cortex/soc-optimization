@@ -1,35 +1,26 @@
-dirtyInputs: true
-id: 'JOB - Triage Incidents'
-inputs: []
+id: JOB - Triage Incidents
+version: 3
+vcShouldKeepItemLegacyProdMachine: false
 name: JOB - Triage Incidents
-outputs: []
-quiet: true
-starttaskid: "0"
 tags:
 - SOC_Framework
+starttaskid: "0"
 tasks:
   "0":
-    continueonerrortype: ""
     id: "0"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
+    taskid: e017f7b2-15dc-4408-8530-1bedbbbe5c72
+    type: start
+    task:
+      id: e017f7b2-15dc-4408-8530-1bedbbbe5c72
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
     nexttasks:
       '#none#':
       - "3"
-    note: false
-    quietmode: 0
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: e017f7b2-15dc-4408-8530-1bedbbbe5c72
-      iscommand: false
-      name: ""
-      version: -1
-    taskid: e017f7b2-15dc-4408-8530-1bedbbbe5c72
-    timertriggers: []
-    type: start
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -37,20 +28,31 @@ tasks:
           "y": 50
         }
       }
-  "1":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "1"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "1":
+    id: "1"
+    taskid: 9ae0e2cd-eac0-4ee2-8abf-81e8415f05af
+    type: regular
+    task:
+      id: 9ae0e2cd-eac0-4ee2-8abf-81e8415f05af
+      version: -1
+      name: Get Incidents
+      description: send HTTP POST request.
+      script: '|||core-api-post'
+      type: regular
+      iscommand: true
+      brand: ""
     nexttasks:
       '#error#':
       - "6"
       '#none#':
       - "5"
-    note: false
-    quietmode: 0
     scriptarguments:
       body:
         simple: '{"request_data" : {"filters" : [{"field": "status","operator": "eq","value":
@@ -61,19 +63,8 @@ tasks:
       uri:
         simple: /public_api/v1/incidents/get_incidents
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: send HTTP POST request.
-      id: 9ae0e2cd-eac0-4ee2-8abf-81e8415f05af
-      iscommand: true
-      name: Get Incidents
-      script: '|||core-api-post'
-      type: regular
-      version: -1
-    taskid: 9ae0e2cd-eac0-4ee2-8abf-81e8415f05af
-    timertriggers: []
-    type: regular
+    continueonerror: true
+    continueonerrortype: errorPath
     view: |-
       {
         "position": {
@@ -81,78 +72,38 @@ tasks:
           "y": 380
         }
       }
-  "2":
-    continueonerrortype: ""
-    id: "2"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    loop:
-      exitCondition: ""
-      forEach: true
-      iscommand: false
-      max: 100
-      wait: 1
-    nexttasks:
-      '#none#':
-      - "4"
     note: false
-    quietmode: 0
-    scriptarguments:
-      Incident:
-        simple: ${Found.response.reply.incidents}
-    separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 94b05767-4822-4ae1-8f66-53b98234d58a
-      iscommand: false
-      name: Close Incidents
-      playbookId: 'Close Incidents'
-      type: playbook
-      version: -1
-    taskid: 94b05767-4822-4ae1-8f66-53b98234d58a
     timertriggers: []
-    type: playbook
-    view: |-
-      {
-        "position": {
-          "x": 385.75,
-          "y": 720
-        }
-      }
-  "3":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "3"
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "3":
+    id: "3"
+    taskid: 0b8f86fd-faba-4add-ba9f-474a2df363b3
+    type: regular
+    task:
+      id: 0b8f86fd-faba-4add-ba9f-474a2df363b3
+      version: -1
+      name: Get Time
+      description: |
+        Retrieves the current date and time.
+      scriptName: GetTime
+      type: regular
+      iscommand: false
+      brand: ""
     nexttasks:
       '#error#':
       - "6"
       '#none#':
       - "1"
-    note: false
-    quietmode: 0
     scriptarguments:
       hoursAgo:
         simple: "6"
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: |
-        Retrieves the current date and time.
-      id: 0b8f86fd-faba-4add-ba9f-474a2df363b3
-      iscommand: false
-      name: Get Time
-      script: GetTime
-      type: regular
-      version: -1
-    taskid: 0b8f86fd-faba-4add-ba9f-474a2df363b3
-    timertriggers: []
-    type: regular
+    continueonerror: true
+    continueonerrortype: errorPath
     view: |-
       {
         "position": {
@@ -160,34 +111,34 @@ tasks:
           "y": 210
         }
       }
-  "4":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "4"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "4":
+    id: "4"
+    taskid: 21d546a1-f8fd-4993-a575-6bcb30005435
+    type: regular
+    task:
+      id: 21d546a1-f8fd-4993-a575-6bcb30005435
+      version: -1
+      name: Close
+      description: commands.local.cmd.close.inv
+      script: Builtin|||closeInvestigation
+      type: regular
+      iscommand: true
+      brand: Builtin
     nexttasks:
       '#error#':
       - "6"
       '#none#':
       - "7"
-    note: false
-    quietmode: 0
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: Builtin
-      description: commands.local.cmd.close.inv
-      id: 21d546a1-f8fd-4993-a575-6bcb30005435
-      iscommand: true
-      name: Close
-      script: Builtin|||closeInvestigation
-      type: regular
-      version: -1
-    taskid: 21d546a1-f8fd-4993-a575-6bcb30005435
-    timertriggers: []
-    type: regular
+    continueonerror: true
+    continueonerrortype: errorPath
     view: |-
       {
         "position": {
@@ -195,39 +146,39 @@ tasks:
           "y": 890
         }
       }
-  "5":
-    conditions:
-    - condition:
-      - - left:
-            iscontext: true
-            value:
-              simple: Found.response.reply.incidents.incident_id
-          operator: isExists
-      label: "yes"
-    continueonerrortype: ""
-    id: "5"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "5":
+    id: "5"
+    taskid: 2a934d58-f94b-41b6-85b0-cf069a19ec88
+    type: condition
+    task:
+      id: 2a934d58-f94b-41b6-85b0-cf069a19ec88
+      version: -1
+      name: Incidents to Triage?
+      type: condition
+      iscommand: false
+      brand: ""
     nexttasks:
       '#default#':
       - "4"
       "yes":
-      - "2"
-    note: false
-    quietmode: 0
+      - "8"
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 2a934d58-f94b-41b6-85b0-cf069a19ec88
-      iscommand: false
-      name: Incidents to Triage?
-      type: condition
-      version: -1
-    taskid: 2a934d58-f94b-41b6-85b0-cf069a19ec88
-    timertriggers: []
-    type: condition
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isExists
+          left:
+            value:
+              simple: Found.response.reply.incidents.incident_id
+            iscontext: true
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -235,27 +186,27 @@ tasks:
           "y": 550
         }
       }
-  "6":
-    continueonerrortype: ""
-    id: "6"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
     note: false
-    quietmode: 0
-    separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: f9f44a29-0a52-4a67-88d2-715faefa19fa
-      iscommand: false
-      name: Foundation - Error Handling
-      playbookId: 'Foundation - Error Handling'
-      type: playbook
-      version: -1
-    taskid: f9f44a29-0a52-4a67-88d2-715faefa19fa
     timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "6":
+    id: "6"
+    taskid: f9f44a29-0a52-4a67-88d2-715faefa19fa
     type: playbook
+    task:
+      id: f9f44a29-0a52-4a67-88d2-715faefa19fa
+      version: -1
+      name: Foundation - Error Handling
+      playbookName: Foundation - Error Handling
+      type: playbook
+      iscommand: false
+      brand: ""
+    separatecontext: true
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -263,26 +214,26 @@ tasks:
           "y": 1060
         }
       }
-  "7":
-    continueonerrortype: ""
-    id: "7"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
     note: false
-    quietmode: 0
-    separatecontext: false
+    timertriggers: []
+    ignoreworker: false
     skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "7":
+    id: "7"
+    taskid: bf546b3b-1d71-48ed-9a20-bff3bad3242a
+    type: title
     task:
-      brand: ""
       id: bf546b3b-1d71-48ed-9a20-bff3bad3242a
-      iscommand: false
+      version: -1
       name: Done
       type: title
-      version: -1
-    taskid: bf546b3b-1d71-48ed-9a20-bff3bad3242a
-    timertriggers: []
-    type: title
+      iscommand: false
+      brand: ""
+    separatecontext: false
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -290,16 +241,59 @@ tasks:
           "y": 1065
         }
       }
-version: -1
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "8":
+    id: "8"
+    taskid: 53391bc1-20c5-4d23-85c5-80a903904c17
+    type: playbook
+    task:
+      id: 53391bc1-20c5-4d23-85c5-80a903904c17
+      version: -1
+      name: Close Incidents
+      playbookName: Close Incidents
+      type: playbook
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "4"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 676.25,
+          "y": 720
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
 view: |-
   {
-    "linkLabelsPosition": {},
+    "linkLabelsPosition": {
+      "5_8_yes": 0.83
+    },
     "paper": {
       "dimensions": {
         "height": 1080,
-        "width": 912,
+        "width": 1007.25,
         "x": 50,
         "y": 50
       }
     }
   }
+inputs: []
+outputs: []
+quiet: true
+dirtyInputs: true
