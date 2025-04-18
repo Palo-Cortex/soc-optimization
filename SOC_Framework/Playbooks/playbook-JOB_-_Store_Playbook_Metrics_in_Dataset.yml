@@ -1,26 +1,35 @@
+dirtyInputs: true
 id: JOB - Store Playbook Metrics in Dataset
-version: 2
-vcShouldKeepItemLegacyProdMachine: false
+inputs: []
 name: JOB - Store Playbook Metrics in Dataset
+outputs: []
+quiet: true
+starttaskid: "0"
 tags:
 - SOC_Framework
-starttaskid: "0"
 tasks:
   "0":
+    continueonerrortype: ""
     id: "0"
-    taskid: 70ae04ac-deed-4719-8f9a-d689a1125612
-    type: start
-    task:
-      id: 70ae04ac-deed-4719-8f9a-d689a1125612
-      version: -1
-      name: ""
-      iscommand: false
-      brand: ""
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
     nexttasks:
       '#none#':
       - "1"
+    note: false
+    quietmode: 0
     separatecontext: false
-    continueonerrortype: ""
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 70ae04ac-deed-4719-8f9a-d689a1125612
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 70ae04ac-deed-4719-8f9a-d689a1125612
+    timertriggers: []
+    type: start
     view: |-
       {
         "position": {
@@ -28,44 +37,44 @@ tasks:
           "y": 50
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
   "1":
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "1"
-    taskid: f90525f7-68cd-481f-8362-10dea2acebb7
-    type: regular
-    task:
-      id: f90525f7-68cd-481f-8362-10dea2acebb7
-      version: -1
-      name: Search Alerts
-      description: |-
-        Searches Demisto alerts. A summarized version of this scrips is available with the summarizedversion argument.
-
-        This automation runs using the default Limited User role, unless you explicitly change the permissions.
-        For more information, see the section about permissions here:
-        https://docs-cortex.paloaltonetworks.com/r/Cortex-XSIAM/Cortex-XSIAM-Administrator-Guide/Permission-Management
-      scriptName: SearchAlertsV2
-      type: regular
-      iscommand: false
-      brand: ""
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
     nexttasks:
       '#error#':
       - "4"
       '#none#':
       - "6"
+    note: false
+    quietmode: 0
     scriptarguments:
       fromdate:
         simple: 1 hour ago
       limit:
         simple: "500"
     separatecontext: false
-    continueonerror: true
-    continueonerrortype: errorPath
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Searches Demisto alerts. A summarized version of this scrips is available with the summarizedversion argument.
+
+        This automation runs using the default Limited User role, unless you explicitly change the permissions.
+        For more information, see the section about permissions here:
+        https://docs-cortex.paloaltonetworks.com/r/Cortex-XSIAM/Cortex-XSIAM-Administrator-Guide/Permission-Management
+      id: 897cea94-126d-4215-9d8b-eb4c44b88ec6
+      iscommand: false
+      name: Search Alerts
+      script: SearchAlertsV2
+      type: regular
+      version: -1
+    taskid: 897cea94-126d-4215-9d8b-eb4c44b88ec6
+    timertriggers: []
+    type: regular
     view: |-
       {
         "position": {
@@ -73,34 +82,34 @@ tasks:
           "y": 210
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
   "3":
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "3"
-    taskid: 2338a1f5-43e7-41a8-89ce-52b874c47e2f
-    type: regular
-    task:
-      id: 2338a1f5-43e7-41a8-89ce-52b874c47e2f
-      version: -1
-      name: Close Investigation
-      description: commands.local.cmd.close.inv
-      script: Builtin|||closeInvestigation
-      type: regular
-      iscommand: true
-      brand: Builtin
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
     nexttasks:
       '#error#':
       - "4"
       '#none#':
       - "5"
+    note: false
+    quietmode: 0
     separatecontext: false
-    continueonerror: true
-    continueonerrortype: errorPath
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.close.inv
+      id: 2338a1f5-43e7-41a8-89ce-52b874c47e2f
+      iscommand: true
+      name: Close Investigation
+      script: Builtin|||closeInvestigation
+      type: regular
+      version: -1
+    taskid: 2338a1f5-43e7-41a8-89ce-52b874c47e2f
+    timertriggers: []
+    type: regular
     view: |-
       {
         "position": {
@@ -108,30 +117,30 @@ tasks:
           "y": 550
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
   "4":
+    continueonerrortype: ""
     id: "4"
-    taskid: 1d0c04dc-71bc-4667-8b3e-49b4339eb081
-    type: playbook
-    task:
-      id: 1d0c04dc-71bc-4667-8b3e-49b4339eb081
-      version: -1
-      name: Foundation - Error Handling
-      playbookName: Foundation - Error Handling
-      type: playbook
-      iscommand: false
-      brand: ""
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
     nexttasks:
       '#none#':
       - "5"
+    note: false
+    quietmode: 0
     separatecontext: true
-    continueonerrortype: ""
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 1d0c04dc-71bc-4667-8b3e-49b4339eb081
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: Foundation - Error Handling
+      type: playbook
+      version: -1
+    taskid: 1d0c04dc-71bc-4667-8b3e-49b4339eb081
+    timertriggers: []
+    type: playbook
     view: |-
       {
         "position": {
@@ -139,26 +148,26 @@ tasks:
           "y": 720
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
   "5":
+    continueonerrortype: ""
     id: "5"
-    taskid: 455bc6dc-2b02-4b09-8faf-9d84988ac0fe
-    type: title
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
     task:
+      brand: ""
       id: 455bc6dc-2b02-4b09-8faf-9d84988ac0fe
-      version: -1
+      iscommand: false
       name: Done
       type: title
-      iscommand: false
-      brand: ""
-    separatecontext: false
-    continueonerrortype: ""
+      version: -1
+    taskid: 455bc6dc-2b02-4b09-8faf-9d84988ac0fe
+    timertriggers: []
+    type: title
     view: |-
       {
         "position": {
@@ -166,38 +175,38 @@ tasks:
           "y": 890
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
   "6":
+    continueonerrortype: ""
     id: "6"
-    taskid: 367553c1-9597-4413-88e5-39b5b6814fa3
-    type: playbook
-    task:
-      id: 367553c1-9597-4413-88e5-39b5b6814fa3
-      version: -1
-      name: Get Alert Tasks and Store to Dataset
-      playbookName: Get Alert Tasks and Store to Dataset
-      type: playbook
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
       iscommand: false
-      brand: ""
+      max: 100
+      wait: 1
     nexttasks:
       '#none#':
       - "3"
+    note: false
+    quietmode: 0
     scriptarguments:
       Alert:
         simple: ${foundIncidents}
     separatecontext: true
-    continueonerrortype: ""
-    loop:
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 367553c1-9597-4413-88e5-39b5b6814fa3
       iscommand: false
-      exitCondition: ""
-      wait: 1
-      max: 100
+      name: Get Alert Tasks and Store to Dataset
+      playbookId: 'Get Alert Tasks and Store to Dataset'
+      type: playbook
+      version: -1
+    taskid: 367553c1-9597-4413-88e5-39b5b6814fa3
+    timertriggers: []
+    type: playbook
     view: |-
       {
         "position": {
@@ -205,13 +214,7 @@ tasks:
           "y": 380
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
+version: -1
 view: |-
   {
     "linkLabelsPosition": {},
@@ -224,7 +227,3 @@ view: |-
       }
     }
   }
-inputs: []
-outputs: []
-quiet: true
-dirtyInputs: true
