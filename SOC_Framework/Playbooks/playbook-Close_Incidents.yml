@@ -1,15 +1,15 @@
 id: 97f87182-252c-454b-810d-c951e39abe9d
-version: 8
+version: 5
 vcShouldKeepItemLegacyProdMachine: false
 name: Close Incidents
 starttaskid: "0"
 tasks:
   "0":
     id: "0"
-    taskid: 388b6c79-26c8-4e79-8102-5ca9735eec59
+    taskid: e3a4ffd5-adb5-49d4-8e54-715805207555
     type: start
     task:
-      id: 388b6c79-26c8-4e79-8102-5ca9735eec59
+      id: e3a4ffd5-adb5-49d4-8e54-715805207555
       version: -1
       name: ""
       iscommand: false
@@ -35,10 +35,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "1":
     id: "1"
-    taskid: b877ed7d-27c9-43b4-8f10-be5e08c162cc
+    taskid: 663de9f9-9efb-4629-8280-64ddaea94d59
     type: regular
     task:
-      id: b877ed7d-27c9-43b4-8f10-be5e08c162cc
+      id: 663de9f9-9efb-4629-8280-64ddaea94d59
       version: -1
       name: Close Incident
       description: send HTTP POST request.
@@ -47,20 +47,23 @@ tasks:
       iscommand: true
       brand: ""
     nexttasks:
+      '#error#':
+      - "8"
       '#none#':
       - "6"
     scriptarguments:
       body:
-        simple: '{"request_data":{"incident_id":"${inputs.Incident.incident_id}","update_data":{"status":"resolved_other","resolve_comment":"This
-          incident is resolved"}}}'
+        simple: '{"request_data":{"incident_id":"${inputs.Incident.incident_id}","update_data":{"status":"resolved_other","resolve_comment":"Resolved
+          by the Auto Triage Job"}}}'
       uri:
         simple: /public_api/v1/incidents/update_incident
     separatecontext: false
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 195.25,
           "y": 1060
         }
       }
@@ -73,10 +76,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "2":
     id: "2"
-    taskid: c7bf93cb-abc8-4d9b-9ae1-b66dda8941f9
+    taskid: 99cb03a0-75ca-4e84-b683-93094ef3dd10
     type: regular
     task:
-      id: c7bf93cb-abc8-4d9b-9ae1-b66dda8941f9
+      id: 99cb03a0-75ca-4e84-b683-93094ef3dd10
       version: -1
       name: Get Alerts on Incident
       description: send HTTP POST request.
@@ -85,6 +88,8 @@ tasks:
       iscommand: true
       brand: ""
     nexttasks:
+      '#error#':
+      - "8"
       '#none#':
       - "3"
     scriptarguments:
@@ -92,13 +97,12 @@ tasks:
         simple: '{"request_data":{"incident_id":"${inputs.Incident.incident_id}",
           "alerts_limit":90}}'
       extend-context:
-        simple: Alerts.response.reply.alerts.data.alert_id=response.reply.alerts.data.alert_id
-      ignore-outputs:
-        simple: "true"
+        simple: Alerts=.
       uri:
         simple: /public_api/v1/incidents/get_incident_extra_data
     separatecontext: false
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     view: |-
       {
         "position": {
@@ -110,15 +114,15 @@ tasks:
     timertriggers: []
     ignoreworker: false
     skipunavailable: false
-    quietmode: 2
+    quietmode: 0
     isoversize: false
     isautoswitchedtoquietmode: false
   "3":
     id: "3"
-    taskid: 4ddaf994-3e26-4d9e-88ee-9f7230a44416
+    taskid: c92b49de-eb8c-421f-8634-093b4d2a186b
     type: condition
     task:
-      id: 4ddaf994-3e26-4d9e-88ee-9f7230a44416
+      id: c92b49de-eb8c-421f-8634-093b4d2a186b
       version: -1
       name: Alerts Exist?
       type: condition
@@ -142,7 +146,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 195.25,
+          "x": 340.5,
           "y": 380
         }
       }
@@ -155,10 +159,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "4":
     id: "4"
-    taskid: 9d40919b-c301-470d-a452-ace75db76c75
+    taskid: 0dbf3550-c176-4730-a49a-bee3d6121817
     type: regular
     task:
-      id: 9d40919b-c301-470d-a452-ace75db76c75
+      id: 0dbf3550-c176-4730-a49a-bee3d6121817
       version: -1
       name: Batch Close Alerts
       description: send HTTP POST request.
@@ -167,6 +171,8 @@ tasks:
       iscommand: true
       brand: ""
     nexttasks:
+      '#error#':
+      - "8"
       '#none#':
       - "5"
     scriptarguments:
@@ -177,27 +183,27 @@ tasks:
         simple: /public_api/v1/alerts/update_alerts
     separatecontext: false
     continueonerror: true
-    continueonerrortype: ""
+    continueonerrortype: errorPath
     view: |-
       {
         "position": {
-          "x": 340.5,
-          "y": 549
+          "x": 681,
+          "y": 550
         }
       }
     note: false
     timertriggers: []
     ignoreworker: false
     skipunavailable: false
-    quietmode: 2
+    quietmode: 0
     isoversize: false
     isautoswitchedtoquietmode: false
   "5":
     id: "5"
-    taskid: 562c1c24-32f9-4615-8f50-ecab33206937
+    taskid: d88ea08f-98ee-4b26-85cc-f7477012992c
     type: regular
     task:
-      id: 562c1c24-32f9-4615-8f50-ecab33206937
+      id: d88ea08f-98ee-4b26-85cc-f7477012992c
       version: -1
       name: Delete Context
       description: |-
@@ -206,7 +212,7 @@ tasks:
         This automation runs using the default Limited User role, unless you explicitly change the permissions.
         For more information, see the section about permissions here:
         https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.10/Cortex-XSOAR-Administrator-Guide/Automations
-      script: DeleteContext
+      scriptName: DeleteContext
       type: regular
       iscommand: false
       brand: ""
@@ -216,14 +222,12 @@ tasks:
     scriptarguments:
       key:
         simple: Alerts
-      subplaybook:
-        simple: "yes"
     separatecontext: false
     continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 340.5,
+          "x": 826.25,
           "y": 720
         }
       }
@@ -236,10 +240,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "6":
     id: "6"
-    taskid: 2f478251-4ce8-413b-8712-a5dcd0d2a83e
+    taskid: 30aae18e-e9ed-45b0-8572-85c9a7ca5b0e
     type: title
     task:
-      id: 2f478251-4ce8-413b-8712-a5dcd0d2a83e
+      id: 30aae18e-e9ed-45b0-8572-85c9a7ca5b0e
       version: -1
       name: Fin
       type: title
@@ -250,8 +254,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 195.25,
-          "y": 1230
+          "x": 145.25,
+          "y": 1400
         }
       }
     note: false
@@ -263,10 +267,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "7":
     id: "7"
-    taskid: 1646142f-ee76-4a97-8e28-2feb971d46c8
+    taskid: d5cb1cde-8a03-4f19-8d12-9f9217147d14
     type: condition
     task:
-      id: 1646142f-ee76-4a97-8e28-2feb971d46c8
+      id: d5cb1cde-8a03-4f19-8d12-9f9217147d14
       version: -1
       name: ASM Incident?
       type: condition
@@ -293,8 +297,39 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 195.25,
+          "x": 50,
           "y": 890
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "8":
+    id: "8"
+    taskid: 70396ca7-33b0-4663-833f-a495a53c1793
+    type: playbook
+    task:
+      id: 70396ca7-33b0-4663-833f-a495a53c1793
+      version: -1
+      name: Foundation - Error Handling
+      playbookName: Foundation - Error Handling
+      type: playbook
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "6"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 485.75,
+          "y": 1230
         }
       }
     note: false
@@ -309,8 +344,8 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 1240,
-        "width": 671.5,
+        "height": 1410,
+        "width": 1157.25,
         "x": 50,
         "y": 50
       }

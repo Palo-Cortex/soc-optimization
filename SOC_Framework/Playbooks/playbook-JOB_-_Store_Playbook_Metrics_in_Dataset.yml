@@ -1,35 +1,26 @@
-dirtyInputs: true
 id: JOB - Store Playbook Metrics in Dataset
-inputs: []
+version: 2
+vcShouldKeepItemLegacyProdMachine: false
 name: JOB - Store Playbook Metrics in Dataset
-outputs: []
-quiet: true
-starttaskid: "0"
 tags:
 - SOC_Framework
+starttaskid: "0"
 tasks:
   "0":
-    continueonerrortype: ""
     id: "0"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
+    taskid: 70ae04ac-deed-4719-8f9a-d689a1125612
+    type: start
+    task:
+      id: 70ae04ac-deed-4719-8f9a-d689a1125612
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
     nexttasks:
       '#none#':
       - "1"
-    note: false
-    quietmode: 0
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 70ae04ac-deed-4719-8f9a-d689a1125612
-      iscommand: false
-      name: ""
-      version: -1
-    taskid: 70ae04ac-deed-4719-8f9a-d689a1125612
-    timertriggers: []
-    type: start
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -37,44 +28,44 @@ tasks:
           "y": 50
         }
       }
-  "1":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "1"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#error#':
-      - "4"
-      '#none#':
-      - "6"
     note: false
-    quietmode: 0
-    scriptarguments:
-      fromdate:
-        simple: 1 hour ago
-      limit:
-        simple: "500"
-    separatecontext: false
+    timertriggers: []
+    ignoreworker: false
     skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "1":
+    id: "1"
+    taskid: f90525f7-68cd-481f-8362-10dea2acebb7
+    type: regular
     task:
-      brand: ""
+      id: f90525f7-68cd-481f-8362-10dea2acebb7
+      version: -1
+      name: Search Alerts
       description: |-
         Searches Demisto alerts. A summarized version of this scrips is available with the summarizedversion argument.
 
         This automation runs using the default Limited User role, unless you explicitly change the permissions.
         For more information, see the section about permissions here:
         https://docs-cortex.paloaltonetworks.com/r/Cortex-XSIAM/Cortex-XSIAM-Administrator-Guide/Permission-Management
-      id: f90525f7-68cd-481f-8362-10dea2acebb7
-      iscommand: false
-      name: Search Alerts
-      script: SearchAlertsV2
+      scriptName: SearchAlertsV2
       type: regular
-      version: -1
-    taskid: f90525f7-68cd-481f-8362-10dea2acebb7
-    timertriggers: []
-    type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#error#':
+      - "4"
+      '#none#':
+      - "6"
+    scriptarguments:
+      fromdate:
+        simple: 1 hour ago
+      limit:
+        simple: "500"
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: errorPath
     view: |-
       {
         "position": {
@@ -82,34 +73,34 @@ tasks:
           "y": 210
         }
       }
-  "3":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "3"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "3":
+    id: "3"
+    taskid: 2338a1f5-43e7-41a8-89ce-52b874c47e2f
+    type: regular
+    task:
+      id: 2338a1f5-43e7-41a8-89ce-52b874c47e2f
+      version: -1
+      name: Close Investigation
+      description: commands.local.cmd.close.inv
+      script: Builtin|||closeInvestigation
+      type: regular
+      iscommand: true
+      brand: Builtin
     nexttasks:
       '#error#':
       - "4"
       '#none#':
       - "5"
-    note: false
-    quietmode: 0
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: Builtin
-      description: commands.local.cmd.close.inv
-      id: 2338a1f5-43e7-41a8-89ce-52b874c47e2f
-      iscommand: true
-      name: Close Investigation
-      script: Builtin|||closeInvestigation
-      type: regular
-      version: -1
-    taskid: 2338a1f5-43e7-41a8-89ce-52b874c47e2f
-    timertriggers: []
-    type: regular
+    continueonerror: true
+    continueonerrortype: errorPath
     view: |-
       {
         "position": {
@@ -117,30 +108,30 @@ tasks:
           "y": 550
         }
       }
-  "4":
-    continueonerrortype: ""
-    id: "4"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "4":
+    id: "4"
+    taskid: 1d0c04dc-71bc-4667-8b3e-49b4339eb081
+    type: playbook
+    task:
+      id: 1d0c04dc-71bc-4667-8b3e-49b4339eb081
+      version: -1
+      name: Foundation - Error Handling
+      playbookName: Foundation - Error Handling
+      type: playbook
+      iscommand: false
+      brand: ""
     nexttasks:
       '#none#':
       - "5"
-    note: false
-    quietmode: 0
     separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 1d0c04dc-71bc-4667-8b3e-49b4339eb081
-      iscommand: false
-      name: Foundation - Error Handling
-      playbookId: Foundation - Error Handling
-      type: playbook
-      version: -1
-    taskid: 1d0c04dc-71bc-4667-8b3e-49b4339eb081
-    timertriggers: []
-    type: playbook
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -148,26 +139,26 @@ tasks:
           "y": 720
         }
       }
-  "5":
-    continueonerrortype: ""
-    id: "5"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
     note: false
-    quietmode: 0
-    separatecontext: false
+    timertriggers: []
+    ignoreworker: false
     skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "5":
+    id: "5"
+    taskid: 455bc6dc-2b02-4b09-8faf-9d84988ac0fe
+    type: title
     task:
-      brand: ""
       id: 455bc6dc-2b02-4b09-8faf-9d84988ac0fe
-      iscommand: false
+      version: -1
       name: Done
       type: title
-      version: -1
-    taskid: 455bc6dc-2b02-4b09-8faf-9d84988ac0fe
-    timertriggers: []
-    type: title
+      iscommand: false
+      brand: ""
+    separatecontext: false
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -175,30 +166,38 @@ tasks:
           "y": 890
         }
       }
-  "6":
-    continueonerrortype: ""
-    id: "6"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "6":
+    id: "6"
+    taskid: 367553c1-9597-4413-88e5-39b5b6814fa3
+    type: playbook
+    task:
+      id: 367553c1-9597-4413-88e5-39b5b6814fa3
+      version: -1
+      name: Get Alert Tasks and Store to Dataset
+      playbookName: Get Alert Tasks and Store to Dataset
+      type: playbook
+      iscommand: false
+      brand: ""
     nexttasks:
       '#none#':
       - "3"
-    note: false
-    quietmode: 0
+    scriptarguments:
+      Alert:
+        simple: ${foundIncidents}
     separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 4938fb85-c82a-4321-8a48-b4d28b82be97
+    continueonerrortype: ""
+    loop:
       iscommand: false
-      name: Get Alert Tasks and Store to Dataset
-      playbookId: bb2825d4-e383-4c6f-83fd-b89036f3dc6c
-      type: playbook
-      version: -1
-    taskid: 4938fb85-c82a-4321-8a48-b4d28b82be97
-    timertriggers: []
-    type: playbook
+      exitCondition: ""
+      wait: 1
+      max: 100
     view: |-
       {
         "position": {
@@ -206,7 +205,13 @@ tasks:
           "y": 380
         }
       }
-version: -1
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
 view: |-
   {
     "linkLabelsPosition": {},
@@ -219,3 +224,7 @@ view: |-
       }
     }
   }
+inputs: []
+outputs: []
+quiet: true
+dirtyInputs: true
