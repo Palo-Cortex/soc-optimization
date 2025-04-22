@@ -33,7 +33,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "11"
+      - "28"
     note: false
     quietmode: 0
     separatecontext: false
@@ -50,18 +50,20 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
+          "x": 50,
           "y": 50
         }
       }
   "2":
     continueonerror: true
-    continueonerrortype: ""
+    continueonerrortype: errorPath
     id: "2"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "30"
       '#none#':
       - "12"
     note: true
@@ -78,30 +80,32 @@ tasks:
     task:
       brand: ""
       description: Returns forensics evidence.
-      id: b04ee12c-19cf-462b-8a02-78f918eca0b6
+      id: 86e46687-7f40-48f4-8581-8dcb8c77cfbb
       iscommand: true
       name: Get Forensic Information
       script: '|||proofpoint-get-forensics'
       type: regular
       version: -1
-    taskid: b04ee12c-19cf-462b-8a02-78f918eca0b6
+    taskid: 86e46687-7f40-48f4-8581-8dcb8c77cfbb
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 515
+          "x": 50,
+          "y": 540
         }
       }
   "3":
     continueonerror: true
-    continueonerrortype: ""
+    continueonerrortype: errorPath
     id: "3"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "30"
       '#none#':
       - "14"
     note: false
@@ -123,51 +127,20 @@ tasks:
     task:
       brand: Builtin
       description: commands.local.cmd.set.incident
-      id: 546a56b9-95e1-4e1b-842b-e578976f1bd2
+      id: bf746e5f-94ec-4ab2-a00a-04c9090adc6b
       iscommand: true
       name: Summarize Forensic Info
       script: Builtin|||setAlert
       type: regular
       version: -1
-    taskid: 546a56b9-95e1-4e1b-842b-e578976f1bd2
+    taskid: bf746e5f-94ec-4ab2-a00a-04c9090adc6b
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 152.5,
-          "y": 865
-        }
-      }
-  "11":
-    continueonerrortype: ""
-    id: "11"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "23"
-    note: false
-    quietmode: 0
-    separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: fd493027-fde4-42fe-8fd7-b362fffd03dc
-      iscommand: false
-      name: Foundation - Upon Trigger
-      playbookId: 0c636b23-4aaa-4eb4-84d8-e2d77cc5182b
-      type: playbook
-      version: -1
-    taskid: fd493027-fde4-42fe-8fd7-b362fffd03dc
-    timertriggers: []
-    type: playbook
-    view: |-
-      {
-        "position": {
-          "x": 265,
-          "y": 195
+          "x": 50,
+          "y": 880
         }
       }
   "12":
@@ -208,20 +181,23 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 690
+          "x": 195.25,
+          "y": 710
         }
       }
   "13":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "13"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "30"
       '#none#':
-      - "15"
       - "20"
+      - "15"
     note: false
     quietmode: 2
     reputationcalc: 2
@@ -235,20 +211,20 @@ tasks:
     task:
       brand: Builtin
       description: commands.local.cmd.extract.indicators
-      id: 03bec576-05ab-4340-8a48-74c917877e62
+      id: a4444626-37ea-4f61-8016-7e1c62cfcf14
       iscommand: true
       name: Create Indicator from Threat
       script: Builtin|||extractIndicators
       type: regular
       version: -1
-    taskid: 03bec576-05ab-4340-8a48-74c917877e62
+    taskid: a4444626-37ea-4f61-8016-7e1c62cfcf14
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 1185
+          "x": 545.25,
+          "y": 1210
         }
       }
   "14":
@@ -277,12 +253,13 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 1040
+          "x": 545.25,
+          "y": 1050
         }
       }
   "15":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "15"
     ignoreworker: false
     isautoswitchedtoquietmode: false
@@ -309,29 +286,32 @@ tasks:
       brand: ""
       description: Add DBot score to context for indicators with custom vendor, score,
         reliability, and type.
-      id: e23f7778-21b8-4f4d-833d-8c0b567631bd
+      id: 9f8fb9ec-0c9c-4ea3-a4f4-092bbb5c77a4
       iscommand: false
       name: Assign Proofpoint DBot Score
       script: AddDBotScoreToContext
       type: regular
       version: -1
-    taskid: e23f7778-21b8-4f4d-833d-8c0b567631bd
+    taskid: 9f8fb9ec-0c9c-4ea3-a4f4-092bbb5c77a4
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 1535
+          "x": 1316.75,
+          "y": 1550
         }
       }
   "16":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "16"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "30"
       '#none#':
       - "19"
     note: false
@@ -344,20 +324,20 @@ tasks:
     task:
       brand: ""
       description: Get the overall score for the indicator as calculated by DBot.
-      id: 32fd8a01-4b5b-4bcf-8726-1d673adbaaba
+      id: b003a1b1-11d6-4477-b3f5-3a95816d709b
       iscommand: false
       name: Get Indicator Scores
       script: GetIndicatorDBotScoreFromCache
       type: regular
       version: -1
-    taskid: 32fd8a01-4b5b-4bcf-8726-1d673adbaaba
+    taskid: b003a1b1-11d6-4477-b3f5-3a95816d709b
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 1710
+          "x": 1316.75,
+          "y": 1720
         }
       }
   "17":
@@ -409,16 +389,22 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 2205
+          "x": 1607.25,
+          "y": 2220
         }
       }
   "18":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "18"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    nexttasks:
+      '#error#':
+      - "30"
+      '#none#':
+      - "29"
     note: false
     quietmode: 0
     separatecontext: false
@@ -426,20 +412,20 @@ tasks:
     task:
       brand: Builtin
       description: commands.local.cmd.close.inv
-      id: 1fc76c73-bff0-4657-805c-c6ac8e8548bc
+      id: 90be9cad-92ee-4bf8-b131-395cdc8abd2f
       iscommand: true
       name: Close
       script: Builtin|||closeInvestigation
       type: regular
       version: -1
-    taskid: 1fc76c73-bff0-4657-805c-c6ac8e8548bc
+    taskid: 90be9cad-92ee-4bf8-b131-395cdc8abd2f
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 2700
+          "x": 1607.25,
+          "y": 2720
         }
       }
   "19":
@@ -468,18 +454,20 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 1885
+          "x": 1462,
+          "y": 1890
         }
       }
   "20":
     continueonerror: true
-    continueonerrortype: ""
+    continueonerrortype: errorPath
     id: "20"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "30"
       '#none#':
       - "21"
     note: true
@@ -492,30 +480,32 @@ tasks:
     task:
       brand: ""
       description: Converts the contents of a URL to an image file or a PDF file.
-      id: 6ed4591d-338f-4713-8863-6122f5f67196
+      id: f3f1911d-d1f7-48b5-8506-3a3655ec3287
       iscommand: true
       name: Rasterize URL
       script: '|||rasterize'
       type: regular
       version: -1
-    taskid: 6ed4591d-338f-4713-8863-6122f5f67196
+    taskid: f3f1911d-d1f7-48b5-8506-3a3655ec3287
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 480,
-          "y": 1360
+          "x": 640.5,
+          "y": 1380
         }
       }
   "21":
     continueonerror: true
-    continueonerrortype: ""
+    continueonerrortype: errorPath
     id: "21"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "30"
       '#none#':
       - "26"
     note: true
@@ -530,20 +520,20 @@ tasks:
     task:
       brand: ""
       description: Sends http request. Returns the response as json.
-      id: e269dd1f-51c2-4860-80a0-c0e53a5a0783
+      id: 8b4d6890-9876-4204-8a06-a9aaae936420
       iscommand: false
       name: Request raw HTML
       script: http
       type: regular
       version: -1
-    taskid: e269dd1f-51c2-4860-80a0-c0e53a5a0783
+    taskid: 8b4d6890-9876-4204-8a06-a9aaae936420
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 480,
-          "y": 1535
+          "x": 690.5,
+          "y": 1550
         }
       }
   "23":
@@ -572,8 +562,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 370
+          "x": 50,
+          "y": 380
         }
       }
   "24":
@@ -602,17 +592,20 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 152.5,
-          "y": 2380
+          "x": 1752.5,
+          "y": 2390
         }
       }
   "25":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "25"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "30"
       '#none#':
       - "17"
     note: false
@@ -627,30 +620,32 @@ tasks:
     task:
       brand: ""
       description: Get the prevalence of an ip, identified by ip_address.
-      id: bb5f9ab2-3341-4618-8e01-0249313a6923
+      id: 0d98aacf-4892-478e-8371-446585b5adb0
       iscommand: true
       name: Prevalence of Click IP
       script: '|||core-get-IP-analytics-prevalence'
       type: regular
       version: -1
-    taskid: bb5f9ab2-3341-4618-8e01-0249313a6923
+    taskid: 0d98aacf-4892-478e-8371-446585b5adb0
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 2030
+          "x": 1462,
+          "y": 2050
         }
       }
   "26":
     continueonerror: true
-    continueonerrortype: ""
+    continueonerrortype: errorPath
     id: "26"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "30"
       '#none#':
       - "19"
     note: false
@@ -718,20 +713,20 @@ tasks:
     task:
       brand: Builtin
       description: commands.local.cmd.set.incident
-      id: 61d99d4e-1bba-4efb-88cb-4a30968b2381
+      id: f3626359-1539-4b91-ab41-5aab6522c99c
       iscommand: true
       name: Set Response Data
       script: Builtin|||setAlert
       type: regular
       version: -1
-    taskid: 61d99d4e-1bba-4efb-88cb-4a30968b2381
+    taskid: f3626359-1539-4b91-ab41-5aab6522c99c
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 480,
-          "y": 1710
+          "x": 835.75,
+          "y": 1720
         }
       }
   "27":
@@ -760,8 +755,97 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 150,
-          "y": 2520
+          "x": 1752.5,
+          "y": 2550
+        }
+      }
+  "28":
+    continueonerrortype: ""
+    id: "28"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "23"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 569f89b6-a611-445d-83c7-b651ab245a10
+      iscommand: false
+      name: Foundation - Upon Trigger
+      playbookId: Foundation - Upon Trigger
+      type: playbook
+      version: -1
+    taskid: 569f89b6-a611-445d-83c7-b651ab245a10
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 210
+        }
+      }
+  "29":
+    continueonerrortype: ""
+    id: "29"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f3d3b6e4-8232-4808-87dd-ee2e280cd321
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: f3d3b6e4-8232-4808-87dd-ee2e280cd321
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 1026.25,
+          "y": 3060
+        }
+      }
+  "30":
+    continueonerrortype: ""
+    id: "30"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "29"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: fc8e2675-f51f-4110-888e-980fb44da7cb
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: Foundation - Error Handling
+      type: playbook
+      version: -1
+    taskid: fc8e2675-f51f-4110-888e-980fb44da7cb
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 550,
+          "y": 2890
         }
       }
 version: -1
@@ -770,8 +854,8 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 2745,
-        "width": 810,
+        "height": 3070,
+        "width": 2083.5,
         "x": 50,
         "y": 50
       }

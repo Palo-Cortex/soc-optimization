@@ -1,3 +1,4 @@
+dirtyInputs: true
 id: 19afce31-d945-4a44-800d-efd460f0c9f1
 inputs: []
 name: Use Case - Close NGFW Prevented
@@ -13,7 +14,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "3"
+      - "6"
     note: false
     quietmode: 0
     separatecontext: false
@@ -30,16 +31,22 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 195.25,
           "y": 50
         }
       }
   "1":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "1"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    nexttasks:
+      '#error#':
+      - "5"
+      '#none#':
+      - "4"
     note: false
     quietmode: 0
     separatecontext: false
@@ -47,29 +54,32 @@ tasks:
     task:
       brand: Builtin
       description: commands.local.cmd.close.inv
-      id: f37d1e85-3487-4838-8568-4910aaf76d0e
+      id: eb94ae43-7086-45b8-9a09-e5608fd76c1e
       iscommand: true
       name: Close Alert
       script: Builtin|||closeInvestigation
       type: regular
       version: -1
-    taskid: f37d1e85-3487-4838-8568-4910aaf76d0e
+    taskid: eb94ae43-7086-45b8-9a09-e5608fd76c1e
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 545
+          "x": 340.5,
+          "y": 550
         }
       }
   "2":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "2"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "5"
       '#none#':
       - "1"
     note: false
@@ -82,25 +92,83 @@ tasks:
     task:
       brand: Builtin
       description: commands.local.cmd.set.incident
-      id: e460eb0d-de17-42fa-8960-d9d230588fbc
+      id: 891a1c35-05d3-4761-8710-2a955027bf3c
       iscommand: true
       name: Set Alert Type
       script: Builtin|||setAlert
       type: regular
       version: -1
-    taskid: e460eb0d-de17-42fa-8960-d9d230588fbc
+    taskid: 891a1c35-05d3-4761-8710-2a955027bf3c
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 370
+          "x": 195.25,
+          "y": 380
         }
       }
-  "3":
+  "4":
     continueonerrortype: ""
-    id: "3"
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: bce720e8-ee1f-4559-98c6-9f1b7b91ccd2
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: bce720e8-ee1f-4559-98c6-9f1b7b91ccd2
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 195.25,
+          "y": 890
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: aa707ddf-9ee8-4384-8ba6-6f5b0aeb3f07
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: Foundation - Error Handling
+      type: playbook
+      version: -1
+    taskid: aa707ddf-9ee8-4384-8ba6-6f5b0aeb3f07
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 720
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
@@ -113,20 +181,20 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 6cbbb1c7-46a4-4e29-8a25-4b50459d35d3
+      id: e0ffc94d-1fc8-4b14-8ed6-3aa3ba72daba
       iscommand: false
       name: Foundation - Upon Trigger
-      playbookId: 0c636b23-4aaa-4eb4-84d8-e2d77cc5182b
+      playbookId: Foundation - Upon Trigger
       type: playbook
       version: -1
-    taskid: 6cbbb1c7-46a4-4e29-8a25-4b50459d35d3
+    taskid: e0ffc94d-1fc8-4b14-8ed6-3aa3ba72daba
     timertriggers: []
     type: playbook
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 195
+          "x": 195.25,
+          "y": 210
         }
       }
 version: -1
@@ -135,8 +203,8 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 590,
-        "width": 380,
+        "height": 900,
+        "width": 671.5,
         "x": 50,
         "y": 50
       }
