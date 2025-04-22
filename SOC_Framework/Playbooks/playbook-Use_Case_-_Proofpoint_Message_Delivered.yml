@@ -33,7 +33,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "11"
+      - "26"
     note: false
     quietmode: 0
     separatecontext: false
@@ -50,18 +50,20 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": -280
+          "x": 676.25,
+          "y": 50
         }
       }
   "2":
     continueonerror: true
-    continueonerrortype: ""
+    continueonerrortype: errorPath
     id: "2"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "27"
       '#none#':
       - "12"
     note: true
@@ -78,30 +80,32 @@ tasks:
     task:
       brand: ""
       description: Returns forensics evidence.
-      id: 257fa3e9-0c36-40cd-8a22-3083572750dd
+      id: f2bcfbdc-76e1-4c7e-b6c8-46234aed0a0f
       iscommand: true
       name: Get Forensic Information
       script: '|||proofpoint-get-forensics'
       type: regular
       version: -1
-    taskid: 257fa3e9-0c36-40cd-8a22-3083572750dd
+    taskid: f2bcfbdc-76e1-4c7e-b6c8-46234aed0a0f
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 210
+          "x": 676.25,
+          "y": 540
         }
       }
   "3":
     continueonerror: true
-    continueonerrortype: ""
+    continueonerrortype: errorPath
     id: "3"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "27"
       '#none#':
       - "14"
     note: false
@@ -156,51 +160,20 @@ tasks:
     task:
       brand: Builtin
       description: commands.local.cmd.set.incident
-      id: 17f5eec4-9b51-4074-8ddd-cd1e58c08f8b
+      id: f84ce61f-e6c8-4513-8642-13337099b65c
       iscommand: true
       name: Summarize Forensic Info
       script: Builtin|||setAlert
       type: regular
       version: -1
-    taskid: 17f5eec4-9b51-4074-8ddd-cd1e58c08f8b
+    taskid: f84ce61f-e6c8-4513-8642-13337099b65c
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 360,
-          "y": 550
-        }
-      }
-  "11":
-    continueonerrortype: ""
-    id: "11"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "23"
-    note: false
-    quietmode: 0
-    separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: fd493027-fde4-42fe-8fd7-b362fffd03dc
-      iscommand: false
-      name: Foundation - Upon Trigger
-      playbookId: 0c636b23-4aaa-4eb4-84d8-e2d77cc5182b
-      type: playbook
-      version: -1
-    taskid: fd493027-fde4-42fe-8fd7-b362fffd03dc
-    timertriggers: []
-    type: playbook
-    view: |-
-      {
-        "position": {
-          "x": 50,
-          "y": -95
+          "x": 1743,
+          "y": 880
         }
       }
   "12":
@@ -241,17 +214,20 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 370
+          "x": 1402.5,
+          "y": 710
         }
       }
   "13":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "13"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "27"
       '#none#':
       - "15"
       - "20"
@@ -266,20 +242,20 @@ tasks:
     task:
       brand: Builtin
       description: commands.local.cmd.extract.indicators
-      id: 6f5df510-9ace-4c85-83aa-653de55d0bdc
+      id: 93b64fbe-d997-4b1d-a4a4-38646cd09d6e
       iscommand: true
       name: Create Indicator from Threat
       script: Builtin|||extractIndicators
       type: regular
       version: -1
-    taskid: 6f5df510-9ace-4c85-83aa-653de55d0bdc
+    taskid: 93b64fbe-d997-4b1d-a4a4-38646cd09d6e
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 60,
-          "y": 850
+          "x": 1066.75,
+          "y": 1210
         }
       }
   "14":
@@ -308,17 +284,20 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 60,
-          "y": 720
+          "x": 1066.75,
+          "y": 1050
         }
       }
   "15":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "15"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "27"
       '#none#':
       - "16"
     note: false
@@ -361,29 +340,32 @@ tasks:
       brand: ""
       description: Add DBot score to context for indicators with custom vendor, score,
         reliability, and type.
-      id: 4de73dd2-6ff5-43cc-82cd-822427fb707b
+      id: 3698522d-f7aa-45ef-ba6d-3afe26bd1225
       iscommand: false
       name: Assign Proofpoint DBot Score
       script: AddDBotScoreToContext
       type: regular
       version: -1
-    taskid: 4de73dd2-6ff5-43cc-82cd-822427fb707b
+    taskid: 3698522d-f7aa-45ef-ba6d-3afe26bd1225
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 60,
-          "y": 1010
+          "x": 190.5,
+          "y": 1380
         }
       }
   "16":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "16"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "27"
       '#none#':
       - "19"
     note: false
@@ -396,20 +378,20 @@ tasks:
     task:
       brand: ""
       description: Get the overall score for the indicator as calculated by DBot.
-      id: 98559a7f-7633-4618-8855-8b078a3297a8
+      id: 421aad89-5905-4716-abe1-d1f2791c7f81
       iscommand: false
       name: Get Indicator Scores
       script: GetIndicatorDBotScoreFromCache
       type: regular
       version: -1
-    taskid: 98559a7f-7633-4618-8855-8b078a3297a8
+    taskid: 421aad89-5905-4716-abe1-d1f2791c7f81
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 60,
-          "y": 1180
+          "x": 426.25,
+          "y": 1550
         }
       }
   "17":
@@ -456,16 +438,22 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 60,
-          "y": 1530
+          "x": 576.25,
+          "y": 1880
         }
       }
   "18":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "18"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    nexttasks:
+      '#error#':
+      - "27"
+      '#none#':
+      - "28"
     note: false
     quietmode: 0
     separatecontext: false
@@ -473,20 +461,20 @@ tasks:
     task:
       brand: Builtin
       description: commands.local.cmd.close.inv
-      id: 1fc76c73-bff0-4657-805c-c6ac8e8548bc
+      id: 9b0af67b-973c-47f0-9a0a-df864e3eba64
       iscommand: true
       name: Close
       script: Builtin|||closeInvestigation
       type: regular
       version: -1
-    taskid: 1fc76c73-bff0-4657-805c-c6ac8e8548bc
+    taskid: 9b0af67b-973c-47f0-9a0a-df864e3eba64
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 20,
-          "y": 2120
+          "x": 576.25,
+          "y": 2380
         }
       }
   "19":
@@ -515,18 +503,20 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 60,
-          "y": 1370
+          "x": 576.25,
+          "y": 1720
         }
       }
   "20":
     continueonerror: true
-    continueonerrortype: ""
+    continueonerrortype: errorPath
     id: "20"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "27"
       '#none#':
       - "21"
     note: true
@@ -556,30 +546,32 @@ tasks:
     task:
       brand: ""
       description: Converts the contents of a URL to an image file or a PDF file.
-      id: 8258967f-ca94-4268-8719-4df05002ae9d
+      id: a9865578-e118-420f-b625-dcf79cad7236
       iscommand: true
       name: Rasterize URL
       script: '|||rasterize'
       type: regular
       version: -1
-    taskid: 8258967f-ca94-4268-8719-4df05002ae9d
+    taskid: a9865578-e118-420f-b625-dcf79cad7236
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 490,
-          "y": 1030
+          "x": 1157.25,
+          "y": 1380
         }
       }
   "21":
     continueonerror: true
-    continueonerrortype: ""
+    continueonerrortype: errorPath
     id: "21"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "27"
       '#none#':
       - "19"
     note: true
@@ -611,20 +603,20 @@ tasks:
     task:
       brand: ""
       description: Sends http request. Returns the response as json.
-      id: bdd8f897-beab-434e-83f0-7cb55ef2e622
+      id: 4ffc2b28-9624-4af3-8d92-d3fe04b79235
       iscommand: false
       name: Request raw HTML
       script: http
       type: regular
       version: -1
-    taskid: bdd8f897-beab-434e-83f0-7cb55ef2e622
+    taskid: 4ffc2b28-9624-4af3-8d92-d3fe04b79235
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 490,
-          "y": 1180
+          "x": 1302.5,
+          "y": 1550
         }
       }
   "23":
@@ -653,8 +645,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 70
+          "x": 676.25,
+          "y": 380
         }
       }
   "24":
@@ -683,8 +675,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 370,
-          "y": 1720
+          "x": 721.5,
+          "y": 2050
         }
       }
   "25":
@@ -713,8 +705,97 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 370,
-          "y": 1870
+          "x": 721.5,
+          "y": 2210
+        }
+      }
+  "26":
+    continueonerrortype: ""
+    id: "26"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "23"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2c77fd12-6699-43e6-8e5a-fc8eca8d451d
+      iscommand: false
+      name: Foundation - Upon Trigger
+      playbookId: Foundation - Upon Trigger
+      type: playbook
+      version: -1
+    taskid: 2c77fd12-6699-43e6-8e5a-fc8eca8d451d
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 676.25,
+          "y": 210
+        }
+      }
+  "27":
+    continueonerrortype: ""
+    id: "27"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "28"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: d681ec2a-c458-4580-8db4-aba1209b3b18
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: Foundation - Error Handling
+      type: playbook
+      version: -1
+    taskid: d681ec2a-c458-4580-8db4-aba1209b3b18
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 2550
+        }
+      }
+  "28":
+    continueonerrortype: ""
+    id: "28"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 3d1e4f0a-e201-4cc3-a624-3932fef5c345
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: 3d1e4f0a-e201-4cc3-a624-3932fef5c345
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 340.5,
+          "y": 2720
         }
       }
 version: -1
@@ -723,10 +804,10 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 2495,
-        "width": 850,
-        "x": 20,
-        "y": -280
+        "height": 2730,
+        "width": 2074,
+        "x": 50,
+        "y": 50
       }
     }
   }
