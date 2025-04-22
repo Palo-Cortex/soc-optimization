@@ -1,24 +1,49 @@
+dirtyInputs: true
 id: 97f87182-252c-454b-810d-c951e39abe9d
-version: 5
-vcShouldKeepItemLegacyProdMachine: false
+inputSections:
+- description: Generic group for inputs
+  inputs:
+  - incident_id
+  name: General (Inputs group)
+inputs:
+- description: ""
+  key: incident_id
+  playbookInputQuery: null
+  required: true
+  value: {}
 name: Close Incidents
+outputSections:
+- description: Generic group for outputs
+  name: General (Outputs group)
+  outputs: []
+outputs: []
+quiet: true
 starttaskid: "0"
+tags:
+- SOC_Framework
 tasks:
   "0":
+    continueonerrortype: ""
     id: "0"
-    taskid: e3a4ffd5-adb5-49d4-8e54-715805207555
-    type: start
-    task:
-      id: e3a4ffd5-adb5-49d4-8e54-715805207555
-      version: -1
-      name: ""
-      iscommand: false
-      brand: ""
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
     nexttasks:
       '#none#':
-      - "2"
+      - "9"
+    note: false
+    quietmode: 0
     separatecontext: false
-    continueonerrortype: ""
+    skipunavailable: false
+    task:
+      brand: ""
+      id: e3a4ffd5-adb5-49d4-8e54-715805207555
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: e3a4ffd5-adb5-49d4-8e54-715805207555
+    timertriggers: []
+    type: start
     view: |-
       {
         "position": {
@@ -26,83 +51,138 @@ tasks:
           "y": 50
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
   "1":
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "1"
-    taskid: 663de9f9-9efb-4629-8280-64ddaea94d59
-    type: regular
-    task:
-      id: 663de9f9-9efb-4629-8280-64ddaea94d59
-      version: -1
-      name: Close Incident
-      description: send HTTP POST request.
-      script: '|||core-api-post'
-      type: regular
-      iscommand: true
-      brand: ""
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
     nexttasks:
       '#error#':
       - "8"
       '#none#':
       - "6"
+    note: false
+    quietmode: 0
     scriptarguments:
       body:
-        simple: '{"request_data":{"incident_id":"${inputs.Incident.incident_id}","update_data":{"status":"resolved_other","resolve_comment":"Resolved
+        simple: '{"request_data":{"incident_id":"${inputs.incident_id}","update_data":{"status":"resolved_other","resolve_comment":"Resolved
           by the Auto Triage Job"}}}'
       uri:
         simple: /public_api/v1/incidents/update_incident
     separatecontext: false
-    continueonerror: true
-    continueonerrortype: errorPath
+    skipunavailable: false
+    task:
+      brand: ""
+      description: send HTTP POST request.
+      id: 958e2c9a-4f9e-41f8-a617-1ca32f65d965
+      iscommand: true
+      name: Close Incident
+      script: '|||core-api-post'
+      type: regular
+      version: -1
+    taskid: 958e2c9a-4f9e-41f8-a617-1ca32f65d965
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 380
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 30aae18e-e9ed-45b0-8572-85c9a7ca5b0e
+      iscommand: false
+      name: Fin
+      type: title
+      version: -1
+    taskid: 30aae18e-e9ed-45b0-8572-85c9a7ca5b0e
+    timertriggers: []
+    type: title
     view: |-
       {
         "position": {
           "x": 195.25,
-          "y": 1060
+          "y": 720
         }
       }
-    note: false
-    timertriggers: []
+  "8":
+    continueonerrortype: ""
+    id: "8"
     ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
     isautoswitchedtoquietmode: false
-  "2":
-    id: "2"
-    taskid: 99cb03a0-75ca-4e84-b683-93094ef3dd10
-    type: regular
-    task:
-      id: 99cb03a0-75ca-4e84-b683-93094ef3dd10
-      version: -1
-      name: Get Alerts on Incident
-      description: send HTTP POST request.
-      script: '|||core-api-post'
-      type: regular
-      iscommand: true
-      brand: ""
+    isoversize: false
     nexttasks:
-      '#error#':
-      - "8"
       '#none#':
-      - "3"
-    scriptarguments:
-      body:
-        simple: '{"request_data":{"incident_id":"${inputs.Incident.incident_id}",
-          "alerts_limit":90}}'
-      extend-context:
-        simple: Alerts=.
-      uri:
-        simple: /public_api/v1/incidents/get_incident_extra_data
+      - "6"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 70396ca7-33b0-4663-833f-a495a53c1793
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: Foundation - Error Handling
+      type: playbook
+      version: -1
+    taskid: 70396ca7-33b0-4663-833f-a495a53c1793
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 340.5,
+          "y": 550
+        }
+      }
+  "9":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: inputs.incident_id
+          operator: isNotEmpty
+      label: "yes"
+    continueonerrortype: ""
+    id: "9"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "8"
+      "yes":
+      - "1"
+    note: false
+    quietmode: 0
     separatecontext: false
-    continueonerror: true
-    continueonerrortype: errorPath
+    skipunavailable: false
+    task:
+      brand: ""
+      id: b20b3f16-cdd7-478f-a3e1-30e50f48027d
+      iscommand: false
+      name: Is there an Incident ID?
+      type: condition
+      version: -1
+    taskid: b20b3f16-cdd7-478f-a3e1-30e50f48027d
+    timertriggers: []
+    type: condition
     view: |-
       {
         "position": {
@@ -110,261 +190,16 @@ tasks:
           "y": 210
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
-  "3":
-    id: "3"
-    taskid: c92b49de-eb8c-421f-8634-093b4d2a186b
-    type: condition
-    task:
-      id: c92b49de-eb8c-421f-8634-093b4d2a186b
-      version: -1
-      name: Alerts Exist?
-      type: condition
-      iscommand: false
-      brand: ""
-    nexttasks:
-      '#default#':
-      - "7"
-      "yes":
-      - "4"
-    separatecontext: false
-    conditions:
-    - label: "yes"
-      condition:
-      - - operator: isExists
-          left:
-            value:
-              simple: Alerts
-            iscontext: true
-    continueonerrortype: ""
-    view: |-
-      {
-        "position": {
-          "x": 340.5,
-          "y": 380
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
-  "4":
-    id: "4"
-    taskid: 0dbf3550-c176-4730-a49a-bee3d6121817
-    type: regular
-    task:
-      id: 0dbf3550-c176-4730-a49a-bee3d6121817
-      version: -1
-      name: Batch Close Alerts
-      description: send HTTP POST request.
-      script: '|||core-api-post'
-      type: regular
-      iscommand: true
-      brand: ""
-    nexttasks:
-      '#error#':
-      - "8"
-      '#none#':
-      - "5"
-    scriptarguments:
-      body:
-        simple: '{"request_data":{"alert_id_list":${Alerts.response.reply.alerts.data.alert_id},"update_data":{"status":"resolved_other","comment":"This
-          alert is auto triaged"}}}'
-      uri:
-        simple: /public_api/v1/alerts/update_alerts
-    separatecontext: false
-    continueonerror: true
-    continueonerrortype: errorPath
-    view: |-
-      {
-        "position": {
-          "x": 681,
-          "y": 550
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
-  "5":
-    id: "5"
-    taskid: d88ea08f-98ee-4b26-85cc-f7477012992c
-    type: regular
-    task:
-      id: d88ea08f-98ee-4b26-85cc-f7477012992c
-      version: -1
-      name: Delete Context
-      description: |-
-        Delete field from context.
-
-        This automation runs using the default Limited User role, unless you explicitly change the permissions.
-        For more information, see the section about permissions here:
-        https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.10/Cortex-XSOAR-Administrator-Guide/Automations
-      scriptName: DeleteContext
-      type: regular
-      iscommand: false
-      brand: ""
-    nexttasks:
-      '#none#':
-      - "7"
-    scriptarguments:
-      key:
-        simple: Alerts
-    separatecontext: false
-    continueonerrortype: ""
-    view: |-
-      {
-        "position": {
-          "x": 826.25,
-          "y": 720
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
-  "6":
-    id: "6"
-    taskid: 30aae18e-e9ed-45b0-8572-85c9a7ca5b0e
-    type: title
-    task:
-      id: 30aae18e-e9ed-45b0-8572-85c9a7ca5b0e
-      version: -1
-      name: Fin
-      type: title
-      iscommand: false
-      brand: ""
-    separatecontext: false
-    continueonerrortype: ""
-    view: |-
-      {
-        "position": {
-          "x": 145.25,
-          "y": 1400
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
-  "7":
-    id: "7"
-    taskid: d5cb1cde-8a03-4f19-8d12-9f9217147d14
-    type: condition
-    task:
-      id: d5cb1cde-8a03-4f19-8d12-9f9217147d14
-      version: -1
-      name: ASM Incident?
-      type: condition
-      iscommand: false
-      brand: ""
-    nexttasks:
-      '#default#':
-      - "6"
-      "yes":
-      - "1"
-    separatecontext: false
-    conditions:
-    - label: "yes"
-      condition:
-      - - operator: containsGeneral
-          left:
-            value:
-              simple: ${inputs.Incident.description}
-            iscontext: true
-          right:
-            value:
-              simple: ASM
-    continueonerrortype: ""
-    view: |-
-      {
-        "position": {
-          "x": 50,
-          "y": 890
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
-  "8":
-    id: "8"
-    taskid: 70396ca7-33b0-4663-833f-a495a53c1793
-    type: playbook
-    task:
-      id: 70396ca7-33b0-4663-833f-a495a53c1793
-      version: -1
-      name: Foundation - Error Handling
-      playbookName: Foundation - Error Handling
-      type: playbook
-      iscommand: false
-      brand: ""
-    nexttasks:
-      '#none#':
-      - "6"
-    separatecontext: true
-    continueonerrortype: ""
-    view: |-
-      {
-        "position": {
-          "x": 485.75,
-          "y": 1230
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
+version: -1
 view: |-
   {
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 1410,
-        "width": 1157.25,
+        "height": 730,
+        "width": 671.5,
         "x": 50,
         "y": 50
       }
     }
   }
-inputs:
-- key: Incident
-  value: {}
-  required: false
-  description: ""
-  playbookInputQuery: null
-inputSections:
-- inputs:
-  - Incident
-  name: General (Inputs group)
-  description: Generic group for inputs
-outputSections:
-- outputs: []
-  name: General (Outputs group)
-  description: Generic group for outputs
-outputs: []
-dirtyInputs: true
