@@ -1,5 +1,5 @@
 dirtyInputs: true
-id: 'Get Alert Tasks and Store to Dataset'
+id: Get Alert Tasks and Store to Dataset
 inputSections:
 - description: Generic group for inputs
   inputs:
@@ -28,7 +28,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "1"
+      - "8"
     note: false
     quietmode: 0
     separatecontext: false
@@ -45,18 +45,20 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 450,
+          "x": 340.5,
           "y": 50
         }
       }
   "1":
     continueonerror: true
-    continueonerrortype: ""
+    continueonerrortype: errorPath
     id: "1"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "7"
       '#none#':
       - "2"
     note: false
@@ -70,20 +72,20 @@ tasks:
       brand: ""
       description: Get all tasks for a specific alert by the given state, name and/or
         tag.
-      id: bf0ee84a-541f-40ef-8464-8ede6b9d432d
+      id: 821b218c-99cd-4970-a450-8e167a34e211
       iscommand: false
       name: Get Alert Tasks
       script: GetAlertTasks
       type: regular
       version: -1
-    taskid: bf0ee84a-541f-40ef-8464-8ede6b9d432d
+    taskid: 821b218c-99cd-4970-a450-8e167a34e211
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 450,
-          "y": 200
+          "x": 50,
+          "y": 380
         }
       }
   "2":
@@ -122,13 +124,13 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 450,
-          "y": 380
+          "x": 195.25,
+          "y": 550
         }
       }
   "3":
     continueonerror: true
-    continueonerrortype: ""
+    continueonerrortype: errorPath
     id: "3"
     ignoreworker: false
     isautoswitchedtoquietmode: false
@@ -150,29 +152,34 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 45ec77ff-8b56-4311-8c3b-2fa8726a2051
+      id: 54c63399-81d1-4093-b1f3-74447f5e8e79
       iscommand: true
       name: Post to Dataset
       script: '|||xql-post-to-dataset'
       type: regular
       version: -1
-    taskid: 45ec77ff-8b56-4311-8c3b-2fa8726a2051
+    taskid: 54c63399-81d1-4093-b1f3-74447f5e8e79
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 690,
-          "y": 780
+          "x": 631,
+          "y": 890
         }
       }
   "4":
     continueonerror: true
-    continueonerrortype: ""
+    continueonerrortype: errorPath
     id: "4"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    nexttasks:
+      '#error#':
+      - "7"
+      '#none#':
+      - "6"
     note: false
     quietmode: 0
     scriptarguments:
@@ -190,29 +197,32 @@ tasks:
         This automation runs using the default Limited User role, unless you explicitly change the permissions.
         For more information, see the section about permissions here:
         https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.10/Cortex-XSOAR-Administrator-Guide/Automations
-      id: 9192f3d8-bfe5-4df9-8587-c752cf310535
+      id: 97cc1a90-6d2a-4446-bc73-ab000e55a21f
       iscommand: false
       name: Delete Context
       script: DeleteContext
       type: regular
       version: -1
-    taskid: 9192f3d8-bfe5-4df9-8587-c752cf310535
+    taskid: 97cc1a90-6d2a-4446-bc73-ab000e55a21f
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 400,
-          "y": 1000
+          "x": 485.75,
+          "y": 1060
         }
       }
   "5":
-    continueonerrortype: ""
+    continueonerror: true
+    continueonerrortype: errorPath
     id: "5"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#error#':
+      - "7"
       '#none#':
       - "3"
     note: false
@@ -229,20 +239,118 @@ tasks:
     task:
       brand: ""
       description: Set a value in context under the key you entered.
-      id: 31167d7a-e034-4875-850d-2ea8d4fdf4f5
+      id: 3dfd1c80-02c7-4a96-9be7-54a979471d81
       iscommand: false
       name: Create Object
       script: Set
       type: regular
       version: -1
-    taskid: 31167d7a-e034-4875-850d-2ea8d4fdf4f5
+    taskid: 3dfd1c80-02c7-4a96-9be7-54a979471d81
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 690,
-          "y": 610
+          "x": 50,
+          "y": 720
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: d61d72ac-5011-4089-ba4f-1bea46150b16
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: d61d72ac-5011-4089-ba4f-1bea46150b16
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 726.25,
+          "y": 1400
+        }
+      }
+  "7":
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 7c42b74a-9e4f-4691-83bb-1d2b2afa0cce
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: Foundation - Error Handling
+      type: playbook
+      version: -1
+    taskid: 7c42b74a-9e4f-4691-83bb-1d2b2afa0cce
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1230
+        }
+      }
+  "8":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: inputs.Alert.id
+          operator: isNotEmpty
+      label: "yes"
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "6"
+      "yes":
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 8b767a65-3af3-4ddb-af32-35c3db58d607
+      iscommand: false
+      name: Is there an Alert?
+      type: condition
+      version: -1
+    taskid: 8b767a65-3af3-4ddb-af32-35c3db58d607
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 340.5,
+          "y": 210
         }
       }
 version: -1
@@ -251,9 +359,9 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 1045,
-        "width": 670,
-        "x": 400,
+        "height": 1410,
+        "width": 1057.25,
+        "x": 50,
         "y": 50
       }
     }
