@@ -23,17 +23,17 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 9b745ac1-d45c-4d0c-8846-7b3dcb65d3ad
+      id: dc73a190-a2e4-4e6e-8a57-badb11c62e1b
       iscommand: false
       name: ""
       version: -1
-    taskid: 9b745ac1-d45c-4d0c-8846-7b3dcb65d3ad
+    taskid: dc73a190-a2e4-4e6e-8a57-badb11c62e1b
     timertriggers: []
     type: start
     view: |-
       {
         "position": {
-          "x": 290.5,
+          "x": 340.5,
           "y": 50
         }
       }
@@ -65,19 +65,19 @@ tasks:
     task:
       brand: ""
       description: send HTTP POST request.
-      id: 6e2b45a2-1134-4746-8fa0-9010532432d8
+      id: 570ac39c-c7e3-4d62-8fd8-c99e56310eab
       iscommand: true
       name: Get Incidents
       script: '|||core-api-post'
       type: regular
       version: -1
-    taskid: 6e2b45a2-1134-4746-8fa0-9010532432d8
+    taskid: 570ac39c-c7e3-4d62-8fd8-c99e56310eab
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 481,
+          "x": 531,
           "y": 380
         }
       }
@@ -104,19 +104,19 @@ tasks:
       brand: ""
       description: |
         Retrieves the current date and time.
-      id: 6bedbe98-6973-43e3-888a-b19c039e6574
+      id: 69ffc3bb-879b-4413-8283-fd0a00aed023
       iscommand: false
       name: Get Time
       script: GetTime
       type: regular
       version: -1
-    taskid: 6bedbe98-6973-43e3-888a-b19c039e6574
+    taskid: 69ffc3bb-879b-4413-8283-fd0a00aed023
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 290.5,
+          "x": 340.5,
           "y": 210
         }
       }
@@ -138,7 +138,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#default#':
-      - "7"
+      - "9"
       "yes":
       - "8"
     note: false
@@ -147,18 +147,18 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 5776a330-7878-436f-8cc8-17e603b4f0f2
+      id: 11786de0-5a13-412d-8a8a-1ab69922d510
       iscommand: false
       name: Incidents to Triage?
       type: condition
       version: -1
-    taskid: 5776a330-7878-436f-8cc8-17e603b4f0f2
+    taskid: 11786de0-5a13-412d-8a8a-1ab69922d510
     timertriggers: []
     type: condition
     view: |-
       {
         "position": {
-          "x": 531,
+          "x": 581,
           "y": 550
         }
       }
@@ -170,20 +170,20 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "7"
+      - "9"
     note: false
     quietmode: 0
     separatecontext: true
     skipunavailable: false
     task:
       brand: ""
-      id: 5f959f5a-c36c-4409-8646-003db68f88d6
+      id: 907d148a-f017-4c11-8d8d-b65ee05375b9
       iscommand: false
       name: Foundation - Error Handling
       playbookId: Foundation - Error Handling
       type: playbook
       version: -1
-    taskid: 5f959f5a-c36c-4409-8646-003db68f88d6
+    taskid: 907d148a-f017-4c11-8d8d-b65ee05375b9
     timertriggers: []
     type: playbook
     view: |-
@@ -205,19 +205,19 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 770694c8-81b1-4843-8cb1-0f0bd6134dd9
+      id: 6ae6dff9-3719-4b2e-8758-d1cf54a24c13
       iscommand: false
       name: Done
       type: title
       version: -1
-    taskid: 770694c8-81b1-4843-8cb1-0f0bd6134dd9
+    taskid: 6ae6dff9-3719-4b2e-8758-d1cf54a24c13
     timertriggers: []
     type: title
     view: |-
       {
         "position": {
-          "x": 340.5,
-          "y": 890
+          "x": 435.75,
+          "y": 1060
         }
       }
   "8":
@@ -234,7 +234,7 @@ tasks:
       wait: 1
     nexttasks:
       '#none#':
-      - "7"
+      - "9"
     note: false
     quietmode: 0
     scriptarguments:
@@ -244,30 +244,64 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 099ae5a2-fa98-4412-80b3-747732160606
+      id: 481cd8d5-7bca-4923-8cd0-77d48d883e8f
       iscommand: false
       name: Close Incidents
       playbookId: 97f87182-252c-454b-810d-c951e39abe9d
       type: playbook
       version: -1
-    taskid: 099ae5a2-fa98-4412-80b3-747732160606
+    taskid: 481cd8d5-7bca-4923-8cd0-77d48d883e8f
     timertriggers: []
     type: playbook
     view: |-
       {
         "position": {
-          "x": 676.25,
+          "x": 435.75,
           "y": 720
+        }
+      }
+  "9":
+    continueonerrortype: ""
+    id: "9"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "7"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.close.inv
+      id: ecad854e-0b30-4494-8c61-183d70ee7952
+      iscommand: true
+      name: Close Job
+      script: Builtin|||closeInvestigation
+      type: regular
+      version: -1
+    taskid: ecad854e-0b30-4494-8c61-183d70ee7952
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 435.75,
+          "y": 890
         }
       }
 version: -1
 view: |-
   {
-    "linkLabelsPosition": {},
+    "linkLabelsPosition": {
+      "5_9_#default#": 0.82
+    },
     "paper": {
       "dimensions": {
-        "height": 900,
-        "width": 1007.25,
+        "height": 1070,
+        "width": 912,
         "x": 50,
         "y": 50
       }
