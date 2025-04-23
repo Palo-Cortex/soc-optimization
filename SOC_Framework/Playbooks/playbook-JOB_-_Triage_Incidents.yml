@@ -23,11 +23,11 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: ef0db9e6-cb66-4744-8ec1-d010d2a2bb25
+      id: 9b745ac1-d45c-4d0c-8846-7b3dcb65d3ad
       iscommand: false
       name: ""
       version: -1
-    taskid: ef0db9e6-cb66-4744-8ec1-d010d2a2bb25
+    taskid: 9b745ac1-d45c-4d0c-8846-7b3dcb65d3ad
     timertriggers: []
     type: start
     view: |-
@@ -65,13 +65,13 @@ tasks:
     task:
       brand: ""
       description: send HTTP POST request.
-      id: a1f20685-0409-47e8-a448-5fda388e52a5
+      id: 6e2b45a2-1134-4746-8fa0-9010532432d8
       iscommand: true
       name: Get Incidents
       script: '|||core-api-post'
       type: regular
       version: -1
-    taskid: a1f20685-0409-47e8-a448-5fda388e52a5
+    taskid: 6e2b45a2-1134-4746-8fa0-9010532432d8
     timertriggers: []
     type: regular
     view: |-
@@ -104,13 +104,13 @@ tasks:
       brand: ""
       description: |
         Retrieves the current date and time.
-      id: 6495cad3-f3c5-4f28-ad98-88e140343b78
+      id: 6bedbe98-6973-43e3-888a-b19c039e6574
       iscommand: false
       name: Get Time
       script: GetTime
       type: regular
       version: -1
-    taskid: 6495cad3-f3c5-4f28-ad98-88e140343b78
+    taskid: 6bedbe98-6973-43e3-888a-b19c039e6574
     timertriggers: []
     type: regular
     view: |-
@@ -147,12 +147,12 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 1363bdca-3f21-4360-a321-edb50c4ae20c
+      id: 5776a330-7878-436f-8cc8-17e603b4f0f2
       iscommand: false
       name: Incidents to Triage?
       type: condition
       version: -1
-    taskid: 1363bdca-3f21-4360-a321-edb50c4ae20c
+    taskid: 5776a330-7878-436f-8cc8-17e603b4f0f2
     timertriggers: []
     type: condition
     view: |-
@@ -177,13 +177,13 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 6022cef1-efad-4af2-8e12-42885fb4ae9b
+      id: 5f959f5a-c36c-4409-8646-003db68f88d6
       iscommand: false
       name: Foundation - Error Handling
       playbookId: Foundation - Error Handling
       type: playbook
       version: -1
-    taskid: 6022cef1-efad-4af2-8e12-42885fb4ae9b
+    taskid: 5f959f5a-c36c-4409-8646-003db68f88d6
     timertriggers: []
     type: playbook
     view: |-
@@ -205,12 +205,12 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: bd5e247a-beca-412e-8766-a3bdc0a9ff8d
+      id: 770694c8-81b1-4843-8cb1-0f0bd6134dd9
       iscommand: false
       name: Done
       type: title
       version: -1
-    taskid: bd5e247a-beca-412e-8766-a3bdc0a9ff8d
+    taskid: 770694c8-81b1-4843-8cb1-0f0bd6134dd9
     timertriggers: []
     type: title
     view: |-
@@ -244,13 +244,13 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 1827d8d0-9892-4fc5-a9b4-2562ad38630d
+      id: 099ae5a2-fa98-4412-80b3-747732160606
       iscommand: false
       name: Close Incidents
       playbookId: 97f87182-252c-454b-810d-c951e39abe9d
       type: playbook
       version: -1
-    taskid: 1827d8d0-9892-4fc5-a9b4-2562ad38630d
+    taskid: 099ae5a2-fa98-4412-80b3-747732160606
     timertriggers: []
     type: playbook
     view: |-
