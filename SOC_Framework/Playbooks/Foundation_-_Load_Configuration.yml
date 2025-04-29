@@ -1,0 +1,174 @@
+dirtyInputs: true
+id: 'Foundation - Load Configuration'
+inputSections:
+- description: Generic group for inputs
+  inputs:
+  - listName
+  - keyName
+  name: General (Inputs group)
+inputs:
+- description: ""
+  key: listName
+  playbookInputQuery: null
+  required: true
+  value: {}
+- description: ""
+  key: keyName
+  playbookInputQuery: null
+  required: true
+  value: {}
+name: Foundation - Load Configuration
+outputSections:
+- description: Generic group for outputs
+  name: General (Outputs group)
+  outputs: []
+outputs: []
+starttaskid: "0"
+tags:
+- SOC_Framework
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 4b396c35-3ad7-4f23-8da7-48130935be83
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 4b396c35-3ad7-4f23-8da7-48130935be83
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: ${inputs.keyName}
+      value:
+        complex:
+          accessor: SOCOptimizationConfig
+          root: lists
+          transformers:
+          - operator: ParseJSON
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Set a value in context under the key you entered.
+      id: 72500782-76a6-4084-a21b-d2d2d06ddfee
+      iscommand: false
+      name: Set Configuration
+      script: Set
+      type: regular
+      version: -1
+    taskid: 72500782-76a6-4084-a21b-d2d2d06ddfee
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 380
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: be6942f5-03b8-429c-82d0-fdd19fbcc592
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: be6942f5-03b8-429c-82d0-fdd19fbcc592
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 550
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      listName:
+        simple: ${inputs.listName}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.list.get
+      id: 58e61a7b-8f68-4dd4-9cc2-ebc75317be3a
+      iscommand: true
+      name: Get Configuration
+      script: Builtin|||getList
+      type: regular
+      version: -1
+    taskid: 58e61a7b-8f68-4dd4-9cc2-ebc75317be3a
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 195
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 560,
+        "width": 381,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }

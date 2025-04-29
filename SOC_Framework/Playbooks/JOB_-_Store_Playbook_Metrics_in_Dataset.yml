@@ -16,7 +16,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "1"
+      - "7"
     note: false
     quietmode: 0
     separatecontext: false
@@ -53,9 +53,9 @@ tasks:
     quietmode: 0
     scriptarguments:
       fromdate:
-        simple: 1 hour ago
+        simple: ${subplaybook-7.SOCOptimizeConfig.[1].fields.LookBack}
       limit:
-        simple: "500"
+        simple: ${subplaybook-7.SOCOptimizeConfig.[1].fields.AlertLimit}
     separatecontext: false
     skipunavailable: false
     task:
@@ -66,20 +66,20 @@ tasks:
         This automation runs using the default Limited User role, unless you explicitly change the permissions.
         For more information, see the section about permissions here:
         https://docs-cortex.paloaltonetworks.com/r/Cortex-XSIAM/Cortex-XSIAM-Administrator-Guide/Permission-Management
-      id: 897cea94-126d-4215-9d8b-eb4c44b88ec6
+      id: 90a04f51-e1d9-42e9-a871-9616c4fc53d6
       iscommand: false
       name: Search Alerts
       script: SearchAlertsV2
       type: regular
       version: -1
-    taskid: 897cea94-126d-4215-9d8b-eb4c44b88ec6
+    taskid: 90a04f51-e1d9-42e9-a871-9616c4fc53d6
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
           "x": 195.25,
-          "y": 210
+          "y": 380
         }
       }
   "3":
@@ -114,7 +114,7 @@ tasks:
       {
         "position": {
           "x": 340.5,
-          "y": 550
+          "y": 720
         }
       }
   "4":
@@ -145,7 +145,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 720
+          "y": 890
         }
       }
   "5":
@@ -172,7 +172,7 @@ tasks:
       {
         "position": {
           "x": 195.25,
-          "y": 890
+          "y": 1060
         }
       }
   "6":
@@ -201,7 +201,7 @@ tasks:
       id: 367553c1-9597-4413-88e5-39b5b6814fa3
       iscommand: false
       name: Get Alert Tasks and Store to Dataset
-      playbookId: 'Get Alert Tasks and Store to Dataset'
+      playbookId: Get Alert Tasks and Store to Dataset
       type: playbook
       version: -1
     taskid: 367553c1-9597-4413-88e5-39b5b6814fa3
@@ -211,7 +211,48 @@ tasks:
       {
         "position": {
           "x": 340.5,
-          "y": 380
+          "y": 550
+        }
+      }
+  "7":
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      keyName:
+        simple: SOCOptimizeConfig
+      listName:
+        simple: SOCOptimizationConfig
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 308f1807-6aa2-4bde-8fa7-3a75d56554a5
+      iscommand: false
+      name: Foundation - Load Configuration
+      playbookId: 'Foundation - Load Configuration'
+      type: playbook
+      version: -1
+    taskid: 308f1807-6aa2-4bde-8fa7-3a75d56554a5
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 195.25,
+          "y": 210
         }
       }
 version: -1
@@ -220,7 +261,7 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 900,
+        "height": 1070,
         "width": 671.5,
         "x": 50,
         "y": 50
