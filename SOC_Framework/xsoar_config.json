@@ -2,7 +2,7 @@
     "custom_packs": [
         {
             "id": "SOCOptimization.zip",
-            "url": "https://github.com/annabarone/xsiam-soc-framework-content/raw/refs/heads/feature/capture_pack/testing/Packs/SOCOptimization.zip",
+            "url": "https://github.com/Palo-Cortex/soc-optimization/raw/refs/heads/package_refactor/testing/SOC_Framework.zip",
             "system": "yes"
         }
     ],
@@ -32,7 +32,7 @@
         {
             "dataset_name": "value_tags",
             "dataset_type": "lookup",
-            "url": "https://raw.githubusercontent.com/annabarone/xsiam-soc-framework-content/refs/heads/feature/capture_pack/testing/Packs/SOCOptimization/LookupData/value_tags.json",
+            "url": "https://raw.githubusercontent.com/Palo-Cortex/soc-optimization/refs/heads/package_refactor/SOC_Framework/Lookup/value_tags.json",
             "dataset_schema": {
                 "Product": "text",
                 "TaskName": "text",
