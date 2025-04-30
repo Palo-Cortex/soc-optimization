@@ -1,0 +1,22 @@
+{
+    "cacheVersn": 0,
+    "data": "-",
+    "definitionId": "",
+    "description": "",
+    "detached": false,
+    "fromServerVersion": "",
+    "id": "Job_Utility_Bulk_Alert_Closer_ID_List",
+    "isOverridable": false,
+    "itemVersion": "",
+    "locked": false,
+    "name": "Job_Utility_Bulk_Alert_Closer_ID_List",
+    "nameLocked": false,
+    "packID": "",
+    "packName": "",
+    "system": false,
+    "tags": null,
+    "toServerVersion": "",
+    "truncated": false,
+    "type": "plain_text",
+    "version": -1
+}

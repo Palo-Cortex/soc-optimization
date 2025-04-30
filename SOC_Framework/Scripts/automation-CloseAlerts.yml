@@ -1,5 +1,5 @@
 commonfields:
-  id: a5051b65-b8e8-4111-88e7-44e193a8ea3e
+  id: CloseAlerts
   version: -1
 dockerimage: demisto/python3:3.10.14.96411
 enabled: true

@@ -50,7 +50,7 @@ tasks:
       id: b1ae301c-1a22-4b54-87a6-a63c4c0ee824
       iscommand: false
       name: CloseAlerts
-      script: a5051b65-b8e8-4111-88e7-44e193a8ea3e
+      script: CloseAlerts
       type: regular
       version: -1
     taskid: b1ae301c-1a22-4b54-87a6-a63c4c0ee824
