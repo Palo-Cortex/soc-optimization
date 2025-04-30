@@ -32,7 +32,7 @@
         {
             "dataset_name": "value_tags",
             "dataset_type": "lookup",
-            "url": "https://raw.githubusercontent.com/Palo-Cortex/soc-optimization/refs/heads/package_refactor/SOC_Framework/Lookup/value_tags.json",
+            "url": "https://raw.githubusercontent.com/Palo-Cortex/soc-optimization/refs/heads/main/SOC_Framework/Lookup/value_tags.json",
             "dataset_schema": {
                 "Product": "text",
                 "TaskName": "text",
