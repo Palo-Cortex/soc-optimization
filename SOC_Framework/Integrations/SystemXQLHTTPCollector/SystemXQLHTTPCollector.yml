@@ -1,0 +1,32 @@
+category: Utilities
+commonfields:
+  id: System XQL HTTP Collector
+  version: -1
+configuration:
+- additionalinfo: The name of the 'Vendor' to include in the event data
+  defaultvalue: XSIAM
+  display: vendor name
+  name: vendor
+  required: false
+  type: 0
+- additionalinfo: The name of the 'Product' to include in the event data
+  defaultvalue: PlaybookMetrics
+  display: Product Name
+  name: product
+  required: false
+  type: 0
+description: This integration allows for posting data to the XSIAM using system-level send_events_to_xsiam so it can be queried via XQL
+display: System XQL HTTP Collector
+name: System XQL HTTP Collector
+script:
+  commands:
+  - arguments:
+    - description: The event data to send given in JSON formatted string
+      name: JSON
+      required: true
+    name: xql-post-to-dataset
+  dockerimage: demisto/python3:3.10.9.42476
+  runonce: false
+  script: ''
+  subtype: python3
+  type: python
