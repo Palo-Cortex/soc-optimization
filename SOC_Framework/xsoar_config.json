@@ -2,7 +2,7 @@
     "custom_packs": [
         {
             "id": "SOCOptimization.zip",
-            "url": "https://github.com/Palo-Cortex/soc-optimization/raw/refs/heads/package_refactor/testing/SOC_Framework.zip",
+            "url": "https://github.com/Palo-Cortex/soc-optimization/archive/refs/tags/V1.6.1.zip",
             "system": "yes"
         }
     ],
