@@ -89,6 +89,6 @@ The metrics collected are designed to demonstrate **operational value**:
 
 ## 📷 Visual Overview
 
-![SOC Automation Foundation - Upon Trigger](image-placeholder)
+![SOC Automation Foundation - Upon Trigger](./images/UponTrigger.png)
 
 > *Diagram illustrates the four-stage logic inside the Upon Trigger playbook: Alert Triage, Enrichment, Auto Remediation, and Assessment & Escalation.*
