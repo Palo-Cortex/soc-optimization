@@ -1,4 +1,5 @@
 {
+    "post_config_doc": "https://github.com/Palo-Cortex/soc-optimization/blob/post_config_documentation/POST_CONFIG_README.md",
     "custom_packs": [
         {
             "id": "SOCOptimization.zip",
