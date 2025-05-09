@@ -2,7 +2,7 @@
     "post_config_docs": [
         {
             "name": "SOC Framework - Manual Steps",
-            "url": "https://github.com/Palo-Cortex/soc-optimization/blob/post_config_documentation/POST_CONFIG_README.md"
+            "url": "https://github.com/Palo-Cortex/soc-optimization/blob/main/POST_CONFIG_README.md"
         }
     ],
     "custom_packs": [
