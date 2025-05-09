@@ -2,7 +2,7 @@
     "post_config_docs": [
         {
             "name": "SOC Framework - Manual Steps",
-            "url": "https://github.com/Palo-Cortex/soc-optimization/blob/post_config_documentation/POST_CONFIG_README.md"
+            "url": "https://github.com/Palo-Cortex/soc-optimization/blob/main-v3x/POST_CONFIG_README.md"
         }
     ],
     "custom_packs": [
@@ -38,7 +38,7 @@
         {
             "dataset_name": "value_tags",
             "dataset_type": "lookup",
-            "url": "https://raw.githubusercontent.com/Palo-Cortex/soc-optimization/refs/heads/main/Lookup/value_tags.json",
+            "url": "https://raw.githubusercontent.com/Palo-Cortex/soc-optimization/refs/heads/main-v3x/Lookup/value_tags.json",
             "dataset_schema": {
                 "Product": "text",
                 "TaskName": "text",
