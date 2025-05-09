@@ -785,7 +785,7 @@
                 "type": "Custom XQL",
                 "width": 33.333333333333336,
                 "height": 400,
-                "phrase": "dataset = alerts \n| arrayexpand original_tags\n| filter original_tags contains \"DS:\"\n// Open manual alerts\n| filter resolution_status = ENUM.NEW or resolution_status = ENUM.UNDER_INVESTIGATION \n| comp count_distinct(incident_id) as total_incidents by original_tags    \n| sort desc total_incidents \n\n\n\n\n\n\n\n| view graph type = pie header = \"Total Manual Incidents\" xaxis = original_tags yaxis = total_incidents ",
+                "phrase": "dataset = alerts \n| arrayexpand original_tags\n| filter original_tags contains \"DS:\"\n// Open manual alerts\n| filter resolution_status = ENUM.NEW or resolution_status = ENUM.IN_PROGRESS \n| comp count_distinct(incident_id) as total_incidents by original_tags    \n| sort desc total_incidents \n\n\n\n\n\n\n\n| view graph type = pie header = \"Total Manual Incidents\" xaxis = original_tags yaxis = total_incidents ",
                 "time_frame": {
                   "relativeTime": 86400000
                 },
@@ -1689,7 +1689,7 @@
       "creation_time": 1745756360597,
       "description": "The total incidents left-over for analysts to analize.",
       "data": {
-        "phrase": "dataset = alerts \n| arrayexpand original_tags\n| filter original_tags contains \"DS:\"\n// Open manual alerts\n| filter resolution_status = ENUM.NEW or resolution_status = ENUM.UNDER_INVESTIGATION \n| comp count_distinct(incident_id) as total_incidents by original_tags    \n| sort desc total_incidents \n\n\n\n\n\n\n\n| view graph type = pie header = \"Total Manual Incidents\" xaxis = original_tags yaxis = total_incidents ",
+        "phrase": "dataset = alerts \n| arrayexpand original_tags\n| filter original_tags contains \"DS:\"\n// Open manual alerts\n| filter resolution_status = ENUM.NEW or resolution_status = ENUM.IN_PROGRESS \n| comp count_distinct(incident_id) as total_incidents by original_tags    \n| sort desc total_incidents \n\n\n\n\n\n\n\n| view graph type = pie header = \"Total Manual Incidents\" xaxis = original_tags yaxis = total_incidents ",
         "time_frame": {
           "relativeTime": 86400000
         },
