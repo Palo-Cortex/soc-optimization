@@ -9,7 +9,7 @@
         {
             "id": "SOCOptimization.zip",
             "url": "https://github.com/Palo-Cortex/soc-optimization/archive/refs/tags/V1.6.2.zip",
-            "system": "yes"
+            "system": "no"
         }
     ],
     "marketplace_packs": [
