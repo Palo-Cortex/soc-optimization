@@ -19,13 +19,18 @@
             "version": "latest"
         },
         {
-            "id": "DemistoRESTAPI",
-            "name": "Cortex REST API",
+            "id": "CommonScripts",
+            "name": "Common Scripts",
             "version": "latest"
         },
         {
-            "id": "ProofpointTAP",
-            "name": "Proofpoint TAP",
+            "id": "CommonPlaybooks",
+            "name": "Common Playbooks",
+            "version": "latest"
+        },
+        {
+            "id": "DemistoRESTAPI",
+            "name": "Cortex REST API",
             "version": "latest"
         },
         {
