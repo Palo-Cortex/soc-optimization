@@ -92,3 +92,40 @@ The metrics collected are designed to demonstrate **operational value**:
 ![SOC Automation Foundation - Upon Trigger](./images/UponTrigger.jpg)
 
 > *Diagram illustrates the four-stage logic inside the Upon Trigger playbook: Alert Triage, Enrichment, Auto Remediation, and Assessment & Escalation.*
+
+## 🔧 Repository Structure and Usage
+
+```
+.
+├── Base Content Packs
+│   ├── SOC Malware
+│   ├── SOC Phishing
+│   └── SOC Identity
+│
+├── Supporting Playbooks
+│   └── SOC Common Playbooks
+│
+├── Optimization Layer (Optional)
+│   └── SOC Optimization
+│
+└── Product Enhancements
+    ├── SOC ProofPoint TAP
+    └── SOC CrowdStrike Falcon
+```
+
+## 🧭 Selection Requirements
+
+All loaded playbooks must specify:
+- **Use Case**: `SOC Malware`, `SOC Phishing`, or `SOC Identity`
+- **Product Set**: `CrowdStrike`, `ProofPoint TAP`
+
+---
+
+## 📘 Description
+
+This repository enables modular, scalable playbook deployment in Cortex XSIAM, tailored for key SOC use cases.  
+
+- **Use Case Playbooks** (Malware, Phishing, Identity) form the foundation and **require** `SOC Common Playbooks` for operational support.  
+- **SOC Optimization** (optional) overlays efficiency patterns inspired by the Palo Alto Networks SOC to enhance all use case workflows.  
+- **Product Enhancement Packs** for `CrowdStrike Falcon` and `ProofPoint TAP` enrich detection and response capabilities by leveraging product-specific context in XSIAM.
+
