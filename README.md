@@ -35,6 +35,8 @@ This repository outlines a scalable SOC optimization approach tailored for Palo 
     - Grouping effectiveness
     - Auto-remediation success rate
     - Analyst review backlog
+    
+👉 [See when to use the Upon Trigger](./Documentation/Value_Metrics.md)
 
 ---
 
