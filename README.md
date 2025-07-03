@@ -19,9 +19,7 @@ This repository outlines a scalable SOC optimization approach tailored for Palo 
   - **Assessment and Escalation**
 - This playbook dynamically decides whether to run in **Shadow Mode** (safe/test) or **Full Mode** (production) using contextual data.
 
----
 👉 [See when to use the Upon Trigger](../Documentation/Upon_Trigger.md)
----
 
 ### 3. **Value Metrics for Automation Efficiency**
 - The `JOB_-_Store_Playbook_Metrics_in_Dataset.yml` playbook collects key metrics and stores them in a dataset.
