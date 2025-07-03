@@ -44,6 +44,10 @@ Use this automation when:
 
 ---
 
+> For guidance on aligning Auto-Triage to your industry’s risk profile, see [CIA Alignment for Auto-Triage Usage](../Documentation/CIA_Auto_Triage_Prioritization.md).
+
+---
+
 ## 🧪 FieldOps Value Alignment
 
 | Value Driver         | Alignment                                                                 |
