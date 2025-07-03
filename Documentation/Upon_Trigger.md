@@ -64,4 +64,15 @@ You can extend `Upon Trigger` based on your use case:
 ---
 
 ## 📁 File Structure Suggestion (Optional)
+- /playbooks/
+  - upon_trigger_base.yml
+  - /enrichment_modules/
+    - enrich_user_from_ldap.yml
+    - enrich_with_virustotal.yml
+  - /remediation_modules/
+    - isolate_endpoint.yml
+    - disable_user.yml
+  - /escalation_flows/
+    - notify_soc_slack.yml
+    - create_case_escalation.yml
 
