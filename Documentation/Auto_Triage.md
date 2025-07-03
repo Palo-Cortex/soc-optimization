@@ -71,6 +71,8 @@ Use this automation when:
 
 - 🛠️ **Adjust the 6-Hour Window as Needed:**  
   Depending on your SOC tempo, you may want to shorten or lengthen the time threshold. Align it with your average MTTA (mean time to acknowledge).
+    > 🔧 This value is configurable by detaching and modifying the list named `SOCOptimizationConfig` located in:  
+  > **Settings → Configurations → Object Setup → Lists**
 
 - 🚨 **Always Preserve Escalation Pathways:**  
   Ensure your auto-triage logic never closes incidents that have passed through critical detection policies, high-severity alerts, or manual tagging.
