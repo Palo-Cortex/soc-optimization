@@ -29,7 +29,7 @@ Use the `Upon Trigger` playbook **as the first task** in:
 | **Assessment & Escalation** | Adjust severity, flag for analyst review, notify if needed              |
 
 ---
-👉 [See how to adjust this playbook for your industry](../docs/CIA_Priorities_Readme.md)
+👉 [See how to adjust this playbook for your industry](../Documentation/CIA_Priorities_Readme.md)
 ---
 
 ## 🧩 Where and How to Add To It
