@@ -10,6 +10,8 @@ This repository outlines a scalable SOC optimization approach tailored for Palo 
 - Incidents that are not marked with a star are automatically triaged using `JOB_-_Triage_Incidents.yml`.
 - Ensures that high-volume, low-risk alerts are handled without manual intervention.
 
+👉 [Auto-Triage Usage](./docs/Auto-Triage_Usage.md) — Automatically closes non-priority incidents to reduce alert fatigue.
+
 ### 2. **Modular Playbooking via `Upon Trigger`**
 - The `Upon Trigger` playbook is the engine of modular decision-making.
 - It divides alert processing into four logical stages:
