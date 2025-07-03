@@ -2,7 +2,7 @@
 
 The **“Upon Trigger”** foundation playbook is the starting point for any **entry point playbook** — triggered by specific alerts in XSIAM. It establishes the core automation logic for handling alerts consistently and intelligently from the moment they enter the system.
 
-![When to Use the 'Upon Trigger' Foundation](/blob/main/images/When_To_Use_Upon_Trigger.png)
+![When to Use the 'Upon Trigger' Foundation](/images/When_To_Use_Upon_Trigger.png)
 
 ---
 
