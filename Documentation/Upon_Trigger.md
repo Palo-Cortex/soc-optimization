@@ -1,6 +1,6 @@
 # ⚙️ Upon Trigger Foundation – XSIAM SOC Automation
 
-The **“Upon Trigger”** foundation playbook is the starting point for any **entry point playbook** — triggered by specific alerts in XSIAM. It establishes the core automation logic for handling alerts consistently and intelligently from the moment they enter the system.
+The **“Upon Trigger”** foundation playbook is the standardized first step for any **entry point playbook** triggered by alerts in XSIAM. It provides structured, modular logic to ensure clean triage, contextual enrichment, and safe, scalable automation from the moment a trigger fires.
 
 ![When to Use the 'Upon Trigger' Foundation](../images/When_To_Use_Upon_Trigger.png)
 
@@ -11,11 +11,11 @@ The **“Upon Trigger”** foundation playbook is the starting point for any **e
 Use the `Upon Trigger` playbook **as the first task** in:
 
 - Any alert-level **entry point** playbook.
-- Any automation flow that begins **immediately upon alert ingestion**.
-- Use cases where **alert triage, enrichment, and auto-remediation** need a consistent launch point.
-- Scenarios where you want to drive **low-to-no-touch response**, while maintaining flexibility and oversight.
+- Alert flows triggered directly from XDR detection logic.
+- Use cases focused on **reducing time-to-context** and enabling **automated triage**.
+- Automation paths that will expand to include **remediation**, **escalation**, or **case enrichment**.
 
-> This ensures every triggered playbook begins with clean, enriched, and normalized alert data — enabling safe automation and smart escalation.
+> This ensures every triggered playbook begins with clean, enriched, and normalized alert data — enabling scalable automation and smart escalation.
 
 ---
 
@@ -26,50 +26,42 @@ Use the `Upon Trigger` playbook **as the first task** in:
 | **Alert Triage**          | Normalize and deduplicate raw alerts                                      |
 | **Enrichment**            | Add context: user, host, domain, file, etc.                               |
 | **Auto Remediation**      | Evaluate and execute remediation if safe and in scope                     |
-| **Assessment & Escalation** | Adjust severity, flag for analyst review, notify SOC if critical       |
+| **Assessment & Escalation** | Adjust severity, flag for analyst review, notify if needed              |
 
 ---
 
 ## 🧩 Where and How to Add To It
 
-You can extend `Upon Trigger` to suit your specific use cases:
+You can extend `Upon Trigger` based on your use case:
 
 ### 🔹 Add Custom Enrichment
 - Geo-IP history
 - Threat intel lookups (e.g., VirusTotal, Recorded Future)
 
 ### 🔹 Plug in Decision Gates
-- Branch by alert **source**, **asset type**, or **user role**
+- Branch logic by:
+  - Alert source (EDR, NDR, Identity, etc.)
+  - Asset type (server vs. endpoint)
+  - User role (admin vs. standard)
 
 ### 🔹 Connect Specialized Remediation
-- Host isolation
-- User disablement
-- Session token revocation
+- Isolate endpoint
+- Disable user or revoke session
+- Remove malicious file or quarantine artifacts
 
-### 🔹 Adjust Escalation Flow
-- Route differently by **business unit**, **time of day**, or **incident type**
-
----
-
-## 🧭 FieldOps Tie-In
-
-| **FieldOps Phase** | **Who** | **Where It Fits**                                                         |
-|--------------------|---------|----------------------------------------------------------------------------|
-| **PoV**            | DC      | Starts alert-level automation; builds trust in triage and enrichment      |
-| **Post-Sales**     | PS      | Becomes reusable foundation for tenant-specific scaling                   |
-| **Pre-Sales**      | SC      | Used in BYOS Lab to show high-fidelity alert automation                   |
+### 🔹 Adjust Escalation Logic
+- Route based on:
+  - Business unit
+  - Time of day
+  - Alert type or severity
 
 ---
 
 ## 📝 Suggested Narrative
 
-> “Every alert that triggers automation in XSIAM starts with the same foundation — the ‘Upon Trigger’ playbook. It ensures we’re working with clean, enriched data before making any decisions. From deduplication to environment detection, it’s the runway for everything we automate. And because it's modular, we can add custom logic or remediation tailored to each use case, without rebuilding from scratch. It’s our first step toward measurable automation.”
+> “Every alert that triggers automation in XSIAM starts with the same foundation — the ‘Upon Trigger’ playbook. It ensures we’re working with clean, enriched data before making any decisions. From deduplication to environment detection, it’s the runway for everything we automate. And because it's modular, we can add custom logic or remediation tailored to each use case, without rebuilding from scratch.”
 
 ---
 
 ## 📁 File Structure Suggestion (Optional)
-/playbooks/
-├── upon_trigger_base.yml
-├── enrichment_modules/
-├── remediation_modules/
-└── escalation_flows/
+
