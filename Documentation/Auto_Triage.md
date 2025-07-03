@@ -2,7 +2,12 @@
 
 The **Auto-Triage** function is a key automation mechanism within the XSIAM ecosystem. It streamlines the incident queue by automatically closing non-priority incidents that haven’t been starred or linked to starred alerts within a defined timeframe. This logic supports the XSIAM FieldOps goals of minimizing analyst workload, improving signal fidelity, and enforcing hygiene across incident pipelines.
 
-![Auto-Triage Flow](../images/Auto_Triage_Usage.png)
+## Auto-Triage Usage
+
+<div align="center">
+  <img src="../images/Auto_Triage_Usage.png" alt="Auto-Triage Flow" width="60%">
+</div>
+
 
 ---
 
