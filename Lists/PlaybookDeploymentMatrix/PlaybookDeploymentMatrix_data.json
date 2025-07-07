@@ -1,0 +1,100 @@
+[
+    {
+        "name": "EP_InitialAccess",
+        "enabled": false,
+        "deployment": "prod",
+        "prod": "MITRE - Initial Access",
+        "green": ""
+    },
+    {
+        "name": "EP_Execution",
+        "enabled": false,
+        "deployment": "prod",
+        "prod": "MITRE - Execution",
+        "green": ""
+    },
+    {
+        "name": "EP_Persistence",
+        "enabled": false,
+        "deployment": "prod",
+        "prod": "",
+        "green": ""
+    },
+    {
+        "name": "EP_PrivilegeEscalation",
+        "enabled": false,
+        "deployment": "prod",
+        "prod": "",
+        "green": ""
+    },
+    {
+        "name": "EP_DefenseEvasion",
+        "enabled": false,
+        "deployment": "prod",
+        "prod": "",
+        "green": ""
+    },
+    {
+        "name": "EP_CredentialAccess",
+        "enabled": false,
+        "deployment": "prod",
+        "prod": "",
+        "green": ""
+    },
+    {
+        "name": "EP_Discovery",
+        "enabled": false,
+        "deployment": "prod",
+        "prod": "",
+        "green": ""
+    },
+    {
+        "name": "EP_LateralMovement",
+        "enabled": false,
+        "deployment": "prod",
+        "prod": "",
+        "green": ""
+    },
+    {
+        "name": "EP_Collection",
+        "enabled": false,
+        "deployment": "prod",
+        "prod": "",
+        "green": ""
+    },
+    {
+        "name": "EP_CommandAndControl",
+        "enabled": false,
+        "deployment": "prod",
+        "prod": "",
+        "green": ""
+    },
+    {
+        "name": "EP_Exfiltration",
+        "enabled": false,
+        "deployment": "prod",
+        "prod": "",
+        "green": ""
+    },
+    {
+        "name": "EP_Impact",
+        "enabled": false,
+        "deployment": "prod",
+        "prod": "",
+        "green": ""
+    },
+    {
+        "name": "EP_Reconnaissance",
+        "enabled": false,
+        "deployment": "prod",
+        "prod": "",
+        "green": ""
+    },
+    {
+        "name": "EP_ResourceDevelopment",
+        "enabled": false,
+        "deployment": "prod",
+        "prod": "",
+        "green": ""
+    }
+]

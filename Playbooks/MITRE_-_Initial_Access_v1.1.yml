@@ -1,0 +1,248 @@
+id: 'MITRE - Initial Access'
+inputs: []
+name: MITRE - Initial Access
+outputs: []
+quiet: true
+starttaskid: "0"
+tags:
+- MITRE
+- SOC
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 272aeb5c-9aa6-4d8d-8fcb-aa39a8ff593a
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 272aeb5c-9aa6-4d8d-8fcb-aa39a8ff593a
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 275,
+          "y": 50
+        }
+      }
+  "1":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                accessor: mitreattcktechnique
+                root: alert
+                transformers:
+                - operator: toLowerCase
+          operator: containsGeneral
+          right:
+            value:
+              simple: phishing
+      label: "yes"
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "3"
+      "yes":
+      - "2"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 4ac8b798-a29e-4c87-b307-1858802a1ffd
+      iscommand: false
+      name: MITRE Technique is Phishing?
+      type: condition
+      version: -1
+    taskid: 4ac8b798-a29e-4c87-b307-1858802a1ffd
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 210
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 73b1d347-ca47-460c-884c-177c3e503c41
+      iscommand: false
+      name: SOC Phishing Investigation
+      playbookId: 'SOC Phishing Investigation'
+      type: playbook
+      version: -1
+    taskid: 73b1d347-ca47-460c-884c-177c3e503c41
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 380
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 732f4f84-bdce-4a73-9d2f-d469389f3ee3
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: 732f4f84-bdce-4a73-9d2f-d469389f3ee3
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 275,
+          "y": 550
+        }
+      }
+  "4":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                accessor: tags
+                root: alert
+                transformers:
+                - operator: toLowerCase
+          operator: containsGeneral
+          right:
+            value:
+              simple: dt:identity analytics
+        - left:
+            iscontext: true
+            value:
+              complex:
+                accessor: tags
+                root: alert
+                transformers:
+                - operator: toLowerCase
+          operator: isEqualString
+          right:
+            value:
+              simple: dt:identity threat
+      label: "yes"
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "3"
+      "yes":
+      - "6"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 37a09ac0-a9bf-472c-a1b7-9cf6fbe3f191
+      iscommand: false
+      name: Is Detection Trigger Identity
+      type: condition
+      version: -1
+    taskid: 37a09ac0-a9bf-472c-a1b7-9cf6fbe3f191
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 500,
+          "y": 210
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 521aefd3-7584-492e-89c4-086ae185a11b
+      iscommand: false
+      name: SOC Identity Analytics - Alert Handling v1.0
+      playbookId: 'SOC Identity Analytics - Alert Handling'
+      type: playbook
+      version: -1
+    taskid: 521aefd3-7584-492e-89c4-086ae185a11b
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 612.5,
+          "y": 380
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 560,
+        "width": 942.5,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
