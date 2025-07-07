@@ -1,5 +1,3 @@
-import demistomock as demisto  # noqa: F401
-from CommonServerPython import *  # noqa: F401
 from datetime import datetime
 import json
 
@@ -50,10 +48,41 @@ def main():
 
         if action == "list":
             result_lines = [
-                f"- **{ep.get('name')}**: {'✅ Enabled' if ep.get('enabled', True) else '🚫 Disabled'} | 🟢 Prod: {ep.get('prod', 'N/A')} | 🧪 Green: {ep.get('green', 'N/A')}"
+                f"- **{ep.get('name')}**: {'✅ Enabled' if ep.get('enabled', True) else '🚫 Disabled'} | 🟢 Prod: {ep.get('prod', '')} | 🧪 Green: {ep.get('green', '')}"
                 for ep in data
             ]
             return_results("\n".join(result_lines))
+            return
+
+        if action == "create":
+            if not ep_name:
+                return_error("Missing required argument: 'entry_point_name' for create action")
+            if any(item.get("name") == ep_name for item in data):
+                return_error(f"Entry Point '{ep_name}' already exists.")
+            new_entry = {
+                "name": ep_name,
+                "enabled": False,
+                "deployment": "prod",
+                "prod": "",
+                "green": ""
+            }
+            data.append(new_entry)
+            demisto.executeCommand("setList", {
+                "listName": list_name,
+                "listData": json.dumps(data)
+            })
+            return_results(f"🆕 Created new Entry Point: **{ep_name}** (disabled by default)")
+            return
+
+        if action == "delete":
+            if not ep_name:
+                return_error("Missing required argument: 'entry_point_name' for delete action")
+            data = [item for item in data if item.get("name") != ep_name]
+            demisto.executeCommand("setList", {
+                "listName": list_name,
+                "listData": json.dumps(data)
+            })
+            return_results(f"🗑️ Deleted Entry Point: **{ep_name}**")
             return
 
         if not ep_name:
@@ -67,8 +96,8 @@ def main():
             return_error(f"⚠️ Entry Point '{ep_name}' is currently disabled.")
 
         if action == "show":
-            deployed_prod = entry.get("prod", "Not set")
-            staged_green = entry.get("green", "Not set")
+            deployed_prod = entry.get("prod", "")
+            staged_green = entry.get("green", "")
             enabled_status = "✅ Enabled" if entry.get("enabled", True) else "🛑 Disabled"
             result = (
                 f"📌 **Playbook Status for {ep_name}**\n"
@@ -136,7 +165,7 @@ def main():
             )
 
         else:
-            return_error("Invalid action. Use 'list', 'show', 'stage', 'deploy', 'rollback', 'enable', or 'disable'.")
+            return_error("Invalid action. Use 'list', 'create', 'delete', 'show', 'stage', 'deploy', 'rollback', 'enable', or 'disable'.")
 
         if action in ("stage", "deploy", "rollback", "enable", "disable"):
             demisto.executeCommand("setList", {
