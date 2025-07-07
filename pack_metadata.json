@@ -2,7 +2,7 @@
     "name": "SOC Framework",
     "description": "This contents the content used to leverage processes that the Palo SOC uses including: Playbooks, integrations, layouts, etc.",
     "support": "community",
-    "currentVersion": "1.6.7",
+    "currentVersion": "1.6.8",
     "author": "Scott Brumley & Nicholas Ericksen",
     "url": "https://live.paloaltonetworks.com/t5/cortex-xsoar-discussions/bd-p/Cortex_XSOAR_Discussions",
     "email": "",
