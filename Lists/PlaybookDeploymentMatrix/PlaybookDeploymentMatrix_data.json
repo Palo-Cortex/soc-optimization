@@ -1,14 +1,14 @@
 [
     {
         "name": "EP_InitialAccess",
-        "enabled": false,
+        "enabled": true,
         "deployment": "prod",
         "prod": "MITRE - Initial Access",
         "green": ""
     },
     {
         "name": "EP_Execution",
-        "enabled": false,
+        "enabled": true,
         "deployment": "prod",
         "prod": "MITRE - Execution",
         "green": ""
