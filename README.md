@@ -38,6 +38,23 @@ This repository outlines a scalable SOC optimization approach tailored for Palo 
     
 👉 [See how to use the Value Metrics](./Documentation/Value_Metrics.md)
 
+### 4. **Blue / Green Deployment Model**
+
+This script enables a **blue/green deployment strategy** for Cortex XSIAM playbooks using a centralized list called `PlaybookDeploymentMatrix`.
+
+Each Entry Point (EP) tracks:
+- A `prod` playbook (live in production)
+- A `green` playbook (staged for testing)
+
+##### ✅ Benefits
+- 🔄 **Safe Playbook Promotion**: Easily test and promote playbooks without disrupting production.
+- 🚫 **Instant Rollback**: Quickly revert if a green version causes issues.
+- 🔍 **Clear Visibility**: View current deployment states via command.
+- 🛡️ **Controlled Changes**: Use the `enabled` flag to gate deployment activity.
+
+👉 [How to Use Blue / Green Deployment](./Documentation/Blue_Green.md)
+
+
 ---
 
 ## 🧩 Playbook Structure
