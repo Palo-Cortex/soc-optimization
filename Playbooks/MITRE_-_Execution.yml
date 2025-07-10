@@ -1,0 +1,112 @@
+id: 'MITRE - Execution'
+inputs: []
+name: MITRE - Execution
+outputs: []
+quiet: true
+sourceplaybookid: 'MITRE - Initial Access'
+starttaskid: "0"
+tags:
+- MITRE
+- SOC
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 272aeb5c-9aa6-4d8d-8fcb-aa39a8ff593a
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 272aeb5c-9aa6-4d8d-8fcb-aa39a8ff593a
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 732f4f84-bdce-4a73-9d2f-d469389f3ee3
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: 732f4f84-bdce-4a73-9d2f-d469389f3ee3
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 380
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 5459ae89-15af-43dd-8c94-a291246c11a9
+      iscommand: false
+      name: SOC Malware Investigation and Response
+      playbookId: 'SOC Malware Investigation and Response'
+      type: playbook
+      version: -1
+    taskid: 5459ae89-15af-43dd-8c94-a291246c11a9
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 210
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 390,
+        "width": 380,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+adopted: true

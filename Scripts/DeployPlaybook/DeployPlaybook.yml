@@ -1,0 +1,35 @@
+args:
+- description: This is the playbook which includes the routing that is tied to the trigger.
+  name: entry_point_name
+- description: The top level playbook that you want to deploy from development.  i.e. MITRE - Execution
+  name: playbook_name
+- auto: PREDEFINED
+  description: Do you want to deploy this playbook, rollback to the previous version, or show what is deployed currently
+  name: action
+  predefined:
+  - deploy
+  - rollback
+  - show
+  - stage
+  - enable
+  - disable
+  - list
+  required: true
+commonfields:
+  id: 'DeployPlaybook'
+  version: -1
+dockerimage: demisto/python3:3.12.11.3982393
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: DeployPlaybook
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: ''
+scripttarget: 0
+subtype: python3
+tags:
+- SOC
+- SOC_Framework
+type: python
