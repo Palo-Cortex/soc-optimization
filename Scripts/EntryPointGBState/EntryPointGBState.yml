@@ -1,0 +1,23 @@
+args:
+- defaultValue: EP_InitialAccess
+  name: entrypoint_name
+  required: true
+comment: This script will read the PlaybookDepoloymentMatrix to see the current playbook running should be given the EntryPoint Playbooks name.
+commonfields:
+  id: 'EntryPointGBState'
+  version: -1
+dockerimage: demisto/python3:3.12.11.3982393
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: EntryPointGBState
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: ''
+scripttarget: 0
+subtype: python3
+tags:
+- SOC
+- SOC_Framework
+type: python
