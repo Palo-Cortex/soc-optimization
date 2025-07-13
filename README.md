@@ -26,7 +26,7 @@ This repository outlines a scalable SOC optimization approach tailored for Palo 
 
 👉 [See when to use the Upon Trigger](https://github.com/Palo-Cortex/soc-optimization/blob/main/Documentation/Upon_Trigger.md)
 
-![Modular Playbooking](https://github.com/Palo-Cortex/soc-optimization/blob/main/Documentation/)
+![Modular Playbooking](https://github.com/Palo-Cortex/soc-optimization/blob/main/images/ModularPlaybooking.png)
 
 ### 3. **Value Metrics for Automation Efficiency**
 - The `JOB_-_Store_Playbook_Metrics_in_Dataset.yml` playbook collects key metrics and stores them in a dataset.
