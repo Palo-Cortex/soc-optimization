@@ -1,0 +1,48 @@
+args:
+- name: playbook_name
+- name: tag
+- name: time
+- name: vendor
+- name: product
+- auto: PREDEFINED
+  name: action
+  predefined:
+  - add
+  - delete
+  - update
+  required: true
+- auto: PREDEFINED
+  name: category
+  predefined:
+  - containment
+  - case_management
+  - enrichment
+  - triage
+  - eradication
+  - recovery
+  - escalation
+- auto: PREDEFINED
+  name: type
+  predefined:
+  - playbook
+  - task
+  required: true
+- name: scriptid
+commonfields:
+  id: 'setValueTags'
+  version: -1
+dockerimage: demisto/python3:3.12.11.4095827
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: setValueTags
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: ''
+scripttarget: 0
+subtype: python3
+tags:
+- SOC
+- SOC_Framework
+type: python
