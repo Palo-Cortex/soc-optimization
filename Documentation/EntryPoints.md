@@ -71,7 +71,7 @@ The `PlaybookDeploymentMatrix` list tracks:
 
 All Entry Points should call the `setValueTags` script to update the `value_tags` lookup table with playbook execution metrics. This allows visibility into automation usage, time saved, and script-level actions.
 
-👉 See [setValueTags Usage](https://github.com/Palo-Cortex/soc-optimization/blob/main/setValueTags.md)
+👉 See [setValueTags Usage](https://github.com/Palo-Cortex/soc-optimization/blob/main/Documentation/setValueTags.md)
 
 ---
 
