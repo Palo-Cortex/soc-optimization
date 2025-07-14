@@ -1,0 +1,16 @@
+commonfields:
+  id: 'removeSOCFramework'
+  version: -1
+dockerimage: demisto/python3:3.12.11.4095827
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: removeSOCFramework
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: ''
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
