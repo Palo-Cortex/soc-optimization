@@ -10,6 +10,9 @@ args:
   - add
   - delete
   - update
+  - list_all
+  - list_by_type
+  - list_by_tag_or_name
   required: true
 - auto: PREDEFINED
   name: category
@@ -26,8 +29,13 @@ args:
   predefined:
   - playbook
   - task
-  required: true
 - name: scriptid
+- auto: PREDEFINED
+  name: output_format
+  predefined:
+  - json
+  - table
+  - markdown
 commonfields:
   id: 'setValueTags'
   version: -1
