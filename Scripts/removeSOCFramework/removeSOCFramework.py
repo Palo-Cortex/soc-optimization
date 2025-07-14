@@ -15,10 +15,12 @@ manual_cleanup = """
 - Uninstall the following content packs via Marketplace > Installed Packs:
     • POV Content Pack
     • SOC Framework
+    • Playbook / Automation Triggers
 
 - Remove the following integration instances via Settings > Integrations:
     • Core REST API - Standard XSIAM API Key Cred (Core REST API)
     • PlaybookMetrics (System XQL HTTP Collector - Community Contribution)
+    • Triggers (MITRE Execution, MITRE Initial Access)
 """
 
 def delete_job_by_name(job_name):
