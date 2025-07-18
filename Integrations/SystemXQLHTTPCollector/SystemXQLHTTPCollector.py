@@ -25,7 +25,7 @@ def main() -> None:
     demisto.debug(f'Command being called is {command}')
 
     try:
-        if command == 'test-module':
+        if command == 'test.json-module':
             return_results(test_module_command())
 
         elif command == 'xql-post-to-dataset':
