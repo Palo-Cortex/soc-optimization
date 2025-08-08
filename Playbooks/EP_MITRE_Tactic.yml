@@ -3,7 +3,7 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: ""
     isoverridable: false
-    itemVersion: 1.6.9
+    itemVersion: 1.7.0
     packID: ""
     packName: SOC Framework
     prevname: ""
@@ -64,7 +64,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 50,
           "y": 50
         }
       }
@@ -86,7 +86,7 @@ tasks:
     quietmode: 0
     scriptarguments:
       EntryPoint:
-        simple: ${inputs.EntryPoint}
+        simple: EP_${PlaybookRouting.EntryPoint}
       keyName:
         simple: PlaybookRoutes
       listName:
@@ -95,20 +95,20 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: edb5e094-b11c-4c3d-918f-73cdec0154cf
+      id: 69ff8e1d-90df-4a0f-822c-9d47ad59ee93
       iscommand: false
       name: Foundation - Playbook Router
       playbookId: Foundation - Playbook Router
       type: playbook
       version: -1
-    taskid: edb5e094-b11c-4c3d-918f-73cdec0154cf
+    taskid: 69ff8e1d-90df-4a0f-822c-9d47ad59ee93
     timertriggers: []
     type: playbook
     view: |-
       {
         "position": {
           "x": 162.5,
-          "y": 550
+          "y": 890
         }
       }
   "3":
@@ -134,7 +134,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 50,
           "y": 1570
         }
       }
@@ -146,7 +146,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "2"
+      - "9"
     note: false
     quietmode: 0
     separatecontext: true
@@ -165,7 +165,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 50,
           "y": 380
         }
       }
@@ -187,25 +187,25 @@ tasks:
       alertId:
         simple: ${alert.internal_id}
       name:
-        simple: EP_${PlaybookRouting.EntryPoint}
+        simple: ${PlaybookRouting.Playbook.Name}
     separatecontext: false
     skipunavailable: false
     task:
       brand: Builtin
       description: commands.local.cmd.set.playbook
-      id: a44cce24-a78f-498d-b8bc-2691c3e0f539
+      id: 25d2429b-b985-4486-88f2-1d2acfad0f6d
       iscommand: true
       name: Run Playbook
       script: Builtin|||setPlaybook
       type: regular
       version: -1
-    taskid: a44cce24-a78f-498d-b8bc-2691c3e0f539
+    taskid: 25d2429b-b985-4486-88f2-1d2acfad0f6d
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 275,
           "y": 1230
         }
       }
@@ -227,7 +227,7 @@ tasks:
       '#default#':
       - "3"
       "yes":
-      - "9"
+      - "5"
     note: false
     quietmode: 0
     separatecontext: false
@@ -246,7 +246,7 @@ tasks:
       {
         "position": {
           "x": 162.5,
-          "y": 720
+          "y": 1060
         }
       }
   "7":
@@ -276,7 +276,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 162.5,
           "y": 1400
         }
       }
@@ -315,7 +315,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 50,
           "y": 210
         }
       }
@@ -462,8 +462,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 275,
-          "y": 890
+          "x": 50,
+          "y": 550
         }
       }
   "10":
@@ -474,7 +474,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "5"
+      - "2"
     note: false
     quietmode: 0
     scriptarguments:
@@ -537,13 +537,15 @@ tasks:
       {
         "position": {
           "x": 162.5,
-          "y": 1060
+          "y": 720
         }
       }
 version: -1
 view: |-
   {
-    "linkLabelsPosition": {},
+    "linkLabelsPosition": {
+      "9_10_MITRE Tactic": 0.87
+    },
     "paper": {
       "dimensions": {
         "height": 1580,
