@@ -219,7 +219,7 @@ tasks:
       brand: ""
       id: 521aefd3-7584-492e-89c4-086ae185a11b
       iscommand: false
-      name: SOC Identity Analytics - Alert Handling
+      name: SOC Identity Analytics - Alert Handling v1.0
       playbookId: 'SOC Identity Analytics - Alert Handling'
       type: playbook
       version: -1
