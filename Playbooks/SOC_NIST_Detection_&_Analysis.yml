@@ -1,0 +1,942 @@
+adopted: true
+description: Detection & Analysis (Endpoint) — chooses actions based on normalized
+  entities and alert categories.
+dirtyInputs: true
+id: auto-pb-detect-analyze-endpoint-11bcb85d-f5be-437d-a309-aeb1052386a2
+inputSections:
+- description: Generic group for inputs
+  inputs: []
+  name: General (Inputs group)
+inputs: []
+name: SOC NIST Detection & Analysis
+outputSections:
+- description: Generic group for outputs
+  name: General (Outputs group)
+  outputs: []
+outputs: []
+starttaskid: "0"
+tags:
+- SOC
+- SOC_Framework
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "18"
+      - "19"
+      - "20"
+      - "21"
+      - "27"
+      - "29"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 27225af5-5c8c-47e1-8bc7-3b685c88f559
+      iscommand: false
+      name: ""
+      playbooktaskmissingcomponent: null
+      version: -1
+    taskid: 27225af5-5c8c-47e1-8bc7-3b685c88f559
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 1175,
+          "y": 50
+        }
+      }
+  "4":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: Normalized.process.hashes.sha256
+          operator: isExists
+          right:
+            value: {}
+      label: "Yes"
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: Normalized.process.hashes.sha256
+          operator: isNotExists
+      label: "No"
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      "No":
+      - "22"
+      "Yes":
+      - "15"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Check Normalized.process md5/sha256.
+      id: 94a9cde1-08c5-4251-8f0e-c031b77efe2d
+      iscommand: false
+      name: Have a Process hash?
+      playbooktaskmissingcomponent: null
+      type: condition
+      version: -1
+    taskid: 94a9cde1-08c5-4251-8f0e-c031b77efe2d
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 500,
+          "y": 390
+        }
+      }
+  "5":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: Normalized.host.ip
+          operator: isExists
+      - - left:
+            iscontext: true
+            value:
+              simple: Normalized.ip.ip
+          operator: isExists
+      label: "Yes"
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: Normalized.host.ip
+          operator: isNotExists
+      - - left:
+            iscontext: true
+            value:
+              simple: Normalized.ip.ip
+          operator: isNotExists
+      label: "No"
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      "No":
+      - "22"
+      "Yes":
+      - "16"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Check Normalized.host.ip or Normalized.ip.ip.
+      id: ea3b9fc6-1814-4a30-8412-5aca97b6cd26
+      iscommand: false
+      name: Have an Endpoint IP?
+      playbooktaskmissingcomponent: null
+      type: condition
+      version: -1
+    taskid: ea3b9fc6-1814-4a30-8412-5aca97b6cd26
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 950,
+          "y": 390
+        }
+      }
+  "6":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: Normalized.user.user
+          operator: isExists
+          right:
+            value: {}
+      label: "Yes"
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "22"
+      "Yes":
+      - "17"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Check Normalized.user fields for correlation.
+      id: 868abdc8-4fd3-43e6-b3e4-8a8f52787af9
+      iscommand: false
+      name: Have a User tied to this endpoint?
+      playbooktaskmissingcomponent: null
+      type: condition
+      version: -1
+    taskid: 868abdc8-4fd3-43e6-b3e4-8a8f52787af9
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 1400,
+          "y": 390
+        }
+      }
+  "14":
+    continueonerrortype: ""
+    id: "14"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "22"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      EndpointID:
+        complex:
+          accessor: id
+          root: Normalized.host
+          transformers:
+          - operator: uniq
+      Hostname:
+        complex:
+          accessor: name
+          root: Normalized.host
+          transformers:
+          - operator: uniq
+      IPAddress:
+        complex:
+          accessor: ip
+          root: Normalized.host
+          transformers:
+          - operator: uniq
+      UseReputationCommand:
+        simple: "False"
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Enrich an endpoint by hostname using one or more integrations.
+        Supported integrations:
+        - Active Directory Query v2
+        - McAfee ePO v2
+        - VMware Carbon Black EDR v2
+        - Cylance Protect v2
+        - CrowdStrike Falcon
+        - ExtraHop Reveal(x)
+        - Cortex XDR / Core (endpoint enrichment, reputation and risk)
+        - Endpoint reputation using !endpoint command.
+      id: 9eb3bd8d-6e9f-48f2-804c-56a3a6a5f625
+      iscommand: false
+      name: SOC Endpoint Enrichment - Generic v2.1
+      playbookId: SOC Endpoint Enrichment - Generic v2.1
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 9eb3bd8d-6e9f-48f2-804c-56a3a6a5f625
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 570
+        }
+      }
+  "15":
+    continueonerrortype: ""
+    id: "15"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "22"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      DetectionThreshold:
+        simple: "5"
+      FileSHA256:
+        simple: ${Normalized.processes.hashes.sha256}
+      TrustedPublishers:
+        simple: |-
+          Microsoft Root Authority,Microsoft Timestamping Service,
+          Microsoft Code Signing PCA, Microsoft Corporation
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: "This playbook checks the file reputation and sets the verdict
+        as a new context key.\n\nThe verdict is composed by 3 main components:\n\n*
+        VirusTotal detection rate\n* Digital certificate signers\n* NSRL DB\n\nNote:
+        a user can provide a list of trusted signers of his own using the playbook
+        inputs\n "
+      id: 20e5bf66-ff40-40c7-aeea-98ce1b11bb46
+      iscommand: false
+      name: SOC File Reputation
+      playbookId: SOC File Reputation
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 20e5bf66-ff40-40c7-aeea-98ce1b11bb46
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 612.5,
+          "y": 570
+        }
+      }
+  "16":
+    continueonerrortype: ""
+    id: "16"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "22"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      ExecutedFromParent:
+        simple: "True"
+      IP:
+        complex:
+          accessor: ip
+          root: Normalized.ip
+          transformers:
+          - operator: uniq
+      InternalRange:
+        complex:
+          accessor: PrivateIPs
+          root: lists
+          transformers:
+          - args:
+              error_if_no_match: {}
+              ignore_case: {}
+              multi_line: {}
+              period_matches_newline: {}
+              regex:
+                value:
+                  simple: (\b(?:\d{1,3}\.){3}\d{1,3}\b/\d{1,2})
+              unpack_matches: {}
+            operator: RegexExtractAll
+          - args:
+              separator:
+                value:
+                  simple: ','
+            operator: join
+      ResolveIP:
+        simple: "False"
+      UseReputationCommand:
+        simple: "False"
+      extended_data:
+        simple: "False"
+      threat_model_association:
+        simple: "False"
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f1b6093c-9f7b-44f0-a0b9-eb9a8c0cd44d
+      iscommand: false
+      name: SOC IP Enrichment - Generic v2
+      playbookId: SOC IP Enrichment - Generic v2
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: f1b6093c-9f7b-44f0-a0b9-eb9a8c0cd44d
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 1062.5,
+          "y": 570
+        }
+      }
+  "17":
+    continueonerrortype: ""
+    id: "17"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "22"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      Username:
+        complex:
+          accessor: user
+          root: Normalized.primary
+          transformers:
+          - operator: uniq
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Enrich accounts using one or more integrations.
+        Supported integrations:
+        - Active Directory
+        - Microsoft Graph User
+        - SailPoint IdentityNow
+        - SailPoint IdentityIQ
+        - PingOne
+        - Okta
+        - AWS IAM
+        - Cortex XDR (account enrichment and reputation)
+
+        Also, the playbook supports the generic command 'iam-get-user' (implemented in IAM integrations). For more information, visit https://xsoar.pan.dev/docs/integrations/iam-integrations.
+      id: ad534ded-e14f-4a66-a64f-13ccee8ab181
+      iscommand: false
+      name: SOC Account Enrichment - Generic v2.1
+      playbookId: SOC Account Enrichment - Generic v2.1
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: ad534ded-e14f-4a66-a64f-13ccee8ab181
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 1512.5,
+          "y": 570
+        }
+      }
+  "18":
+    continueonerrortype: ""
+    id: "18"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "23"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 798b1484-152b-4136-b878-ba63d4ad8387
+      iscommand: false
+      name: Host Enrichent
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 798b1484-152b-4136-b878-ba63d4ad8387
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 220
+        }
+      }
+  "19":
+    continueonerrortype: ""
+    id: "19"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 72ccd199-d1c3-47d1-b78f-350a0c3151a5
+      iscommand: false
+      name: File Enrichment
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 72ccd199-d1c3-47d1-b78f-350a0c3151a5
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 500,
+          "y": 220
+        }
+      }
+  "20":
+    continueonerrortype: ""
+    id: "20"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 143681c6-6c93-4d1b-b3c1-a707aa32d15b
+      iscommand: false
+      name: IP Enrichment
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 143681c6-6c93-4d1b-b3c1-a707aa32d15b
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 950,
+          "y": 220
+        }
+      }
+  "21":
+    continueonerrortype: ""
+    id: "21"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 4c308473-ccba-4f78-9e13-18bc1a29aac6
+      iscommand: false
+      name: Identity Enrichment
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 4c308473-ccba-4f78-9e13-18bc1a29aac6
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 1400,
+          "y": 220
+        }
+      }
+  "22":
+    continueonerrortype: ""
+    id: "22"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: b6b8b36e-2253-4433-a487-b92e0583ace6
+      iscommand: false
+      name: Done
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: b6b8b36e-2253-4433-a487-b92e0583ace6
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 1175,
+          "y": 750
+        }
+      }
+  "23":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: Normalized.host.name
+          operator: isExists
+          right:
+            value: {}
+      label: "Yes"
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: Normalized.host.name
+          operator: isNotExists
+      label: "No"
+    continueonerrortype: ""
+    id: "23"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      "No":
+      - "22"
+      "Yes":
+      - "14"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Check Normalized.host fields.
+      id: 3f6621d0-c736-482b-a04f-a4c87d287027
+      iscommand: false
+      name: Have a Host entity?
+      playbooktaskmissingcomponent: null
+      type: condition
+      version: -1
+    taskid: 3f6621d0-c736-482b-a04f-a4c87d287027
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 390
+        }
+      }
+  "24":
+    continueonerrortype: ""
+    id: "24"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "22"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      Email:
+        complex:
+          accessor: recipients
+          root: Normalized.primary
+          transformers:
+          - operator: uniq
+      UseReputationCommand:
+        simple: "False"
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 54f0fb53-cb41-43f9-a199-d1c3afba323d
+      iscommand: false
+      name: Email Address Enrichment - Generic v2.1
+      playbookId: Email Address Enrichment - Generic v2.1
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 54f0fb53-cb41-43f9-a199-d1c3afba323d
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 1942.5,
+          "y": 570
+        }
+      }
+  "25":
+    continueonerrortype: ""
+    id: "25"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "22"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      Rasterize:
+        simple: "True"
+      URL:
+        complex:
+          accessor: url
+          root: Normalized.url
+          transformers:
+          - operator: uniq
+      UseReputationCommand:
+        simple: "False"
+      VerifyURL:
+        simple: "False"
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 852b5e97-21b4-4577-ac8e-1b7cd887b789
+      iscommand: false
+      name: SOC URL Enrichment - Generic v2
+      playbookId: SOC URL Enrichment - Generic v2
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 852b5e97-21b4-4577-ac8e-1b7cd887b789
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 2597.5,
+          "y": 570
+        }
+      }
+  "26":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: Normalized.primary.recipients
+          operator: isExists
+          right:
+            value: {}
+      label: "Yes"
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: Normalized.primary.recipients
+          operator: isNotExists
+      label: "No"
+    continueonerrortype: ""
+    id: "26"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      "No":
+      - "22"
+      "Yes":
+      - "24"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Check Normalized.host.ip or Normalized.ip.ip.
+      id: e2293a68-c616-4457-a7fc-f3a6ab04d256
+      iscommand: false
+      name: Have an Email?
+      playbooktaskmissingcomponent: null
+      type: condition
+      version: -1
+    taskid: e2293a68-c616-4457-a7fc-f3a6ab04d256
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 2055,
+          "y": 390
+        }
+      }
+  "27":
+    continueonerrortype: ""
+    id: "27"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "26"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 061749cd-dfd3-499f-8142-a3bce901fa48
+      iscommand: false
+      name: Email Enrichment
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 061749cd-dfd3-499f-8142-a3bce901fa48
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 2055,
+          "y": 220
+        }
+      }
+  "28":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: Normalized.urls
+          operator: isExists
+          right:
+            value: {}
+      label: "Yes"
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: Normalized.url.url
+          operator: isNotExists
+      label: "No"
+    continueonerrortype: ""
+    id: "28"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      "No":
+      - "22"
+      "Yes":
+      - "25"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Check Normalized.host.ip or Normalized.ip.ip.
+      id: 07928f9c-77df-45ea-abd8-0154a5c0b46b
+      iscommand: false
+      name: Have an URL?
+      playbooktaskmissingcomponent: null
+      type: condition
+      version: -1
+    taskid: 07928f9c-77df-45ea-abd8-0154a5c0b46b
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 2485,
+          "y": 390
+        }
+      }
+  "29":
+    continueonerrortype: ""
+    id: "29"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "28"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: ecb992e8-fbd1-48ca-a33e-fdc3387bb3e8
+      iscommand: false
+      name: URL Enrichment
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: ecb992e8-fbd1-48ca-a33e-fdc3387bb3e8
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 2485,
+          "y": 220
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {
+      "4_15_Yes": 0.82,
+      "5_16_Yes": 0.84,
+      "5_22_No": 0.84,
+      "6_17_Yes": 0.69
+    },
+    "paper": {
+      "dimensions": {
+        "height": 760,
+        "width": 2927.5,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }

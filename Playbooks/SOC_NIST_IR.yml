@@ -1,0 +1,277 @@
+adopted: true
+description: Minimal scaffold for SOC_NIST_IR. Add conditions and actions in the UI.
+dirtyInputs: true
+id: auto-soc_nist_ir_static-5665921e-797f-469f-a938-801fc03ce4b1
+inputSections:
+- description: Generic group for inputs
+  inputs:
+  - ShadowMode
+  name: General (Inputs group)
+inputs:
+- description: ""
+  key: ShadowMode
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "True"
+name: SOC_NIST_IR
+outputSections:
+- description: Generic group for outputs
+  name: General (Outputs group)
+  outputs: []
+outputs: []
+starttaskid: "0"
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f2d8507e-c7b1-46a3-8716-3084a647eb5c
+      iscommand: false
+      name: ""
+      playbooktaskmissingcomponent: null
+      version: -1
+    taskid: f2d8507e-c7b1-46a3-8716-3084a647eb5c
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 60a01e78-83c7-4ebc-b3ab-dbd880d88e5e
+      iscommand: false
+      name: Preparation
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 60a01e78-83c7-4ebc-b3ab-dbd880d88e5e
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 220
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 5bd9fd01-9c9c-40af-93c0-eff89b121aef
+      iscommand: false
+      name: Detection & Analysis
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 5bd9fd01-9c9c-40af-93c0-eff89b121aef
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 390
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Detection & Analysis (Endpoint) — chooses actions based on normalized
+        entities and alert categories.
+      id: 36eed8c6-dd8f-4356-b4ce-e60f6a30c3c8
+      iscommand: false
+      name: SOC NIST Detection & Analysis
+      playbookId: auto-pb-detect-analyze-endpoint-11bcb85d-f5be-437d-a309-aeb1052386a2
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 36eed8c6-dd8f-4356-b4ce-e60f6a30c3c8
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 560
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 48386826-9711-4307-8b9d-3e0a03407ad0
+      iscommand: false
+      name: Containment
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 48386826-9711-4307-8b9d-3e0a03407ad0
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 700
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    note: false
+    quietmode: 0
+    scriptarguments:
+      AutoBlockIndicators:
+        simple: "True"
+      AutoContainment:
+        simple: "True"
+      BlockIndicators:
+        simple: "True"
+      ClearUserSessions:
+        simple: "True"
+      Domain:
+        simple: ${Normalized.domain}
+      EndpointID:
+        simple: ${Normalized.host.id}
+      FileContainment:
+        simple: "True"
+      FileHash:
+        simple: ${Normalized.processes.hashes.sha256}
+      FilePath:
+        simple: ${Normalized..processes..image.path}
+      FileRemediation:
+        simple: Quarantine
+      HostContainment:
+        simple: "True"
+      IAMUserDomain:
+        simple: ${Domain.Name}
+      IP:
+        simple: ${Normalized.ips}
+      ShadowMode:
+        simple: ${inputs.ShadowMode}
+      URL:
+        simple: ${Normalized.url.url}
+      UserContainment:
+        simple: "True"
+      UserVerification:
+        simple: "True"
+      Username:
+        simple: ${Normalized.primary.user}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: "This playbook handles the main containment actions available with
+        Cortex XSIAM, including the following sub-playbooks:  \n* Containment Plan
+        - Isolate endpoint\n* Containment Plan - Disable account\n* Containment Plan
+        - Quarantine file\n* Containment Plan - Block indicators\n* Containment Plan
+        - Clear user session (currently, the playbook supports only Okta)\n\nNote:
+        The playbook inputs enable manipulating the execution flow. Read the input
+        descriptions for details."
+      id: 021bfca3-08df-48c4-9b78-74405f1ba994
+      iscommand: false
+      name: SOC Containment Plan
+      playbookId: SOC Containment Plan
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 021bfca3-08df-48c4-9b78-74405f1ba994
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 880
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 900,
+        "width": 380,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
