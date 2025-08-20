@@ -4,7 +4,7 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: ""
     isoverridable: false
-    itemVersion: 1.6.9
+    itemVersion: 1.7.1
     packID: ""
     packName: SOC Framework
     prevname: ""
@@ -165,7 +165,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "25"
+      - "26"
     note: false
     quietmode: 0
     separatecontext: false
@@ -216,7 +216,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1630
+          "y": 1810
         }
       }
   "6":
@@ -247,7 +247,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1980
+          "y": 2160
         }
       }
   "7":
@@ -278,7 +278,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 2150
+          "y": 2330
         }
       }
   "8":
@@ -306,7 +306,7 @@ tasks:
       {
         "position": {
           "x": 275,
-          "y": 2320
+          "y": 2500
         }
       }
   "17":
@@ -473,7 +473,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1450
+          "y": 1630
         }
       }
   "23":
@@ -510,7 +510,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1800
+          "y": 1980
         }
       }
   "24":
@@ -565,10 +565,51 @@ tasks:
       iscommand: false
       name: Normalize Entities in Context
       playbooktaskmissingcomponent: null
-      script: 'SOC_NormalizeContext'
+      script: SOC_NormalizeContext
       type: regular
       version: -1
     taskid: 164053c2-9f5b-487d-a444-b927f4266b8e
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1450
+        }
+      }
+  "26":
+    continueonerrortype: ""
+    id: "26"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "25"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: Normalized
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: "Delete field from context.\n\nThis automation runs using the default
+        Limited User role, unless you explicitly change the permissions.\nFor more
+        information, see the section about permissions here:\n- For Cortex XSOAR 6
+        see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
+        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+      id: b3ef35e8-aaf0-4568-8ebf-c503b652bb5e
+      iscommand: false
+      name: Delete Previous Context
+      playbooktaskmissingcomponent: null
+      script: DeleteContext
+      type: regular
+      version: -1
+    taskid: b3ef35e8-aaf0-4568-8ebf-c503b652bb5e
     timertriggers: []
     type: regular
     view: |-
@@ -584,7 +625,7 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 2330,
+        "height": 2510,
         "width": 830,
         "x": 50,
         "y": 50
