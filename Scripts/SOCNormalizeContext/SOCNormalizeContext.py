@@ -1,17 +1,20 @@
 import demistomock as demisto  # noqa: F401
 from CommonServerPython import *  # noqa: F401
-# SOC_NormalizeContext_v10 (Readable)
+demisto.debug('pack name = SOC Framework, pack version = 2.0.0')
+
+# SOC_NormalizeContext_v11 (Readable + PID normalization)
 # Cortex XSIAM / XSOAR Automation (Python 3)
 #
 # Outputs (Context + Set):
 #   Normalized, NormalizedEntity, AlertCategories, ActiveProducts
 #
-# Normalizes: domain, user(s), ip(s), url(s), email, process(es)
+# Normalizes: domain, user(s), ip(s), url(s), email, process(es), pid/ppid
 # Notes:
 # - Primary entity precedence: email > url > user > process > host > ip > cloud
 # - Process canonical_id priority: sha256 > sha1 > md5 > path > filename
-# - Email primary now uses "recipients" (plural) to match downstream playbooks
-# - Adds "system_binary" flag for known-good OS paths (e.g., cmd.exe in System32)
+# - Email primary uses "recipients" (plural) to match downstream playbooks
+# - Marks known-good system binary cmd.exe in System32 as system_binary=true
+# - Adds Normalized.pids / Normalized.ppids and backfills process.runtime.{pid,ppid}
 
 import re
 from urllib.parse import urlsplit, urlunsplit, quote, unquote
@@ -105,6 +108,41 @@ def gather_ips(ci):
         ci.get('ip')
     )
     return (ips[0] if ips else None), ips
+
+# ---------------------------
+# PID / PPID normalization
+# ---------------------------
+
+def _to_pid_str(v):
+    """Return a PID/PPID as a clean string (digits only if numeric)."""
+    if v is None:
+        return None
+    s = str(v).strip()
+    return s if s else None
+
+def _collect_ids(ci, *keys):
+    """Collect values from multiple keys (each may be scalar/list), dedupe, keep order."""
+    seen, out = set(), []
+    for k in keys:
+        for v in ensure_list(ci.get(k)):
+            s = _to_pid_str(v)
+            if s and s not in seen:
+                seen.add(s); out.append(s)
+    return out
+
+def gather_pids(ci):
+    """Return (primary_pid, all_pids, primary_ppid, all_ppids)."""
+    pid_keys = [
+        'issue.initiatorpid', 'initiatorpid', 'issue.pid', 'pid', 'processid',
+        'xdmsourceprocessid', 'xdmsource.processid', 'xdmsourcepid', 'process.pid'
+    ]
+    ppid_keys = [
+        'issue.initiatorppid', 'initiatorppid', 'ppid', 'parentprocessid',
+        'xdmsourceprocessparentid', 'xdmsource.parentprocessid', 'process.ppid'
+    ]
+    pids  = _collect_ids(ci, *pid_keys)
+    ppids = _collect_ids(ci, *ppid_keys)
+    return (pids[0] if pids else None), pids, (ppids[0] if ppids else None), ppids
 
 # ---------------------------
 # URL normalization
@@ -252,7 +290,9 @@ def build_processes_from_xdm(ci):
         "signer":     'xdmsourceprocessexecutablesigner',
         "signature":  'xdmsourceprocessexecutablesignaturestatus',
         "name":       'xdmsourceprocessname',
-        "causality":  'xdmsourceprocesscausalityid'
+        "causality":  'xdmsourceprocesscausalityid',
+        "pid":        'xdmsourceprocessid',          # optional
+        "ppid":       'xdmsourceprocessparentid'     # optional
     }
     arrays = {k: ensure_list(ci.get(v)) for k, v in keys.items()}
     maxlen = max((len(v) for v in arrays.values()), default=0)
@@ -266,6 +306,8 @@ def build_processes_from_xdm(ci):
         signer    = first_nonempty(arrays["signer"][i] if i < len(arrays["signer"]) else None)
         signature = first_nonempty(arrays["signature"][i] if i < len(arrays["signature"]) else None)
         causality = first_nonempty(arrays["causality"][i] if i < len(arrays["causality"]) else None)
+        pid       = _to_pid_str(arrays["pid"][i]  if i < len(arrays["pid"])  else None)
+        ppid      = _to_pid_str(arrays["ppid"][i] if i < len(arrays["ppid"]) else None)
 
         hashes = prune_empty({"sha256": (sha256.lower() if isinstance(sha256, str) else sha256)})
         entity = prune_empty({
@@ -275,7 +317,7 @@ def build_processes_from_xdm(ci):
                 "path": path, "filename": filename,
                 "command_line": cmdline, "signer": signer, "signature": signature
             }),
-            "runtime": {},
+            "runtime": prune_empty({"pid": pid, "ppid": ppid}),
             "causality_id": causality
         })
         if entity and entity["canonical_id"] != "unknown:process":
@@ -369,6 +411,9 @@ def main():
     # IPs
     primary_ip, ips = gather_ips(ci)
 
+    # PIDs
+    primary_pid, all_pids, primary_ppid, all_ppids = gather_pids(ci)
+
     # Host
     host_name = first_nonempty(ci.get('hostname'), ci.get('host'), ci.get('agenthostname'),
                                ci.get('devicehostname'), ci.get('xdrhostname'), ci.get('agentname'),
@@ -400,6 +445,14 @@ def main():
     procs.extend(build_processes_from_xdm(ci))
     procs = dedupe_processes(procs)
     primary_proc = procs[0] if len(procs) == 1 else None
+
+    # If we have a single primary process and it's missing pid/ppid, backfill from gathered IDs
+    if primary_proc:
+        rt = primary_proc.setdefault("runtime", {})
+        if not rt.get("pid") and primary_pid:
+            rt["pid"] = primary_pid
+        if not rt.get("ppid") and primary_ppid:
+            rt["ppid"] = primary_ppid
 
     # Categories
     cats = collect_alert_categories(ci)
@@ -451,9 +504,11 @@ def main():
             "all_usernames": all_usernames or None
         }),
         "users": all_usernames or None,
-        "host": prune_empty({"name": host_name, "id": host_id, "ip": host_ip, "fqdn": host_fqdn}),
+        "host": prune_empty({"name": host_name, "id": host_id, "ip": host_ip, "fqdn": host_fqdn, "pid": primary_pid}),
         "ip": prune_empty({"ip": primary_ip}),
         "ips": ips or None,
+        "pids": (all_pids or None),
+        "ppids": (all_ppids or None),
         "url": prune_empty({"url": primary_url}),
         "urls": urls or None,
         "email": prune_empty({
@@ -504,3 +559,4 @@ def main():
 # XSOAR/XSIAM entrypoint
 if __name__ in ('__builtin__','builtins','__main__'):
     main()
+

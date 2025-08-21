@@ -14,7 +14,6 @@ outputs: []
 quiet: true
 starttaskid: "0"
 tags:
-- PoV
 - SOC
 - SOC_Framework
 tasks:

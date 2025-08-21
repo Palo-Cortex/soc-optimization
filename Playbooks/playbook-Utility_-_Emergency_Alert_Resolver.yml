@@ -5,6 +5,9 @@ name: Utility - Emergency Alert Resolver
 outputs: []
 sourceplaybookid: da4ddd5b-fd19-419b-862b-23f64feed129
 starttaskid: "0"
+tags:
+- SOC
+- SOC_Framework
 tasks:
   "0":
     continueonerrortype: ""

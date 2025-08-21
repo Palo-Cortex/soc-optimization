@@ -1,0 +1,515 @@
+adopted: true
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.6.0
+    isoverridable: false
+    itemVersion: 1.0.3
+    packID: ""
+    packName: SOC Malware Investigation Response
+    prevname: ""
+    supportedModules: []
+    toServerVersion: ""
+description: |-
+  This playbook handles all the recovery actions available with Cortex XSIAM, including the following tasks:
+  * Unisolate endpoint
+  * Restore quarantined file
+
+  Note: The playbook inputs enable manipulating the execution flow; read the input descriptions for details.
+dirtyInputs: true
+id: 'SOC Recovery Plan'
+inputSections:
+- description: Generic group for inputs
+  inputs:
+  - unIsolateEndpoint
+  - releaseFile
+  - endpointID
+  - FileHash
+  - ShadowMode
+  name: General (Inputs group)
+inputs:
+- description: Set to True to cancel the endpoint isolation.
+  key: unIsolateEndpoint
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "true"
+- description: Set to True to release the quarantined file.
+  key: releaseFile
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "false"
+- description: The endpoint ID.
+  key: endpointID
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: The file hash.
+  key: FileHash
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: ""
+  key: ShadowMode
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "True"
+name: SOC Recovery Plan
+outputSections:
+- description: Generic group for outputs
+  name: General (Outputs group)
+  outputs: []
+outputs: []
+sourceplaybookid: Recovery Plan
+starttaskid: "0"
+tags:
+- SOC
+- SOC_Framework
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 6664776c-7209-42a0-8272-5f7f66756511
+      iscommand: false
+      name: ""
+      playbooktaskmissingcomponent: null
+      version: -1
+    taskid: 6664776c-7209-42a0-8272-5f7f66756511
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 490,
+          "y": 50
+        }
+      }
+  "1":
+    conditions:
+    - condition:
+      - - ignorecase: true
+          left:
+            iscontext: true
+            value:
+              complex:
+                root: inputs.unIsolateEndpoint
+          operator: isEqualString
+          right:
+            value:
+              simple: "true"
+      label: "yes"
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "3"
+      "yes":
+      - "9"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Whether to unisolate the endpoint.
+      id: 82bb4625-493c-4e79-8ba2-9ded7a609000
+      iscommand: false
+      name: Should unisolate the endpoint?
+      playbooktaskmissingcomponent: null
+      type: condition
+      version: -1
+    taskid: 82bb4625-493c-4e79-8ba2-9ded7a609000
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 220
+        }
+      }
+  "2":
+    continueonerror: true
+    continueonerrortype: errorPath
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#error#':
+      - "6"
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      endpoint_id:
+        complex:
+          root: inputs.endpointID
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Reverses the isolation of an endpoint.
+      id: 7c166a0f-010b-41ce-a475-31757ebf0484
+      iscommand: true
+      name: Unisolate endpoint
+      playbooktaskmissingcomponent: null
+      script: '|||core-unisolate-endpoint'
+      type: regular
+      version: -1
+    taskid: 7c166a0f-010b-41ce-a475-31757ebf0484
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 592.5,
+          "y": 580
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 10b17a6b-93a9-4d5a-8d84-7950f294732a
+      iscommand: false
+      name: Done
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 10b17a6b-93a9-4d5a-8d84-7950f294732a
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 807.5,
+          "y": 765
+        }
+      }
+  "4":
+    conditions:
+    - condition:
+      - - ignorecase: true
+          left:
+            iscontext: true
+            value:
+              complex:
+                root: inputs.releaseFile
+          operator: isEqualString
+          right:
+            value:
+              simple: "true"
+      label: "yes"
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "3"
+      "yes":
+      - "7"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Whether to restore the quarantined file.
+      id: 1f8e95ae-1cf7-44c0-896b-576fb895a635
+      iscommand: false
+      name: Should restore the quarantined file?
+      playbooktaskmissingcomponent: null
+      type: condition
+      version: -1
+    taskid: 1f8e95ae-1cf7-44c0-896b-576fb895a635
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 930,
+          "y": 220
+        }
+      }
+  "5":
+    continueonerror: true
+    continueonerrortype: errorPath
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#error#':
+      - "6"
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      endpoint_id:
+        complex:
+          root: inputs.endpointID
+      file_hash:
+        complex:
+          root: inputs.FileHash
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Restores a quarantined file on requested endpoints.
+      id: c4bc4cdb-9338-404e-ada7-553e73fd49ec
+      iscommand: true
+      name: Restore file
+      playbooktaskmissingcomponent: null
+      script: '|||core-restore-file'
+      type: regular
+      version: -1
+    taskid: c4bc4cdb-9338-404e-ada7-553e73fd49ec
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1472.5,
+          "y": 580
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: true
+    task:
+      brand: ""
+      id: 62c35c37-ce13-4b5d-8616-b51565be7392
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: Foundation - Error Handling
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 62c35c37-ce13-4b5d-8616-b51565be7392
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 1360,
+          "y": 760
+        }
+      }
+  "7":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: shadow_mode
+          operator: isFalse
+      label: "no"
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "8"
+      "no":
+      - "5"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 104854df-35fd-4a6c-90d2-5f301e15aed7
+      iscommand: false
+      name: Shadow Run?
+      playbooktaskmissingcomponent: null
+      type: condition
+      version: -1
+    taskid: 104854df-35fd-4a6c-90d2-5f301e15aed7
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 1042.5,
+          "y": 400
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      value:
+        simple: |-
+          Shadow Mode: XSIAM Restore File
+          Command: core-restore-file
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Prints text to war room (Markdown supported)
+      id: 7d13998f-a24e-4389-bd2e-7ffaa41b5b7d
+      iscommand: false
+      name: Print To WarRoom
+      playbooktaskmissingcomponent: null
+      script: Print
+      type: regular
+      version: -1
+    taskid: 7d13998f-a24e-4389-bd2e-7ffaa41b5b7d
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1042.5,
+          "y": 580
+        }
+      }
+  "9":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: shadow_mode
+          operator: isFalse
+      label: "no"
+    continueonerrortype: ""
+    id: "9"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "10"
+      "no":
+      - "2"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 896bf2d8-70ca-4e9a-8bce-7bd5d46c9954
+      iscommand: false
+      name: Shadow Run?
+      playbooktaskmissingcomponent: null
+      type: condition
+      version: -1
+    taskid: 896bf2d8-70ca-4e9a-8bce-7bd5d46c9954
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 400
+        }
+      }
+  "10":
+    continueonerrortype: ""
+    id: "10"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      value:
+        simple: |-
+          Shadow Mode: XSIAM Unisolate Endpoint
+          Command: core-unisolate-endpoint
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Prints text to war room (Markdown supported)
+      id: 11df0270-40f1-473b-a850-077db369b0a8
+      iscommand: false
+      name: Print To WarRoom
+      playbooktaskmissingcomponent: null
+      script: Print
+      type: regular
+      version: -1
+    taskid: 11df0270-40f1-473b-a850-077db369b0a8
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 580
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {
+      "1_3_#default#": 0.54,
+      "1_9_yes": 0.9,
+      "4_3_#default#": 0.54
+    },
+    "paper": {
+      "dimensions": {
+        "height": 780,
+        "width": 1802.5,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
