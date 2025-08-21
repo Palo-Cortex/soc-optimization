@@ -237,7 +237,7 @@ tasks:
       id: 639a4c41-079c-4269-8591-3bb13561847a
       iscommand: false
       name: SOC_NIST_IR
-      playbookId: auto-soc_nist_ir_static-5665921e-797f-469f-a938-801fc03ce4b1
+      playbookId: SOC_NIST_IR
       playbooktaskmissingcomponent: null
       type: playbook
       version: -1
