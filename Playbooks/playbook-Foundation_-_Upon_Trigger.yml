@@ -31,7 +31,6 @@ sourceplaybookid: Foundation - Upon Trigger
 starttaskid: "0"
 tags:
 - SOC
-- PoV
 - SOC_Framework
 tasks:
   "0":

@@ -7,6 +7,7 @@ starttaskid: "0"
 tags:
 - MITRE
 - SOC
+- SOC_Framework
 tasks:
   "0":
     continueonerrortype: ""

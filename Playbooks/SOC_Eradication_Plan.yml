@@ -1,0 +1,776 @@
+adopted: true
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.6.0
+    isoverridable: false
+    itemVersion: 1.0.3
+    packID: ""
+    packName: SOC Malware Investigation Response
+    prevname: ""
+    supportedModules: []
+    toServerVersion: ""
+description: "This playbook handles all the eradication actions available with Cortex
+  XSIAM, including the following sub-playbooks:\n* Eradication Plan - Reset user password\n*
+  Eradication Plan - Delete file\n* Eradication Plan - Kill process (currently, the
+  playbook supports terminating a process by name)  \n\nNote: The playbook inputs
+  enable manipulating the execution flow. Read the input descriptions for details."
+dirtyInputs: true
+id: 'SOC Eradication Plan'
+inputSections:
+- description: Generic group for inputs
+  inputs:
+  - AutoEradicate
+  - EndpointID
+  - FilePath
+  - Username
+  - FileRemediation
+  - UserRemediation
+  - ProcessTermination
+  - ProcessID
+  - ShadowMode
+  name: General (Inputs group)
+inputs:
+- description: Set to True to execute the eradication playbook automatically.
+  key: AutoEradicate
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "True"
+- description: The endpoint ID.
+  key: EndpointID
+  playbookInputQuery: null
+  required: false
+  value:
+    complex:
+      accessor: agentid
+      root: alert
+- description: The file path for the file deletion and for the process termination
+    task.
+  key: FilePath
+  playbookInputQuery: null
+  required: false
+  value:
+    complex:
+      accessor: initiatorpath
+      root: foundIncidents.CustomFields
+- description: The username to reset the password for.
+  key: Username
+  playbookInputQuery: null
+  required: false
+  value:
+    complex:
+      accessor: username
+      root: foundIncidents.CustomFields
+- description: "Choose 'Quarantine' or 'Delete'  to avoid file remediation conflicts.
+    \nFor example, choosing 'Delete' ignores the 'Quarantine file' task under the
+    containment playbook and executes only file deletion."
+  key: FileRemediation
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: Delete
+- description: Set to 'True' to reset the user's password.
+  key: UserRemediation
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "True"
+- description: "Choose 'PID' to terminate the process using the Process ID, or 'Name'
+    to terminate the process using its name.\nPlease note that providing the file
+    path is mandatory for the process termination. \nIf 'PID' is chosen, the input
+    `ProcessID` should not be empty; otherwise, the termination will not proceed."
+  key: ProcessTermination
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: Name
+- description: The process ID to terminate.
+  key: ProcessID
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: ""
+  key: ShadowMode
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "True"
+name: SOC Eradication Plan
+outputSections:
+- description: Generic group for outputs
+  name: General (Outputs group)
+  outputs:
+  - TerminatedProcessFromEndpoints
+outputs:
+- contextPath: TerminatedProcessFromEndpoints
+  description: The terminated process from endpoint
+  type: unknown
+sourceplaybookid: Eradication Plan
+starttaskid: "0"
+tags:
+- SOC
+- SOC_Framework
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "57"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: a565fd6d-2dd4-4f6f-8c41-d80d96fd1a58
+      iscommand: false
+      name: ""
+      playbooktaskmissingcomponent: null
+      version: -1
+    taskid: a565fd6d-2dd4-4f6f-8c41-d80d96fd1a58
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 771.5,
+          "y": 50
+        }
+      }
+  "46":
+    continueonerrortype: ""
+    form:
+      description: Select which eradication actions to perform.
+      expired: false
+      questions:
+      - defaultrows: []
+        fieldassociated: ""
+        gridcolumns: []
+        id: "0"
+        label: ""
+        labelarg:
+          simple: Select Users to reset their password
+        options: []
+        optionsarg:
+        - complex:
+            root: inputs.Username
+            transformers:
+            - operator: uniq
+        placeholder: ""
+        readonly: false
+        required: false
+        tooltip: ""
+        type: multiSelect
+      - defaultrows: []
+        fieldassociated: ""
+        gridcolumns: []
+        id: "1"
+        label: ""
+        labelarg:
+          simple: Select Files to delete
+        options: []
+        optionsarg:
+        - complex:
+            root: inputs.FilePath
+            transformers:
+            - operator: uniq
+        placeholder: ""
+        readonly: false
+        required: false
+        tooltip: Please consider carefully whether the file will be needed for further
+          investigation before deleting it.
+        type: multiSelect
+      - defaultrows: []
+        fieldassociated: ""
+        gridcolumns: []
+        id: "2"
+        label: ""
+        labelarg:
+          simple: Select Process to terminate
+        options: []
+        optionsarg:
+        - complex:
+            root: ProcessList
+            transformers:
+            - operator: uniq
+            - args:
+                applyIfEmpty: {}
+                defaultValue:
+                  iscontext: true
+                  value:
+                    simple: inputs.FilePath
+              operator: SetIfEmpty
+        placeholder: ""
+        readonly: false
+        required: false
+        tooltip: Please consider carefully whether the process termination could impact
+          system processes with a similar name.
+        type: multiSelect
+      sender: ""
+      title: Which Eradication actions would you like to perform?
+      totalanswers: 0
+    id: "46"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    message:
+      bcc: null
+      body: null
+      cc: null
+      format: ""
+      methods: []
+      subject: null
+      timings:
+        completeafterreplies: 1
+        completeaftersla: false
+        completeafterv2: true
+        retriescount: 2
+        retriesinterval: 360
+      to: null
+    nexttasks:
+      '#none#':
+      - "47"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Select which indicators to block.
+      id: 0b8d21a3-7d1d-44ac-898f-f7b9dd3c484e
+      iscommand: false
+      name: Which eradication actions would you like to perform?
+      playbooktaskmissingcomponent: null
+      type: collection
+      version: -1
+    taskid: 0b8d21a3-7d1d-44ac-898f-f7b9dd3c484e
+    timertriggers: []
+    type: collection
+    view: |-
+      {
+        "position": {
+          "x": 531,
+          "y": 720
+        }
+      }
+  "47":
+    continueonerrortype: ""
+    id: "47"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "54"
+      - "52"
+      - "53"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: eac14d54-acee-4628-894b-c3f85ad56381
+      iscommand: false
+      name: Eradication
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: eac14d54-acee-4628-894b-c3f85ad56381
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 531,
+          "y": 890
+        }
+      }
+  "48":
+    conditions:
+    - condition:
+      - - ignorecase: true
+          left:
+            iscontext: true
+            value:
+              complex:
+                root: inputs.AutoEradicate
+          operator: isEqualString
+          right:
+            value:
+              simple: "True"
+      label: "yes"
+    continueonerrortype: ""
+    id: "48"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "46"
+      "yes":
+      - "47"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Whether to perform eradication actions automatically or manually.
+      id: 7e62a114-2f14-44b9-8fcb-e391078f8112
+      iscommand: false
+      name: Should Eradicate automatically?
+      playbooktaskmissingcomponent: null
+      type: condition
+      version: -1
+    taskid: 7e62a114-2f14-44b9-8fcb-e391078f8112
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 531,
+          "y": 550
+        }
+      }
+  "52":
+    continueonerrortype: ""
+    id: "52"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "61"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: e2ca1e88-b318-4dd3-8cd0-e79bcea8b708
+      iscommand: false
+      name: Reset Password
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: e2ca1e88-b318-4dd3-8cd0-e79bcea8b708
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1050
+        }
+      }
+  "53":
+    continueonerrortype: ""
+    id: "53"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "60"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 55eece77-4b85-418a-85b4-2df675bc6406
+      iscommand: false
+      name: Delete File
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 55eece77-4b85-418a-85b4-2df675bc6406
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 531,
+          "y": 1050
+        }
+      }
+  "54":
+    continueonerrortype: ""
+    id: "54"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "58"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 85a5283a-4dcb-4be9-8994-cda1836b671a
+      iscommand: false
+      name: Terminate Process
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 85a5283a-4dcb-4be9-8994-cda1836b671a
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 1012,
+          "y": 1050
+        }
+      }
+  "55":
+    continueonerrortype: ""
+    id: "55"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: aca6dccc-d750-41e7-8303-cc4cb1d1e1d8
+      iscommand: false
+      name: Done
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: aca6dccc-d750-41e7-8303-cc4cb1d1e1d8
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 290.5,
+          "y": 1380
+        }
+      }
+  "56":
+    continueonerror: true
+    continueonerrortype: errorPath
+    id: "56"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#error#':
+      - "59"
+      '#none#':
+      - "48"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: ProcessList
+      stringify:
+        simple: "false"
+      value:
+        complex:
+          root: inputs.FilePath
+          transformers:
+          - args:
+              error_if_no_match: {}
+              ignore_case: {}
+              multi_line: {}
+              period_matches_newline: {}
+              regex:
+                value:
+                  simple: '[^\\]+$'
+              unpack_matches: {}
+            operator: RegexExtractAll
+          - args:
+              array1_key:
+                iscontext: true
+              array2:
+                iscontext: true
+                value:
+                  simple: inputs.ProcessID
+              array2_key: {}
+              determine_output_length_by: {}
+              merge_dict: {}
+              output_name1:
+                value:
+                  simple: Path
+              output_name2:
+                value:
+                  simple: PID
+            operator: MakePair
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Set a value in context under the key you entered.
+      id: a6a87806-5c61-4c82-9c34-b01e38127473
+      iscommand: false
+      name: Set Process list
+      playbooktaskmissingcomponent: null
+      script: Set
+      type: regular
+      version: -1
+    taskid: a6a87806-5c61-4c82-9c34-b01e38127473
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 962,
+          "y": 380
+        }
+      }
+  "57":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                root: inputs.FilePath
+          operator: isNotEmpty
+          right:
+            value: {}
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                root: inputs.ProcessID
+          operator: isNotEmpty
+      label: "yes"
+    continueonerrortype: ""
+    id: "57"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "48"
+      "yes":
+      - "56"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Check if the file path and PID are defined.
+      id: e5166636-3899-4c68-8dfa-b2b39ca764ed
+      iscommand: false
+      name: The file path and PID defined?
+      playbooktaskmissingcomponent: null
+      type: condition
+      version: -1
+    taskid: e5166636-3899-4c68-8dfa-b2b39ca764ed
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 771.5,
+          "y": 210
+        }
+      }
+  "58":
+    continueonerrortype: ""
+    id: "58"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "55"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      ProcessTermination:
+        simple: Name
+      ShadowMode:
+        simple: ${inputs.ShadowMode}
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: "This playbook is one of the sub-playbooks in the eradication plan.
+        \nThis playbook handles the termination of the processes as a crucial step
+        in the eradication action.\nThe playbook executes actions of process termination,
+        which is a crucial step in the eradication process.\nThe process termination
+        can be performed based on either the process ID or the process name."
+      id: cf859d36-0c22-443a-a347-b0304d6a2772
+      iscommand: false
+      name: SOC Eradication Plan - Terminate Process
+      playbookId: SOC Eradication Plan - Terminate Process
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: cf859d36-0c22-443a-a347-b0304d6a2772
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 1012,
+          "y": 1210
+        }
+      }
+  "59":
+    continueonerrortype: ""
+    id: "59"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: true
+    task:
+      brand: ""
+      id: f4eed107-abe3-43fe-8a55-10ee6345385b
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: Foundation - Error Handling
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: f4eed107-abe3-43fe-8a55-10ee6345385b
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 1012,
+          "y": 550
+        }
+      }
+  "60":
+    continueonerrortype: ""
+    id: "60"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "55"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      EndpointID:
+        complex:
+          root: Endpoints
+      FilePath:
+        complex:
+          root: Path
+      FileRemediation:
+        simple: Delete
+      ShadowMode:
+        simple: ${inputs.ShadowMode}
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: "This playbook is one of the sub-playbooks in the eradication plan.
+        \nThis playbook executes actions of file deletion, which is a crucial step
+        in the eradication process."
+      id: af1597ac-23f8-46ad-9e35-57daabd0136b
+      iscommand: false
+      name: SOC Eradication Plan - Delete File
+      playbookId: SOC Eradication Plan - Delete File
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: af1597ac-23f8-46ad-9e35-57daabd0136b
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 531,
+          "y": 1210
+        }
+      }
+  "61":
+    continueonerrortype: ""
+    id: "61"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "55"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      ShadowMode:
+        simple: ${inputs.ShadowMode}
+      UserRemediation:
+        simple: "True"
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: "This playbook is one of the sub-playbooks in the eradication plan.
+        \nThe playbook executes actions to reset the user's passwords, which is a
+        crucial step in the eradication process."
+      id: 12816d7e-28d2-4feb-9b1f-0c1f63e98688
+      iscommand: false
+      name: SOC Eradication Plan - Reset Password
+      playbookId: SOC Eradication Plan - Reset Password
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 12816d7e-28d2-4feb-9b1f-0c1f63e98688
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1210
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {
+      "48_47_yes": 0.53
+    },
+    "paper": {
+      "dimensions": {
+        "height": 1390,
+        "width": 1342,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
