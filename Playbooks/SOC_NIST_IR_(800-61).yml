@@ -1,0 +1,520 @@
+adopted: true
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    isoverridable: false
+    itemVersion: 2.0.0
+    packID: ""
+    packName: SOC Framework
+    prevname: ""
+    supportedModules: []
+    toServerVersion: ""
+description: |-
+  This playbook implements the NIST SP 800-61 Incident Response lifecycle in a structured, repeatable way. It serves as the top-level controller, orchestrating all downstream playbooks and automations that align to the four NIST phases:
+
+  Preparation – Normalize and stage context (entities, products, alert categories) to ensure consistent execution.
+
+  Detection & Analysis – Trigger enrichment and investigation playbooks (endpoint, network, identity, email, cloud) based on normalized entities and mapped MITRE ATT&CK tactics.
+
+  Containment, Eradication, Recovery – Call the appropriate static or product-specific playbooks to contain threats, remove malicious artifacts, and restore systems.
+
+  Post-Incident Activity – Document lessons learned, update playbook routing matrices, and feed back into SOC optimization.
+
+  The design emphasizes modularity and flexibility:
+
+  Each NIST phase is represented as a dedicated section or sub-playbook, making it easy to swap out or extend tools.
+
+  Normalization (Upon Trigger of the EntryPoint) ensures entities (hosts, users, IPs, processes, etc.) are handled consistently.
+
+  This top-level playbook is the backbone of the SOC Framework: it receives the alert trigger, applies the NIST 800-61 model, and routes execution to the appropriate detection, containment, and response sub-playbooks for standardized incident handling
+dirtyInputs: true
+id: 'SOC NIST IR (800-61)'
+inputSections:
+- description: Generic group for inputs
+  inputs:
+  - ShadowMode
+  name: General (Inputs group)
+inputs:
+- description: ""
+  key: ShadowMode
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "True"
+name: SOC NIST IR (800-61)
+outputSections:
+- description: Generic group for outputs
+  name: General (Outputs group)
+  outputs: []
+outputs: []
+sourceplaybookid: auto-soc_nist_ir_static-5665921e-797f-469f-a938-801fc03ce4b1
+starttaskid: "0"
+tags:
+- SOC_Framework
+- SOC
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f2d8507e-c7b1-46a3-8716-3084a647eb5c
+      iscommand: false
+      name: ""
+      playbooktaskmissingcomponent: null
+      version: -1
+    taskid: f2d8507e-c7b1-46a3-8716-3084a647eb5c
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 60a01e78-83c7-4ebc-b3ab-dbd880d88e5e
+      iscommand: false
+      name: Preparation
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 60a01e78-83c7-4ebc-b3ab-dbd880d88e5e
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 220
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 5bd9fd01-9c9c-40af-93c0-eff89b121aef
+      iscommand: false
+      name: Detection & Analysis
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 5bd9fd01-9c9c-40af-93c0-eff89b121aef
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 390
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Detection & Analysis (Endpoint) — chooses actions based on normalized
+        entities and alert categories.
+      id: 36eed8c6-dd8f-4356-b4ce-e60f6a30c3c8
+      iscommand: false
+      name: SOC NIST Detection & Analysis
+      playbookId: auto-pb-detect-analyze-endpoint-11bcb85d-f5be-437d-a309-aeb1052386a2
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 36eed8c6-dd8f-4356-b4ce-e60f6a30c3c8
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 560
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 48386826-9711-4307-8b9d-3e0a03407ad0
+      iscommand: false
+      name: Containment
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 48386826-9711-4307-8b9d-3e0a03407ad0
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 700
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "7"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      AutoBlockIndicators:
+        simple: "True"
+      AutoContainment:
+        simple: "True"
+      BlockIndicators:
+        simple: "True"
+      ClearUserSessions:
+        simple: "True"
+      Domain:
+        simple: ${Normalized.domain}
+      EndpointID:
+        simple: ${Normalized.host.id}
+      FileContainment:
+        simple: "True"
+      FileHash:
+        simple: ${Normalized.processes.hashes.sha256}
+      FilePath:
+        simple: ${Normalized..processes..image.path}
+      FileRemediation:
+        simple: Quarantine
+      HostContainment:
+        simple: "True"
+      Hostname:
+        simple: ${Normalized.host.name)
+      IAMUserDomain:
+        simple: ${Domain.Name}
+      IP:
+        simple: ${Normalized.ips}
+      ShadowMode:
+        simple: "True"
+      URL:
+        simple: ${Normalized.url.url}
+      UserContainment:
+        simple: "True"
+      UserVerification:
+        simple: "True"
+      Username:
+        simple: ${Normalized.primary.user}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: "This playbook handles the main containment actions available with
+        Cortex XSIAM, including the following sub-playbooks:  \n* Containment Plan
+        - Isolate endpoint\n* Containment Plan - Disable account\n* Containment Plan
+        - Quarantine file\n* Containment Plan - Block indicators\n* Containment Plan
+        - Clear user session (currently, the playbook supports only Okta)\n\nNote:
+        The playbook inputs enable manipulating the execution flow. Read the input
+        descriptions for details."
+      id: 0b33efad-1b7b-4100-a193-49d26bdd3ac6
+      iscommand: false
+      name: SOC Containment Plan
+      playbookId: SOC Containment Plan
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 0b33efad-1b7b-4100-a193-49d26bdd3ac6
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 880
+        }
+      }
+  "7":
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 7fe2fa42-6f0a-4588-8da1-ff4fb88d8fbb
+      iscommand: false
+      name: Eradication
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 7fe2fa42-6f0a-4588-8da1-ff4fb88d8fbb
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1030
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "9"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      AutoEradicate:
+        simple: "True"
+      EndpointID:
+        simple: ${Normalized.host.id}
+      FilePath:
+        simple: ${Normalized.processes.image.path}
+      FileRemediation:
+        simple: Delete
+      ProcessID:
+        simple: ${Normalized.host.pid}
+      ProcessTermination:
+        simple: Name
+      ShadowMode:
+        simple: "True"
+      UserRemediation:
+        simple: "True"
+      Username:
+        simple: ${Normalized.primary.user}
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: "This playbook handles all the eradication actions available with
+        Cortex XSIAM, including the following sub-playbooks:\n* Eradication Plan -
+        Reset user password\n* Eradication Plan - Delete file\n* Eradication Plan
+        - Kill process (currently, the playbook supports terminating a process by
+        name)  \n\nNote: The playbook inputs enable manipulating the execution flow.
+        Read the input descriptions for details."
+      id: 944b08f7-251c-4f39-a5c9-dead91b70697
+      iscommand: false
+      name: SOC Eradication Plan
+      playbookId: SOC Eradication Plan
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 944b08f7-251c-4f39-a5c9-dead91b70697
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1210
+        }
+      }
+  "9":
+    continueonerrortype: ""
+    id: "9"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "10"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f78e1862-c25b-45ad-9bff-fdab1d2b3355
+      iscommand: false
+      name: Recovery
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: f78e1862-c25b-45ad-9bff-fdab1d2b3355
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1390
+        }
+      }
+  "10":
+    continueonerrortype: ""
+    id: "10"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 0
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "11"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      FileHash:
+        simple: ${Normalized.processes.hashes.sha256}
+      ShadowMode:
+        simple: "True"
+      endpointID:
+        simple: ${Normalized.host.id}
+      releaseFile:
+        simple: "false"
+      unIsolateEndpoint:
+        simple: "true"
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        This playbook handles all the recovery actions available with Cortex XSIAM, including the following tasks:
+        * Unisolate endpoint
+        * Restore quarantined file
+
+        Note: The playbook inputs enable manipulating the execution flow; read the input descriptions for details.
+      id: 9946d995-11fb-424d-afa0-2547e4d459f1
+      iscommand: false
+      name: SOC Recovery Plan
+      playbookId: SOC Recovery Plan
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 9946d995-11fb-424d-afa0-2547e4d459f1
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1570
+        }
+      }
+  "11":
+    continueonerrortype: ""
+    id: "11"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 8b6dab24-5e99-4dbe-88db-034169678fda
+      iscommand: false
+      name: Done
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: 8b6dab24-5e99-4dbe-88db-034169678fda
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1710
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 1720,
+        "width": 380,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }

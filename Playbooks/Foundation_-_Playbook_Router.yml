@@ -1,0 +1,188 @@
+adopted: true
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    isoverridable: false
+    itemVersion: 1.7.0
+    packID: ""
+    packName: SOC Framework
+    prevname: ""
+    supportedModules: []
+    toServerVersion: ""
+dirtyInputs: true
+id: Foundation - Playbook Router
+inputSections:
+- description: Generic group for inputs
+  inputs:
+  - listName
+  - keyName
+  - EntryPoint
+  name: General (Inputs group)
+inputs:
+- description: ""
+  key: listName
+  playbookInputQuery: null
+  required: true
+  value: {}
+- description: ""
+  key: keyName
+  playbookInputQuery: null
+  required: true
+  value: {}
+- description: ""
+  key: EntryPoint
+  playbookInputQuery: null
+  required: false
+  value: {}
+name: Foundation - Playbook Router
+outputSections:
+- description: Generic group for outputs
+  name: General (Outputs group)
+  outputs: []
+outputs: []
+sourceplaybookid: Foundation - Load Configuration
+starttaskid: "0"
+tags:
+- SOC_Framework
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 10469017-1df8-47d0-8423-c1cda3daec75
+      iscommand: false
+      name: ""
+      playbooktaskmissingcomponent: null
+      version: -1
+    taskid: 10469017-1df8-47d0-8423-c1cda3daec75
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 50
+        }
+      }
+  "2":
+    continueonerror: true
+    continueonerrortype: errorPath
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#error#':
+      - "4"
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      entrypoint_name:
+        simple: ${inputs.EntryPoint}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: This script will read the PlaybookDepoloymentMatrix to see the
+        current playbook running should be given the EntryPoint Playbooks name.
+      id: 954f313b-96a3-436e-82a5-d7cdec693902
+      iscommand: false
+      name: Set Configuration
+      playbooktaskmissingcomponent: null
+      script: EntryPointGBState
+      type: regular
+      version: -1
+    taskid: 954f313b-96a3-436e-82a5-d7cdec693902
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 210
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: eca05bd6-97e7-4b72-8309-dbb33900284d
+      iscommand: false
+      name: Done
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: eca05bd6-97e7-4b72-8309-dbb33900284d
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 385
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2d9a5b14-18ee-460c-8593-96df28b90637
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: Foundation - Error Handling
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 2d9a5b14-18ee-460c-8593-96df28b90637
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 380
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 400,
+        "width": 810,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }

@@ -4,16 +4,24 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: ""
     isoverridable: false
-    itemVersion: 1.7.0
+    itemVersion: 2.0.0
     packID: ""
     packName: SOC Framework
     prevname: ""
     supportedModules: []
     toServerVersion: ""
-description: 'This playbook will run the Upon Trigger from the SOC Framework "Optimization",
-  The Playbook Router executes the prod playbook in the List called "PlaybookDeploymentMatrix"
-  for a Blue / Green deployment.  It does this my Matching on the MITRE Tactic in
-  the alert to the playbook in the blue field (i.e. name=EP_Execution and prod=MyPlaybook). '
+description: |-
+  This Entry Point playbook acts as the first stage of the incident response pipeline. It is designed to be assigned directly to the automation trigger so that every new alert entering the SOC Framework is handled in a standardized way.
+
+  Key functions:
+
+  Upon Trigger Handling – Calls the Foundation – Upon Trigger playbook to initialize context, clear routing data, and set global variables.
+
+  Alert Classification – Matches the incoming alert’s MITRE ATT&CK tactic or category against the Playbook Deployment Matrix to determine the appropriate response path.
+
+  Routing to Lifecycle – Once classified, passes control to the top-level SOC NIST IR (800-61) playbook, which orchestrates the NIST incident response phases (Preparation, Detection & Analysis, Containment, Eradication, Recovery, and Post-Incident).
+
+  This playbook ensures that every alert begins consistently, with normalization and routing handled before entering the NIST IR lifecycle. It effectively connects the raw automation trigger to the structured NIST response process, enabling modular blue/green deployment and tool-agnostic playbook execution
 dirtyInputs: true
 id: 'EP_IR_NIST (800-61)'
 inputSections:
@@ -50,7 +58,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "8"
+      - "4"
     note: false
     quietmode: 0
     separatecontext: false
@@ -68,7 +76,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 377.5,
+          "x": 162.5,
           "y": 50
         }
       }
@@ -97,7 +105,7 @@ tasks:
       {
         "position": {
           "x": 162.5,
-          "y": 940
+          "y": 760
         }
       }
   "4":
@@ -134,78 +142,6 @@ tasks:
       {
         "position": {
           "x": 162.5,
-          "y": 400
-        }
-      }
-  "7":
-    continueonerrortype: ""
-    id: "7"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    note: false
-    quietmode: 0
-    separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 7583e4e4-266f-4361-88f4-fb320d3d12ee
-      iscommand: false
-      name: Foundation - Error Handling
-      playbookId: Foundation - Error Handling
-      playbooktaskmissingcomponent: null
-      type: playbook
-      version: -1
-    taskid: 7583e4e4-266f-4361-88f4-fb320d3d12ee
-    timertriggers: []
-    type: playbook
-    view: |-
-      {
-        "position": {
-          "x": 592.5,
-          "y": 400
-        }
-      }
-  "8":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "8"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#error#':
-      - "7"
-      '#none#':
-      - "4"
-    note: false
-    quietmode: 0
-    scriptarguments:
-      key:
-        simple: PlaybookRouting
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: "Delete field from context.\n\nThis automation runs using the default
-        Limited User role, unless you explicitly change the permissions.\nFor more
-        information, see the section about permissions here:\n- For Cortex see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
-      id: 63767169-aa5d-4103-8829-5e6728918fac
-      iscommand: false
-      name: Delete PlaybookRouting Context
-      playbooktaskmissingcomponent: null
-      script: DeleteContext
-      type: regular
-      version: -1
-    taskid: 63767169-aa5d-4103-8829-5e6728918fac
-    timertriggers: []
-    type: regular
-    view: |-
-      {
-        "position": {
-          "x": 377.5,
           "y": 220
         }
       }
@@ -248,7 +184,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 760
+          "y": 580
         }
       }
   "14":
@@ -296,7 +232,7 @@ tasks:
       {
         "position": {
           "x": 162.5,
-          "y": 580
+          "y": 400
         }
       }
 version: -1
@@ -305,8 +241,8 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 950,
-        "width": 922.5,
+        "height": 770,
+        "width": 492.5,
         "x": 50,
         "y": 50
       }
