@@ -11,7 +11,7 @@ contentitemexportablefields:
     supportedModules: []
     toServerVersion: ""
 description: |-
-  This Entry Point playbook acts as the first stage of the incident response pipeline. It is designed to be assigned directly to the automation trigger so that every new alert entering the SOC Framework is handled in a standardized way.
+  This Entry Point playbook acts as the first stage of the alert response pipeline. It is designed to be assigned directly to the automation trigger so that every new alert entering the SOC Framework is handled in a standardized way.
 
   Key functions:
 
@@ -19,7 +19,7 @@ description: |-
 
   Alert Classification – Matches the incoming alert’s MITRE ATT&CK tactic or category against the Playbook Deployment Matrix to determine the appropriate response path.
 
-  Routing to Lifecycle – Once classified, passes control to the top-level SOC NIST IR (800-61) playbook, which orchestrates the NIST incident response phases (Preparation, Detection & Analysis, Containment, Eradication, Recovery, and Post-Incident).
+  Routing to Lifecycle – Once classified, passes control to the top-level SOC NIST IR (800-61) playbook, which orchestrates the NIST alert response phases (Preparation, Detection & Analysis, Containment, Eradication, Recovery, and Post-Alert).
 
   This playbook ensures that every alert begins consistently, with normalization and routing handled before entering the NIST IR lifecycle. It effectively connects the raw automation trigger to the structured NIST response process, enabling modular blue/green deployment and tool-agnostic playbook execution
 dirtyInputs: true
@@ -76,7 +76,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 50,
           "y": 50
         }
       }
@@ -104,7 +104,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 50,
           "y": 760
         }
       }
@@ -141,50 +141,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 162.5,
-          "y": 220
-        }
-      }
-  "12":
-    continueonerrortype: ""
-    id: "12"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    loop:
-      exitCondition: ""
-      iscommand: false
-      max: 100
-      wait: 1
-    nexttasks:
-      '#none#':
-      - "3"
-    note: false
-    quietmode: 0
-    scriptarguments:
-      ShadowMode:
-        simple: ${shadow_mode}
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: Minimal scaffold for SOC_NIST_IR_(800-61). Add conditions and actions in
-        the UI.
-      id: 639a4c41-079c-4269-8591-3bb13561847a
-      iscommand: false
-      name: SOC_NIST_IR_(800-61)
-      playbookId: SOC_NIST_IR_(800-61)
-      playbooktaskmissingcomponent: null
-      type: playbook
-      version: -1
-    taskid: 639a4c41-079c-4269-8591-3bb13561847a
-    timertriggers: []
-    type: playbook
-    view: |-
-      {
-        "position": {
           "x": 50,
-          "y": 580
+          "y": 220
         }
       }
   "14":
@@ -212,7 +170,7 @@ tasks:
       "no":
       - "3"
       "yes":
-      - "12"
+      - "15"
     note: false
     quietmode: 0
     separatecontext: false
@@ -231,14 +189,48 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 50,
           "y": 400
+        }
+      }
+  "15":
+    continueonerrortype: ""
+    id: "15"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 0d22027d-5677-4823-87b1-7b943d966d7a
+      iscommand: false
+      name: SOC NIST IR (800-61)
+      playbookId: SOC NIST IR (800-61)
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 0d22027d-5677-4823-87b1-7b943d966d7a
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 580
         }
       }
 version: -1
 view: |-
   {
-    "linkLabelsPosition": {},
+    "linkLabelsPosition": {
+      "14_15_yes": 0.9
+    },
     "paper": {
       "dimensions": {
         "height": 770,
