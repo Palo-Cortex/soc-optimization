@@ -168,12 +168,12 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      description: Minimal scaffold for SOC_NIST_IR. Add conditions and actions in
+      description: Minimal scaffold for SOC_NIST_IR_(800-61). Add conditions and actions in
         the UI.
       id: 639a4c41-079c-4269-8591-3bb13561847a
       iscommand: false
-      name: SOC_NIST_IR
-      playbookId: SOC_NIST_IR
+      name: SOC_NIST_IR_(800-61)
+      playbookId: SOC_NIST_IR_(800-61)
       playbooktaskmissingcomponent: null
       type: playbook
       version: -1
