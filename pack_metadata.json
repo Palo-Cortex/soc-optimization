@@ -2,7 +2,7 @@
     "name": "SOC Framework",
     "description": "This contents the content used to leverage processes that the Palo SOC uses including: Playbooks, integrations, layouts, etc.",
     "support": "xsoar",
-    "currentVersion": "2.0.4",
+    "currentVersion": "2.0.6",
     "author": "Cortex XSOAR",
     "url": "https://www.paloaltonetworks.com/cortex",
     "email": "",
