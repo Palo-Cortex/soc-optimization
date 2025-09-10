@@ -4,7 +4,7 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: ""
     isoverridable: false
-    itemVersion: 2.0.0
+    itemVersion: 2.0.6
     packID: ""
     packName: SOC Framework
     prevname: ""
@@ -170,7 +170,7 @@ tasks:
       "no":
       - "3"
       "yes":
-      - "15"
+      - "16"
     note: false
     quietmode: 0
     separatecontext: false
@@ -193,9 +193,9 @@ tasks:
           "y": 400
         }
       }
-  "15":
+  "16":
     continueonerrortype: ""
-    id: "15"
+    id: "16"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
@@ -208,14 +208,14 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 0d22027d-5677-4823-87b1-7b943d966d7a
+      id: c331991a-32d6-459a-8718-2c1a3feb376e
       iscommand: false
       name: SOC NIST IR (800-61)
       playbookId: SOC NIST IR (800-61)
       playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: 0d22027d-5677-4823-87b1-7b943d966d7a
+    taskid: c331991a-32d6-459a-8718-2c1a3feb376e
     timertriggers: []
     type: playbook
     view: |-
@@ -229,7 +229,7 @@ version: -1
 view: |-
   {
     "linkLabelsPosition": {
-      "14_15_yes": 0.9
+      "14_16_yes": 0.9
     },
     "paper": {
       "dimensions": {
