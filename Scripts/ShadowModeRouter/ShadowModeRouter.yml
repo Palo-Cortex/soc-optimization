@@ -1,5 +1,6 @@
 args:
-- name: ShadowMode
+- defaultValue: ${inputs.ShadowMode}
+  name: ShadowMode
   required: true
 commonfields:
   id: 'ShadowModeRouter'
