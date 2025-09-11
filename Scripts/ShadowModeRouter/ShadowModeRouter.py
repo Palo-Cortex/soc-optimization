@@ -1,5 +1,8 @@
 import demistomock as demisto  # noqa: F401
 from CommonServerPython import *  # noqa: F401
+demisto.debug('pack name = SOC Framework, pack version = 2.0.8')
+
+
 def main():
     try:
         shadow_mode = demisto.args().get("ShadowMode")
@@ -23,3 +26,4 @@ def main():
 
 if __name__ in ("__main__", "__builtin__", "builtins"):
     main()
+

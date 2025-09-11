@@ -19,8 +19,10 @@ runas: DBotWeakRole
 runonce: false
 script: ''
 scripttarget: 0
+sourcescripid: ShadowModeRouter
 subtype: python3
 tags:
 - SOC
 - SOC_Framework
+- Condition
 type: python
