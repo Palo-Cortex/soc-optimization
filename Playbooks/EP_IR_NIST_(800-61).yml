@@ -4,7 +4,7 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: ""
     isoverridable: false
-    itemVersion: 2.0.6
+    itemVersion: 2.0.8
     packID: ""
     packName: SOC Framework
     prevname: ""
@@ -199,23 +199,49 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
     nexttasks:
       '#none#':
       - "3"
     note: false
     quietmode: 0
+    scriptarguments:
+      ShadowMode:
+        simple: ${shadow_mode}
     separatecontext: true
     skipunavailable: false
     task:
       brand: ""
-      id: c331991a-32d6-459a-8718-2c1a3feb376e
+      description: |-
+        This playbook implements the NIST SP 800-61 Alert Response lifecycle in a structured, repeatable way. It serves as the top-level controller, orchestrating all downstream playbooks and automations that align to the four NIST phases:
+
+        Preparation – Normalize and stage context (entities, products, alert categories) to ensure consistent execution.
+
+        Detection & Analysis – Trigger enrichment and investigation playbooks (endpoint, network, identity, email, cloud) based on normalized entities and mapped MITRE ATT&CK tactics.
+
+        Containment, Eradication, Recovery – Call the appropriate static or product-specific playbooks to contain threats, remove malicious artifacts, and restore systems.
+
+        Post-Alert Activity – Document lessons learned, update playbook routing matrices, and feed back into SOC optimization.
+
+        The design emphasizes modularity and flexibility:
+
+        Each NIST phase is represented as a dedicated section or sub-playbook, making it easy to swap out or extend tools.
+
+        Normalization (Upon Trigger of the EntryPoint) ensures entities (hosts, users, IPs, processes, etc.) are handled consistently.
+
+        This top-level playbook is the backbone of the SOC Framework: it receives the alert trigger, applies the NIST 800-61 model, and routes execution to the appropriate detection, containment, and response sub-playbooks for standardized alert handling
+      id: d14faa64-aa88-4c49-a364-1311e063b01b
       iscommand: false
       name: SOC NIST IR (800-61)
       playbookId: SOC NIST IR (800-61)
       playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: c331991a-32d6-459a-8718-2c1a3feb376e
+    taskid: d14faa64-aa88-4c49-a364-1311e063b01b
     timertriggers: []
     type: playbook
     view: |-

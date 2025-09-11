@@ -4,7 +4,7 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: ""
     isoverridable: false
-    itemVersion: 2.0.6
+    itemVersion: 2.0.8
     packID: ""
     packName: SOC Framework
     prevname: ""
@@ -123,7 +123,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "12"
+      - "16"
     note: false
     quietmode: 0
     separatecontext: false
@@ -154,7 +154,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "13"
+      - "17"
     note: false
     quietmode: 0
     separatecontext: false
@@ -185,7 +185,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "14"
+      - "18"
     note: false
     quietmode: 0
     separatecontext: false
@@ -216,7 +216,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "15"
+      - "19"
     note: false
     quietmode: 0
     separatecontext: false
@@ -267,9 +267,9 @@ tasks:
           "y": 1790
         }
       }
-  "12":
+  "16":
     continueonerrortype: ""
-    id: "12"
+    id: "16"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
@@ -282,26 +282,26 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: d5036432-2b28-489a-8cc4-16b3433afb2a
+      id: 7444db9e-2fa2-42eb-85f4-19162a107216
       iscommand: false
       name: SOC NIST Enrichment
-      playbookId: auto-pb-detect-analyze-endpoint-11bcb85d-f5be-437d-a309-aeb1052386a2
+      playbookId: SOC NIST Enrichment
       playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: d5036432-2b28-489a-8cc4-16b3433afb2a
+    taskid: 7444db9e-2fa2-42eb-85f4-19162a107216
     timertriggers: []
     type: playbook
     view: |-
       {
         "position": {
           "x": 50,
-          "y": 560
+          "y": 550
         }
       }
-  "13":
+  "17":
     continueonerrortype: ""
-    id: "13"
+    id: "17"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
@@ -314,14 +314,14 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 2a5311d8-6aa0-4c04-809b-aa05815c488a
+      id: 16d3f72a-dc4b-4b2b-88a3-7921639aa4c0
       iscommand: false
       name: SOC Containment Plan
-      playbookId: Containment Plan
+      playbookId: SOC Containment Plan
       playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: 2a5311d8-6aa0-4c04-809b-aa05815c488a
+    taskid: 16d3f72a-dc4b-4b2b-88a3-7921639aa4c0
     timertriggers: []
     type: playbook
     view: |-
@@ -331,9 +331,9 @@ tasks:
           "y": 910
         }
       }
-  "14":
+  "18":
     continueonerrortype: ""
-    id: "14"
+    id: "18"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
@@ -346,14 +346,14 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 12a214df-d22e-4a1b-8777-9bf9ceb19023
+      id: 8b671441-78c2-444e-8010-544ad34a9edf
       iscommand: false
       name: SOC Eradication Plan
-      playbookId: Eradication Plan
+      playbookId: SOC Eradication Plan
       playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: 12a214df-d22e-4a1b-8777-9bf9ceb19023
+    taskid: 8b671441-78c2-444e-8010-544ad34a9edf
     timertriggers: []
     type: playbook
     view: |-
@@ -363,9 +363,9 @@ tasks:
           "y": 1260
         }
       }
-  "15":
+  "19":
     continueonerrortype: ""
-    id: "15"
+    id: "19"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
@@ -378,14 +378,14 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 06f2adec-32d9-4033-8ace-a480f51e797a
+      id: 5bbd6f67-982b-46ad-8780-3dc3f2dcf608
       iscommand: false
       name: SOC Recovery Plan
-      playbookId: Recovery Plan
+      playbookId: SOC Recovery Plan
       playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: 06f2adec-32d9-4033-8ace-a480f51e797a
+    taskid: 5bbd6f67-982b-46ad-8780-3dc3f2dcf608
     timertriggers: []
     type: playbook
     view: |-
