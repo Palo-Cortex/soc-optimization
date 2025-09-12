@@ -1,26 +1,29 @@
 {
     "name": "SOC Framework",
     "description": "This contents the content used to leverage processes that the Palo SOC uses including: Playbooks, integrations, layouts, etc.",
-    "support": "community",
-    "currentVersion": "2.0.0",
-    "author": "Scott Brumley & Nicholas Ericksen",
-    "url": "https://live.paloaltonetworks.com/t5/cortex-xsoar-discussions/bd-p/Cortex_XSOAR_Discussions",
+    "support": "xsoar",
+    "currentVersion": "2.0.9",
+    "author": "Cortex XSOAR",
+    "url": "https://www.paloaltonetworks.com/cortex",
     "email": "",
     "categories": [
         "Utilities"
     ],
     "tags": [
         "SOC",
-        "Utility"
+        "SOC_Framework",
+        "Utility",
+        "Palo Alto Networks Products"
     ],
     "useCases": [],
     "keywords": [],
+    "dependencies": {
+        "SOC Common Playbooks": {
+            "mandatory": true,
+            "display_name": "SOC Common Playbooks"
+        }
+    },
     "marketplaces": [
-        "xsoar",
         "marketplacev2"
-    ],
-    "githubUser": [
-        "scottbrumley",
-        "nericksen"
     ]
 }
