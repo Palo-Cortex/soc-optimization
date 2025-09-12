@@ -2,7 +2,7 @@
     "name": "SOC Framework",
     "description": "This contents the content used to leverage processes that the Palo SOC uses including: Playbooks, integrations, layouts, etc.",
     "support": "xsoar",
-    "currentVersion": "2.0.4",
+    "currentVersion": "2.0.8",
     "author": "Cortex XSOAR",
     "url": "https://www.paloaltonetworks.com/cortex",
     "email": "",
@@ -17,5 +17,13 @@
     ],
     "useCases": [],
     "keywords": [],
-    "marketplaces": ["marketplacev2"]
+    "dependencies": {
+        "SOC Common Playbooks": {
+            "mandatory": true,
+            "display_name": "SOC Common Playbooks"
+        }
+    },
+    "marketplaces": [
+        "marketplacev2"
+    ]
 }

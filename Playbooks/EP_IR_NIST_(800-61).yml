@@ -4,7 +4,7 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: ""
     isoverridable: false
-    itemVersion: 2.0.0
+    itemVersion: 2.0.8
     packID: ""
     packName: SOC Framework
     prevname: ""
@@ -170,7 +170,7 @@ tasks:
       "no":
       - "3"
       "yes":
-      - "15"
+      - "16"
     note: false
     quietmode: 0
     separatecontext: false
@@ -193,29 +193,55 @@ tasks:
           "y": 400
         }
       }
-  "15":
+  "16":
     continueonerrortype: ""
-    id: "15"
+    id: "16"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
     nexttasks:
       '#none#':
       - "3"
     note: false
     quietmode: 0
+    scriptarguments:
+      ShadowMode:
+        simple: ${shadow_mode}
     separatecontext: true
     skipunavailable: false
     task:
       brand: ""
-      id: 0d22027d-5677-4823-87b1-7b943d966d7a
+      description: |-
+        This playbook implements the NIST SP 800-61 Alert Response lifecycle in a structured, repeatable way. It serves as the top-level controller, orchestrating all downstream playbooks and automations that align to the four NIST phases:
+
+        Preparation – Normalize and stage context (entities, products, alert categories) to ensure consistent execution.
+
+        Detection & Analysis – Trigger enrichment and investigation playbooks (endpoint, network, identity, email, cloud) based on normalized entities and mapped MITRE ATT&CK tactics.
+
+        Containment, Eradication, Recovery – Call the appropriate static or product-specific playbooks to contain threats, remove malicious artifacts, and restore systems.
+
+        Post-Alert Activity – Document lessons learned, update playbook routing matrices, and feed back into SOC optimization.
+
+        The design emphasizes modularity and flexibility:
+
+        Each NIST phase is represented as a dedicated section or sub-playbook, making it easy to swap out or extend tools.
+
+        Normalization (Upon Trigger of the EntryPoint) ensures entities (hosts, users, IPs, processes, etc.) are handled consistently.
+
+        This top-level playbook is the backbone of the SOC Framework: it receives the alert trigger, applies the NIST 800-61 model, and routes execution to the appropriate detection, containment, and response sub-playbooks for standardized alert handling
+      id: d14faa64-aa88-4c49-a364-1311e063b01b
       iscommand: false
       name: SOC NIST IR (800-61)
       playbookId: SOC NIST IR (800-61)
       playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: 0d22027d-5677-4823-87b1-7b943d966d7a
+    taskid: d14faa64-aa88-4c49-a364-1311e063b01b
     timertriggers: []
     type: playbook
     view: |-
@@ -229,7 +255,7 @@ version: -1
 view: |-
   {
     "linkLabelsPosition": {
-      "14_15_yes": 0.9
+      "14_16_yes": 0.9
     },
     "paper": {
       "dimensions": {
