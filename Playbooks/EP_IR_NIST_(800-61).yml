@@ -4,7 +4,7 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: ""
     isoverridable: false
-    itemVersion: 2.0.8
+    itemVersion: 2.0.9
     packID: ""
     packName: SOC Framework
     prevname: ""
@@ -211,8 +211,8 @@ tasks:
     quietmode: 0
     scriptarguments:
       ShadowMode:
-        simple: ${shadow_mode}
-    separatecontext: true
+        simple: "true"
+    separatecontext: false
     skipunavailable: false
     task:
       brand: ""
@@ -234,14 +234,14 @@ tasks:
         Normalization (Upon Trigger of the EntryPoint) ensures entities (hosts, users, IPs, processes, etc.) are handled consistently.
 
         This top-level playbook is the backbone of the SOC Framework: it receives the alert trigger, applies the NIST 800-61 model, and routes execution to the appropriate detection, containment, and response sub-playbooks for standardized alert handling
-      id: d14faa64-aa88-4c49-a364-1311e063b01b
+      id: 0350118a-082d-4d81-84c0-1f321aa9b58f
       iscommand: false
       name: SOC NIST IR (800-61)
       playbookId: SOC NIST IR (800-61)
       playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: d14faa64-aa88-4c49-a364-1311e063b01b
+    taskid: 0350118a-082d-4d81-84c0-1f321aa9b58f
     timertriggers: []
     type: playbook
     view: |-
