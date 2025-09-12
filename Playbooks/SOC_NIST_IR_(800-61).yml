@@ -305,23 +305,70 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
     nexttasks:
       '#none#':
       - "7"
     note: false
     quietmode: 0
+    scriptarguments:
+      AutoBlockIndicators:
+        simple: "True"
+      AutoContainment:
+        simple: "True"
+      BlockIndicators:
+        simple: "True"
+      ClearUserSessions:
+        simple: "True"
+      Domain:
+        simple: ${Normalized.domain}
+      EndpointID:
+        simple: ${Normalized.host.id}
+      FileContainment:
+        simple: "True"
+      FileHash:
+        simple: ${Normalized.process.hashes.sha256}
+      FilePath:
+        simple: ${Normalized.process.image.path}
+      FileRemediation:
+        simple: Quarantine
+      HostContainment:
+        simple: "True"
+      IAMUserDomain:
+        simple: ${Normalized.domain}
+      IP:
+        simple: ${Normalized.host.ip}
+      ShadowMode:
+        simple: ${inputs.ShadowMode}
+      UserContainment:
+        simple: "True"
+      UserVerification:
+        simple: "False"
+      Username:
+        simple: Normalized.primary.user
     separatecontext: true
     skipunavailable: false
     task:
       brand: ""
-      id: 16d3f72a-dc4b-4b2b-88a3-7921639aa4c0
+      description: "This playbook handles the main containment actions available with
+        Cortex XSIAM, including the following sub-playbooks:  \n* Containment Plan
+        - Isolate endpoint\n* Containment Plan - Disable account\n* Containment Plan
+        - Quarantine file\n* Containment Plan - Block indicators\n* Containment Plan
+        - Clear user session (currently, the playbook supports only Okta)\n\nNote:
+        The playbook inputs enable manipulating the execution flow. Read the input
+        descriptions for details."
+      id: fe645c23-15ff-4ac0-9b7c-fe8c9686e838
       iscommand: false
       name: SOC Containment Plan
       playbookId: SOC Containment Plan
       playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: 16d3f72a-dc4b-4b2b-88a3-7921639aa4c0
+    taskid: fe645c23-15ff-4ac0-9b7c-fe8c9686e838
     timertriggers: []
     type: playbook
     view: |-
@@ -337,23 +384,53 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
     nexttasks:
       '#none#':
       - "9"
     note: false
     quietmode: 0
+    scriptarguments:
+      AutoEradicate:
+        simple: "True"
+      EndpointID:
+        simple: ${Normalized.host.id}
+      FilePath:
+        simple: ${Normalized.process.image.path}
+      FileRemediation:
+        simple: Delete
+      ProcessID:
+        simple: Normalized.pids
+      ProcessTermination:
+        simple: PID
+      ShadowMode:
+        simple: ${inputs.ShadowMode}
+      UserRemediation:
+        simple: "True"
+      Username:
+        simple: ${Normalized.primary.user}
     separatecontext: true
     skipunavailable: false
     task:
       brand: ""
-      id: 8b671441-78c2-444e-8010-544ad34a9edf
+      description: "This playbook handles all the eradication actions available with
+        Cortex XSIAM, including the following sub-playbooks:\n* Eradication Plan -
+        Reset user password\n* Eradication Plan - Delete file\n* Eradication Plan
+        - Kill process (currently, the playbook supports terminating a process by
+        name)  \n\nNote: The playbook inputs enable manipulating the execution flow.
+        Read the input descriptions for details."
+      id: c7aff9ea-52b9-4194-9c91-550687baa0ad
       iscommand: false
       name: SOC Eradication Plan
       playbookId: SOC Eradication Plan
       playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: 8b671441-78c2-444e-8010-544ad34a9edf
+    taskid: c7aff9ea-52b9-4194-9c91-550687baa0ad
     timertriggers: []
     type: playbook
     view: |-
@@ -369,23 +446,45 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
     nexttasks:
       '#none#':
       - "11"
     note: false
     quietmode: 0
+    scriptarguments:
+      FileHash:
+        simple: ${Normalized.process.hashes.sha256}
+      ShadowMode:
+        simple: ${inputs.ShadowMode}
+      endpointID:
+        simple: ${Normalized.host.id}
+      releaseFile:
+        simple: "false"
+      unIsolateEndpoint:
+        simple: "true"
     separatecontext: true
     skipunavailable: false
     task:
       brand: ""
-      id: 5bbd6f67-982b-46ad-8780-3dc3f2dcf608
+      description: |-
+        This playbook handles all the recovery actions available with Cortex XSIAM, including the following tasks:
+        * Unisolate endpoint
+        * Restore quarantined file
+
+        Note: The playbook inputs enable manipulating the execution flow; read the input descriptions for details.
+      id: 5657b546-5c94-4603-81bb-8f57eccd18cf
       iscommand: false
       name: SOC Recovery Plan
       playbookId: SOC Recovery Plan
       playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: 5bbd6f67-982b-46ad-8780-3dc3f2dcf608
+    taskid: 5657b546-5c94-4603-81bb-8f57eccd18cf
     timertriggers: []
     type: playbook
     view: |-
