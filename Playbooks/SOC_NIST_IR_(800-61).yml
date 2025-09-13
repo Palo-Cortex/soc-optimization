@@ -4,7 +4,7 @@ contentitemexportablefields:
     definitionid: ""
     fromServerVersion: ""
     isoverridable: false
-    itemVersion: 2.0.8
+    itemVersion: 2.0.9
     packID: ""
     packName: SOC Framework
     prevname: ""
@@ -92,7 +92,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "3"
+      - "22"
     note: false
     quietmode: 0
     separatecontext: false
@@ -123,7 +123,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "16"
+      - "21"
     note: false
     quietmode: 0
     separatecontext: false
@@ -143,7 +143,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 390
+          "y": 570
         }
       }
   "5":
@@ -174,7 +174,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 740
+          "y": 920
         }
       }
   "7":
@@ -205,7 +205,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1090
+          "y": 1270
         }
       }
   "9":
@@ -236,7 +236,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1440
+          "y": 1620
         }
       }
   "11":
@@ -264,39 +264,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1790
-        }
-      }
-  "16":
-    continueonerrortype: ""
-    id: "16"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "5"
-    note: false
-    quietmode: 0
-    separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 7444db9e-2fa2-42eb-85f4-19162a107216
-      iscommand: false
-      name: SOC NIST Enrichment
-      playbookId: SOC NIST Enrichment
-      playbooktaskmissingcomponent: null
-      type: playbook
-      version: -1
-    taskid: 7444db9e-2fa2-42eb-85f4-19162a107216
-    timertriggers: []
-    type: playbook
-    view: |-
-      {
-        "position": {
-          "x": 50,
-          "y": 550
+          "y": 1970
         }
       }
   "17":
@@ -349,7 +317,7 @@ tasks:
       UserVerification:
         simple: "False"
       Username:
-        simple: Normalized.primary.user
+        simple: ${Normalized.primary.user}
     separatecontext: true
     skipunavailable: false
     task:
@@ -361,21 +329,21 @@ tasks:
         - Clear user session (currently, the playbook supports only Okta)\n\nNote:
         The playbook inputs enable manipulating the execution flow. Read the input
         descriptions for details."
-      id: fe645c23-15ff-4ac0-9b7c-fe8c9686e838
+      id: 05937f65-53b9-474b-93e2-ad173ef974ab
       iscommand: false
       name: SOC Containment Plan
       playbookId: SOC Containment Plan
       playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: fe645c23-15ff-4ac0-9b7c-fe8c9686e838
+    taskid: 05937f65-53b9-474b-93e2-ad173ef974ab
     timertriggers: []
     type: playbook
     view: |-
       {
         "position": {
           "x": 50,
-          "y": 910
+          "y": 1090
         }
       }
   "18":
@@ -437,7 +405,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1260
+          "y": 1440
         }
       }
   "19":
@@ -491,7 +459,93 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1610
+          "y": 1790
+        }
+      }
+  "21":
+    continueonerrortype: ""
+    id: "21"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      email:
+        simple: ${Normalized.primary.recipients}
+      endpointID:
+        simple: ${Normalized.host.id}
+      endpointIP:
+        simple: ${Normalized.host.ip}
+      hostname:
+        simple: ${Normalized.host.name}
+      sha256:
+        simple: ${Normalized.file.hashes.sha256}
+      url:
+        simple: ${Normalized.url.url}
+      username:
+        simple: ${Normalized.user.user}
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Detection & Analysis (Endpoint) — chooses actions based on normalized
+        entities and alert categories.
+      id: 0306c875-1a60-4ea7-8c8a-fd3986668aee
+      iscommand: false
+      name: SOC NIST Detection & Analysis
+      playbookId: SOC NIST Detection & Analysis_NMILES
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 0306c875-1a60-4ea7-8c8a-fd3986668aee
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 740
+        }
+      }
+  "22":
+    continueonerrortype: ""
+    id: "22"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 45237cd1-6c2a-4f83-8d11-90fa3a510df6
+      iscommand: false
+      name: SOC Ready Ticketing
+      playbookId: SOC Ready Ticketing
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 45237cd1-6c2a-4f83-8d11-90fa3a510df6
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 400
         }
       }
 version: -1
@@ -500,7 +554,7 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 1800,
+        "height": 1980,
         "width": 380,
         "x": 50,
         "y": 50
