@@ -1,8 +1,8 @@
 id: SOC NIST IR (800-61)
-version: 3
+version: 9
 contentitemexportablefields:
   contentitemfields:
-    packID: SOCOptimization
+    packID: ""
     packName: SOC Framework
     itemVersion: 2.1.0
     fromServerVersion: ""
@@ -38,10 +38,10 @@ starttaskid: "0"
 tasks:
   "0":
     id: "0"
-    taskid: f2d8507e-c7b1-46a3-8716-3084a647eb5c
+    taskid: 4b81322f-09e6-4306-83e6-e3f95b45ec8c
     type: start
     task:
-      id: f2d8507e-c7b1-46a3-8716-3084a647eb5c
+      id: 4b81322f-09e6-4306-83e6-e3f95b45ec8c
       version: -1
       name: ""
       iscommand: false
@@ -68,10 +68,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "1":
     id: "1"
-    taskid: 60a01e78-83c7-4ebc-b3ab-dbd880d88e5e
+    taskid: 707a43f2-ce32-449f-894f-a0516e802be0
     type: title
     task:
-      id: 60a01e78-83c7-4ebc-b3ab-dbd880d88e5e
+      id: 707a43f2-ce32-449f-894f-a0516e802be0
       version: -1
       name: Preparation
       type: title
@@ -99,10 +99,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "3":
     id: "3"
-    taskid: 5bd9fd01-9c9c-40af-93c0-eff89b121aef
+    taskid: a8a79a1d-db10-42e4-8469-335dc3f7afef
     type: title
     task:
-      id: 5bd9fd01-9c9c-40af-93c0-eff89b121aef
+      id: a8a79a1d-db10-42e4-8469-335dc3f7afef
       version: -1
       name: Detection & Analysis
       type: title
@@ -130,10 +130,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "5":
     id: "5"
-    taskid: 48386826-9711-4307-8b9d-3e0a03407ad0
+    taskid: 82a21dcd-8822-4211-8370-bb5044a2661b
     type: title
     task:
-      id: 48386826-9711-4307-8b9d-3e0a03407ad0
+      id: 82a21dcd-8822-4211-8370-bb5044a2661b
       version: -1
       name: Containment
       type: title
@@ -161,10 +161,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "6":
     id: "6"
-    taskid: 0b33efad-1b7b-4100-a193-49d26bdd3ac6
+    taskid: 01c4569f-a60d-4e4c-806d-01ad8462b59c
     type: playbook
     task:
-      id: 0b33efad-1b7b-4100-a193-49d26bdd3ac6
+      id: 01c4569f-a60d-4e4c-806d-01ad8462b59c
       version: -1
       name: SOC Containment Plan
       description: "This playbook handles the main containment actions available with
@@ -244,10 +244,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "7":
     id: "7"
-    taskid: 7fe2fa42-6f0a-4588-8da1-ff4fb88d8fbb
+    taskid: 467e83fc-5ad9-43fc-8808-94358e3e7c52
     type: title
     task:
-      id: 7fe2fa42-6f0a-4588-8da1-ff4fb88d8fbb
+      id: 467e83fc-5ad9-43fc-8808-94358e3e7c52
       version: -1
       name: Eradication
       type: title
@@ -275,10 +275,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "8":
     id: "8"
-    taskid: 944b08f7-251c-4f39-a5c9-dead91b70697
+    taskid: 63c6f336-5968-4292-8ccd-2cd8ddd2b168
     type: playbook
     task:
-      id: 944b08f7-251c-4f39-a5c9-dead91b70697
+      id: 63c6f336-5968-4292-8ccd-2cd8ddd2b168
       version: -1
       name: SOC Eradication Plan
       description: "This playbook handles all the eradication actions available with
@@ -337,10 +337,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "9":
     id: "9"
-    taskid: f78e1862-c25b-45ad-9bff-fdab1d2b3355
+    taskid: 7076683a-109c-4f3e-8714-c729eb5ef6ae
     type: title
     task:
-      id: f78e1862-c25b-45ad-9bff-fdab1d2b3355
+      id: 7076683a-109c-4f3e-8714-c729eb5ef6ae
       version: -1
       name: Recovery
       type: title
@@ -368,10 +368,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "10":
     id: "10"
-    taskid: 9946d995-11fb-424d-afa0-2547e4d459f1
+    taskid: 349962e7-8c92-49ef-8beb-03e535b537c3
     type: playbook
     task:
-      id: 9946d995-11fb-424d-afa0-2547e4d459f1
+      id: 349962e7-8c92-49ef-8beb-03e535b537c3
       version: -1
       name: SOC Recovery Plan
       description: |-
@@ -422,10 +422,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "11":
     id: "11"
-    taskid: 8b6dab24-5e99-4dbe-88db-034169678fda
+    taskid: 0f6e6bd7-9427-4585-85ab-a6455d741e78
     type: title
     task:
-      id: 8b6dab24-5e99-4dbe-88db-034169678fda
+      id: 0f6e6bd7-9427-4585-85ab-a6455d741e78
       version: -1
       name: Done
       type: title
@@ -450,12 +450,14 @@ tasks:
     isautoswitchedtoquietmode: false
   "12":
     id: "12"
-    taskid: 4f9dcd50-1eea-48e8-82d7-1ab3774fb40f
+    taskid: 2ad12d25-e825-4fce-a9cc-e847f21a3cc6
     type: playbook
     task:
-      id: 4f9dcd50-1eea-48e8-82d7-1ab3774fb40f
+      id: 2ad12d25-e825-4fce-a9cc-e847f21a3cc6
       version: -1
       name: SOC NIST Detection & Analysis
+      description: Detection & Analysis (Endpoint) — chooses actions based on normalized
+        entities and alert categories.
       playbookName: SOC NIST Detection & Analysis
       type: playbook
       iscommand: false
@@ -464,8 +466,28 @@ tasks:
     nexttasks:
       '#none#':
       - "5"
+    scriptarguments:
+      email:
+        simple: ${Normalized.primary.user_email}
+      endpointID:
+        simple: ${Normalized.host.id}
+      endpointIP:
+        simple: ${Normalized.host.ip}
+      hostname:
+        simple: ${Normalized.host.name}
+      sha256:
+        simple: ${Normalized.processes.hashes.sha256}
+      url:
+        simple: ${Normalized.url.url}
+      username:
+        simple: ${Normalized.primary.user}
     separatecontext: true
     continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 0
     view: |-
       {
         "position": {
