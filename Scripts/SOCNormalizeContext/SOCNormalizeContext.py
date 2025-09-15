@@ -1,3 +1,5 @@
+import demistomock as demisto  # noqa: F401
+from CommonServerPython import *  # noqa: F401
 demisto.debug('pack name = SOC Framework, pack version = 2.0.0')
 
 # SOC_NormalizeContext_v11 (Readable + PID normalization)
