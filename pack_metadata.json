@@ -21,6 +21,7 @@
     "dependencies": {
         "SOC Common Playbooks": {
             "mandatory": true,
+            "minVersion": "2.7.18",
             "display_name": "SOC Common Playbooks"
         }
     },
