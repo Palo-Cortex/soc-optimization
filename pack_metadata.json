@@ -1,5 +1,6 @@
 {
     "name": "SOC Framework",
+    "id": "soc-optimization",
     "description": "This contents the content used to leverage processes that the Palo SOC uses including: Playbooks, integrations, layouts, etc.",
     "support": "xsoar",
     "currentVersion": "2.1.4",
