@@ -19,6 +19,9 @@ outputSections:
 outputs: []
 quiet: true
 starttaskid: "0"
+tags:
+- SOC
+- SOC_Framework
 tasks:
   "0":
     continueonerrortype: ""

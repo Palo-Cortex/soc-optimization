@@ -1,0 +1,28 @@
+args:
+- defaultValue: ${inputs.ShadowMode}
+  name: ShadowMode
+  required: true
+commonfields:
+  id: 'ShadowModeRouter'
+  version: -1
+dockerimage: demisto/python3:3.12.11.4508456
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: ShadowModeRouter
+outputs:
+- contextPath: Full Run
+- contextPath: Shadow Mode
+  type: unknown
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: ''
+scripttarget: 0
+sourcescripid: ShadowModeRouter
+subtype: python3
+tags:
+- SOC
+- SOC_Framework
+- Condition
+type: python

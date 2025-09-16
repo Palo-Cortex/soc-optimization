@@ -5,10 +5,31 @@ the [xsiam-pov-automation](https://github.com/annabarone/xsiam-pov-automation/tr
 manual steps still need to be done: 
 
 ---
+## Quick Start
+1. **Enable Auto Triage Job**
+   * Choose Auto Triage and Enable
+   * Refresh page and look for Running or Completed
+2. **Configure Starring**
+   * Star Issues on Medium or Higher + has MITRE Tactic
+![Starring_NIST_IR.png](images/Starring_NIST_IR.png)
+3. **Configure Automation Trigger**
+   * NIST Incident Response Flow (800-61)
+     * Trigger playbook "EP_IR_NIST(800-61)" on starred Alerts
+     ![Automation_Trigger_NIST_IR.png](images/Automation_Trigger_NIST_IR.png)
+--- 
+## What Next?
+1. XSIAM SOC Value Metrics Dashboard([Value Metrics](Documentation/Value_Metrics.md))
+   * These require alerts with triggered playbooks tasks.
+2. Customize Value Metrics tasks or playbooks "Use Cases" ([setValueTags.md](Documentation/setValueTags.md))
+3. Observe Playbooks running in Issues table.
+---
 
-## Manual Configuration
+## Troubleshooting
+* Check xsiam_playbookmetrics_raw exists -- Once alerts start to flow and automation get triggered the JOB will start collecting metrics based on the JOB run interval.
 
-### 1 - Enable Job - Auto Triage 
+### Manual Configuration
+
+#### 1 - Enable Job - Auto Triage 
 
 To guarantee the configuration does not interfere with existing tenants without the SC/DC’s understanding, 
 we have disabled the auto triage job by default. Once you are confident that the starred alerts for your 
@@ -20,61 +41,7 @@ tenant are set up properly, please enable the job.
 
 3. Click **Enable**
 
-
-### 2 - 🧮 Configuring Value Metrics via `value_tags` Lookup Table
-
-The automation efficiency metrics are powered by a configurable lookup table: **`value_tags`**. This table defines how XSIAM calculates time saved and task categorization in the "XSIAM Value Metrics" dashboard.
-
-To configure the value tags:
-
-1. Navigate to: **Settings → Data Management → value_tags → Edit**.
-2. Populate the table with entries of two types: **Use Cases** and **Tasks**.
-
-#### 🧩 Use Case Configuration
-
-Use Cases represent full playbooks and their impact. They are identified with the `Category` field set to `use_case`.
-
-| Field       | Description                                                                  |
-|-------------|------------------------------------------------------------------------------|
-| Category    | Must be `use_case`                                                           |
-| Tag         | Label used in dashboards (e.g., "Auto Triage", "Remediate User")             |
-| Time        | Time (in minutes) it would take an analyst to complete the full playbook     |
-| PlaybookID  | The playbook's name or UUID (e.g., `Upon Trigger`)                           |
-| Taskname    | *Not relevant for use_case*                                                  |
-| Product     | *Not relevant for use_case*                                                  |
-| Vendor      | *Not relevant for use_case*                                                  |
-
-> ✅ **Note:** By default, the `Upon Trigger` playbook is included and tracked.
-
-#### 🔧 Task Configuration
-
-Tasks represent atomic actions or decisions within playbooks, such as enrichment, lookups, or remediation steps.
-
-| Field       | Description                                                                  |
-|-------------|------------------------------------------------------------------------------|
-| Category    | Describes the nature of the task (e.g., enrichment, remediation)             |
-| Tag         | Label used in dashboards (e.g., "IP Reputation", "User Disable")             |
-| Time        | Estimated time (in minutes) to perform the task manually                     |
-| Taskname    | Human-friendly task label                                                    |
-| ScriptID    | The name of the command or script used (e.g., `ip`, `panorama-quarantine`)   |
-| Product     | The security product used (e.g., Cortex XDR, PAN NGFW, VirusTotal)           |
-| Vendor      | Vendor associated with the product (e.g., Palo Alto Networks, CrowdStrike)   |
-
-> 🛠️ These fields enable granular analysis of automation usage across vendors and products.
-
-### 3 - 🔄 Updating the `value_tags` Table
-
-- **Initial Setup:** The SOC Optimization Framework loads a baseline `value_tags` dataset.
-- **Ongoing Updates:** To apply updates:
-  - Download the latest dataset from the **Dataset Management** page.
-  - Manually import it to overwrite your current `value_tags` table.
-
-> ⚠️ **Important:** Updates made via the **Demisto SDK** **do not** update the `value_tags` table, to avoid unintentionally overwriting custom metrics.
-
 ---
-
-## Troubleshooting
-
 ### Errored Jobs
 
 If either of the "_Auto Triage_" or "_Collect Playbook Metrics_" jobs show as _**Error**_ for their _Last Run status_ as seen in 

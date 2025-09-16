@@ -6,7 +6,6 @@ quiet: true
 starttaskid: "0"
 tags:
 - SOC
-- PoV
 - SOC_Framework
 tasks:
   "0":

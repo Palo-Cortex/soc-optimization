@@ -1,26 +1,49 @@
+adopted: true
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    isoverridable: false
+    itemVersion: 1.7.0
+    packID: ""
+    packName: SOC Framework
+    prevname: ""
+    supportedModules: []
+    toServerVersion: ""
 dirtyInputs: true
-id: 'Close Incidents'
+id: Foundation - Playbook Router
 inputSections:
 - description: Generic group for inputs
   inputs:
-  - incident_id
+  - listName
+  - keyName
+  - EntryPoint
   name: General (Inputs group)
 inputs:
 - description: ""
-  key: incident_id
+  key: listName
   playbookInputQuery: null
   required: true
   value: {}
-name: Close Incidents
+- description: ""
+  key: keyName
+  playbookInputQuery: null
+  required: true
+  value: {}
+- description: ""
+  key: EntryPoint
+  playbookInputQuery: null
+  required: false
+  value: {}
+name: Foundation - Playbook Router
 outputSections:
 - description: Generic group for outputs
   name: General (Outputs group)
   outputs: []
 outputs: []
-quiet: true
+sourceplaybookid: Foundation - Load Configuration
 starttaskid: "0"
 tags:
-- SOC
 - SOC_Framework
 tasks:
   "0":
@@ -31,71 +54,71 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "9"
+      - "2"
     note: false
     quietmode: 0
     separatecontext: false
     skipunavailable: false
     task:
       brand: ""
-      id: e3a4ffd5-adb5-49d4-8e54-715805207555
+      id: 10469017-1df8-47d0-8423-c1cda3daec75
       iscommand: false
       name: ""
+      playbooktaskmissingcomponent: null
       version: -1
-    taskid: e3a4ffd5-adb5-49d4-8e54-715805207555
+    taskid: 10469017-1df8-47d0-8423-c1cda3daec75
     timertriggers: []
     type: start
     view: |-
       {
         "position": {
-          "x": 195.25,
+          "x": 265,
           "y": 50
         }
       }
-  "1":
+  "2":
     continueonerror: true
     continueonerrortype: errorPath
-    id: "1"
+    id: "2"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
       '#error#':
-      - "8"
+      - "4"
       '#none#':
-      - "6"
+      - "3"
     note: false
     quietmode: 0
     scriptarguments:
-      body:
-        simple: '{"request_data":{"incident_id":"${inputs.incident_id}","update_data":{"status":"resolved_other","resolve_comment":"Resolved
-          by the Auto Triage Job"}}}'
-      uri:
-        simple: /public_api/v1/incidents/update_incident
+      entrypoint_name:
+        simple: ${inputs.EntryPoint}
     separatecontext: false
     skipunavailable: false
     task:
       brand: ""
-      description: send HTTP POST request.
-      id: 958e2c9a-4f9e-41f8-a617-1ca32f65d965
-      iscommand: true
-      name: Close Incident
-      script: '|||core-api-post'
+      description: This script will read the PlaybookDepoloymentMatrix to see the
+        current playbook running should be given the EntryPoint Playbooks name.
+      id: 954f313b-96a3-436e-82a5-d7cdec693902
+      iscommand: false
+      name: Set Configuration
+      playbooktaskmissingcomponent: null
+      script: EntryPointGBState
       type: regular
       version: -1
-    taskid: 958e2c9a-4f9e-41f8-a617-1ca32f65d965
+    taskid: 954f313b-96a3-436e-82a5-d7cdec693902
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 380
+          "x": 265,
+          "y": 210
         }
       }
-  "6":
+  "3":
     continueonerrortype: ""
-    id: "6"
+    id: "3"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
@@ -105,90 +128,49 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 30aae18e-e9ed-45b0-8572-85c9a7ca5b0e
+      id: eca05bd6-97e7-4b72-8309-dbb33900284d
       iscommand: false
-      name: Fin
+      name: Done
+      playbooktaskmissingcomponent: null
       type: title
       version: -1
-    taskid: 30aae18e-e9ed-45b0-8572-85c9a7ca5b0e
+    taskid: eca05bd6-97e7-4b72-8309-dbb33900284d
     timertriggers: []
     type: title
     view: |-
       {
         "position": {
-          "x": 195.25,
-          "y": 720
+          "x": 480,
+          "y": 385
         }
       }
-  "8":
+  "4":
     continueonerrortype: ""
-    id: "8"
+    id: "4"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
-    nexttasks:
-      '#none#':
-      - "6"
     note: false
     quietmode: 0
     separatecontext: true
     skipunavailable: false
     task:
       brand: ""
-      id: 70396ca7-33b0-4663-833f-a495a53c1793
+      id: 2d9a5b14-18ee-460c-8593-96df28b90637
       iscommand: false
       name: Foundation - Error Handling
       playbookId: Foundation - Error Handling
+      playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: 70396ca7-33b0-4663-833f-a495a53c1793
+    taskid: 2d9a5b14-18ee-460c-8593-96df28b90637
     timertriggers: []
     type: playbook
     view: |-
       {
         "position": {
-          "x": 340.5,
-          "y": 550
-        }
-      }
-  "9":
-    conditions:
-    - condition:
-      - - left:
-            iscontext: true
-            value:
-              simple: inputs.incident_id
-          operator: isNotEmpty
-      label: "yes"
-    continueonerrortype: ""
-    id: "9"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#default#':
-      - "8"
-      "yes":
-      - "1"
-    note: false
-    quietmode: 0
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: b20b3f16-cdd7-478f-a3e1-30e50f48027d
-      iscommand: false
-      name: Is there an Incident ID?
-      type: condition
-      version: -1
-    taskid: b20b3f16-cdd7-478f-a3e1-30e50f48027d
-    timertriggers: []
-    type: condition
-    view: |-
-      {
-        "position": {
-          "x": 195.25,
-          "y": 210
+          "x": 50,
+          "y": 380
         }
       }
 version: -1
@@ -197,11 +179,10 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 730,
-        "width": 671.5,
+        "height": 400,
+        "width": 810,
         "x": 50,
         "y": 50
       }
     }
   }
-adopted: true

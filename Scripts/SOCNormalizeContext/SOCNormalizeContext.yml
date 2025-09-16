@@ -1,0 +1,18 @@
+commonfields:
+  id: 'SOC_NormalizeContext'
+  version: -1
+dockerimage: demisto/python3:3.12.11.4508456
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: SOC_NormalizeContext
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: ''
+scripttarget: 0
+subtype: python3
+tags:
+- SOC
+- SOC_Framework
+type: python
