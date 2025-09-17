@@ -18,6 +18,7 @@ inputSections:
   name: General (Inputs group)
 inputs: []
 name: Foundation - Upon Trigger
+fromversion: 5.0.0
 outputSections:
 - description: Generic group for outputs
   name: General (Outputs group)

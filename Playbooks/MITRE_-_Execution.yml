@@ -1,6 +1,7 @@
 id: 'MITRE - Execution'
 inputs: []
 name: MITRE - Execution
+fromversion: 5.0.0
 outputs: []
 quiet: true
 sourceplaybookid: 'MITRE - Initial Access'

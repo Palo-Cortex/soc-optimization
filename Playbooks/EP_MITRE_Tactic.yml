@@ -29,6 +29,7 @@ inputs:
   value:
     simple: EP_InitialAccess
 name: EP_MITRE_Tactic
+fromversion: 5.0.0
 outputSections:
 - description: Generic group for outputs
   name: General (Outputs group)

@@ -3,6 +3,7 @@ dirtyInputs: true
 id: Foundation - Dedup
 inputs: []
 name: Foundation - Dedup
+fromversion: 5.0.0
 outputs: []
 quiet: true
 sourceplaybookid: Foundation - Upon Trigger

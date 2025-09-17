@@ -12,6 +12,7 @@ inputs:
   required: false
   value: {}
 name: Get Alert Tasks and Store to Dataset
+fromversion: 5.0.0
 outputSections:
 - description: Generic group for outputs
   name: General (Outputs group)

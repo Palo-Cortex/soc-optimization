@@ -13,6 +13,7 @@ contentitemexportablefields:
     supportedModules: []
 vcShouldKeepItemLegacyProdMachine: false
 name: EP_IR_NIST (800-61)
+fromversion: 5.0.0
 description: |-
   This Entry Point playbook acts as the first stage of the alert response pipeline. It is designed to be assigned directly to the automation trigger so that every new alert entering the SOC Framework is handled in a standardized way.
 

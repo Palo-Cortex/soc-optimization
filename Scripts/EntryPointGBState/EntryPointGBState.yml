@@ -11,6 +11,7 @@ enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: EntryPointGBState
+fromversion: 5.0.0
 pswd: ""
 runas: DBotWeakRole
 runonce: false

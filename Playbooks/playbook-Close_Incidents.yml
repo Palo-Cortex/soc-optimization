@@ -12,6 +12,7 @@ inputs:
   required: true
   value: {}
 name: Close Incidents
+fromversion: 6.5.0
 outputSections:
 - description: Generic group for outputs
   name: General (Outputs group)
