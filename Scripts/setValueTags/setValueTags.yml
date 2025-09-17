@@ -44,6 +44,7 @@ enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: setValueTags
+fromversion: 5.0.0
 pswd: ""
 runas: DBotWeakRole
 runonce: false

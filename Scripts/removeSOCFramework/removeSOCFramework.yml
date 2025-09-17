@@ -6,6 +6,7 @@ enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: removeSOCFramework
+fromversion: 5.0.0
 pswd: ""
 runas: DBotWeakRole
 runonce: false

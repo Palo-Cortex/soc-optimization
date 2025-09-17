@@ -10,6 +10,7 @@ enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: ShadowModeRouter
+fromversion: 5.0.0
 outputs:
 - contextPath: Full Run
 - contextPath: Shadow Mode

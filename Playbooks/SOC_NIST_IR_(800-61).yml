@@ -13,6 +13,7 @@ contentitemexportablefields:
     supportedModules: []
 vcShouldKeepItemLegacyProdMachine: false
 name: SOC NIST IR (800-61)
+fromversion: 5.0.0
 description: |-
   This playbook implements the NIST SP 800-61 Alert Response lifecycle in a structured, repeatable way. It serves as the top-level controller, orchestrating all downstream playbooks and automations that align to the four NIST phases:
 

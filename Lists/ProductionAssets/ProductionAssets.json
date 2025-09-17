@@ -12,6 +12,7 @@
     "itemVersion": "",
     "locked": false,
     "name": "ProductionAssets",
+    "fromVersion": "6.5.0",
     "nameLocked": false,
     "packID": "",
     "packName": "",

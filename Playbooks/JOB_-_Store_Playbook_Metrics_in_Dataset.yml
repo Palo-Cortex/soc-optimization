@@ -2,6 +2,7 @@ dirtyInputs: true
 id: JOB - Store Playbook Metrics in Dataset
 inputs: []
 name: JOB - Store Playbook Metrics in Dataset
+fromversion: 5.0.0
 outputs: []
 quiet: true
 starttaskid: "0"

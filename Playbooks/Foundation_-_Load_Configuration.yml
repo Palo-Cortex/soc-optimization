@@ -18,6 +18,7 @@ inputs:
   required: true
   value: {}
 name: Foundation - Load Configuration
+fromversion: 5.0.0
 outputSections:
 - description: Generic group for outputs
   name: General (Outputs group)

@@ -18,6 +18,7 @@ configuration:
 description: This integration allows for posting data to the XSIAM using system-level send_events_to_xsiam so it can be queried via XQL
 display: System XQL HTTP Collector
 name: System XQL HTTP Collector
+fromversion: 5.0.0
 script:
   commands:
   - arguments:

@@ -6,6 +6,7 @@ enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: SOC_NormalizeContext
+fromversion: 5.0.0
 pswd: ""
 runas: DBotWeakRole
 runonce: false

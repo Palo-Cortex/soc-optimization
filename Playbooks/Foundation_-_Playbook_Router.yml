@@ -36,6 +36,7 @@ inputs:
   required: false
   value: {}
 name: Foundation - Playbook Router
+fromversion: 5.0.0
 outputSections:
 - description: Generic group for outputs
   name: General (Outputs group)

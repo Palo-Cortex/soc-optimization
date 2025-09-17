@@ -10,6 +10,7 @@
     "itemVersion": "",
     "locked": false,
     "name": "Job_Utility_Bulk_Alert_Closer_ID_List",
+    "fromVersion": "6.5.0",
     "nameLocked": false,
     "packID": "",
     "packName": "",
