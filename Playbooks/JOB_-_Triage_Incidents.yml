@@ -1,36 +1,38 @@
-dirtyInputs: true
-id: JOB - Triage Incidents
-inputs: []
-name: JOB - Triage Incidents
-fromversion: 5.0.0
-outputs: []
-quiet: true
-starttaskid: "0"
+id: JOB - Triage Alerts
+version: 5
+contentitemexportablefields:
+  contentitemfields:
+    packID: soc-optimization
+    packName: SOC Framework
+    itemVersion: 2.1.5
+    fromServerVersion: 5.0.0
+    toServerVersion: ""
+    definitionid: ""
+    prevname: ""
+    isoverridable: false
+    supportedModules: []
+vcShouldKeepItemLegacyProdMachine: false
+name: JOB - Triage Alerts
 tags:
 - SOC_Framework
+starttaskid: "0"
 tasks:
   "0":
-    continueonerrortype: ""
     id: "0"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
+    taskid: dc73a190-a2e4-4e6e-8a57-badb11c62e1b
+    type: start
+    task:
+      id: dc73a190-a2e4-4e6e-8a57-badb11c62e1b
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
-    note: false
-    quietmode: 0
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: dc73a190-a2e4-4e6e-8a57-badb11c62e1b
-      iscommand: false
-      name: ""
-      version: -1
-    taskid: dc73a190-a2e4-4e6e-8a57-badb11c62e1b
-    timertriggers: []
-    type: start
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -38,43 +40,44 @@ tasks:
           "y": 50
         }
       }
-  "1":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "1"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "1":
+    id: "1"
+    taskid: 993570fa-2548-4e9c-af63-478189b6c22b
+    type: regular
+    task:
+      id: 993570fa-2548-4e9c-af63-478189b6c22b
+      version: -1
+      name: Get Alerts
+      description: send HTTP POST request.
+      script: '|||core-api-post'
+      type: regular
+      iscommand: true
+      brand: ""
+      playbooktaskmissingcomponent:
     nexttasks:
       '#error#':
       - "6"
       '#none#':
       - "5"
-    note: false
-    quietmode: 0
     scriptarguments:
       body:
         simple: '{"request_data" : {"filters" : [{"field": "status","operator": "eq","value":
           "New"},{"operator": "lte", "value": ${TimeNowUnix}, "field": "modification_time"},{"operator":
-          "eq", "value": "false", "field": "starred"}]}}'
+          "eq", "value": false, "field": "starred"}]}}'
       extend-context:
         simple: Found=.
       uri:
         simple: /public_api/v1/incidents/get_incidents
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: send HTTP POST request.
-      id: 570ac39c-c7e3-4d62-8fd8-c99e56310eab
-      iscommand: true
-      name: Get Incidents
-      script: '|||core-api-post'
-      type: regular
-      version: -1
-    taskid: 570ac39c-c7e3-4d62-8fd8-c99e56310eab
-    timertriggers: []
-    type: regular
+    continueonerror: true
+    continueonerrortype: errorPath
     view: |-
       {
         "position": {
@@ -82,38 +85,39 @@ tasks:
           "y": 550
         }
       }
-  "3":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "3"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "3":
+    id: "3"
+    taskid: bd09f205-83bf-4378-b50b-44a476e5f1ab
+    type: regular
+    task:
+      id: bd09f205-83bf-4378-b50b-44a476e5f1ab
+      version: -1
+      name: Get Time
+      description: |
+        Retrieves the current date and time.
+      scriptName: GetTime
+      type: regular
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
     nexttasks:
       '#error#':
       - "6"
       '#none#':
       - "1"
-    note: false
-    quietmode: 0
     scriptarguments:
       hoursAgo:
         simple: ${SOCOptimizeConfig.[0].fields.TriageWindowHours}
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: |
-        Retrieves the current date and time.
-      id: bd09f205-83bf-4378-b50b-44a476e5f1ab
-      iscommand: false
-      name: Get Time
-      script: GetTime
-      type: regular
-      version: -1
-    taskid: bd09f205-83bf-4378-b50b-44a476e5f1ab
-    timertriggers: []
-    type: regular
+    continueonerror: true
+    continueonerrortype: errorPath
     view: |-
       {
         "position": {
@@ -121,41 +125,42 @@ tasks:
           "y": 380
         }
       }
-  "5":
-    conditions:
-    - condition:
-      - - left:
-            iscontext: true
-            value:
-              simple: Found.response.reply.incidents.incident_id
-          operator: isExists
-          right:
-            value: {}
-      label: "yes"
-    continueonerrortype: ""
-    id: "5"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "5":
+    id: "5"
+    taskid: 11786de0-5a13-412d-8a8a-1ab69922d510
+    type: condition
+    task:
+      id: 11786de0-5a13-412d-8a8a-1ab69922d510
+      version: -1
+      name: Alerts to Triage?
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "9"
       "yes":
       - "8"
-    note: false
-    quietmode: 0
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 11786de0-5a13-412d-8a8a-1ab69922d510
-      iscommand: false
-      name: Incidents to Triage?
-      type: condition
-      version: -1
-    taskid: 11786de0-5a13-412d-8a8a-1ab69922d510
-    timertriggers: []
-    type: condition
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isExists
+          left:
+            value:
+              simple: Found.response.reply.incidents.incident_id
+            iscontext: true
+          right:
+            value: {}
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -163,30 +168,31 @@ tasks:
           "y": 720
         }
       }
-  "6":
-    continueonerrortype: ""
-    id: "6"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "6":
+    id: "6"
+    taskid: 907d148a-f017-4c11-8d8d-b65ee05375b9
+    type: playbook
+    task:
+      id: 907d148a-f017-4c11-8d8d-b65ee05375b9
+      version: -1
+      name: Foundation - Error Handling
+      playbookName: Foundation - Error Handling
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "9"
-    note: false
-    quietmode: 0
     separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 907d148a-f017-4c11-8d8d-b65ee05375b9
-      iscommand: false
-      name: Foundation - Error Handling
-      playbookId: Foundation - Error Handling
-      type: playbook
-      version: -1
-    taskid: 907d148a-f017-4c11-8d8d-b65ee05375b9
-    timertriggers: []
-    type: playbook
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -194,26 +200,27 @@ tasks:
           "y": 720
         }
       }
-  "7":
-    continueonerrortype: ""
-    id: "7"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
     note: false
-    quietmode: 0
-    separatecontext: false
+    timertriggers: []
+    ignoreworker: false
     skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "7":
+    id: "7"
+    taskid: 6ae6dff9-3719-4b2e-8758-d1cf54a24c13
+    type: title
     task:
-      brand: ""
       id: 6ae6dff9-3719-4b2e-8758-d1cf54a24c13
-      iscommand: false
+      version: -1
       name: Done
       type: title
-      version: -1
-    taskid: 6ae6dff9-3719-4b2e-8758-d1cf54a24c13
-    timertriggers: []
-    type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    separatecontext: false
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -221,39 +228,40 @@ tasks:
           "y": 1230
         }
       }
-  "8":
-    continueonerrortype: ""
-    id: "8"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
-    loop:
-      exitCondition: ""
-      forEach: true
+    isautoswitchedtoquietmode: false
+  "8":
+    id: "8"
+    taskid: 481cd8d5-7bca-4923-8cd0-77d48d883e8f
+    type: playbook
+    task:
+      id: 481cd8d5-7bca-4923-8cd0-77d48d883e8f
+      version: -1
+      name: Close Alerts
+      playbookName: Close Alerts
+      type: playbook
       iscommand: false
-      max: 100
-      wait: 1
+      brand: ""
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "9"
-    note: false
-    quietmode: 0
     scriptarguments:
       incident_id:
         simple: ${Found.response.reply.incidents.incident_id}
     separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 481cd8d5-7bca-4923-8cd0-77d48d883e8f
+    continueonerrortype: ""
+    loop:
       iscommand: false
-      name: Close Incidents
-      playbookId: 'Close Incidents'
-      type: playbook
-      version: -1
-    taskid: 481cd8d5-7bca-4923-8cd0-77d48d883e8f
-    timertriggers: []
-    type: playbook
+      exitCondition: ""
+      wait: 1
+      max: 100
+      forEach: true
     view: |-
       {
         "position": {
@@ -261,31 +269,32 @@ tasks:
           "y": 890
         }
       }
-  "9":
-    continueonerrortype: ""
-    id: "9"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "9":
+    id: "9"
+    taskid: ecad854e-0b30-4494-8c61-183d70ee7952
+    type: regular
+    task:
+      id: ecad854e-0b30-4494-8c61-183d70ee7952
+      version: -1
+      name: Close Job
+      description: commands.local.cmd.close.inv
+      script: Builtin|||closeInvestigation
+      type: regular
+      iscommand: true
+      brand: Builtin
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "7"
-    note: false
-    quietmode: 0
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: Builtin
-      description: commands.local.cmd.close.inv
-      id: ecad854e-0b30-4494-8c61-183d70ee7952
-      iscommand: true
-      name: Close Job
-      script: Builtin|||closeInvestigation
-      type: regular
-      version: -1
-    taskid: ecad854e-0b30-4494-8c61-183d70ee7952
-    timertriggers: []
-    type: regular
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -293,40 +302,41 @@ tasks:
           "y": 1060
         }
       }
-  "10":
-    continueonerrortype: ""
-    id: "10"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
-    loop:
-      exitCondition: ""
+    isautoswitchedtoquietmode: false
+  "10":
+    id: "10"
+    taskid: 926663cb-18a9-4e04-bd55-69fb51d83e10
+    type: playbook
+    task:
+      id: 926663cb-18a9-4e04-bd55-69fb51d83e10
+      version: -1
+      name: Foundation - Load Configuration
+      playbookName: Foundation - Load Configuration
+      type: playbook
       iscommand: false
-      max: 0
-      wait: 1
+      brand: ""
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "3"
-    note: false
-    quietmode: 0
     scriptarguments:
       keyName:
         simple: SOCOptimizeConfig
       listName:
         simple: SOCOptimizationConfig
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 926663cb-18a9-4e04-bd55-69fb51d83e10
+    continueonerrortype: ""
+    loop:
       iscommand: false
-      name: Foundation - Load Configuration
-      playbookId: 'Foundation - Load Configuration'
-      type: playbook
-      version: -1
-    taskid: 926663cb-18a9-4e04-bd55-69fb51d83e10
-    timertriggers: []
-    type: playbook
+      exitCondition: ""
+      wait: 1
+      max: 0
     view: |-
       {
         "position": {
@@ -334,7 +344,14 @@ tasks:
           "y": 210
         }
       }
-version: -1
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+system: true
 view: |-
   {
     "linkLabelsPosition": {
@@ -343,10 +360,14 @@ view: |-
     "paper": {
       "dimensions": {
         "height": 1240,
-        "width": 1007.25,
+        "width": 1006.25,
         "x": 50,
         "y": 50
       }
     }
   }
+inputs: []
+outputs: []
+dirtyInputs: true
 adopted: true
+fromversion: 5.0.0
