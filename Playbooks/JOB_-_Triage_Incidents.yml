@@ -1,4 +1,4 @@
-id: JOB - Triage Alerts
+id: 'JOB - Triage Incidents'
 version: 5
 contentitemexportablefields:
   contentitemfields:
@@ -12,7 +12,7 @@ contentitemexportablefields:
     isoverridable: false
     supportedModules: []
 vcShouldKeepItemLegacyProdMachine: false
-name: JOB - Triage Alerts
+name: JOB - Triage Incidents
 tags:
 - SOC_Framework
 starttaskid: "0"
