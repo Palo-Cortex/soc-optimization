@@ -348,8 +348,8 @@
                     "FRI",
                     "SAT"
                 ],
-                "timePeriodType": "hours",
-                "timePeriod": 1
+                "timePeriodType": "minutes",
+                "timePeriod": 10
             },
             "cronView": false,
             "scheduled": false,
