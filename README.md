@@ -8,7 +8,7 @@ This repository outlines a scalable SOC optimization approach tailored for Palo 
 
 # SOC Framework Features – WIIFM at a Glance  
 
-| Feature Category | DC (Pre-Sales Demo) | PS (Post-Sales Transition) | Customer (Outcome) |
+| Feature Category | DC (Pre-Sales Demo) | PS (Post-Sales Transition) | Analyst (Outcome) |
 |------------------|---------------------|----------------------------|---------------------|
 | **Entry Point Playbooks** (Upon Trigger, Dedup, Enrichment, Normalization, Auto-Close) | ✅ Clean story, easy demo | ⚙️ Standard starting point, fewer surprises | 🚀 Less noise, faster investigations |
 | **Blue / Green Deployments** (Staging, Rollback) | ✅ Safe demo of new playbooks | ⚙️ Controlled rollout, easy rollback | 🛡️ Confidence in change management |
