@@ -6,6 +6,17 @@ This repository outlines a scalable SOC optimization approach tailored for Palo 
 
 ## 🔁 Core Patterns
 
+# SOC Framework Features – WIIFM at a Glance  
+
+| Feature Category | DC (Pre-Sales Demo) | PS (Post-Sales Transition) | Analyst (Outcome) |
+|------------------|---------------------|----------------------------|---------------------|
+| **Entry Point Playbooks** (Upon Trigger, Dedup, Enrichment, Normalization, Auto-Close) | ✅ Clean story, easy demo | ⚙️ Standard starting point, fewer surprises | 🚀 Less noise, faster investigations |
+| **Blue / Green Deployments** (Staging, Rollback) | ✅ Safe demo of new playbooks | ⚙️ Controlled rollout, easy rollback | 🛡️ Confidence in change management |
+| **Workflow Playbooks** (NIST, MITRE) | ✅ Aligns with frameworks for execs | ⚙️ Ready accelerators, less build time | 📊 Recognizable standards, measurable maturity |
+| **Playbook Patterns** (Shadow Mode, Inputs, Error Handling) | ✅ “Safe mode” demo | ⚙️ Smooth handoff, fewer failures | 🧩 Flexible, reliable automations |
+| **Auto Triage** (Starring, Closing Low Fidelity) | ✅ Instant ROI demo | ⚙️ Less backlog during cutover | ⏱️ Analysts focus on real threats |
+| **SOC Metrics Reporting** (Dashboards, Error Dataset) | ✅ Easy way to show value | ⚙️ Prove handoff & adoption success | 📈 Visibility into SOC performance |
+
 ### 1. **Auto-Triage for Non-Starred Incidents**
 - Incidents that are not marked with a star are automatically triaged using `JOB_-_Triage_Incidents.yml`.
 - Ensures that high-volume, low-risk alerts are handled without manual intervention.
