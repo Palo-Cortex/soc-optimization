@@ -3,19 +3,58 @@
 This repository outlines a scalable SOC optimization approach tailored for Palo Alto Networks Cortex XSIAM. The goal is to reduce analyst fatigue, improve response time, and enable data-driven visibility into automation value. The solution is based on three core patterns and enhanced by modular design and operational safeguards.
 
 ---
+# Quick Setup
 
-## 🔁 Core Patterns
+- Get started fast with Auto Triage + Incident Response Catch-All. 
+- These content packs get installed via the PoV Companion.
 
-# SOC Framework Features – WIIFM at a Glance  
+---
 
-| Feature Category | DC (Pre-Sales Demo) | PS (Post-Sales Transition) | Analyst (Outcome) |
-|------------------|---------------------|----------------------------|---------------------|
-| **Entry Point Playbooks** (Upon Trigger, Dedup, Enrichment, Normalization, Auto-Close) | ✅ Clean story, easy demo | ⚙️ Standard starting point, fewer surprises | 🚀 Less noise, faster investigations |
-| **Blue / Green Deployments** (Staging, Rollback) | ✅ Safe demo of new playbooks | ⚙️ Controlled rollout, easy rollback | 🛡️ Confidence in change management |
-| **Workflow Playbooks** (NIST, MITRE) | ✅ Aligns with frameworks for execs | ⚙️ Ready accelerators, less build time | 📊 Recognizable standards, measurable maturity |
-| **Playbook Patterns** (Shadow Mode, Inputs, Error Handling) | ✅ “Safe mode” demo | ⚙️ Smooth handoff, fewer failures | 🧩 Flexible, reliable automations |
-| **Auto Triage** (Starring, Closing Low Fidelity) | ✅ Instant ROI demo | ⚙️ Less backlog during cutover | ⏱️ Analysts focus on real threats |
-| **SOC Metrics Reporting** (Dashboards, Error Dataset) | ✅ Easy way to show value | ⚙️ Prove handoff & adoption success | 📈 Visibility into SOC performance |
+## 1. Enable Auto Triage
+1. Read 👉 [Auto-Triage Usage](./Documentation/Auto_Triage.md) To Understand How it Closes Cases
+2. Investigation & Response → Automation → Jobs
+3. Check Auto Triage
+4. Click Enable Button
+
+![Auto_Triage_Enable.png](./images/Auto_Triage_Enable.png)
+---
+
+## 2. Configure Automation Rules
+1. Navigate: **Investigation & Response → Automation → Automation Rules**
+2. Add Rule: Run Entry Point Playbook called **EP_IR_NIST(800-61)** if `starred = True`
+
+   👉 [Learn more about Entry Point playbooks](https://github.com/Palo-Cortex/soc-optimization/blob/main/Documentation/EntryPoints.md)
+
+![Default_Automation_Rules.png](./images/Default_Automation_Rules.png)
+  - **EP_IR_NIST(800-61)** is the *Incident Response Catch-All*.
+  - You can create more specific rules above this (e.g., Phishing based on MITRE Technique T1566).
+
+---
+
+## 3. Configure Starring Rule
+**Starred Issues define which alerts feed into Auto Triage.**
+1. Navigate: **Cases & Issues → Case Configuration → Starred Issues**
+2. Add Rule: Star alert if
+  - `Severity >= Medium`
+  - `Has MITRE Tactic`
+
+![Starring_NIST_IR.png](./images/Starring_NIST_IR.png)
+
+## 4. XSIAM SOC Value Metric Dashboard
+** Real-time metrics from PoV into production **
+1. Dashboards & Reports → Dashboard → XSIAM SOC Value Metrics
+2. Select 7 Days (More realistic for SOC reporting)
+![Value_Metrics.png](./images/Value_Metrics.png)
+
+*Tips:* 
+- Alerts must fire playbooks and playbook tasks must run before this dash works. 
+- Dataset = `xsiam_playbookmetrics_raw`
+
+---
+
+# 🔁 Core Patterns
+
+---
 
 ### 1. **Auto-Triage for Non-Starred Incidents**
 - Incidents that are not marked with a star are automatically triaged using `JOB_-_Triage_Incidents.yml`.
@@ -137,37 +176,38 @@ The metrics collected are designed to demonstrate **operational value**:
 
 ```
 .
-├── Base Content Packs
-│   ├── SOC Malware
-│   ├── SOC Phishing
-│   └── SOC Identity
-│
 ├── Supporting Playbooks
 │   └── SOC Common Playbooks
 │
 ├── Optimization Layer (Optional)
-│   └── SOC Optimization
+│   ├── EP IR NIST (800-61)             - Entry Point playbook for SOC NIST IR (800-61)
+│   ├── SOC NIST IR (800-61)            - Runs the NIST framework for incident response
+│   ├── SOC Phishing - Generic v3       - Runs a one off Phishing playbook.
+│   ├── EP MITRE Tactic                 - Entry Point playbook for MITRE Tactic playbooks. Allows for Blue / Green Deployments
+│   ├── MITRE - Execution               - Runs MITRE Execution automations
+│   ├── MITRE - Initial Access          - Runs MITRE Initial Access automations
+│   └── JOB - Triage Alerts             - Automatic Triage to close Low Fidelity Alerts
 │
 ├── Product Enhancements
 │   ├── SOC ProofPoint TAP (Optional)
-│   └── SOC CrowdStrike Falcon (Optional)
+│   ├── SOC Microsoft Defender (Optional)
+│   ├── SOC Microsoft Graph Security (Optional)
+│   ├── SOC CrowdStrike Falcon (Optional)
+│   └── ...
 │
 ├── scripts
-│   └── setValueTags.py – Maintains `value_tags` table for metrics and dashboards
+│   ├── DeployPlaybook                  - Blue / Green Deployment Script
+│   ├── EntryPointGBState               - Blue / Green Router
+│   ├── ShadowModeRouter                - Conditional task script that runs the playbook in Full Run or Shadow Mode
+│   ├── SOC_NormalizeContext            - Normalizeds Artifacts in Data Context (i.e. user, IPs, domains, urls, etc.)
+│   └── setValueTags                    – Maintains `value_tags` table for metrics and dashboards
 ```
-
-## 🧭 Selection Requirements
-
-All loaded playbooks must specify:
-- **Use Case**: `SOC Malware`, `SOC Phishing`, or `SOC Identity`
-- **Product Set**: `CrowdStrike`, `ProofPoint TAP`
-
 ---
 
 ## 📘 Description
 
 This repository enables modular, scalable playbook deployment in Cortex XSIAM, tailored for key SOC use cases.
 
-- **Use Case Playbooks** (Malware, Phishing, Identity) form the foundation and **require** `SOC Common Playbooks` for operational support.
+- **Use Case Playbooks** (NIST IR "Incident Response" (800-61) ) is the catch-all for operational support.
 - **SOC Optimization** (optional) overlays efficiency patterns inspired by the Palo Alto Networks SOC to enhance all use case workflows.
 - **Product Enhancement Packs** for `CrowdStrike Falcon` and `ProofPoint TAP` enrich detection and response capabilities by leveraging product-specific context in XSIAM.
