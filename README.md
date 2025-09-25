@@ -11,13 +11,12 @@ This repository outlines a scalable SOC optimization approach tailored for Palo 
 ---
 
 ## 1. Enable Auto Triage
-1. Read 👉 [Auto-Triage Usage](https://github.com/Palo-Cortex/soc-optimization/blob/main/Documentation/Auto_Triage.md) To Understand How it Closes Cases
+1. Read 👉 [Auto-Triage Usage](./Documentation/Auto_Triage.md) To Understand How it Closes Cases
 2. Investigation & Response → Automation → Jobs
 3. Check Auto Triage
 4. Click Enable Button
 
-
-![Auto_Triage_Enable.png](https://github.com/Palo-Cortex/soc-optimization/blob/main/images/Auto_Triage_Enable.png)
+![Auto_Triage_Enable.png](./images/Auto_Triage_Enable.png)
 ---
 
 ## 2. Configure Automation Rules
@@ -26,9 +25,7 @@ This repository outlines a scalable SOC optimization approach tailored for Palo 
 
    👉 [Learn more about Entry Point playbooks](https://github.com/Palo-Cortex/soc-optimization/blob/main/Documentation/EntryPoints.md)
 
-
-![Default_Automation_Rules.png](https://github.com/Palo-Cortex/soc-optimization/blob/main/images/Default_Automation_Rules.png)
-
+![Default_Automation_Rules.png](./images/Default_Automation_Rules.png)
   - **EP_IR_NIST(800-61)** is the *Incident Response Catch-All*.
   - You can create more specific rules above this (e.g., Phishing based on MITRE Technique T1566).
 
@@ -41,17 +38,13 @@ This repository outlines a scalable SOC optimization approach tailored for Palo 
   - `Severity >= Medium`
   - `Has MITRE Tactic`
 
-
-![Starring_NIST_IR.png](https://github.com/Palo-Cortex/soc-optimization/blob/main/images/Starring_NIST_IR.png)
-
+![Starring_NIST_IR.png](./images/Starring_NIST_IR.png)
 
 ## 4. XSIAM SOC Value Metric Dashboard
 ** Real-time metrics from PoV into production **
 1. Dashboards & Reports → Dashboard → XSIAM SOC Value Metrics
 2. Select 7 Days (More realistic for SOC reporting)
-
-![Value_Metrics.png](https://github.com/Palo-Cortex/soc-optimization/blob/main/images/Value_Metrics.png)
-
+![Value_Metrics.png](./images/Value_Metrics.png)
 
 *Tips:* 
 - Alerts must fire playbooks and playbook tasks must run before this dash works. 
@@ -67,7 +60,7 @@ This repository outlines a scalable SOC optimization approach tailored for Palo 
 - Incidents that are not marked with a star are automatically triaged using `JOB_-_Triage_Incidents.yml`.
 - Ensures that high-volume, low-risk alerts are handled without manual intervention.
 
-👉 [Auto-Triage Usage](https://github.com/Palo-Cortex/soc-optimization/blob/main/Documentation/Auto_Triage.md) — Automatically closes non-priority incidents to reduce alert fatigue.
+👉 [Auto-Triage Usage](./Documentation/Auto_Triage.md) — Automatically closes non-priority incidents to reduce alert fatigue.
 
 ### 2. **Modular Playbooking with the `Upon Trigger`**
 - The `Upon Trigger` playbook is the engine of modular decision-making.
