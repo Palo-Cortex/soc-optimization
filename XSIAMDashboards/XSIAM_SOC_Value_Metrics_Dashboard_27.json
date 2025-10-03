@@ -1,7 +1,7 @@
 {
   "dashboards_data": [
     {
-      "name": "XSIAM SOC Value Metrics",
+      "name": "XSIAM SOC Value Metrics V27",
       "description": "Actions taken by XSIAM for the SOC",
       "status": "ENABLED",
       "layout": [
@@ -379,7 +379,7 @@
                 "type": "Custom XQL",
                 "width": 25,
                 "height": 400,
-                "phrase": "dataset = xsiam_playbookmetrics_raw\n| alter Tasks = Tasks->[]\n| arrayexpand Tasks\n\n// TODO apply a datamodel to these two objects instead (Tasks and Alert)\n| alter\ntaskState = tasks->state,\ntaskType = tasks->type,\ntaskId = tasks->id,\ntaskName = tasks->name,\nscriptID = tasks->scriptId,\nincidentID = alert->[0].parentXDRIncident,\nalertID = alert->[0].id,\nalertName = alert->name,\nalertType = alert->type,\nplaybookId = alert->playbookId\n\n// Filter for just automation\n| filter taskType = \"playbook\"\n| filter taskState = \"Completed\"\n\n\n//TODO make this a lookup table and join instead to make it scalable\n| join type = inner (dataset = value_tags \n| filter Category = \"use_case\"\n| fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time, PlaybookID as playbook_id\n) as vt (taskName = vt.value_taskname)\n| fields value_category, value_scriptid, value_tag, value_taskname, value_time, _time, playbook_id \n\n| fields value_time , value_tag , value_category\n| alter soc_event_mintutes = to_integer(value_time)\n| comp sum(soc_event_mintutes) as total_soc_minutes by value_tag\n| alter total_soc_hours = divide(total_soc_minutes,60)\n| sort desc total_soc_hours \n\n\n\n\n\n\n| view graph type = column subtype = grouped layout = horizontal header = \"Use Case Time\" xaxis = value_tag yaxis = total_soc_hours ",
+                "phrase": "dataset = xsiam_playbookmetrics_raw\n| alter Tasks = Tasks->[]\n| arrayexpand Tasks\n\n// TODO apply a datamodel to these two objects instead (Tasks and Alert)\n| alter\ntaskState = tasks->state,\ntaskType = tasks->type,\ntaskId = tasks->id,\ntaskName = tasks->name,\nscriptID = tasks->scriptId,\nincidentID = alert->[0].parentXDRIncident,\nalertID = alert->[0].id,\nalertName = alert->name,\nalertType = alert->type,\nplaybookId = alert->playbookId\n\n// Filter for just automation\n| filter taskType = \"playbook\"\n| filter taskState = \"Completed\"\n\n\n//TODO make this a lookup table and join instead to make it scalable\n| join type = inner (dataset = value_tags \n| filter Category = \"use_case\"\n| fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time, PlaybookID as playbook_id\n) as vt (taskName = vt.value_taskname)\n| fields value_category, value_scriptid, value_tag, value_taskname, value_time, _time, playbook_id \n\n| fields value_time , value_tag , value_category\n| alter soc_event_minutes = to_integer(value_time)\n| comp sum(soc_event_minutes) as total_soc_minutes by value_tag\n| alter total_soc_hours = divide(total_soc_minutes,60)\n| sort desc total_soc_hours \n\n\n\n\n\n\n\n| view graph type = column subtype = grouped layout = horizontal header = \"Use Case Time\" xaxis = value_tag yaxis = total_soc_hours ",
                 "time_frame": {
                   "relativeTime": 86400000
                 },
@@ -492,12 +492,12 @@
               }
             },
             {
-              "key": "xql_1750429941149",
+              "key": "xql_1758894817129",
               "data": {
                 "type": "Custom XQL",
                 "width": 25,
                 "height": 400,
-                "phrase": "config case_sensitive = false\n| dataset = incidents \n| comp count_distinct(incident_id) as total_incidents\n| alter incidents_per_day = round(divide(total_incidents, 7))\n| alter incidents_per_hour = round(divide(incidents_per_day, 8))\n| alter analyst_required = round(divide(incidents_per_hour, 13))\n| alter analyst_required = if(analyst_required < 1, 1, analyst_required )\n\n\n\n\n| view graph type = single subtype = standard yaxis = analyst_required ",
+                "phrase": "config case_sensitive = false\n| dataset = incidents \n| comp\n    min(_time) as t_start, \n    max(_time) as t_end,\n    count_distinct(incident_id) as total_incidents\n| alter days_selected = add(timestamp_diff(t_end, t_start, \"DAY\"), 1)\n| alter incidents_per_day = round(divide(total_incidents, days_selected))\n| alter incidents_per_hour = round(divide(incidents_per_day, 24))\n| alter analyst_required = round(divide(incidents_per_hour, 13))\n| alter analyst_required = if(analyst_required < 1, 1, analyst_required )\n\n\n\n\n\n| view graph type = single subtype = standard yaxis = analyst_required ",
                 "time_frame": {
                   "relativeTime": 86400000
                 },
@@ -523,12 +523,12 @@
               }
             },
             {
-              "key": "xql_1750429903480",
+              "key": "xql_1758894956970",
               "data": {
                 "type": "Custom XQL",
                 "width": 25,
                 "height": 400,
-                "phrase": "config case_sensitive = false\n| dataset = incidents \n| filter status contains \"new\" or status contains \"investigation\"\n| comp count_distinct(incident_id) as total_incidents\n| alter incidents_per_day = round(divide(total_incidents, 7))\n| alter incidents_per_hour = round(divide(incidents_per_day, 8))\n| alter analyst_required = round(divide(incidents_per_hour, 13))\n| alter analyst_required = if(analyst_required < 1, 1, analyst_required )\n\n\n\n| view graph type = single subtype = standard yaxis = analyst_required ",
+                "phrase": "config case_sensitive = false\n| dataset = incidents \n| filter status contains \"new\" or status contains \"investigation\"\n| comp\n    min(_time) as t_start, \n    max(_time) as t_end,\n    count_distinct(incident_id) as total_incidents\n| alter days_selected = add(timestamp_diff(t_end, t_start, \"DAY\"), 1)\n| alter incidents_per_day = round(divide(total_incidents, days_selected))\n| alter incidents_per_hour = round(divide(incidents_per_day, 24))\n| alter analyst_required = round(divide(incidents_per_hour, 13))\n| alter analyst_required = if(analyst_required < 1, 1, analyst_required )\n\n\n\n\n\n| view graph type = single subtype = standard yaxis = analyst_required ",
                 "time_frame": {
                   "relativeTime": 86400000
                 },
@@ -684,12 +684,12 @@
           "id": "row-9104",
           "data": [
             {
-              "key": "xql_1750692388012",
+              "key": "xql_1759523137405",
               "data": {
                 "type": "Custom XQL",
                 "width": 25,
                 "height": 400,
-                "phrase": "dataset = incidents  \n| comp count_distinct(incident_id) as total_incidents  \n| sort desc total_incidents\n\n\n\n| view graph type = single subtype = standard yaxis = total_incidents ",
+                "phrase": "dataset = incidents  \n| comp count_distinct(incident_id) as total_incidents  \n| sort desc total_incidents\n\n\n\n\n\n| view graph type = single subtype = standard yaxis = total_incidents ",
                 "time_frame": {
                   "relativeTime": 604800000
                 },
@@ -715,43 +715,12 @@
               }
             },
             {
-              "key": "xql_1750243294068",
+              "key": "xql_1759524830698",
               "data": {
                 "type": "Custom XQL",
                 "width": 25,
                 "height": 400,
-                "phrase": "dataset = incidents  \n| filter (status  = ENUM.RESOLVED_OTHER and (resolve_comment = \"Resolved by the Auto Triage Job\")) or status = ENUM.RESOLVED_AUTO_RESOLVE or status = ENUM.RESOLVED_AUTO_RESOLVE\n| comp count_distinct(incident_id) as total_incidents  \n| sort desc total_incidents\n| view graph type = single subtype = standard yaxis = total_incidents ",
-                "time_frame": {
-                  "relativeTime": 86400000
-                },
-                "viewOptions": {
-                  "type": "single",
-                  "commands": [
-                    {
-                      "command": {
-                        "op": "=",
-                        "name": "subtype",
-                        "value": "standard"
-                      }
-                    },
-                    {
-                      "command": {
-                        "op": "=",
-                        "name": "yaxis",
-                        "value": "total_incidents"
-                      }
-                    }
-                  ]
-                }
-              }
-            },
-            {
-              "key": "xql_1750429296483",
-              "data": {
-                "type": "Custom XQL",
-                "width": 25,
-                "height": 400,
-                "phrase": "dataset = incidents  \n| filter (status  = ENUM.NEW  or status = ENUM.UNDER_INVESTIGATION)\n| comp count_distinct(incident_id) as total_incidents  \n| sort desc total_incidents\n\n\n| view graph type = single subtype = standard yaxis = total_incidents ",
+                "phrase": "dataset = incidents   \n| filter status = ENUM.RESOLVED_AUTO_RESOLVE or (status = ENUM.RESOLVED_OTHER and resolve_comment = \"Resolved by the Auto Triage Job\")\n| comp count_distinct(incident_id) as total_incidents  \n| sort desc total_incidents\n\n\n| view graph type = single subtype = standard yaxis = total_incidents ",
                 "time_frame": {
                   "relativeTime": 604800000
                 },
@@ -777,12 +746,43 @@
               }
             },
             {
-              "key": "xql_1750429437464",
+              "key": "xql_1759524958446",
               "data": {
                 "type": "Custom XQL",
                 "width": 25,
                 "height": 400,
-                "phrase": "dataset = incidents  \n| filter (status  = ENUM.NEW  or status = ENUM.UNDER_INVESTIGATION)\n| filter starred = 1\n| comp count_distinct(incident_id) as total_incidents  \n| sort desc total_incidents\n\n\n\n| view graph type = single subtype = standard yaxis = total_incidents ",
+                "phrase": "dataset = incidents  \n| filter status = ENUM.NEW or status = ENUM.UNDER_INVESTIGATION \n| comp count_distinct(incident_id) as total_incidents\n| sort desc total_incidents\n\n\n\n\n| view graph type = single subtype = standard yaxis = total_incidents ",
+                "time_frame": {
+                  "relativeTime": 604800000
+                },
+                "viewOptions": {
+                  "type": "single",
+                  "commands": [
+                    {
+                      "command": {
+                        "op": "=",
+                        "name": "subtype",
+                        "value": "standard"
+                      }
+                    },
+                    {
+                      "command": {
+                        "op": "=",
+                        "name": "yaxis",
+                        "value": "total_incidents"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "key": "xql_1759525111882",
+              "data": {
+                "type": "Custom XQL",
+                "width": 25,
+                "height": 400,
+                "phrase": "dataset = incidents  \n| filter status = ENUM.NEW or status = ENUM.UNDER_INVESTIGATION \n| filter starred = 1\n| comp count_distinct(incident_id) as total_incidents\n| sort desc total_incidents\n\n\n\n\n\n\n| view graph type = single subtype = standard yaxis = total_incidents ",
                 "time_frame": {
                   "relativeTime": 604800000
                 },
@@ -811,7 +811,7 @@
         }
       ],
       "default_dashboard_id": 1,
-      "global_id": "9ba311c2c2414f3bb09eee0742daad78",
+      "global_id": "5007dbb95e5d442c9a84453bffccfb39",
       "metadata": {
         "params": []
       }
@@ -821,7 +821,7 @@
     {
       "widget_key": "xql_1745755883243",
       "title": "Time Saved by XSIAM per Task",
-      "creation_time": 1758895672392,
+      "creation_time": 1759522463510,
       "description": null,
       "data": {
         "phrase": "dataset = xsiam_playbookmetrics_raw\n| alter Tasks = Tasks->[]\n| arrayexpand Tasks\n\n// TODO apply a datamodel to these two objects instead (Tasks and Alert)\n| alter\ntaskState = tasks->state,\ntaskType = tasks->type,\ntaskId = tasks->id,\ntaskName = tasks->name,\nscriptID = tasks->scriptId,\nincidentID = alert->[0].parentXDRIncident,\nalertID = alert->[0].id,\nalertName = alert->name,\nalertType = alert->type,\nplaybookId = alert->[0].playbookId\n\n| filter taskType not in (\"start\", \"title\", \"condition\")\n| filter scriptID != \"\" and scriptID != null\n\n\n// Since the job which posts this data runs every 15 min there may be duplicate data the more frequent it is run\n\n| alter dedupkey = concat(incidentID,taskId, alertID)\n| dedup dedupkey\n\n\n// Filter for just automation\n//| filter alerttype != \"Unclassified\"\n| filter taskState = \"Completed\"\n| filter tasktype = \"regular\"\n| alter ScriptID  =  if ( scriptID  ~= \"^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$\", \"Custom\", ScriptID )\n\n\n//TODO make this a lookup table and join instead to make it scalable\n| join type = inner (dataset = value_tags \n| filter Category != \"use_case\" and Time != \"\" and Time != null and ScriptID != \"\" and ScriptID != null\n| fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time\n) as vt (scriptID contains vt.value_scriptid)\n| fields value_category, value_scriptid, value_tag, value_taskname, value_time, _time \n\n\n| alter soc_event_minutes = to_integer(value_time)\n| comp sum(soc_event_minutes) as total_soc_minutes by value_tag\n| alter total_soc_hours = round(divide(total_soc_minutes , 60))\n| fields value_tag  , total_soc_minutes  , total_soc_hours\n| sort desc total_soc_minutes\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n| view graph type = column subtype = grouped layout = horizontal show_callouts = `true` xaxis = value_tag yaxis = total_soc_minutes,total_soc_hours seriescolor(\"total_soc_hours\",\"#7cb5ec\") seriescolor(\"total_soc_minutes\",\"#23ae4f\") xaxistitle = \"Time\" yaxistitle = \"Category\" seriestitle(\"total_soc_minutes\",\"Total SOC Minutes\") seriestitle(\"total_soc_hours\",\"Total SOC Hours\") ",
@@ -932,7 +932,7 @@
     {
       "widget_key": "xql_1745755921627",
       "title": "Time Save by Category",
-      "creation_time": 1758895672538,
+      "creation_time": 1759522463714,
       "description": "Total time saved by Category that XSIAM is helping SOC",
       "data": {
         "phrase": "dataset = xsiam_playbookmetrics_raw\n| alter Tasks = Tasks->[]\n| arrayexpand Tasks\n\n// TODO apply a datamodel to these two objects instead (Tasks and Alert)\n| alter\ntaskState = tasks->state,\ntaskType = tasks->type,\ntaskId = tasks->id,\ntaskName = tasks->name,\nscriptID = tasks->scriptId,\nincidentID = alert->[0].parentXDRIncident,\nalertID = alert->[0].id,\nalertName = alert->name,\nalertType = alert->type,\nplaybookId = alert->[0].playbookId\n\n| filter taskType not in (\"start\", \"title\", \"condition\")\n| filter scriptID != \"\" and scriptID != null\n\n\n// Since the job which posts this data runs every 15 min there may be duplicate data the more frequent it is run\n\n| alter dedupkey = concat(incidentID,taskId, alertID)\n| dedup dedupkey\n\n\n// Filter for just automation\n//| filter alerttype != \"Unclassified\"\n| filter taskState = \"Completed\"\n| filter tasktype = \"regular\"\n| alter ScriptID  =  if ( scriptID  ~= \"^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$\", \"Custom\", ScriptID )\n\n\n//TODO make this a lookup table and join instead to make it scalable\n| join type = inner (dataset = value_tags \n| filter Category != \"use_case\" and Time != \"\" and Time != null and ScriptID != \"\" and ScriptID != null\n| fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time\n) as vt (scriptID contains vt.value_scriptid)\n| fields value_category, value_scriptid, value_tag, value_taskname, value_time, _time \n\n\n| fields value_time , value_category\n| alter soc_event_mintutes = to_integer(value_time )\n| comp sum(soc_event_mintutes) as total_soc_minutes by value_category\n| alter total_soc_hours = round(divide(total_soc_minutes,60))\n| sort desc total_soc_minutes\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n| view graph type = column subtype = grouped layout = horizontal show_callouts = `true` xaxis = value_category yaxis = total_soc_minutes,total_soc_hours seriescolor(\"total_soc_minutes\",\"#23ae4f\") seriescolor(\"total_soc_hours\",\"#7cb5ec\") xaxistitle = \"Time\" yaxistitle = \"Category\" seriestitle(\"total_soc_minutes\",\"Total SOC Minutes\") seriestitle(\"total_soc_hours\",\"Total SOC Hours\") ",
@@ -1043,7 +1043,7 @@
     {
       "widget_key": "xql_1745755968440",
       "title": "Tools used by XSIAM by Hour",
-      "creation_time": 1758895672736,
+      "creation_time": 1759522463873,
       "description": "Which tools is XSIAM uniquely automating most of the time by number of hours",
       "data": {
         "phrase": "dataset = xsiam_playbookmetrics_raw\n| alter Tasks = Tasks->[]\n| arrayexpand Tasks\n\n// TODO apply a datamodel to these two objects instead (Tasks and Alert)\n| alter\ntaskState = tasks->state,\ntaskType = tasks->type,\ntaskId = tasks->id,\ntaskName = tasks->name,\nscriptID = tasks->scriptId,\nincidentID = alert->[0].parentXDRIncident,\nalertID = alert->[0].id,\nalertName = alert->name,\nalertType = alert->type,\nplaybookId = alert->[0].playbookId\n\n| filter taskType not in (\"start\", \"title\", \"condition\")\n| filter scriptID != \"\" and scriptID != null\n\n\n// Since the job which posts this data runs every 15 min there may be duplicate data the more frequent it is run\n\n| alter dedupkey = concat(incidentID,taskId, alertID)\n| dedup dedupkey\n\n\n// Filter for just automation\n//| filter alerttype != \"Unclassified\"\n| filter taskState = \"Completed\"\n| filter tasktype = \"regular\"\n| alter ScriptID  =  if ( scriptID  ~= \"^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$\", \"Custom\", ScriptID )\n\n\n//TODO make this a lookup table and join instead to make it scalable\n| join type = inner (dataset = value_tags \n| filter Category != \"use_case\" and Time != \"\" and Time != null and ScriptID != \"\" and ScriptID != null\n| fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time, Product as value_product, Vendor as value_vendor\n) as vt (scriptID contains vt.value_scriptid)\n| fields value_category, value_scriptid, value_tag, value_taskname, value_time, _time, value_product, value_vendor \n\n\n| alter soc_event_minutes = to_integer(value_time)\n| comp sum(soc_event_minutes) as total_soc_minutes by value_product, value_vendor \n| alter total_soc_hours = round(divide(total_soc_minutes , 60))\n| fields value_product , value_vendor , total_soc_minutes  , total_soc_hours\n| alter tool = concat(concat(value_vendor  , \" \"), value_product )\n| sort desc total_soc_minutes\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n| view graph type = pie subtype = full header = \"Tool Usage in Hours\" xaxis = tool yaxis = total_soc_hours ",
@@ -1097,7 +1097,7 @@
     {
       "widget_key": "xql_1745756046680",
       "title": "Total SOC Hours Worked by XSIAM",
-      "creation_time": 1758895673189,
+      "creation_time": 1759522463988,
       "description": "The number of hours worked by XSIAM automations",
       "data": {
         "phrase": "dataset = xsiam_playbookmetrics_raw\n| alter Tasks = Tasks->[]\n| arrayexpand Tasks\n\n// TODO apply a datamodel to these two objects instead (Tasks and Alert)\n| alter\ntaskState = tasks->state,\ntaskType = tasks->type,\ntaskId = tasks->id,\ntaskName = tasks->name,\nscriptID = tasks->scriptId,\nincidentID = alert->[0].parentXDRIncident,\nalertID = alert->[0].id,\nalertName = alert->name,\nalertType = alert->type,\nplaybookId = alert->[0].playbookId\n\n| filter taskType not in (\"start\", \"title\", \"condition\")\n| filter scriptID != \"\" and scriptID != null\n\n\n// Since the job which posts this data runs every 15 min there may be duplicate data the more frequent it is run\n\n| alter dedupkey = concat(incidentID,taskId, alertID)\n| dedup dedupkey\n\n\n// Filter for just automation\n//| filter alerttype != \"Unclassified\"\n| filter taskState = \"Completed\"\n| filter tasktype = \"regular\"\n| alter ScriptID  =  if ( scriptID  ~= \"^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$\", \"Custom\", ScriptID )\n\n\n//TODO make this a lookup table and join instead to make it scalable\n| join type = inner (dataset = value_tags \n| filter Category != \"use_case\" and Time != \"\" and Time != null and ScriptID != \"\" and ScriptID != null\n| fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time\n) as vt (scriptID contains vt.value_scriptid)\n| fields value_category, value_scriptid, value_tag, value_taskname, value_time, _time \n\n\n| alter soc_event_mintutes = to_integer(value_time)\n| comp sum(soc_event_mintutes) as total_soc_minutes\n| alter total_soc_hours = round(divide(total_soc_minutes,60))\n\n\n\n\n\n\n\n\n\n\n\n\n| view graph type = single subtype = standard header = \"Hours Saved by XSIAM\" yaxis = total_soc_hours dataunit = \"Hours\" headcolor = \"#f1f7f0\" font = \"Arial\" headerfontsize = 6 ",
@@ -1172,7 +1172,7 @@
     {
       "widget_key": "xql_1745756085465",
       "title": "XSIAM Vendor Usage",
-      "creation_time": 1758895673789,
+      "creation_time": 1759522464110,
       "description": "Which Vendors are being most often automated by XSIAM.",
       "data": {
         "phrase": "dataset = xsiam_playbookmetrics_raw\n| alter Tasks = Tasks->[]\n| arrayexpand Tasks\n\n// TODO apply a datamodel to these two objects instead (Tasks and Alert)\n| alter\ntaskState = tasks->state,\ntaskType = tasks->type,\ntaskId = tasks->id,\ntaskName = tasks->name,\nscriptID = tasks->scriptId,\nincidentID = alert->[0].parentXDRIncident,\nalertID = alert->[0].id,\nalertName = alert->name,\nalertType = alert->type,\nplaybookId = alert->[0].playbookId\n\n| filter taskType not in (\"start\", \"title\", \"condition\")\n| filter scriptID != \"\" and scriptID != null\n\n\n// Since the job which posts this data runs every 15 min there may be duplicate data the more frequent it is run\n\n| alter dedupkey = concat(incidentID,taskId, alertID)\n| dedup dedupkey\n\n\n// Filter for just automation\n//| filter alerttype != \"Unclassified\"\n| filter taskState = \"Completed\"\n| filter tasktype = \"regular\"\n| alter ScriptID  =  if ( scriptID  ~= \"^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$\", \"Custom\", ScriptID )\n\n\n//TODO make this a lookup table and join instead to make it scalable\n| join type = inner (dataset = value_tags \n| filter Category != \"use_case\" and Time != \"\" and Time != null and ScriptID != \"\" and ScriptID != null\n| fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time, Product as value_product, Vendor as value_vendor\n) as vt (scriptID contains vt.value_scriptid)\n| fields value_category, value_scriptid, value_tag, value_taskname, value_time, _time, value_product, value_vendor \n\n\n| alter soc_event_minutes = to_integer(value_time)\n| comp sum(soc_event_minutes) as total_soc_minutes by value_product , value_vendor \n| alter total_soc_hours = round(divide(total_soc_minutes , 60))\n| fields value_product , value_vendor , total_soc_minutes  , total_soc_hours\n| sort desc total_soc_hours\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n| view graph type = funnel header = \"Most Used Vendors\" show_callouts = `true` show_callouts_names = `true` xaxis = value_vendor yaxis = total_soc_hours ",
@@ -1233,7 +1233,7 @@
     {
       "widget_key": "xql_1745756167461",
       "title": "Total Alerts By Source",
-      "creation_time": 1758895674347,
+      "creation_time": 1759522464171,
       "description": "How many alerts are native XSIAM alerts",
       "data": {
         "phrase": "dataset = alerts \n// Total Alerts\n| comp count_distinct(alert_id) as total_alerts by alert_source \n| sort desc total_alerts\n\n\n| view graph type = pie show_callouts = `true` show_callouts_names = `true` xaxis = alert_source yaxis = total_alerts ",
@@ -1286,7 +1286,7 @@
     {
       "widget_key": "xql_1745756206179",
       "title": "Total Alerts",
-      "creation_time": 1758895674820,
+      "creation_time": 1759522464231,
       "description": "All alerts firing by alert type",
       "data": {
         "phrase": "dataset = alerts \n| arrayexpand original_tags\n| filter original_tags contains \"DS:\"\n// Total Alerts\n| comp count_distinct(alert_id) as total_alerts by original_tags \n| sort desc total_alerts\n\n\n\n\n\n\n\n\n| view graph type = column subtype = grouped layout = horizontal header = \"Total Alerts\" xaxis = original_tags yaxis = total_alerts xaxistitle = \"Alerts\" yaxistitle = \"Data Sources\" seriestitle(\"total_alerts\",\"Alerts by Data Source\") ",
@@ -1369,7 +1369,7 @@
     {
       "widget_key": "xql_1745756273220",
       "title": "Custom Scripts Usage",
-      "creation_time": 1758895675532,
+      "creation_time": 1759522464353,
       "description": null,
       "data": {
         "phrase": "dataset = xsiam_playbookmetrics_raw\n| alter Tasks = Tasks->[]\n| arrayexpand Tasks\n\n// TODO apply a datamodel to these two objects instead (Tasks and Alert)\n| alter\ntaskState = tasks->state,\ntaskType = tasks->type,\ntaskId = tasks->id,\ntaskName = tasks->name,\nscriptID = tasks->scriptId,\nincidentID = alert->[0].parentXDRIncident,\nalertID = alert->[0].id,\nalertName = alert->name,\nalertType = alert->type,\nplaybookId = alert->[0].playbookId\n\n| filter taskType not in (\"start\", \"title\", \"condition\")\n| filter scriptID != \"\" and scriptID != null\n\n\n// Since the job which posts this data runs every 15 min there may be duplicate data the more frequent it is run\n\n| alter dedupkey = concat(incidentID,taskId, alertID)\n| dedup dedupkey\n\n\n// Filter for just automation\n//| filter alerttype != \"Unclassified\"\n| filter taskState = \"Completed\"\n| filter tasktype = \"regular\"\n| alter ScriptID  =  if ( scriptID  ~= \"^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89abAB][0-9a-f]{3}-[0-9a-f]{12}$\", \"Custom\", ScriptID )\n\n\n//TODO make this a lookup table and join instead to make it scalable\n| join type = inner (dataset = value_tags \n| filter Category != \"use_case\" and Time != \"\" and Time != null and ScriptID != \"\" and ScriptID != null\n| fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time\n) as vt (scriptID contains vt.value_scriptid)\n| fields value_category, value_scriptid, value_tag, value_taskname, value_time, _time \n\n\n| alter soc_event_minutes = to_integer(value_time)\n| filter value_scriptid = \"Custom\"\n| comp count() as tasknameCount by value_taskname \n| fields value_taskname , taskNameCount\n| sort desc taskNameCount\n\n\n\n\n\n\n\n\n| view graph type = pie subtype = full xaxis = taskName yaxis = taskNameCount legend_percentage = `true` seriestitle(\"taskNameCount\",\"Custom Scripts Used\") ",
@@ -1431,9 +1431,9 @@
     },
     {
       "widget_key": "xql_1745756305970",
-      "title": "Common Use Cases",
-      "creation_time": 1758895676296,
-      "description": "Which Use Cases are most often being executed",
+      "title": "Common Use Incidents",
+      "creation_time": 1759522464471,
+      "description": "Which Use Incidents are most often being executed",
       "data": {
         "phrase": "dataset = xsiam_playbookmetrics_raw\n| alter Tasks = Tasks->[]\n| arrayexpand Tasks\n\n// TODO apply a datamodel to these two objects instead (Tasks and Alert)\n| alter\ntaskState = tasks->state,\ntaskType = tasks->type,\ntaskId = tasks->id,\ntaskName = tasks->name,\nscriptID = tasks->scriptId,\nincidentID = alert->[0].parentXDRIncident,\nalertID = alert->[0].id,\nalertName = alert->name,\nalertType = alert->type,\nplaybookId = alert->playbookId\n\n// Filter for just automation\n| filter taskType = \"playbook\"\n| filter taskState = \"Completed\"\n\n\n//TODO make this a lookup table and join instead to make it scalable\n| join type = inner (dataset = value_tags \n| filter Category = \"use_case\"\n| fields Category as value_category, ScriptID as value_scriptid, `Tag` as value_tag, TaskName as value_taskname, Time as value_time, PlaybookID as playbook_id\n) as vt (taskName = vt.value_taskname)\n| fields value_category, value_scriptid, value_tag, value_taskname, value_time, _time, playbook_id \n\n| fields value_time , value_tag , value_category\n| alter soc_event_minutes = to_integer(value_time)\n| comp sum(soc_event_minutes) as total_soc_minutes by value_tag\n| alter total_soc_hours = divide(total_soc_minutes,60)\n| sort desc total_soc_hours \n\n\n\n\n\n\n\n| view graph type = column subtype = grouped layout = horizontal header = \"Use Case Time\" xaxis = value_tag yaxis = total_soc_hours ",
         "time_frame": {
@@ -1491,170 +1491,14 @@
       "creator_mail": "N/A"
     },
     {
-      "widget_key": "xql_1750243294068",
-      "title": "Cases Auto Resolved",
-      "creation_time": 1758895677018,
-      "description": "This includes deduping (Palo SOC Framework), auto triage, and auto-resolution by XSIAM",
-      "data": {
-        "phrase": "dataset = cases   \n| filter xdm.case.status_progress = \"RESOLVED\" and (xdm.case.status.resolution_comment  = \"Resolved by the Auto Triage Job\" or xdm.case.status.resolution_comment = \"Auto-resolved by Cortex XSIAM because all of the alerts contained in this incident are excluded or resolved\")\n| comp count_distinct(xdm.case.id) as total_cases  \n| sort desc total_cases\n\n| view graph type = single subtype = standard yaxis = total_cases ",
-        "time_frame": {
-          "relativeTime": 2592000000
-        },
-        "viewOptions": {
-          "type": "single",
-          "commands": [
-            {
-              "command": {
-                "op": "=",
-                "name": "subtype",
-                "value": "standard"
-              }
-            },
-            {
-              "command": {
-                "op": "=",
-                "name": "yaxis",
-                "value": "total_cases"
-              }
-            }
-          ]
-        }
-      },
-      "support_time_range": true,
-      "additional_info": {
-        "query_tables": [
-          "cases"
-        ],
-        "query_uses_library": false
-      },
-      "creator_mail": "N/A"
-    },
-    {
-      "widget_key": "xql_1750429296483",
-      "title": "Total Manual Cases",
-      "creation_time": 1758895677493,
-      "description": "",
-      "data": {
-        "phrase": "dataset = cases  \n| filter xdm.case.status_progress = \"NEW\"  or xdm.case.status_progress  = \"UNDER_INVESTIGATION\"\n| comp count_distinct(xdm.case.id) as total_cases\n| sort desc total_cases\n\n\n\n| view graph type = single subtype = standard yaxis = total_cases ",
-        "time_frame": {
-          "relativeTime": 604800000
-        },
-        "viewOptions": {
-          "type": "single",
-          "commands": [
-            {
-              "command": {
-                "op": "=",
-                "name": "subtype",
-                "value": "standard"
-              }
-            },
-            {
-              "command": {
-                "op": "=",
-                "name": "yaxis",
-                "value": "total_cases"
-              }
-            }
-          ]
-        }
-      },
-      "support_time_range": true,
-      "additional_info": {
-        "query_tables": [
-          "cases"
-        ],
-        "query_uses_library": false
-      },
-      "creator_mail": "N/A"
-    },
-    {
-      "widget_key": "xql_1750429437464",
-      "title": "Total Starred Manual Cases",
-      "creation_time": 1758895677854,
-      "description": "",
-      "data": {
-        "phrase": "dataset = cases  \n| filter xdm.case.status_progress = \"NEW\"  or xdm.case.status_progress  = \"UNDER_INVESTIGATION\"\n| filter xdm.case.starred = true\n| comp count_distinct(xdm.case.id) as total_cases  \n| sort desc total_cases\n\n\n\n\n\n| view graph type = single subtype = standard yaxis = total_cases ",
-        "time_frame": {
-          "relativeTime": 604800000
-        },
-        "viewOptions": {
-          "type": "single",
-          "commands": [
-            {
-              "command": {
-                "op": "=",
-                "name": "subtype",
-                "value": "standard"
-              }
-            },
-            {
-              "command": {
-                "op": "=",
-                "name": "yaxis",
-                "value": "total_cases"
-              }
-            }
-          ]
-        }
-      },
-      "support_time_range": true,
-      "additional_info": {
-        "query_tables": [
-          "cases"
-        ],
-        "query_uses_library": false
-      },
-      "creator_mail": "N/A"
-    },
-    {
-      "widget_key": "xql_1750429903480",
-      "title": "Analysts Required post-XSIAM (EPH 8 to 13)",
-      "creation_time": 1758895678310,
-      "description": "Given the total number of manual incidents post-XSIAM and using the Palo SOC benchmark of 8 to 13 events per hour per analyst, how many analysts would be required to handle all incidents?",
-      "data": {
-        "phrase": "config case_sensitive = false\n| dataset = cases \n| filter xdm.case.status_progress = \"NEW\"  or xdm.case.status_progress  = \"UNDER_INVESTIGATION\"\n| filter xdm.case.starred = true\n| comp \n    min(_time) as t_start, \n    max(_time) as t_end,\n    count_distinct(xdm.case.id) as total_cases\n| alter days_selected = add(timestamp_diff(t_end, t_start, \"DAY\"), 1)\n| alter incidents_per_day = round(divide(total_cases, days_selected))\n| alter incidents_per_hour = round(divide(incidents_per_day, 24))\n| alter analyst_required = round(divide(incidents_per_hour, 13))\n| alter analyst_required = if(analyst_required < 1, 1, analyst_required )\n\n\n\n\n\n| view graph type = single subtype = standard yaxis = analyst_required ",
-        "time_frame": {
-          "relativeTime": 2592000000
-        },
-        "viewOptions": {
-          "type": "single",
-          "commands": [
-            {
-              "command": {
-                "op": "=",
-                "name": "subtype",
-                "value": "standard"
-              }
-            },
-            {
-              "command": {
-                "op": "=",
-                "name": "yaxis",
-                "value": "analyst_required"
-              }
-            }
-          ]
-        }
-      },
-      "support_time_range": true,
-      "additional_info": {
-        "query_tables": [
-          "cases"
-        ],
-        "query_uses_library": false
-      },
-      "creator_mail": "N/A"
-    },
-    {
-      "widget_key": "xql_1750429941149",
-      "title": "Analysts Required NO XSIAM (EPH 8 to 13)",
-      "creation_time": 1758895678626,
+      "widget_key": "xql_1758894817129",
+      "title": "Analysts Required NO XSIAM (EPH 8 to 13)_copy",
+      "creation_time": 1759522165194,
       "description": "Given the total number of manual incidents and using the Palo SOC benchmark of 8 to 13 events per hour per analyst, how many analysts would be required to handle all incidents?",
       "data": {
-        "phrase": "config case_sensitive = false\n| dataset = cases \n| comp \n    min(_time) as t_start, \n    max(_time) as t_end,\n    count_distinct(xdm.case.id) as total_cases\n| alter days_selected = add(timestamp_diff(t_end, t_start, \"DAY\"), 1)\n| alter incidents_per_day = round(divide(total_cases, days_selected))\n| alter incidents_per_hour = round(divide(incidents_per_day, 24))\n| alter analyst_required = round(divide(incidents_per_hour, 13))\n| alter analyst_required = if(analyst_required < 1, 1, analyst_required )\n\n\n\n\n\n\n| view graph type = single subtype = standard yaxis = analyst_required ",
+        "phrase": "config case_sensitive = false\n| dataset = incidents \n| comp\n    min(_time) as t_start, \n    max(_time) as t_end,\n    count_distinct(incident_id) as total_incidents\n| alter days_selected = add(timestamp_diff(t_end, t_start, \"DAY\"), 1)\n| alter incidents_per_day = round(divide(total_incidents, days_selected))\n| alter incidents_per_hour = round(divide(incidents_per_day, 24))\n| alter analyst_required = round(divide(incidents_per_hour, 13))\n| alter analyst_required = if(analyst_required < 1, 1, analyst_required )\n\n\n\n\n\n| view graph type = single subtype = standard yaxis = analyst_required ",
         "time_frame": {
-          "relativeTime": 2592000000
+          "relativeTime": 86400000
         },
         "viewOptions": {
           "type": "single",
@@ -1679,21 +1523,21 @@
       "support_time_range": true,
       "additional_info": {
         "query_tables": [
-          "cases"
+          "incidents"
         ],
         "query_uses_library": false
       },
-      "creator_mail": "N/A"
+      "creator_mail": "sbrumley@paloaltonetworks.com"
     },
     {
-      "widget_key": "xql_1750692388012",
-      "title": "Total Cases",
-      "creation_time": 1758895678786,
-      "description": "",
+      "widget_key": "xql_1758894956970",
+      "title": "Analysts Required post-XSIAM (EPH 8 to 13)_copy",
+      "creation_time": 1759522166447,
+      "description": "Given the total number of manual incidents post-XSIAM and using the Palo SOC benchmark of 8 to 13 events per hour per analyst, how many analysts would be required to handle all incidents?",
       "data": {
-        "phrase": "dataset = cases  \n| comp count_distinct(xdm.case.id) as total_cases  \n| sort desc total_cases\n\n\n\n\n| view graph type = single subtype = standard yaxis = total_cases ",
+        "phrase": "config case_sensitive = false\n| dataset = incidents \n| filter status contains \"new\" or status contains \"investigation\"\n| comp\n    min(_time) as t_start, \n    max(_time) as t_end,\n    count_distinct(incident_id) as total_incidents\n| alter days_selected = add(timestamp_diff(t_end, t_start, \"DAY\"), 1)\n| alter incidents_per_day = round(divide(total_incidents, days_selected))\n| alter incidents_per_hour = round(divide(incidents_per_day, 24))\n| alter analyst_required = round(divide(incidents_per_hour, 13))\n| alter analyst_required = if(analyst_required < 1, 1, analyst_required )\n\n\n\n\n\n| view graph type = single subtype = standard yaxis = analyst_required ",
         "time_frame": {
-          "relativeTime": 2592000000
+          "relativeTime": 86400000
         },
         "viewOptions": {
           "type": "single",
@@ -1709,7 +1553,7 @@
               "command": {
                 "op": "=",
                 "name": "yaxis",
-                "value": "total_cases"
+                "value": "analyst_required"
               }
             }
           ]
@@ -1718,13 +1562,169 @@
       "support_time_range": true,
       "additional_info": {
         "query_tables": [
-          "cases"
+          "incidents"
+        ],
+        "query_uses_library": false
+      },
+      "creator_mail": "sbrumley@paloaltonetworks.com"
+    },
+    {
+      "widget_key": "xql_1759523137405",
+      "title": "Total Incidents V27",
+      "creation_time": 1759523137405,
+      "description": "",
+      "data": {
+        "phrase": "dataset = incidents  \n| comp count_distinct(incident_id) as total_incidents  \n| sort desc total_incidents\n\n\n\n\n\n| view graph type = single subtype = standard yaxis = total_incidents ",
+        "time_frame": {
+          "relativeTime": 604800000
+        },
+        "viewOptions": {
+          "type": "single",
+          "commands": [
+            {
+              "command": {
+                "op": "=",
+                "name": "subtype",
+                "value": "standard"
+              }
+            },
+            {
+              "command": {
+                "op": "=",
+                "name": "yaxis",
+                "value": "total_incidents"
+              }
+            }
+          ]
+        }
+      },
+      "support_time_range": true,
+      "additional_info": {
+        "query_tables": [
+          "incidents"
+        ],
+        "query_uses_library": false
+      },
+      "creator_mail": "sbrumley@paloaltonetworks.com"
+    },
+    {
+      "widget_key": "xql_1759524830698",
+      "title": "Incidents Auto Resolved V27",
+      "creation_time": 1759524830698,
+      "description": "This includes deduping (Palo SOC Framework), auto triage, and auto-resolution by XSIAM",
+      "data": {
+        "phrase": "dataset = incidents   \n| filter status = ENUM.RESOLVED_AUTO_RESOLVE or (status = ENUM.RESOLVED_OTHER and resolve_comment = \"Resolved by the Auto Triage Job\")\n| comp count_distinct(incident_id) as total_incidents  \n| sort desc total_incidents\n\n\n| view graph type = single subtype = standard yaxis = total_incidents ",
+        "time_frame": {
+          "relativeTime": 604800000
+        },
+        "viewOptions": {
+          "type": "single",
+          "commands": [
+            {
+              "command": {
+                "op": "=",
+                "name": "subtype",
+                "value": "standard"
+              }
+            },
+            {
+              "command": {
+                "op": "=",
+                "name": "yaxis",
+                "value": "total_incidents"
+              }
+            }
+          ]
+        }
+      },
+      "support_time_range": true,
+      "additional_info": {
+        "query_tables": [
+          "incidents"
+        ],
+        "query_uses_library": false
+      },
+      "creator_mail": "sbrumley@paloaltonetworks.com"
+    },
+    {
+      "widget_key": "xql_1759524958446",
+      "title": "Total Manual Incidents V27",
+      "creation_time": 1759524958446,
+      "description": "",
+      "data": {
+        "phrase": "dataset = incidents  \n| filter status = ENUM.NEW or status = ENUM.UNDER_INVESTIGATION \n| comp count_distinct(incident_id) as total_incidents\n| sort desc total_incidents\n\n\n\n\n| view graph type = single subtype = standard yaxis = total_incidents ",
+        "time_frame": {
+          "relativeTime": 604800000
+        },
+        "viewOptions": {
+          "type": "single",
+          "commands": [
+            {
+              "command": {
+                "op": "=",
+                "name": "subtype",
+                "value": "standard"
+              }
+            },
+            {
+              "command": {
+                "op": "=",
+                "name": "yaxis",
+                "value": "total_incidents"
+              }
+            }
+          ]
+        }
+      },
+      "support_time_range": true,
+      "additional_info": {
+        "query_tables": [
+          "incidents"
+        ],
+        "query_uses_library": false
+      },
+      "creator_mail": "sbrumley@paloaltonetworks.com"
+    },
+    {
+      "widget_key": "xql_1759525111882",
+      "title": "Total Starred Manual Incidents V27",
+      "creation_time": 1759525111882,
+      "description": "",
+      "data": {
+        "phrase": "dataset = incidents  \n| filter status = ENUM.NEW or status = ENUM.UNDER_INVESTIGATION \n| filter starred = 1\n| comp count_distinct(incident_id) as total_incidents\n| sort desc total_incidents\n\n\n\n\n\n\n| view graph type = single subtype = standard yaxis = total_incidents ",
+        "time_frame": {
+          "relativeTime": 604800000
+        },
+        "viewOptions": {
+          "type": "single",
+          "commands": [
+            {
+              "command": {
+                "op": "=",
+                "name": "subtype",
+                "value": "standard"
+              }
+            },
+            {
+              "command": {
+                "op": "=",
+                "name": "yaxis",
+                "value": "total_incidents"
+              }
+            }
+          ]
+        }
+      },
+      "support_time_range": true,
+      "additional_info": {
+        "query_tables": [
+          "incidents"
         ],
         "query_uses_library": false
       },
       "creator_mail": "sbrumley@paloaltonetworks.com"
     }
   ],
-  "id": "9ba311c2c2414f3bb09eee0742daad78",
-  "name": "XSIAM SOC Value Metrics"
+  "id": "5007dbb95e5d442c9a84453bffccfb39",
+  "name": "XSIAM SOC Value Metrics V27"
 }
