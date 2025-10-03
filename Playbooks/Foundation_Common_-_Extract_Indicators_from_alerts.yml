@@ -1,0 +1,205 @@
+description: This is a common playbook intended to integrate the Indicator Extraction
+  to all automated alerts.
+id: 'Foundation Common - Extract Indicators from alerts'
+inputs: []
+name: Foundation Common - Extract Indicators from alerts
+outputs: []
+quiet: true
+starttaskid: "0"
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 775ef611-299c-4899-87c7-60d32884730a
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 775ef611-299c-4899-87c7-60d32884730a
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      text:
+        simple: ${alert}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: Extract all indicators according to server indicators configuration
+      id: acb6a086-80f0-4193-949d-05b7da8a52a9
+      iscommand: true
+      name: Extract indicators from Alert
+      script: Builtin|||extractIndicators
+      type: regular
+      version: -1
+    taskid: acb6a086-80f0-4193-949d-05b7da8a52a9
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 230
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      Account:
+        complex:
+          root: Account
+          transformers:
+          - operator: uniq
+      CriticalEndpoints:
+        simple: admin
+      CriticalGroups:
+        simple: admins,administrators
+      CriticalUsers:
+        simple: admin,administrator
+      DBotScoreIndicators:
+        complex:
+          accessor: Indicator
+          root: DBotScore
+          transformers:
+          - operator: uniq
+      DBotScoreMaxScore:
+        complex:
+          accessor: Score
+          root: DBotScore
+          transformers:
+          - args:
+              descending:
+                value:
+                  simple: "true"
+            operator: sort
+          - operator: uniq
+          - operator: FirstArrayElement
+      EmailAuthenticityCheck:
+        complex:
+          accessor: AuthenticityCheck
+          root: Email
+          transformers:
+          - operator: uniq
+      Endpoint:
+        complex:
+          root: Endpoint
+          transformers:
+          - operator: uniq
+      MicrosoftHeadersSeverityCheck:
+        simple: ${Email.MicrosoftHeadersSeverityCheck}
+      XDRRiskyHosts:
+        complex:
+          accessor: RiskyHost
+          root: PaloAltoNetworksXDR
+          transformers:
+          - operator: uniq
+      XDRRiskyUsers:
+        complex:
+          accessor: RiskyUser
+          root: PaloAltoNetworksXDR
+          transformers:
+          - operator: uniq
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: eb370d25-cc46-41fe-b0f9-7419bb5cce95
+      iscommand: false
+      name: Calculate Severity - Generic v2
+      playbookId: Calculate Severity - Generic v2
+      type: playbook
+      version: -1
+    taskid: eb370d25-cc46-41fe-b0f9-7419bb5cce95
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 410
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 0c830526-70e7-4df8-bffc-214c075794ba
+      iscommand: false
+      name: End Playbook
+      type: title
+      version: -1
+    taskid: 0c830526-70e7-4df8-bffc-214c075794ba
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 590
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 600,
+        "width": 380,
+        "x": 450,
+        "y": 50
+      }
+    }
+  }
+fromversion: 5.0.0
