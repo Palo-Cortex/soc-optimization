@@ -1,4 +1,3 @@
-adopted: true
 contentitemexportablefields:
   contentitemfields:
     definitionid: ""
@@ -8,14 +7,13 @@ contentitemexportablefields:
     packID: ""
     packName: SOC Framework
     prevname: ""
-    supportedModules: []
     toServerVersion: ""
 description: 'This playbook will run the Upon Trigger from the SOC Framework "Optimization",
   The Playbook Router executes the prod playbook in the List called "PlaybookDeploymentMatrix"
   for a Blue / Green deployment.  It does this my Matching on the MITRE Tactic in
   the alert to the playbook in the blue field (i.e. name=EP_Execution and prod=MyPlaybook). '
 dirtyInputs: true
-id: EP_MITRE_Tactic
+id: 'EP_MITRE_Tactic'
 inputSections:
 - description: Generic group for inputs
   inputs:
@@ -24,12 +22,11 @@ inputSections:
 inputs:
 - description: ""
   key: EntryPoint
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: EP_InitialAccess
 name: EP_MITRE_Tactic
-fromversion: 5.0.0
 outputSections:
 - description: Generic group for outputs
   name: General (Outputs group)
@@ -57,18 +54,17 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 03ae8a6c-7832-4b69-8b94-3b174c31c575
+      id: 09476d91-0723-46b6-89a2-d045e698d8c2
       iscommand: false
       name: ""
-      playbooktaskmissingcomponent: null
       version: -1
-    taskid: 03ae8a6c-7832-4b69-8b94-3b174c31c575
+    taskid: 09476d91-0723-46b6-89a2-d045e698d8c2
     timertriggers: []
     type: start
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 275,
           "y": 50
         }
       }
@@ -99,21 +95,19 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: f05afcc0-89a1-4f2f-8e4d-e2c760824901
+      id: 69ff8e1d-90df-4a0f-822c-9d47ad59ee93
       iscommand: false
       name: Foundation - Playbook Router
       playbookId: Foundation - Playbook Router
-      playbookName: Foundation - Playbook Router
-      playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: f05afcc0-89a1-4f2f-8e4d-e2c760824901
+    taskid: 69ff8e1d-90df-4a0f-822c-9d47ad59ee93
     timertriggers: []
     type: playbook
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 640,
           "y": 890
         }
       }
@@ -129,20 +123,19 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 63fef191-0dcf-4bfe-8893-2699157df37b
+      id: 5682800d-a684-4206-bca5-177dab874eeb
       iscommand: false
       name: Done
-      playbooktaskmissingcomponent: null
       type: title
       version: -1
-    taskid: 63fef191-0dcf-4bfe-8893-2699157df37b
+    taskid: 5682800d-a684-4206-bca5-177dab874eeb
     timertriggers: []
     type: title
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 1570
+          "x": 275,
+          "y": 2190
         }
       }
   "4":
@@ -151,29 +144,33 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
     nexttasks:
       '#none#':
       - "9"
     note: false
     quietmode: 0
-    separatecontext: true
+    separatecontext: false
     skipunavailable: false
     task:
       brand: ""
-      id: c335ba73-408b-4ff7-82d6-a24d27f43d9b
+      id: 0e31ed27-4568-45cb-913c-f273c2cc6377
       iscommand: false
       name: Foundation - Upon Trigger
       playbookId: Foundation - Upon Trigger
-      playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: c335ba73-408b-4ff7-82d6-a24d27f43d9b
+    taskid: 0e31ed27-4568-45cb-913c-f273c2cc6377
     timertriggers: []
     type: playbook
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 275,
           "y": 380
         }
       }
@@ -201,21 +198,20 @@ tasks:
     task:
       brand: Builtin
       description: commands.local.cmd.set.playbook
-      id: 5b4d68f1-9c7b-47c6-8f62-853b603acb24
+      id: c1f52b4a-a3de-4bde-b124-ede7bdd49864
       iscommand: true
       name: Run Playbook
-      playbooktaskmissingcomponent: null
       script: Builtin|||setPlaybook
       type: regular
       version: -1
-    taskid: 5b4d68f1-9c7b-47c6-8f62-853b603acb24
+    taskid: c1f52b4a-a3de-4bde-b124-ede7bdd49864
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 275,
-          "y": 1230
+          "x": 640,
+          "y": 1320
         }
       }
   "6":
@@ -234,7 +230,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#default#':
-      - "3"
+      - "11"
       "yes":
       - "5"
     note: false
@@ -243,20 +239,19 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 4dedaf8e-f2b7-4ec4-8614-5090031ad304
+      id: 4e430836-d68d-4c9c-a76f-49d05dd8174b
       iscommand: false
       name: Playbook Name Exists?
-      playbooktaskmissingcomponent: null
       type: condition
       version: -1
-    taskid: 4dedaf8e-f2b7-4ec4-8614-5090031ad304
+    taskid: 4e430836-d68d-4c9c-a76f-49d05dd8174b
     timertriggers: []
     type: condition
     view: |-
       {
         "position": {
-          "x": 162.5,
-          "y": 1060
+          "x": 640,
+          "y": 1070
         }
       }
   "7":
@@ -274,21 +269,20 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 233a60a7-f88c-463d-8b2b-ddd97048a029
+      id: 847acd40-89de-417b-82eb-28bab05459f6
       iscommand: false
       name: Foundation - Error Handling
       playbookId: Foundation - Error Handling
-      playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: 233a60a7-f88c-463d-8b2b-ddd97048a029
+    taskid: 847acd40-89de-417b-82eb-28bab05459f6
     timertriggers: []
     type: playbook
     view: |-
       {
         "position": {
-          "x": 162.5,
-          "y": 1400
+          "x": 640,
+          "y": 1940
         }
       }
   "8":
@@ -312,22 +306,21 @@ tasks:
       description: "Delete field from context.\n\nThis automation runs using the default
         Limited User role, unless you explicitly change the permissions.\nFor more
         information, see the section about permissions here:\n- For Cortex see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
-      id: 38368080-d671-49c8-8383-dc7825abe99f
+        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+      id: c30c65fc-ad22-4134-8f52-025b36bcb269
       iscommand: false
       name: Delete PlaybookRouting Context
-      playbooktaskmissingcomponent: null
       script: DeleteContext
       type: regular
       version: -1
-    taskid: 38368080-d671-49c8-8383-dc7825abe99f
+    taskid: c30c65fc-ad22-4134-8f52-025b36bcb269
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 275,
           "y": 210
         }
       }
@@ -463,19 +456,18 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: a901714e-11c5-4b05-8d15-4e57cec5ca07
+      id: ff5c7713-c552-43c6-b7c8-13e09791238d
       iscommand: false
       name: Match On MITRE Tactic
-      playbooktaskmissingcomponent: null
       type: condition
       version: -1
-    taskid: a901714e-11c5-4b05-8d15-4e57cec5ca07
+    taskid: ff5c7713-c552-43c6-b7c8-13e09791238d
     timertriggers: []
     type: condition
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 275,
           "y": 550
         }
       }
@@ -537,35 +529,124 @@ tasks:
     task:
       brand: ""
       description: Set a value in context under the key you entered.
-      id: 72c5f010-fd6a-4c57-89e0-1b42369415da
+      id: 58e44481-a54b-490e-aad3-8169514d9892
       iscommand: false
       name: Create Playbook Name From Tactic
-      playbooktaskmissingcomponent: null
       script: Set
       type: regular
       version: -1
-    taskid: 72c5f010-fd6a-4c57-89e0-1b42369415da
+    taskid: 58e44481-a54b-490e-aad3-8169514d9892
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 640,
           "y": 720
+        }
+      }
+  "11":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: alert.tags
+          operator: isEqualString
+          right:
+            value:
+              simple: '"DS:CrowdStrike/Falcon_Event"'
+      label: "yes"
+    continueonerrortype: ""
+    id: "11"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "3"
+      "yes":
+      - "12"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: d9a1f66f-706f-417c-9067-cfb0093c45b2
+      iscommand: false
+      name: Is this alert from Crowdstrike Falcon?
+      type: condition
+      version: -1
+    taskid: d9a1f66f-706f-417c-9067-cfb0093c45b2
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": -40,
+          "y": 1320
+        }
+      }
+  "12":
+    continueonerror: true
+    continueonerrortype: errorPath
+    id: "12"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#error#':
+      - "7"
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      alertId:
+        simple: ${alert.internal_id}
+      name:
+        simple: FedEx - Crowdstrike DEFAULT Alert Handler
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.playbook
+      id: 5876394a-a6f3-4121-9b0c-25362e71d250
+      iscommand: true
+      name: |
+        Run Default Crowdstrike Playbook
+      script: Builtin|||setPlaybook
+      type: regular
+      version: -1
+    taskid: 5876394a-a6f3-4121-9b0c-25362e71d250
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": -40,
+          "y": 1780
         }
       }
 version: -1
 view: |-
   {
     "linkLabelsPosition": {
-      "9_10_MITRE Tactic": 0.87
+      "11_12_yes": 0.38,
+      "11_3_#default#": 0.2,
+      "12_7_#error#": 0.28,
+      "6_11_#default#": 0.25,
+      "9_10_MITRE Tactic": 0.87,
+      "9_3_#default#": 0.1
     },
     "paper": {
       "dimensions": {
-        "height": 1580,
-        "width": 605,
-        "x": 50,
+        "height": 2200,
+        "width": 1060,
+        "x": -40,
         "y": 50
       }
     }
   }
+fromversion: 5.0.0
