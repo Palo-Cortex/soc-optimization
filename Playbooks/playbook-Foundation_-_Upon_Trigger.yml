@@ -128,7 +128,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "26"
+      - "4"
     note: false
     quietmode: 0
     separatecontext: false
@@ -158,7 +158,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "22"
+      - "25"
     note: false
     quietmode: 0
     separatecontext: false
@@ -177,7 +177,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1380
+          "y": 1040
         }
       }
   "5":
@@ -207,7 +207,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1710
+          "y": 1540
         }
       }
   "6":
@@ -218,7 +218,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "7"
+      - "26"
     note: false
     quietmode: 0
     separatecontext: false
@@ -237,7 +237,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 2040
+          "y": 1870
         }
       }
   "7":
@@ -457,7 +457,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1540
+          "y": 1370
         }
       }
   "23":
@@ -493,7 +493,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1870
+          "y": 1700
         }
       }
   "24":
@@ -536,7 +536,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "4"
+      - "22"
     note: false
     quietmode: 0
     separatecontext: false
@@ -556,7 +556,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1210
+          "y": 1200
         }
       }
   "26":
@@ -567,7 +567,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "25"
+      - "7"
     note: false
     quietmode: 0
     separatecontext: true
@@ -587,7 +587,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1040
+          "y": 2030
         }
       }
 version: -1

@@ -1,19 +1,21 @@
+adopted: true
 contentitemexportablefields:
   contentitemfields:
     definitionid: ""
-    fromServerVersion: 5.0.0
+    fromServerVersion: ""
     isoverridable: false
-    itemVersion: 2.1.10
+    itemVersion: 1.7.0
     packID: ""
     packName: SOC Framework
     prevname: ""
+    supportedModules: []
     toServerVersion: ""
 description: 'This playbook will run the Upon Trigger from the SOC Framework "Optimization",
   The Playbook Router executes the prod playbook in the List called "PlaybookDeploymentMatrix"
   for a Blue / Green deployment.  It does this my Matching on the MITRE Tactic in
   the alert to the playbook in the blue field (i.e. name=EP_Execution and prod=MyPlaybook). '
 dirtyInputs: true
-id: 'EP_MITRE_Tactic'
+id: EP_MITRE_Tactic
 inputSections:
 - description: Generic group for inputs
   inputs:
@@ -27,6 +29,7 @@ inputs:
   value:
     simple: EP_InitialAccess
 name: EP_MITRE_Tactic
+fromversion: 5.0.0
 outputSections:
 - description: Generic group for outputs
   name: General (Outputs group)
@@ -54,17 +57,18 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 09476d91-0723-46b6-89a2-d045e698d8c2
+      id: 03ae8a6c-7832-4b69-8b94-3b174c31c575
       iscommand: false
       name: ""
+      playbooktaskmissingcomponent: null
       version: -1
-    taskid: 09476d91-0723-46b6-89a2-d045e698d8c2
+    taskid: 03ae8a6c-7832-4b69-8b94-3b174c31c575
     timertriggers: []
     type: start
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 50,
           "y": 50
         }
       }
@@ -95,19 +99,21 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 69ff8e1d-90df-4a0f-822c-9d47ad59ee93
+      id: f05afcc0-89a1-4f2f-8e4d-e2c760824901
       iscommand: false
       name: Foundation - Playbook Router
       playbookId: Foundation - Playbook Router
+      playbookName: Foundation - Playbook Router
+      playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: 69ff8e1d-90df-4a0f-822c-9d47ad59ee93
+    taskid: f05afcc0-89a1-4f2f-8e4d-e2c760824901
     timertriggers: []
     type: playbook
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 162.5,
           "y": 890
         }
       }
@@ -123,18 +129,19 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 5682800d-a684-4206-bca5-177dab874eeb
+      id: 63fef191-0dcf-4bfe-8893-2699157df37b
       iscommand: false
       name: Done
+      playbooktaskmissingcomponent: null
       type: title
       version: -1
-    taskid: 5682800d-a684-4206-bca5-177dab874eeb
+    taskid: 63fef191-0dcf-4bfe-8893-2699157df37b
     timertriggers: []
     type: title
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 50,
           "y": 1570
         }
       }
@@ -144,33 +151,29 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
-    loop:
-      exitCondition: ""
-      iscommand: false
-      max: 100
-      wait: 1
     nexttasks:
       '#none#':
       - "9"
     note: false
     quietmode: 0
-    separatecontext: false
+    separatecontext: true
     skipunavailable: false
     task:
       brand: ""
-      id: 0e31ed27-4568-45cb-913c-f273c2cc6377
+      id: c335ba73-408b-4ff7-82d6-a24d27f43d9b
       iscommand: false
       name: Foundation - Upon Trigger
       playbookId: Foundation - Upon Trigger
+      playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: 0e31ed27-4568-45cb-913c-f273c2cc6377
+    taskid: c335ba73-408b-4ff7-82d6-a24d27f43d9b
     timertriggers: []
     type: playbook
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 50,
           "y": 380
         }
       }
@@ -198,19 +201,20 @@ tasks:
     task:
       brand: Builtin
       description: commands.local.cmd.set.playbook
-      id: c1f52b4a-a3de-4bde-b124-ede7bdd49864
+      id: 5b4d68f1-9c7b-47c6-8f62-853b603acb24
       iscommand: true
       name: Run Playbook
+      playbooktaskmissingcomponent: null
       script: Builtin|||setPlaybook
       type: regular
       version: -1
-    taskid: c1f52b4a-a3de-4bde-b124-ede7bdd49864
+    taskid: 5b4d68f1-9c7b-47c6-8f62-853b603acb24
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 275,
           "y": 1230
         }
       }
@@ -229,6 +233,8 @@ tasks:
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
+      '#default#':
+      - "3"
       "yes":
       - "5"
     note: false
@@ -237,18 +243,19 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 4e430836-d68d-4c9c-a76f-49d05dd8174b
+      id: 4dedaf8e-f2b7-4ec4-8614-5090031ad304
       iscommand: false
       name: Playbook Name Exists?
+      playbooktaskmissingcomponent: null
       type: condition
       version: -1
-    taskid: 4e430836-d68d-4c9c-a76f-49d05dd8174b
+    taskid: 4dedaf8e-f2b7-4ec4-8614-5090031ad304
     timertriggers: []
     type: condition
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 162.5,
           "y": 1060
         }
       }
@@ -267,13 +274,14 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 847acd40-89de-417b-82eb-28bab05459f6
+      id: 233a60a7-f88c-463d-8b2b-ddd97048a029
       iscommand: false
       name: Foundation - Error Handling
       playbookId: Foundation - Error Handling
+      playbooktaskmissingcomponent: null
       type: playbook
       version: -1
-    taskid: 847acd40-89de-417b-82eb-28bab05459f6
+    taskid: 233a60a7-f88c-463d-8b2b-ddd97048a029
     timertriggers: []
     type: playbook
     view: |-
@@ -304,21 +312,22 @@ tasks:
       description: "Delete field from context.\n\nThis automation runs using the default
         Limited User role, unless you explicitly change the permissions.\nFor more
         information, see the section about permissions here:\n- For Cortex see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
-        - For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
-      id: c30c65fc-ad22-4134-8f52-025b36bcb269
+        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
+        For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+      id: 38368080-d671-49c8-8383-dc7825abe99f
       iscommand: false
       name: Delete PlaybookRouting Context
+      playbooktaskmissingcomponent: null
       script: DeleteContext
       type: regular
       version: -1
-    taskid: c30c65fc-ad22-4134-8f52-025b36bcb269
+    taskid: 38368080-d671-49c8-8383-dc7825abe99f
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 50,
           "y": 210
         }
       }
@@ -454,18 +463,19 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: ff5c7713-c552-43c6-b7c8-13e09791238d
+      id: a901714e-11c5-4b05-8d15-4e57cec5ca07
       iscommand: false
       name: Match On MITRE Tactic
+      playbooktaskmissingcomponent: null
       type: condition
       version: -1
-    taskid: ff5c7713-c552-43c6-b7c8-13e09791238d
+    taskid: a901714e-11c5-4b05-8d15-4e57cec5ca07
     timertriggers: []
     type: condition
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 50,
           "y": 550
         }
       }
@@ -527,19 +537,20 @@ tasks:
     task:
       brand: ""
       description: Set a value in context under the key you entered.
-      id: 58e44481-a54b-490e-aad3-8169514d9892
+      id: 72c5f010-fd6a-4c57-89e0-1b42369415da
       iscommand: false
       name: Create Playbook Name From Tactic
+      playbooktaskmissingcomponent: null
       script: Set
       type: regular
       version: -1
-    taskid: 58e44481-a54b-490e-aad3-8169514d9892
+    taskid: 72c5f010-fd6a-4c57-89e0-1b42369415da
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 162.5,
           "y": 720
         }
       }
@@ -547,13 +558,12 @@ version: -1
 view: |-
   {
     "linkLabelsPosition": {
-      "9_10_MITRE Tactic": 0.87,
-      "9_3_#default#": 0.1
+      "9_10_MITRE Tactic": 0.87
     },
     "paper": {
       "dimensions": {
         "height": 1580,
-        "width": 492.5,
+        "width": 605,
         "x": 50,
         "y": 50
       }
