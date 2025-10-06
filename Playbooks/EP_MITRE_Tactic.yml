@@ -255,8 +255,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 162.5,
-          "y": 1400
+          "x": 640,
+          "y": 1940
         }
       }
     note: false
