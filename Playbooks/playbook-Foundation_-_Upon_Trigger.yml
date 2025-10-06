@@ -1,58 +1,37 @@
+id: Foundation - Upon Trigger
+version: 1
 contentitemexportablefields:
   contentitemfields:
-    definitionid: ""
-    fromServerVersion: 5.0.0
-    isoverridable: false
-    itemVersion: 2.1.8
-    packID: ""
+    packID: soc-optimization
     packName: SOC Framework
-    prevname: ""
+    itemVersion: 2.1.10
+    fromServerVersion: 5.0.0
     toServerVersion: ""
-dirtyInputs: true
-id: 'Foundation - Upon Trigger'
-inputSections:
-- description: Generic group for inputs
-  inputs: []
-  name: General (Inputs group)
-inputs: []
+    definitionid: ""
+    prevname: ""
+    isoverridable: false
+vcShouldKeepItemLegacyProdMachine: false
 name: Foundation - Upon Trigger
-outputSections:
-- description: Generic group for outputs
-  name: General (Outputs group)
-  outputs:
-  - Shadow
-outputs:
-- contextPath: Shadow
-  type: boolean
-quiet: true
-sourceplaybookid: Foundation - Upon Trigger
-starttaskid: "0"
 tags:
-- SOC
-- SOC_Framework
+  - SOC
+  - SOC_Framework
+starttaskid: "0"
 tasks:
   "0":
-    continueonerrortype: ""
     id: "0"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
+    taskid: 5206068f-fdf3-4829-8cc2-c3ada7b5516b
+    type: start
+    task:
+      id: 5206068f-fdf3-4829-8cc2-c3ada7b5516b
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
     nexttasks:
       '#none#':
-      - "1"
-    note: false
-    quietmode: 0
+        - "1"
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 5206068f-fdf3-4829-8cc2-c3ada7b5516b
-      iscommand: false
-      name: ""
-      version: -1
-    taskid: 5206068f-fdf3-4829-8cc2-c3ada7b5516b
-    timertriggers: []
-    type: start
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -60,29 +39,29 @@ tasks:
           "y": 50
         }
       }
-  "1":
-    continueonerrortype: ""
-    id: "1"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "17"
     note: false
-    quietmode: 0
-    separatecontext: false
+    timertriggers: []
+    ignoreworker: false
     skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "1":
+    id: "1"
+    taskid: cd6cbd33-49b9-4c0e-8c76-12c43c541cb5
+    type: title
     task:
-      brand: ""
       id: cd6cbd33-49b9-4c0e-8c76-12c43c541cb5
-      iscommand: false
+      version: -1
       name: Environment Detection
       type: title
-      version: -1
-    taskid: cd6cbd33-49b9-4c0e-8c76-12c43c541cb5
-    timertriggers: []
-    type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+        - "17"
+    separatecontext: false
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -90,29 +69,29 @@ tasks:
           "y": 210
         }
       }
-  "2":
-    continueonerrortype: ""
-    id: "2"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "3"
     note: false
-    quietmode: 0
-    separatecontext: false
+    timertriggers: []
+    ignoreworker: false
     skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "2":
+    id: "2"
+    taskid: eaffbc30-3533-483b-80c1-82bdd0e73dd3
+    type: title
     task:
-      brand: ""
       id: eaffbc30-3533-483b-80c1-82bdd0e73dd3
-      iscommand: false
+      version: -1
       name: Data Integrity
       type: title
-      version: -1
-    taskid: eaffbc30-3533-483b-80c1-82bdd0e73dd3
-    timertriggers: []
-    type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+        - "3"
+    separatecontext: false
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -120,29 +99,29 @@ tasks:
           "y": 715
         }
       }
-  "3":
-    continueonerrortype: ""
-    id: "3"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "26"
     note: false
-    quietmode: 0
-    separatecontext: false
+    timertriggers: []
+    ignoreworker: false
     skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "3":
+    id: "3"
+    taskid: 2b3a538a-4c64-408a-86b2-74cd81484c7f
+    type: title
     task:
-      brand: ""
       id: 2b3a538a-4c64-408a-86b2-74cd81484c7f
-      iscommand: false
+      version: -1
       name: Alert Sync (Ledger / Owner Notification)
       type: title
-      version: -1
-    taskid: 2b3a538a-4c64-408a-86b2-74cd81484c7f
-    timertriggers: []
-    type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+        - "26"
+    separatecontext: false
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -150,29 +129,29 @@ tasks:
           "y": 880
         }
       }
-  "4":
-    continueonerrortype: ""
-    id: "4"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "22"
     note: false
-    quietmode: 0
-    separatecontext: false
+    timertriggers: []
+    ignoreworker: false
     skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "4":
+    id: "4"
+    taskid: 4bc7c9d9-c8d2-4e49-8f24-1e964e9ad270
+    type: title
     task:
-      brand: ""
       id: 4bc7c9d9-c8d2-4e49-8f24-1e964e9ad270
-      iscommand: false
+      version: -1
       name: Dedup
       type: title
-      version: -1
-    taskid: 4bc7c9d9-c8d2-4e49-8f24-1e964e9ad270
-    timertriggers: []
-    type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+        - "22"
+    separatecontext: false
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -180,29 +159,29 @@ tasks:
           "y": 1380
         }
       }
-  "5":
-    continueonerrortype: ""
-    id: "5"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "23"
     note: false
-    quietmode: 0
-    separatecontext: false
+    timertriggers: []
+    ignoreworker: false
     skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "5":
+    id: "5"
+    taskid: a4730ca6-80a0-4fb3-80d3-9a2e6e1f964c
+    type: title
     task:
-      brand: ""
       id: a4730ca6-80a0-4fb3-80d3-9a2e6e1f964c
-      iscommand: false
+      version: -1
       name: Enrichment (User, IP, Hash, Domain)
       type: title
-      version: -1
-    taskid: a4730ca6-80a0-4fb3-80d3-9a2e6e1f964c
-    timertriggers: []
-    type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+        - "23"
+    separatecontext: false
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -210,29 +189,29 @@ tasks:
           "y": 1710
         }
       }
-  "6":
-    continueonerrortype: ""
-    id: "6"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "7"
     note: false
-    quietmode: 0
-    separatecontext: false
+    timertriggers: []
+    ignoreworker: false
     skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "6":
+    id: "6"
+    taskid: 35c54f0f-e1e7-48a9-8aed-57d322ddf9c7
+    type: title
     task:
-      brand: ""
       id: 35c54f0f-e1e7-48a9-8aed-57d322ddf9c7
-      iscommand: false
+      version: -1
       name: Assessment
       type: title
-      version: -1
-    taskid: 35c54f0f-e1e7-48a9-8aed-57d322ddf9c7
-    timertriggers: []
-    type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+        - "7"
+    separatecontext: false
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -240,29 +219,29 @@ tasks:
           "y": 2040
         }
       }
-  "7":
-    continueonerrortype: ""
-    id: "7"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "8"
     note: false
-    quietmode: 0
-    separatecontext: false
+    timertriggers: []
+    ignoreworker: false
     skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "7":
+    id: "7"
+    taskid: 76dd4bf8-4839-4846-8cc2-95492ce2721a
+    type: title
     task:
-      brand: ""
       id: 76dd4bf8-4839-4846-8cc2-95492ce2721a
-      iscommand: false
+      version: -1
       name: Escalation
       type: title
-      version: -1
-    taskid: 76dd4bf8-4839-4846-8cc2-95492ce2721a
-    timertriggers: []
-    type: title
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+        - "8"
+    separatecontext: false
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -270,26 +249,26 @@ tasks:
           "y": 2200
         }
       }
-  "8":
-    continueonerrortype: ""
-    id: "8"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
     note: false
-    quietmode: 0
-    separatecontext: false
+    timertriggers: []
+    ignoreworker: false
     skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "8":
+    id: "8"
+    taskid: d6a23a94-520a-4ff6-8146-c309f064e6ed
+    type: title
     task:
-      brand: ""
       id: d6a23a94-520a-4ff6-8146-c309f064e6ed
-      iscommand: false
+      version: -1
       name: Done
       type: title
-      version: -1
-    taskid: d6a23a94-520a-4ff6-8146-c309f064e6ed
-    timertriggers: []
-    type: title
+      iscommand: false
+      brand: ""
+    separatecontext: false
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -297,45 +276,45 @@ tasks:
           "y": 2360
         }
       }
-  "17":
-    conditions:
-    - condition:
-      - - left:
-            iscontext: true
-            value:
-              simple: alert.env
-          operator: isEqualString
-          right:
-            value:
-              simple: prod
-      label: "yes"
-    continueonerrortype: ""
-    id: "17"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "17":
+    id: "17"
+    taskid: d1f1473c-003c-4c82-ac5a-07e0e82dad09
+    type: condition
+    task:
+      id: d1f1473c-003c-4c82-ac5a-07e0e82dad09
+      version: -1
+      name: Is this a Production Environment?
+      type: condition
+      iscommand: false
+      brand: ""
     nexttasks:
       '#default#':
-      - "18"
+        - "18"
       "yes":
-      - "19"
-    note: false
-    quietmode: 0
+        - "19"
     scriptarguments:
       retry-count:
         simple: "0"
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: d1f1473c-003c-4c82-ac5a-07e0e82dad09
-      iscommand: false
-      name: Is this a Production Environment?
-      type: condition
-      version: -1
-    taskid: d1f1473c-003c-4c82-ac5a-07e0e82dad09
-    timertriggers: []
-    type: condition
+    conditions:
+      - label: "yes"
+        condition:
+          - - operator: isEqualString
+              left:
+                value:
+                  simple: alert.env
+                iscontext: true
+              right:
+                value:
+                  simple: prod
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -343,39 +322,39 @@ tasks:
           "y": 370
         }
       }
-  "18":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "18"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "18":
+    id: "18"
+    taskid: 67eedc50-5c07-4832-896d-f5b9780eb669
+    type: regular
+    task:
+      id: 67eedc50-5c07-4832-896d-f5b9780eb669
+      version: -1
+      name: Set To Shadow
+      description: Set a value in context under the key you entered.
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
     nexttasks:
       '#error#':
-      - "24"
+        - "24"
       '#none#':
-      - "2"
-    note: false
-    quietmode: 0
+        - "2"
     scriptarguments:
       key:
         simple: shadow_mode
       value:
         simple: "true"
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: Set a value in context under the key you entered.
-      id: 67eedc50-5c07-4832-896d-f5b9780eb669
-      iscommand: false
-      name: Set To Shadow
-      script: Set
-      type: regular
-      version: -1
-    taskid: 67eedc50-5c07-4832-896d-f5b9780eb669
-    timertriggers: []
-    type: regular
+    continueonerror: true
+    continueonerrortype: errorPath
     view: |-
       {
         "position": {
@@ -383,39 +362,39 @@ tasks:
           "y": 540
         }
       }
-  "19":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "19"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "19":
+    id: "19"
+    taskid: 5752dc90-12fe-48dd-99df-2df4c8d2a051
+    type: regular
+    task:
+      id: 5752dc90-12fe-48dd-99df-2df4c8d2a051
+      version: -1
+      name: Set To Full Run
+      description: Set a value in context under the key you entered.
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
     nexttasks:
       '#error#':
-      - "24"
+        - "24"
       '#none#':
-      - "2"
-    note: false
-    quietmode: 0
+        - "2"
     scriptarguments:
       key:
         simple: shadow_mode
       value:
         simple: "false"
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: Set a value in context under the key you entered.
-      id: 5752dc90-12fe-48dd-99df-2df4c8d2a051
-      iscommand: false
-      name: Set To Full Run
-      script: Set
-      type: regular
-      version: -1
-    taskid: 5752dc90-12fe-48dd-99df-2df4c8d2a051
-    timertriggers: []
-    type: regular
+    continueonerror: true
+    continueonerrortype: errorPath
     view: |-
       {
         "position": {
@@ -423,36 +402,36 @@ tasks:
           "y": 540
         }
       }
-  "22":
-    continueonerrortype: ""
-    id: "22"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
-    loop:
-      exitCondition: ""
+    isautoswitchedtoquietmode: false
+  "22":
+    id: "22"
+    taskid: affbdad4-0d9f-4822-8ff0-30bdda250e0e
+    type: playbook
+    task:
+      id: affbdad4-0d9f-4822-8ff0-30bdda250e0e
+      version: -1
+      name: Foundation - Dedup
+      description: A simple Dedup to insure alerts are not executed on more than once.
+      playbookName: Foundation - Dedup
+      type: playbook
       iscommand: false
-      max: 100
-      wait: 1
+      brand: ""
     nexttasks:
       '#none#':
-      - "5"
-    note: false
-    quietmode: 0
+        - "5"
     separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      description: A simple Dedup to insure alerts are not executed on more than once.
-      id: affbdad4-0d9f-4822-8ff0-30bdda250e0e
+    continueonerrortype: ""
+    loop:
       iscommand: false
-      name: Foundation - Dedup
-      playbookId: Foundation - Dedup
-      type: playbook
-      version: -1
-    taskid: affbdad4-0d9f-4822-8ff0-30bdda250e0e
-    timertriggers: []
-    type: playbook
+      exitCondition: ""
+      wait: 1
+      max: 100
     view: |-
       {
         "position": {
@@ -460,35 +439,35 @@ tasks:
           "y": 1540
         }
       }
-  "23":
-    continueonerrortype: ""
-    id: "23"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
-    loop:
-      exitCondition: ""
+    isautoswitchedtoquietmode: false
+  "23":
+    id: "23"
+    taskid: bf804660-d518-4cd7-87b5-4a5cbd2f4b47
+    type: playbook
+    task:
+      id: bf804660-d518-4cd7-87b5-4a5cbd2f4b47
+      version: -1
+      name: Foundation - Enrichment
+      playbookName: Foundation - Enrichment
+      type: playbook
       iscommand: false
-      max: 100
-      wait: 1
+      brand: ""
     nexttasks:
       '#none#':
-      - "6"
-    note: false
-    quietmode: 0
+        - "6"
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: bf804660-d518-4cd7-87b5-4a5cbd2f4b47
+    continueonerrortype: ""
+    loop:
       iscommand: false
-      name: Foundation - Enrichment
-      playbookId: Foundation - Enrichment
-      type: playbook
-      version: -1
-    taskid: bf804660-d518-4cd7-87b5-4a5cbd2f4b47
-    timertriggers: []
-    type: playbook
+      exitCondition: ""
+      wait: 1
+      max: 100
     view: |-
       {
         "position": {
@@ -496,30 +475,30 @@ tasks:
           "y": 1870
         }
       }
-  "24":
-    continueonerrortype: ""
-    id: "24"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "24":
+    id: "24"
+    taskid: bba69d32-a3b9-4a81-8d58-1be1e99e119f
+    type: playbook
+    task:
+      id: bba69d32-a3b9-4a81-8d58-1be1e99e119f
+      version: -1
+      name: Foundation - Error Handling
+      playbookName: Foundation - Error Handling
+      type: playbook
+      iscommand: false
+      brand: ""
     nexttasks:
       '#none#':
-      - "8"
-    note: false
-    quietmode: 0
+        - "8"
     separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: bba69d32-a3b9-4a81-8d58-1be1e99e119f
-      iscommand: false
-      name: Foundation - Error Handling
-      playbookId: Foundation - Error Handling
-      type: playbook
-      version: -1
-    taskid: bba69d32-a3b9-4a81-8d58-1be1e99e119f
-    timertriggers: []
-    type: playbook
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -527,31 +506,31 @@ tasks:
           "y": 710
         }
       }
-  "25":
-    continueonerror: true
-    continueonerrortype: ""
-    id: "25"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "25":
+    id: "25"
+    taskid: 164053c2-9f5b-487d-a444-b927f4266b8e
+    type: regular
+    task:
+      id: 164053c2-9f5b-487d-a444-b927f4266b8e
+      version: -1
+      name: Normalize Entities in Context
+      scriptName: SOC_NormalizeContext
+      type: regular
+      iscommand: false
+      brand: ""
     nexttasks:
       '#none#':
-      - "4"
-    note: false
-    quietmode: 0
+        - "4"
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 164053c2-9f5b-487d-a444-b927f4266b8e
-      iscommand: false
-      name: Normalize Entities in Context
-      script: SOC_NormalizeContext
-      type: regular
-      version: -1
-    taskid: 164053c2-9f5b-487d-a444-b927f4266b8e
-    timertriggers: []
-    type: regular
+    continueonerror: true
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -559,30 +538,30 @@ tasks:
           "y": 1210
         }
       }
-  "26":
-    continueonerrortype: ""
-    id: "26"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "26":
+    id: "26"
+    taskid: 4b283a1f-a5d4-42fa-8601-6f219d573515
+    type: playbook
+    task:
+      id: 4b283a1f-a5d4-42fa-8601-6f219d573515
+      version: -1
+      name: Foundation Common - Extract Indicators from alerts
+      playbookName: Foundation Common - Extract Indicators from alerts
+      type: playbook
+      iscommand: false
+      brand: ""
     nexttasks:
       '#none#':
-      - "25"
-    note: false
-    quietmode: 0
+        - "25"
     separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 4b283a1f-a5d4-42fa-8601-6f219d573515
-      iscommand: false
-      name: Foundation Common - Extract Indicators from alerts
-      playbookId: Foundation Common - Extract Indicators from alerts
-      type: playbook
-      version: -1
-    taskid: 4b283a1f-a5d4-42fa-8601-6f219d573515
-    timertriggers: []
-    type: playbook
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -590,7 +569,14 @@ tasks:
           "y": 1040
         }
       }
-version: -1
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+system: true
 view: |-
   {
     "linkLabelsPosition": {},
@@ -603,4 +589,19 @@ view: |-
       }
     }
   }
-fromversion: 5.0.0
+inputs: []
+inputSections:
+  - inputs: []
+    name: General (Inputs group)
+    description: Generic group for inputs
+outputSections:
+  - outputs:
+      - Shadow
+    name: General (Outputs group)
+    description: Generic group for outputs
+outputs:
+  - contextPath: Shadow
+    type: boolean
+sourceplaybookid: Foundation - Upon Trigger
+quiet: true
+dirtyInputs: true
