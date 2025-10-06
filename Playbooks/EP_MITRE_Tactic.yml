@@ -1,93 +1,71 @@
-adopted: true
+id: EP_MITRE_Tactic
+version: 2
 contentitemexportablefields:
   contentitemfields:
-    definitionid: ""
-    fromServerVersion: ""
-    isoverridable: false
-    itemVersion: 1.7.0
-    packID: ""
+    packID: soc-optimization
     packName: SOC Framework
-    prevname: ""
-    supportedModules: []
+    itemVersion: 2.1.10
+    fromServerVersion: 5.0.0
     toServerVersion: ""
+    definitionid: ""
+    prevname: ""
+    isoverridable: false
+vcShouldKeepItemLegacyProdMachine: false
+name: EP_MITRE_Tactic
 description: 'This playbook will run the Upon Trigger from the SOC Framework "Optimization",
   The Playbook Router executes the prod playbook in the List called "PlaybookDeploymentMatrix"
   for a Blue / Green deployment.  It does this my Matching on the MITRE Tactic in
   the alert to the playbook in the blue field (i.e. name=EP_Execution and prod=MyPlaybook). '
-dirtyInputs: true
-id: EP_MITRE_Tactic
-inputSections:
-- description: Generic group for inputs
-  inputs:
-  - EntryPoint
-  name: General (Inputs group)
-inputs:
-- description: ""
-  key: EntryPoint
-  playbookInputQuery: null
-  required: false
-  value:
-    simple: EP_InitialAccess
-name: EP_MITRE_Tactic
-fromversion: 5.0.0
-outputSections:
-- description: Generic group for outputs
-  name: General (Outputs group)
-  outputs: []
-outputs: []
-sourceplaybookid: 51ffcd5a-f5bb-4e09-84ae-e1efdc5165ac
-starttaskid: "0"
 tags:
 - MITRE
 - SOC
 - SOC_Framework
+starttaskid: "0"
 tasks:
   "0":
-    continueonerrortype: ""
     id: "0"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
+    taskid: 09476d91-0723-46b6-89a2-d045e698d8c2
+    type: start
+    task:
+      id: 09476d91-0723-46b6-89a2-d045e698d8c2
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
     nexttasks:
       '#none#':
       - "8"
-    note: false
-    quietmode: 0
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 03ae8a6c-7832-4b69-8b94-3b174c31c575
-      iscommand: false
-      name: ""
-      playbooktaskmissingcomponent: null
-      version: -1
-    taskid: 03ae8a6c-7832-4b69-8b94-3b174c31c575
-    timertriggers: []
-    type: start
+    continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 162.5,
           "y": 50
         }
       }
-  "2":
-    continueonerrortype: ""
-    id: "2"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
-    loop:
-      exitCondition: ""
+    isautoswitchedtoquietmode: false
+  "2":
+    id: "2"
+    taskid: 69ff8e1d-90df-4a0f-822c-9d47ad59ee93
+    type: playbook
+    task:
+      id: 69ff8e1d-90df-4a0f-822c-9d47ad59ee93
+      version: -1
+      name: Foundation - Playbook Router
+      playbookName: Foundation - Playbook Router
+      type: playbook
       iscommand: false
-      max: 100
-      wait: 1
+      brand: ""
     nexttasks:
       '#none#':
       - "6"
-    note: false
-    quietmode: 0
     scriptarguments:
       EntryPoint:
         simple: EP_${PlaybookRouting.EntryPoint}
@@ -96,194 +74,184 @@ tasks:
       listName:
         simple: PlaybookDeploymentMatrix
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: f05afcc0-89a1-4f2f-8e4d-e2c760824901
+    continueonerrortype: ""
+    loop:
       iscommand: false
-      name: Foundation - Playbook Router
-      playbookId: Foundation - Playbook Router
-      playbookName: Foundation - Playbook Router
-      playbooktaskmissingcomponent: null
-      type: playbook
-      version: -1
-    taskid: f05afcc0-89a1-4f2f-8e4d-e2c760824901
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 890
+        }
+      }
+    note: false
     timertriggers: []
-    type: playbook
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "3":
+    id: "3"
+    taskid: 5682800d-a684-4206-bca5-177dab874eeb
+    type: title
+    task:
+      id: 5682800d-a684-4206-bca5-177dab874eeb
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+    separatecontext: false
+    continueonerrortype: ""
     view: |-
       {
         "position": {
           "x": 162.5,
-          "y": 890
-        }
-      }
-  "3":
-    continueonerrortype: ""
-    id: "3"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    note: false
-    quietmode: 0
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 63fef191-0dcf-4bfe-8893-2699157df37b
-      iscommand: false
-      name: Done
-      playbooktaskmissingcomponent: null
-      type: title
-      version: -1
-    taskid: 63fef191-0dcf-4bfe-8893-2699157df37b
-    timertriggers: []
-    type: title
-    view: |-
-      {
-        "position": {
-          "x": 50,
           "y": 1570
         }
       }
-  "4":
-    continueonerrortype: ""
-    id: "4"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "4":
+    id: "4"
+    taskid: 0e31ed27-4568-45cb-913c-f273c2cc6377
+    type: playbook
+    task:
+      id: 0e31ed27-4568-45cb-913c-f273c2cc6377
+      version: -1
+      name: Foundation - Upon Trigger
+      playbookName: Foundation - Upon Trigger
+      type: playbook
+      iscommand: false
+      brand: ""
     nexttasks:
       '#none#':
       - "9"
-    note: false
-    quietmode: 0
-    separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: c335ba73-408b-4ff7-82d6-a24d27f43d9b
+    separatecontext: false
+    continueonerrortype: ""
+    loop:
       iscommand: false
-      name: Foundation - Upon Trigger
-      playbookId: Foundation - Upon Trigger
-      playbooktaskmissingcomponent: null
-      type: playbook
-      version: -1
-    taskid: c335ba73-408b-4ff7-82d6-a24d27f43d9b
-    timertriggers: []
-    type: playbook
+      exitCondition: ""
+      wait: 1
+      max: 100
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 162.5,
           "y": 380
         }
       }
-  "5":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "5"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "5":
+    id: "5"
+    taskid: c1f52b4a-a3de-4bde-b124-ede7bdd49864
+    type: regular
+    task:
+      id: c1f52b4a-a3de-4bde-b124-ede7bdd49864
+      version: -1
+      name: Run Playbook
+      description: commands.local.cmd.set.playbook
+      script: Builtin|||setPlaybook
+      type: regular
+      iscommand: true
+      brand: Builtin
     nexttasks:
       '#error#':
       - "7"
       '#none#':
       - "3"
-    note: false
-    quietmode: 0
     scriptarguments:
       alertId:
         simple: ${alert.internal_id}
       name:
         simple: ${PlaybookRouting.Playbook.Name}
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: Builtin
-      description: commands.local.cmd.set.playbook
-      id: 5b4d68f1-9c7b-47c6-8f62-853b603acb24
-      iscommand: true
-      name: Run Playbook
-      playbooktaskmissingcomponent: null
-      script: Builtin|||setPlaybook
-      type: regular
-      version: -1
-    taskid: 5b4d68f1-9c7b-47c6-8f62-853b603acb24
-    timertriggers: []
-    type: regular
+    continueonerror: true
+    continueonerrortype: errorPath
     view: |-
       {
         "position": {
-          "x": 275,
+          "x": 50,
           "y": 1230
         }
       }
-  "6":
-    conditions:
-    - condition:
-      - - left:
-            iscontext: true
-            value:
-              simple: ${PlaybookRouting.Playbook.Name}
-          operator: isNotEmpty
-      label: "yes"
-    continueonerrortype: ""
-    id: "6"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "6":
+    id: "6"
+    taskid: 4e430836-d68d-4c9c-a76f-49d05dd8174b
+    type: condition
+    task:
+      id: 4e430836-d68d-4c9c-a76f-49d05dd8174b
+      version: -1
+      name: Playbook Name Exists?
+      type: condition
+      iscommand: false
+      brand: ""
     nexttasks:
-      '#default#':
-      - "3"
       "yes":
       - "5"
-    note: false
-    quietmode: 0
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 4dedaf8e-f2b7-4ec4-8614-5090031ad304
-      iscommand: false
-      name: Playbook Name Exists?
-      playbooktaskmissingcomponent: null
-      type: condition
-      version: -1
-    taskid: 4dedaf8e-f2b7-4ec4-8614-5090031ad304
-    timertriggers: []
-    type: condition
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isNotEmpty
+          left:
+            value:
+              simple: ${PlaybookRouting.Playbook.Name}
+            iscontext: true
+    continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 50,
           "y": 1060
         }
       }
-  "7":
-    continueonerrortype: ""
-    id: "7"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "7":
+    id: "7"
+    taskid: 847acd40-89de-417b-82eb-28bab05459f6
+    type: playbook
+    task:
+      id: 847acd40-89de-417b-82eb-28bab05459f6
+      version: -1
+      name: Foundation - Error Handling
+      playbookName: Foundation - Error Handling
+      type: playbook
+      iscommand: false
+      brand: ""
     nexttasks:
       '#none#':
       - "3"
-    note: false
-    quietmode: 0
     separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 233a60a7-f88c-463d-8b2b-ddd97048a029
-      iscommand: false
-      name: Foundation - Error Handling
-      playbookId: Foundation - Error Handling
-      playbooktaskmissingcomponent: null
-      type: playbook
-      version: -1
-    taskid: 233a60a7-f88c-463d-8b2b-ddd97048a029
-    timertriggers: []
-    type: playbook
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -291,214 +259,225 @@ tasks:
           "y": 1400
         }
       }
-  "8":
-    continueonerrortype: ""
-    id: "8"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "8":
+    id: "8"
+    taskid: c30c65fc-ad22-4134-8f52-025b36bcb269
+    type: regular
+    task:
+      id: c30c65fc-ad22-4134-8f52-025b36bcb269
+      version: -1
+      name: Delete PlaybookRouting Context
+      description: "Delete field from context.\n\nThis automation runs using the default
+        Limited User role, unless you explicitly change the permissions.\nFor more
+        information, see the section about permissions here:\n- For Cortex see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+      scriptName: DeleteContext
+      type: regular
+      iscommand: false
+      brand: ""
     nexttasks:
       '#none#':
       - "4"
-    note: false
-    quietmode: 0
     scriptarguments:
       key:
         simple: PlaybookRouting
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: "Delete field from context.\n\nThis automation runs using the default
-        Limited User role, unless you explicitly change the permissions.\nFor more
-        information, see the section about permissions here:\n- For Cortex see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
-      id: 38368080-d671-49c8-8383-dc7825abe99f
-      iscommand: false
-      name: Delete PlaybookRouting Context
-      playbooktaskmissingcomponent: null
-      script: DeleteContext
-      type: regular
-      version: -1
-    taskid: 38368080-d671-49c8-8383-dc7825abe99f
-    timertriggers: []
-    type: regular
+    continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 162.5,
           "y": 210
         }
       }
-  "9":
-    conditions:
-    - condition:
-      - - left:
-            iscontext: true
-            value:
-              simple: alert.mitreattcktactic
-          operator: inList
-          right:
-            value:
-              simple: TA0001 - Initial Access
-        - left:
-            iscontext: true
-            value:
-              simple: PlaybookRouting.EntryPoint
-          operator: isEqualString
-          right:
-            value:
-              simple: TA0009 - Collection
-        - left:
-            iscontext: true
-            value:
-              simple: alert.mitreattcktactic
-          operator: isEqualString
-          right:
-            value:
-              simple: TA0043 - Reconnaissance
-        - left:
-            iscontext: true
-            value:
-              simple: alert.mitreattcktactic
-          operator: isEqualString
-          right:
-            value:
-              simple: TA0042 - Resource Development
-        - left:
-            iscontext: true
-            value:
-              simple: alert.mitreattcktactic
-          operator: isEqualString
-          right:
-            value:
-              simple: TA0002 - Execution
-        - left:
-            iscontext: true
-            value:
-              simple: alert.mitreattcktactic
-          operator: isEqualString
-          right:
-            value:
-              simple: TA0003 - Persistence
-        - left:
-            iscontext: true
-            value:
-              simple: alert.mitreattcktactic
-          operator: isEqualString
-          right:
-            value:
-              simple: TA0004 - Privilege Escalation
-        - left:
-            iscontext: true
-            value:
-              simple: alert.mitreattcktactic
-          operator: isEqualString
-          right:
-            value:
-              simple: TA0005 - Defense Evasion
-        - left:
-            iscontext: true
-            value:
-              simple: alert.mitreattcktactic
-          operator: isEqualString
-          right:
-            value:
-              simple: TA0006 - Credential Access
-        - left:
-            iscontext: true
-            value:
-              simple: TA0006 - Credential Access
-          operator: isEqualString
-          right:
-            value:
-              simple: TA0007 - Discovery
-        - left:
-            iscontext: true
-            value:
-              simple: TA0007 - Discovery
-          operator: isEqualString
-          right:
-            value:
-              simple: TA0008 - Lateral Movement
-        - left:
-            iscontext: true
-            value:
-              simple: alert.mitreattcktactic
-          operator: isEqualString
-          right:
-            value:
-              simple: TA0011 - Command and Control
-        - left:
-            iscontext: true
-            value:
-              simple: alert.mitreattcktactic
-          operator: isEqualString
-          right:
-            value:
-              simple: TA0010 - Exfiltration
-        - left:
-            iscontext: true
-            value:
-              simple: alert.mitreattcktactic
-          operator: isEqualString
-          right:
-            value:
-              simple: TA0040 - Impact
-      label: MITRE Tactic
-    continueonerrortype: ""
-    id: "9"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "9":
+    id: "9"
+    taskid: ff5c7713-c552-43c6-b7c8-13e09791238d
+    type: condition
+    task:
+      id: ff5c7713-c552-43c6-b7c8-13e09791238d
+      version: -1
+      name: Match On MITRE Tactic
+      type: condition
+      iscommand: false
+      brand: ""
     nexttasks:
       '#default#':
       - "3"
       MITRE Tactic:
       - "10"
-    note: false
-    quietmode: 0
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: a901714e-11c5-4b05-8d15-4e57cec5ca07
-      iscommand: false
-      name: Match On MITRE Tactic
-      playbooktaskmissingcomponent: null
-      type: condition
-      version: -1
-    taskid: a901714e-11c5-4b05-8d15-4e57cec5ca07
-    timertriggers: []
-    type: condition
+    conditions:
+    - label: MITRE Tactic
+      condition:
+      - - operator: inList
+          left:
+            value:
+              simple: alert.mitreattcktactic
+            iscontext: true
+          right:
+            value:
+              simple: TA0001 - Initial Access
+        - operator: isEqualString
+          left:
+            value:
+              simple: PlaybookRouting.EntryPoint
+            iscontext: true
+          right:
+            value:
+              simple: TA0009 - Collection
+        - operator: isEqualString
+          left:
+            value:
+              simple: alert.mitreattcktactic
+            iscontext: true
+          right:
+            value:
+              simple: TA0043 - Reconnaissance
+        - operator: isEqualString
+          left:
+            value:
+              simple: alert.mitreattcktactic
+            iscontext: true
+          right:
+            value:
+              simple: TA0042 - Resource Development
+        - operator: isEqualString
+          left:
+            value:
+              simple: alert.mitreattcktactic
+            iscontext: true
+          right:
+            value:
+              simple: TA0002 - Execution
+        - operator: isEqualString
+          left:
+            value:
+              simple: alert.mitreattcktactic
+            iscontext: true
+          right:
+            value:
+              simple: TA0003 - Persistence
+        - operator: isEqualString
+          left:
+            value:
+              simple: alert.mitreattcktactic
+            iscontext: true
+          right:
+            value:
+              simple: TA0004 - Privilege Escalation
+        - operator: isEqualString
+          left:
+            value:
+              simple: alert.mitreattcktactic
+            iscontext: true
+          right:
+            value:
+              simple: TA0005 - Defense Evasion
+        - operator: isEqualString
+          left:
+            value:
+              simple: alert.mitreattcktactic
+            iscontext: true
+          right:
+            value:
+              simple: TA0006 - Credential Access
+        - operator: isEqualString
+          left:
+            value:
+              simple: TA0006 - Credential Access
+            iscontext: true
+          right:
+            value:
+              simple: TA0007 - Discovery
+        - operator: isEqualString
+          left:
+            value:
+              simple: TA0007 - Discovery
+            iscontext: true
+          right:
+            value:
+              simple: TA0008 - Lateral Movement
+        - operator: isEqualString
+          left:
+            value:
+              simple: alert.mitreattcktactic
+            iscontext: true
+          right:
+            value:
+              simple: TA0011 - Command and Control
+        - operator: isEqualString
+          left:
+            value:
+              simple: alert.mitreattcktactic
+            iscontext: true
+          right:
+            value:
+              simple: TA0010 - Exfiltration
+        - operator: isEqualString
+          left:
+            value:
+              simple: alert.mitreattcktactic
+            iscontext: true
+          right:
+            value:
+              simple: TA0040 - Impact
+    continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 162.5,
           "y": 550
         }
       }
-  "10":
-    continueonerrortype: ""
-    id: "10"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "10":
+    id: "10"
+    taskid: 58e44481-a54b-490e-aad3-8169514d9892
+    type: regular
+    task:
+      id: 58e44481-a54b-490e-aad3-8169514d9892
+      version: -1
+      name: Create Playbook Name From Tactic
+      description: Set a value in context under the key you entered.
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
     nexttasks:
       '#none#':
       - "2"
-    note: false
-    quietmode: 0
     scriptarguments:
       key:
         simple: PlaybookRouting.EntryPoint
       value:
         complex:
-          accessor: mitreattcktactic
           root: alert
+          accessor: mitreattcktactic
           transformers:
-          - args:
+          - operator: RegexReplace
+            args:
               action_dt: {}
               ignore_case:
                 value:
@@ -509,8 +488,8 @@ tasks:
               regex:
                 value:
                   simple: ^TA\d{4}\s*-\s*
-            operator: RegexReplace
-          - args:
+          - operator: RegexReplace
+            args:
               action_dt: {}
               ignore_case: {}
               multi_line: {}
@@ -521,8 +500,8 @@ tasks:
               regex:
                 value:
                   simple: and
-            operator: RegexReplace
-          - args:
+          - operator: RegexReplace
+            args:
               action_dt: {}
               ignore_case: {}
               multi_line: {}
@@ -531,41 +510,54 @@ tasks:
               regex:
                 value:
                   simple: \s+
-            operator: RegexReplace
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: Set a value in context under the key you entered.
-      id: 72c5f010-fd6a-4c57-89e0-1b42369415da
-      iscommand: false
-      name: Create Playbook Name From Tactic
-      playbooktaskmissingcomponent: null
-      script: Set
-      type: regular
-      version: -1
-    taskid: 72c5f010-fd6a-4c57-89e0-1b42369415da
-    timertriggers: []
-    type: regular
+    continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 50,
           "y": 720
         }
       }
-version: -1
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+system: true
 view: |-
   {
     "linkLabelsPosition": {
-      "9_10_MITRE Tactic": 0.87
+      "9_10_MITRE Tactic": 0.87,
+      "9_3_#default#": 0.1
     },
     "paper": {
       "dimensions": {
         "height": 1580,
-        "width": 605,
+        "width": 492.5,
         "x": 50,
         "y": 50
       }
     }
   }
+inputs:
+- key: EntryPoint
+  value:
+    simple: EP_InitialAccess
+  required: false
+  description: ""
+  playbookInputQuery: null
+inputSections:
+- inputs:
+  - EntryPoint
+  name: General (Inputs group)
+  description: Generic group for inputs
+outputSections:
+- outputs: []
+  name: General (Outputs group)
+  description: Generic group for outputs
+outputs: []
+sourceplaybookid: 51ffcd5a-f5bb-4e09-84ae-e1efdc5165ac
+dirtyInputs: true
