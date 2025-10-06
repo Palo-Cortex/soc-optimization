@@ -1,9 +1,9 @@
 contentitemexportablefields:
   contentitemfields:
     definitionid: ""
-    fromServerVersion: ""
+    fromServerVersion: 5.0.0
     isoverridable: false
-    itemVersion: 1.7.0
+    itemVersion: 2.1.10
     packID: ""
     packName: SOC Framework
     prevname: ""
@@ -22,7 +22,7 @@ inputSections:
 inputs:
 - description: ""
   key: EntryPoint
-  playbookInputQuery:
+  playbookInputQuery: null
   required: false
   value:
     simple: EP_InitialAccess
@@ -64,7 +64,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 275,
+          "x": 162.5,
           "y": 50
         }
       }
@@ -107,7 +107,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 640,
+          "x": 50,
           "y": 890
         }
       }
@@ -134,8 +134,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 275,
-          "y": 2190
+          "x": 162.5,
+          "y": 1570
         }
       }
   "4":
@@ -170,7 +170,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 275,
+          "x": 162.5,
           "y": 380
         }
       }
@@ -210,8 +210,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 640,
-          "y": 1320
+          "x": 50,
+          "y": 1230
         }
       }
   "6":
@@ -229,8 +229,6 @@ tasks:
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
-      '#default#':
-      - "11"
       "yes":
       - "5"
     note: false
@@ -250,8 +248,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 640,
-          "y": 1070
+          "x": 50,
+          "y": 1060
         }
       }
   "7":
@@ -281,8 +279,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 640,
-          "y": 1940
+          "x": 162.5,
+          "y": 1400
         }
       }
   "8":
@@ -320,7 +318,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 275,
+          "x": 162.5,
           "y": 210
         }
       }
@@ -467,7 +465,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 275,
+          "x": 162.5,
           "y": 550
         }
       }
@@ -541,112 +539,23 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 640,
+          "x": 50,
           "y": 720
-        }
-      }
-  "11":
-    conditions:
-    - condition:
-      - - left:
-            iscontext: true
-            value:
-              simple: alert.tags
-          operator: isEqualString
-          right:
-            value:
-              simple: '"DS:CrowdStrike/Falcon_Event"'
-      label: "yes"
-    continueonerrortype: ""
-    id: "11"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#default#':
-      - "3"
-      "yes":
-      - "12"
-    note: false
-    quietmode: 0
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: d9a1f66f-706f-417c-9067-cfb0093c45b2
-      iscommand: false
-      name: Is this alert from Crowdstrike Falcon?
-      type: condition
-      version: -1
-    taskid: d9a1f66f-706f-417c-9067-cfb0093c45b2
-    timertriggers: []
-    type: condition
-    view: |-
-      {
-        "position": {
-          "x": -40,
-          "y": 1320
-        }
-      }
-  "12":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "12"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#error#':
-      - "7"
-      '#none#':
-      - "3"
-    note: false
-    quietmode: 0
-    scriptarguments:
-      alertId:
-        simple: ${alert.internal_id}
-      name:
-        simple: FedEx - Crowdstrike DEFAULT Alert Handler
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: Builtin
-      description: commands.local.cmd.set.playbook
-      id: 5876394a-a6f3-4121-9b0c-25362e71d250
-      iscommand: true
-      name: |
-        Run Default Crowdstrike Playbook
-      script: Builtin|||setPlaybook
-      type: regular
-      version: -1
-    taskid: 5876394a-a6f3-4121-9b0c-25362e71d250
-    timertriggers: []
-    type: regular
-    view: |-
-      {
-        "position": {
-          "x": -40,
-          "y": 1780
         }
       }
 version: -1
 view: |-
   {
     "linkLabelsPosition": {
-      "11_12_yes": 0.38,
-      "11_3_#default#": 0.2,
-      "12_7_#error#": 0.28,
-      "6_11_#default#": 0.25,
       "9_10_MITRE Tactic": 0.87,
       "9_3_#default#": 0.1
     },
     "paper": {
       "dimensions": {
-        "height": 2200,
-        "width": 1060,
-        "x": -40,
+        "height": 1580,
+        "width": 492.5,
+        "x": 50,
         "y": 50
       }
     }
   }
-fromversion: 5.0.0
