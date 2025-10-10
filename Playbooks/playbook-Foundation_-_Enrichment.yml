@@ -1,3 +1,15 @@
+adopted: true
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    isoverridable: false
+    itemVersion: 2.1.11
+    packID: ""
+    packName: SOC Framework
+    prevname: ""
+    supportedModules: []
+    toServerVersion: ""
 dirtyInputs: true
 id: 'Foundation - Enrichment'
 inputSections:
@@ -6,13 +18,13 @@ inputSections:
   name: General (Inputs group)
 inputs: []
 name: Foundation - Enrichment
-fromversion: 5.0.0
 outputSections:
 - description: Generic group for outputs
   name: General (Outputs group)
   outputs: []
 outputs: []
 quiet: true
+sourceplaybookid: Foundation - Enrichment
 starttaskid: "0"
 tags:
 - SOC
@@ -26,8 +38,9 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "12"
       - "9"
+      - "18"
+      - "8"
     note: false
     quietmode: 0
     separatecontext: false
@@ -37,6 +50,7 @@ tasks:
       id: 8492b25a-a19c-4593-8191-9cb60e4d3007
       iscommand: false
       name: ""
+      playbooktaskmissingcomponent:
       version: -1
     taskid: 8492b25a-a19c-4593-8191-9cb60e4d3007
     timertriggers: []
@@ -76,6 +90,7 @@ tasks:
       id: ba15e72f-a381-4b97-8e51-7937092bfaf6
       iscommand: false
       name: Is Source IP Defined?
+      playbooktaskmissingcomponent:
       type: condition
       version: -1
     taskid: ba15e72f-a381-4b97-8e51-7937092bfaf6
@@ -103,6 +118,7 @@ tasks:
       id: 6b3dbf1c-9a22-4bd4-8593-bc8d49dcc7c0
       iscommand: false
       name: Done
+      playbooktaskmissingcomponent:
       type: title
       version: -1
     taskid: 6b3dbf1c-9a22-4bd4-8593-bc8d49dcc7c0
@@ -145,6 +161,7 @@ tasks:
       id: 2eae8f2e-1cc9-4120-88e0-1e70e0be6069
       iscommand: false
       name: Is Destination IP Defined?
+      playbooktaskmissingcomponent:
       type: condition
       version: -1
     taskid: 2eae8f2e-1cc9-4120-88e0-1e70e0be6069
@@ -172,6 +189,7 @@ tasks:
       id: 921bdd5d-2fab-4996-8682-a5e6f80b9aca
       iscommand: false
       name: Email Enrichment
+      playbooktaskmissingcomponent:
       type: title
       version: -1
     taskid: 921bdd5d-2fab-4996-8682-a5e6f80b9aca
@@ -180,7 +198,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 150,
+          "x": 391,
           "y": 550
         }
       }
@@ -202,6 +220,7 @@ tasks:
       id: 02dc9df5-d1cf-4475-83a6-dc33e09fc4fe
       iscommand: false
       name: IP Enrichment
+      playbooktaskmissingcomponent:
       type: title
       version: -1
     taskid: 02dc9df5-d1cf-4475-83a6-dc33e09fc4fe
@@ -239,6 +258,7 @@ tasks:
       id: 98cf7f6d-4237-45d4-b120-8f3cf46a73d2
       iscommand: true
       name: Enrich Source IP
+      playbooktaskmissingcomponent:
       script: '|||ip'
       type: regular
       version: -1
@@ -277,6 +297,7 @@ tasks:
       id: f8b98182-0fae-49fb-b0f2-28b4194942a9
       iscommand: true
       name: Enrich Destination IP
+      playbooktaskmissingcomponent:
       script: '|||ip'
       type: regular
       version: -1
@@ -287,223 +308,6 @@ tasks:
       {
         "position": {
           "x": 1021.5,
-          "y": 1220
-        }
-      }
-  "12":
-    conditions:
-    - condition:
-      - - left:
-            iscontext: true
-            value:
-              simple: alert.remoteip
-          operator: in
-          right:
-            iscontext: true
-            value:
-              complex:
-                accessor: Assets_Type
-                root: lists
-                transformers:
-                - args:
-                    expression:
-                      value:
-                        simple: Admin_Jumpboxes[].IP
-                  operator: jmespath
-      label: Admin Jumpbox
-    - condition:
-      - - left:
-            iscontext: true
-            value:
-              simple: alert.remoteip
-          operator: in
-          right:
-            iscontext: true
-            value:
-              complex:
-                accessor: Assets_Type
-                root: lists
-                transformers:
-                - args:
-                    expression:
-                      value:
-                        simple: Admin_Workstations[].IP
-                  operator: jmespath
-      label: Admin Workstation
-    - condition:
-      - - left:
-            iscontext: true
-            value:
-              simple: alert.remoteip
-          operator: in
-          right:
-            iscontext: true
-            value:
-              complex:
-                accessor: Assets_Type
-                root: lists
-                transformers:
-                - args:
-                    expression:
-                      value:
-                        simple: Management_Servers[].IP
-                  operator: jmespath
-      label: Management Servers
-    continueonerrortype: ""
-    id: "12"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#default#':
-      - "17"
-      Admin Jumpbox:
-      - "13"
-      Admin Workstation:
-      - "14"
-      Management Servers:
-      - "15"
-    note: false
-    quietmode: 0
-    scriptarguments:
-      list_name:
-        simple: ${lists.Assets_Type}
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: Parses a list by header and value.
-      id: 0abc0b11-7db5-4213-b96b-4bfa3e6f22e5
-      iscommand: false
-      name: Known Admin Activity?
-      type: condition
-      version: -1
-    taskid: 0abc0b11-7db5-4213-b96b-4bfa3e6f22e5
-    timertriggers: []
-    type: condition
-    view: |-
-      {
-        "position": {
-          "x": 1071.5,
-          "y": 210
-        }
-      }
-  "13":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "13"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#error#':
-      - "16"
-      '#none#':
-      - "4"
-    note: false
-    quietmode: 0
-    scriptarguments:
-      key:
-        simple: asset.type
-      value:
-        simple: '"Admin_Jumpbox"'
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: Set a value in context under the key you entered.
-      id: 8436fc59-38ac-4d61-844a-4cab07e05aca
-      iscommand: false
-      name: Set Admin Jumpbox
-      script: Set
-      type: regular
-      version: -1
-    taskid: 8436fc59-38ac-4d61-844a-4cab07e05aca
-    timertriggers: []
-    type: regular
-    view: |-
-      {
-        "position": {
-          "x": 440.5,
-          "y": 1220
-        }
-      }
-  "14":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "14"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#error#':
-      - "16"
-      '#none#':
-      - "4"
-    note: false
-    quietmode: 0
-    scriptarguments:
-      key:
-        simple: asset.type
-      value:
-        simple: '"Admin_Workstation"'
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: Set a value in context under the key you entered.
-      id: 90a15668-a064-4ae4-95ec-6ef5bbe7f6ad
-      iscommand: false
-      name: Set Admin Workstation
-      script: Set
-      type: regular
-      version: -1
-    taskid: 90a15668-a064-4ae4-95ec-6ef5bbe7f6ad
-    timertriggers: []
-    type: regular
-    view: |-
-      {
-        "position": {
-          "x": 1702.5,
-          "y": 1220
-        }
-      }
-  "15":
-    continueonerror: true
-    continueonerrortype: ""
-    id: "15"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "4"
-      - "16"
-    note: false
-    quietmode: 0
-    scriptarguments:
-      key:
-        simple: asset.type
-      value:
-        simple: '"Management_Server"'
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: Set a value in context under the key you entered.
-      id: 88253ce7-6290-4ab0-8c52-e69cd829a573
-      iscommand: false
-      name: Set Management Server
-      script: Set
-      type: regular
-      version: -1
-    taskid: 88253ce7-6290-4ab0-8c52-e69cd829a573
-    timertriggers: []
-    type: regular
-    view: |-
-      {
-        "position": {
-          "x": 2183.5,
           "y": 1220
         }
       }
@@ -530,7 +334,8 @@ tasks:
       id: 35dec624-d2e2-448e-a49c-62dc66589b2e
       iscommand: false
       name: Foundation - Error Handling
-      playbookId: 'Foundation - Error Handling'
+      playbookId: Foundation - Error Handling
+      playbooktaskmissingcomponent:
       type: playbook
       version: -1
     taskid: 35dec624-d2e2-448e-a49c-62dc66589b2e
@@ -543,57 +348,162 @@ tasks:
           "y": 1390
         }
       }
-  "17":
+  "18":
     continueonerrortype: ""
-    id: "17"
+    id: "18"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
     nexttasks:
       '#none#':
-      - "9"
-      - "8"
+      - "19"
     note: false
     quietmode: 0
-    scriptarguments:
-      key:
-        simple: asset.type
-      value:
-        simple: unknown
     separatecontext: false
     skipunavailable: false
     task:
       brand: ""
-      description: Set a value in context under the key you entered.
-      id: 5a511b15-7feb-4419-9b99-136dd803924e
+      id: 615702fd-762e-48e9-8754-6a92ab2f46bb
       iscommand: false
-      name: Set To Unknown Activity Type
-      script: Set
-      type: regular
+      name: EndPoint Enrichement
+      playbooktaskmissingcomponent:
+      type: title
       version: -1
-    taskid: 5a511b15-7feb-4419-9b99-136dd803924e
+    taskid: 615702fd-762e-48e9-8754-6a92ab2f46bb
     timertriggers: []
-    type: regular
+    type: title
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 380
+          "x": 1742,
+          "y": 550
+        }
+      }
+  "19":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: issue.tags
+          operator: containsString
+          right:
+            value:
+              simple: DS:Trend Micro Vision One V3
+      label: "yes"
+    continueonerrortype: ""
+    id: "19"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "4"
+      "yes":
+      - "20"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2648e64a-af9c-4805-b000-b266ac6eca20
+      iscommand: false
+      name: Trend Micro Vision One V3
+      playbooktaskmissingcomponent:
+      type: condition
+      version: -1
+    taskid: 2648e64a-af9c-4805-b000-b266ac6eca20
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 1870,
+          "y": 870
+        }
+      }
+  "20":
+    continueonerrortype: ""
+    id: "20"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "21"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: ab047d18-69d1-45ff-8523-e3fe2d7a49d7
+      iscommand: false
+      name: Alert Details from Trend Micro
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: ab047d18-69d1-45ff-8523-e3fe2d7a49d7
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 1870,
+          "y": 1140
+        }
+      }
+  "21":
+    continueonerrortype: ""
+    id: "21"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: true
+    task:
+      brand: ""
+      description: Read-only adapter to enrich an alert from Trend Micro Vision One
+        (Workbench) and normalize into Alert.Enrichment.*.
+      id: 2f46bf8a-6979-4c48-8a35-3a035c535eb0
+      iscommand: false
+      name: SOC Trend Micro Alert Enrichment
+      playbookId: SOC Trend Micro Alert Enrichment
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 2f46bf8a-6979-4c48-8a35-3a035c535eb0
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 1870,
+          "y": 1320
         }
       }
 version: -1
 view: |-
   {
-    "linkLabelsPosition": {
-      "12_15_Management Servers": 0.9
-    },
+    "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
         "height": 1570,
-        "width": 2514.5,
-        "x": 50,
+        "width": 1859,
+        "x": 391,
         "y": 50
       }
     }
   }
-adopted: true
+fromversion: 5.0.0
