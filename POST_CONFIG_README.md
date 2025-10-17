@@ -14,8 +14,8 @@ manual steps still need to be done:
 ![Starring_NIST_IR.png](images/Starring_NIST_IR.png)
 3. **Configure Automation Trigger**
    * NIST Incident Response Flow (800-61)
-     * Trigger playbook "EP_IR_NIST(800-61)" on starred Alerts
-     ![Automation_Trigger_NIST_IR.png](images/Automation_Trigger_NIST_IR.png)
+     * Trigger playbook "EP_IR_NIST(800-61)" on Medium Severity or Higher Alerts
+     ![Automation_Trigger_NIST_IR.png](https://github.com/Palo-Cortex/soc-optimization/blob/main/images/Automation_Trigger_NIST_IR.png)
 --- 
 ## What Next?
 1. XSIAM SOC Value Metrics Dashboard([Value Metrics](Documentation/Value_Metrics.md))
