@@ -15,6 +15,9 @@ description: This is a common playbook intended to integrate the Indicator Extra
 id: 'Foundation Common - Extract Indicators from alerts'
 inputs: []
 name: Foundation Common - Extract Indicators from alerts
+tags:
+  - SOC
+  - SOC_Framework
 outputs: []
 quiet: true
 sourceplaybookid: Foundation Common - Extract Indicators from alerts
@@ -38,7 +41,7 @@ tasks:
       id: 775ef611-299c-4899-87c7-60d32884730a
       iscommand: false
       name: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       version: -1
     taskid: 775ef611-299c-4899-87c7-60d32884730a
     timertriggers: []
@@ -72,7 +75,7 @@ tasks:
       id: acb6a086-80f0-4193-949d-05b7da8a52a9
       iscommand: true
       name: Extract indicators from Alert
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       script: Builtin|||extractIndicators
       type: regular
       version: -1
@@ -101,7 +104,7 @@ tasks:
       id: 0c830526-70e7-4df8-bffc-214c075794ba
       iscommand: false
       name: End Playbook
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       type: title
       version: -1
     taskid: 0c830526-70e7-4df8-bffc-214c075794ba
@@ -133,7 +136,7 @@ tasks:
       iscommand: false
       name: SOC Calculate Severity - Generic v2
       playbookId: 'SOC Calculate Severity - Generic v2'
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       type: playbook
       version: -1
     taskid: b44ef3d5-a65e-4227-8f0d-a4606447ca1e
@@ -159,3 +162,4 @@ view: |-
       }
     }
   }
+fromversion: 5.0.0

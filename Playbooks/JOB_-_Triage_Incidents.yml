@@ -14,6 +14,7 @@ contentitemexportablefields:
 vcShouldKeepItemLegacyProdMachine: false
 name: JOB - Triage Incidents
 tags:
+- SOC
 - SOC_Framework
 starttaskid: "0"
 tasks:
