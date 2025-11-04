@@ -497,7 +497,7 @@
                 "type": "Custom XQL",
                 "width": 25,
                 "height": 400,
-                "phrase": "config case_sensitive = false\n| dataset = incidents \n| comp count_distinct(incident_id) as total_incidents\n| alter incidents_per_day = round(divide(total_incidents, 7))\n| alter incidents_per_hour = round(divide(incidents_per_day, 8))\n| alter analyst_required = round(divide(incidents_per_hour, 13))\n| alter analyst_required = if(analyst_required < 1, 1, analyst_required )\n\n\n\n\n| view graph type = single subtype = standard yaxis = analyst_required ",
+                "phrase": "config case_sensitive = false\n| dataset = issues  \n| comp \n    min(_time) as t_start, \n    max(_time) as t_end,\n    count_distinct(xdm.issue.id) as total_issues\n| alter days_selected = add(timestamp_diff(t_end, t_start, \"DAY\"), 1)\n| alter issues_per_day = round(divide(total_issues, days_selected))\n| alter issues_per_hour = round(divide(issues_per_day, 24))\n| alter analyst_required = round(divide(issues_per_hour, 13))\n| alter analyst_required = if(analyst_required < 1, 1, analyst_required )\n\n\n\n\n\n\n| view graph type = single subtype = standard yaxis = analyst_required ",
                 "time_frame": {
                   "relativeTime": 86400000
                 },
@@ -1652,7 +1652,7 @@
       "creation_time": 1758895678626,
       "description": "Given the total number of manual incidents and using the Palo SOC benchmark of 8 to 13 events per hour per analyst, how many analysts would be required to handle all incidents?",
       "data": {
-        "phrase": "config case_sensitive = false\n| dataset = cases \n| comp \n    min(_time) as t_start, \n    max(_time) as t_end,\n    count_distinct(xdm.case.id) as total_cases\n| alter days_selected = add(timestamp_diff(t_end, t_start, \"DAY\"), 1)\n| alter incidents_per_day = round(divide(total_cases, days_selected))\n| alter incidents_per_hour = round(divide(incidents_per_day, 24))\n| alter analyst_required = round(divide(incidents_per_hour, 13))\n| alter analyst_required = if(analyst_required < 1, 1, analyst_required )\n\n\n\n\n\n\n| view graph type = single subtype = standard yaxis = analyst_required ",
+        "phrase": "config case_sensitive = false\n| dataset = issues  \n| comp \n    min(_time) as t_start, \n    max(_time) as t_end,\n    count_distinct(xdm.issue.id) as total_issues\n| alter days_selected = add(timestamp_diff(t_end, t_start, \"DAY\"), 1)\n| alter issues_per_day = round(divide(total_issues, days_selected))\n| alter issues_per_hour = round(divide(issues_per_day, 24))\n| alter analyst_required = round(divide(issues_per_hour, 13))\n| alter analyst_required = if(analyst_required < 1, 1, analyst_required )\n\n\n\n\n\n\n| view graph type = single subtype = standard yaxis = analyst_required ",
         "time_frame": {
           "relativeTime": 2592000000
         },
