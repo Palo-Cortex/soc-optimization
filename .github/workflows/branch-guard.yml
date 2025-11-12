@@ -1,0 +1,18 @@
+name: Branch name guard
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+jobs:
+  validate-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch naming convention
+        run: |
+          BRANCH="${{ github.head_ref }}"
+          REGEX='^(feat|fix|chore|docs|refactor)\/(data|network|identity|cloud|endpoint|email|siem|core|playbooks)\/(trigger|analysis|containment|eradication|recovery|communication)\/[a-z0-9\-]+$'
+          if [[ ! "$BRANCH" =~ $REGEX ]]; then
+            echo "❌ Branch '$BRANCH' does not match naming convention."
+            echo "Expected: <type>/<surface>/<phase>/<slug>"
+            exit 1
+          fi
+          echo "✅ Branch name looks good: $BRANCH"
