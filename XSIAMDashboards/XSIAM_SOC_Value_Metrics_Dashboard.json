@@ -1726,5 +1726,6 @@
     }
   ],
   "id": "9ba311c2c2414f3bb09eee0742daad78",
-  "name": "XSIAM SOC Value Metrics"
+  "name": "XSIAM SOC Value Metrics",
+  "adopted": true
 }
