@@ -1,0 +1,46 @@
+name: Prevent Customer Data in PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  detect-customer-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Load customer identifiers
+        id: load_patterns
+        run: |
+          if [ -f "Lists/customer-identifiers.json" ]; then
+            jq -r '.[]' Lists/customer-identifiers.json > patterns.txt
+          else
+            echo "" > patterns.txt
+          fi
+
+      - name: Scan diff for forbidden patterns
+        run: |
+          DIFF="$(git diff origin/main)"
+          FOUND=0
+
+          while IFS= read -r pattern; do
+            [[ -z "$pattern" ]] && continue
+
+            if echo "$DIFF" | grep -E "$pattern" >/dev/null 2>&1; then
+              echo "::error:: Found customer data pattern: $pattern"
+              FOUND=1
+            fi
+          done < patterns.txt
+
+          if [ "$FOUND" -eq 1 ]; then
+            exit 1
+          fi
+
+          echo "No customer identifiers detected."
