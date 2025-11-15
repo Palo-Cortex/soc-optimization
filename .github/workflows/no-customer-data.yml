@@ -9,45 +9,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Load customer identifiers
+        id: load_patterns
+        run: |
+          if [ -f "Lists/customer-identifiers.json" ]; then
+            jq -r '.[]' Lists/customer-identifiers.json > patterns.txt
+          else
+            echo "" > patterns.txt
+          fi
+
       - name: Scan diff for forbidden patterns
         run: |
-          echo "🔍 Scanning PR for customer data leakage..."
-
-          # Add/remove patterns here as needed.
-          # These are intentionally strict to fail early.
-          PATTERNS=(
-            "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}"    # Email addresses
-            "[0-9]{1,3}(\.[0-9]{1,3}){3}"                        # IPv4 addresses
-            "[A-Fa-f0-9:]{2,}:[A-Fa-f0-9:]{2,}"                  # IPv6 addresses
-            "([A-Za-z0-9-]+\.){1,}local"                         # internal DNS zones
-            "hostname"                                           # common copy/paste error
-            "internal"                                           # many companies use this tag
-            "corp"                                               # corp.example.com
-            "ad\."                                               # AD domains
-            "dc[0-9]+"                                           # domain controllers
-            "ML-[A-Za-z0-9]+"                                    # customer asset tags
-            "C[0-9]{5,}"                                         # device IDs
-          )
-
-          # Get the PR diff
           DIFF="$(git diff origin/main)"
-
           FOUND=0
-          for p in "${PATTERNS[@]}"; do
-            if echo "$DIFF" | grep -E "$p" >/dev/null 2>&1; then
-              echo "::error:: ❌ Detected customer data matching pattern: $p"
+
+          while IFS= read -r pattern; do
+            [[ -z "$pattern" ]] && continue
+
+            if echo "$DIFF" | grep -E "$pattern" >/dev/null 2>&1; then
+              echo "::error:: Found customer data pattern: $pattern"
               FOUND=1
             fi
-          done
+          done < patterns.txt
 
-          if [ $FOUND -eq 1 ]; then
-            echo "❌ Customer data found. Failing workflow."
+          if [ "$FOUND" -eq 1 ]; then
             exit 1
           fi
 
-          echo "✅ No customer data detected."
+          echo "No customer identifiers detected."
