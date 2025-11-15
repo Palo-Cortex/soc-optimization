@@ -6,37 +6,26 @@ on:
 jobs:
   validate-branch:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check branch naming convention
+      - name: Validate SOC Framework branch naming
         run: |
           BRANCH="${{ github.head_ref }}"
 
-          # Allowed branch types
           TYPE='(feat|fix|chore|docs|refactor)'
 
-          # Allowed SOC Framework modules
-          MODULE='(entrypoint|upon-trigger|hydration|normalization|enrichment|containment|eradication|recovery|communication|data-modeling|correlation|playbooks|lists|common-utils|dashboards)'
+          # Added "project" here
+          MODULE='(entrypoint|upon-trigger|hydration|normalization|enrichment|containment|eradication|recovery|communication|data-modeling|correlation|playbooks|lists|common-utils|dashboards|project)'
 
-          # Component and slug patterns
           COMPONENT='[a-z0-9\-]+'
           SLUG='[a-z0-9\-]+'
 
-          # Final pattern: <type>/<module>/<component>/<slug>
           REGEX="^${TYPE}\/${MODULE}\/${COMPONENT}\/${SLUG}$"
 
           if [[ ! "$BRANCH" =~ $REGEX ]]; then
-            echo "❌ Branch '$BRANCH' does NOT match the SOC Framework naming convention."
-            echo ""
-            echo "Expected format:"
-            echo "  <type>/<module>/<component>/<slug>"
-            echo ""
-            echo "Example:"
-            echo "  feat/upon-trigger/entity-mapping/improve-user-resolution"
-            echo ""
-            echo "Allowed types: $TYPE"
-            echo "Allowed modules: $MODULE"
+            echo "❌ Invalid branch name: $BRANCH"
+            echo "Expected: <type>/<module>/<component>/<slug>"
+            echo "Allowed modules include 'project' for workflow/infra updates."
             exit 1
           fi
 
-          echo "✅ Branch name looks good: $BRANCH"
+          echo "✅ Branch name valid: $BRANCH"
