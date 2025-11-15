@@ -1,93 +1,225 @@
-# 🧩 SOC Optimization Framework — Contributor Guide
+# SOC Optimization Framework — Contributor Guide
 
-Welcome to the **SOC Optimization Framework** repository!  
-This project provides reusable automations, playbooks, and models aligned with the NIST Incident Response lifecycle.  
-Our goal is to keep content **modular, measurable, and easy to extend** by Domain Consultants (DCs), Professional Services (PS), partners, and customer contributors.
+This guide explains how to contribute correctly to the SOC Optimization Framework.  
+It includes the full contribution workflow, branch naming rules, modular coding standards, and PR requirements.
+
+Maintainers: @Palo-Cortex/soc-framework-maintainers
 
 ---
 
-## 🚀 Getting Started
+# 1. Contribution Workflow
 
-Follow these steps to contribute a new idea, feature, or improvement.
-
-1. **Fork the Repository**  
-   Click the **Fork** button at the top right of this page to create your own copy of the repository.
-
-2. **Clone Your Fork**  
-   Open a terminal and clone your fork locally, replacing `<your-username>` with your GitHub username:
+1. Fork the repository  
+2. Clone your fork:
 
        git clone https://github.com/<your-username>/soc-optimization.git
        cd soc-optimization
 
-3. **Create a New Branch**  
-   Each new idea or feature should be developed in its own branch.  
-   Branches also act as **feature flags**, allowing us to automatically build and test your work.
-
-   Use this naming format:
-
-       <type>/<surface>/<phase>/<short-description>
-
-   **Examples**
-
-       feat/identity/containment/auto-disable-risky-users
-       fix/core/trigger/alert-timestamp-normalization
-       docs/core/communication/playbook-standards
-
-   **Segment Definitions**
-
-   | Segment | Examples | Description |
-      |----------|-----------|-------------|
-   | type | feat • fix • chore • docs • refactor | Type of change you’re making |
-   | surface | data • network • identity • endpoint • cloud • email • core • playbooks | Which SOC domain or module is impacted |
-   | phase | trigger • analysis • containment • eradication • recovery • communication | NIST phase or automation layer |
-   | short-description | auto-disable-risky-users | A brief kebab-case name describing your feature |
+3. Create a branch using the SOC Framework naming convention  
+4. Make your changes following the Modular Coding Standards  
+5. Commit and push your branch  
+6. Open a Pull Request  
+7. Tag reviewers: @Palo-Cortex/soc-framework-maintainers  
+8. Maintainers review → validate → merge  
 
 ---
 
-## 🧱 Submitting Your Changes
+# 2. Branch Naming Convention (Required)
 
-1. **Make your edits or add new content**  
-   Be sure to follow the existing folder structure and naming conventions.
+Branches also function as feature flags, so correct naming is mandatory.
 
-2. **Commit your work**
+Format:
 
-       git add .
-       git commit -m "feat(identity/containment): auto-disable risky users"
+       <type>/<module>/<component>/<slug>
 
-3. **Push your branch**
+## Types
 
-       git push origin <your-branch-name>
+       feat | fix | chore | docs | refactor
 
-4. **Create a Pull Request (PR)**
-    - Go to your fork on GitHub.
-    - Click **Compare & Pull Request**.
-    - Provide a clear description of what you added or changed.
-    - The repository maintainers will review, test, and merge your changes.
+## SOC Framework Modules
+
+       entrypoint
+       upon-trigger
+       hydration
+       normalization
+       enrichment
+       containment
+       eradication
+       recovery
+       communication
+       data-modeling
+       correlation
+       playbooks
+       lists
+       common-utils
+       dashboards
+       project          ← for workflows, CI/CD, repo structure, governance
+
+## Component
+
+A sub-area within a module. Must be kebab-case.
+
+Examples:
+
+       entity-mapping
+       artifact-extraction
+       email
+       endpoint
+       crowdstrike
+       case-init
+       severity
+       workflows
+       ci
+       docs
+       maintenance
+
+## Slug
+
+Short, clear, kebab-case description of the change.
+
+## Examples
+
+       feat/upon-trigger/entity-mapping/auto-resolve-user
+       fix/data-modeling/crowdstrike/fix-process-lineage
+       feat/containment/endpoint/auto-isolate-host
+       docs/playbooks/phishing/update-docs
+       chore/project/workflows/update-branch-guard
 
 ---
 
-## 🧩 Feature Flags in CI/CD
+# 3. Modular Coding Standards (Required)
 
-When you create a branch following the naming rules, the **branch name automatically becomes a feature flag** used by our build and validation pipelines.  
-This allows isolated testing of new ideas without disrupting mainline content.
+All contributions must follow the SOC Framework’s modular architecture and FieldOps design principles.
+
+## 3.1 Build “Lego Bricks”
+
+Each contribution must be:
+
+- Reusable  
+- Composable  
+- Self-contained  
+- Single-purpose  
+- Vendor-agnostic unless intentionally vendor-specific  
+- Free of customer-specific data  
+
+## 3.2 Place code in the correct SOC Framework layer
+
+Primary architecture:
+
+       Entry Point
+         → Upon Trigger
+             → Hydration
+             → Normalization
+             → Entity Mapping
+             → Artifact Extraction
+             → Severity / Priority
+             → Ownership
+         → Enrichment
+         → Containment
+         → Eradication
+         → Recovery
+         → Communication
+
+Supporting modules:
+
+       Data Modeling
+       Correlation
+       Playbooks
+       Lists
+       Dashboards
+       Common Utils
+       Project (for workflows, CI/CD, governance)
+
+Your contribution must live in the correct directory for the module it supports.
+
+## 3.3 Vendor Logic Must Be Isolated
+
+Examples:
+
+       data-modeling/crowdstrike/...
+       data-modeling/microsoft/...
+       data-modeling/trendmicro/...
+
+Never mix core logic with vendor-specific code.
+
+## 3.4 Never Include Customer-Specific Data
+
+Do NOT commit:
+
+- Customer usernames  
+- Domains  
+- IP addresses  
+- Tenant identifiers  
+- Integration instance names  
+
+Always use variables, normalized fields, or lists.
+
+## 3.5 Development Sequence: Normalize → Correlate → Playbook
+
+The correct build order:
+
+1. Model your fields  
+2. Build correlation logic  
+3. Develop playbooks that consume normalized context  
+
+Never build playbooks on raw data.
+
+## 3.6 Documentation Required
+
+Each new module or component must include:
+
+- Purpose  
+- Inputs  
+- Outputs  
+- Dependencies  
+- Example behavior  
 
 ---
 
-## ✅ Tips for New Contributors
+# 4. Pull Request Requirements
 
-- Keep branches small and focused — one idea per branch.
-- Always pull the latest `main` before starting new work.
-- Use meaningful commit messages (`feat`, `fix`, `docs`, etc.).
-- Check existing content for examples before creating new files.
-- Don’t worry about perfection — focus on clarity and modularity.
+Every PR must include:
+
+## ✔ Proper branch name
+
+       <type>/<module>/<component>/<slug>
+
+## ✔ PR checklist completed
+- Affected modules selected  
+- Testing described  
+- Dependencies listed  
+- Documentation updated if needed  
+
+## ✔ Maintainers tagged
+
+       @Palo-Cortex/soc-framework-maintainers
+
+## ✔ Clean commit messages
+
+Examples:
+
+       feat(upon-trigger/entity-mapping): improve user identity resolution
+       fix(data-modeling/crowdstrike): correct process lineage parsing
+       docs(playbooks/phishing): update flow and explanation
+       chore(project/workflows): optimize validation workflow
 
 ---
 
-## 💬 Need Help?
+# 5. Governance Summary
 
-If you’re new to GitHub:
-- Ask your Domain Consultant or PS contact for assistance.
-- Or open a GitHub Issue in this repo and tag **@Palo-Cortex/soc-framework-admins**.
+- Maintainers team is **visible**, role = **Maintain**
+- Admin team is **private**, minimal membership
+- All contributors use forks + PRs
+- CODEOWNERS enforces mandatory review
+- Branch naming validated automatically
+- Feature flags generated from branch names
 
-We’re glad you’re contributing to the SOC Optimization Framework —  
-together, we’re building the future of scalable, automated security operations!
+---
+
+# 6. Need Help?
+
+If you get stuck, tag:
+
+       @Palo-Cortex/soc-framework-maintainers
+
+We’re here to help guide contributors and maintain high standards for the SOC Optimization Framework.
