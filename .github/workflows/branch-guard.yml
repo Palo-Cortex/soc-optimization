@@ -2,17 +2,41 @@ name: Branch name guard
 on:
   pull_request:
     types: [opened, synchronize, reopened, edited]
+
 jobs:
   validate-branch:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check branch naming convention
         run: |
           BRANCH="${{ github.head_ref }}"
-          REGEX='^(feat|fix|chore|docs|refactor)\/(data|network|identity|cloud|endpoint|email|siem|core|playbooks)\/(trigger|analysis|containment|eradication|recovery|communication)\/[a-z0-9\-]+$'
+
+          # Allowed branch types
+          TYPE='(feat|fix|chore|docs|refactor)'
+
+          # Allowed SOC Framework modules
+          MODULE='(entrypoint|upon-trigger|hydration|normalization|enrichment|containment|eradication|recovery|communication|data-modeling|correlation|playbooks|lists|common-utils|dashboards)'
+
+          # Component and slug patterns
+          COMPONENT='[a-z0-9\-]+'
+          SLUG='[a-z0-9\-]+'
+
+          # Final pattern: <type>/<module>/<component>/<slug>
+          REGEX="^${TYPE}\/${MODULE}\/${COMPONENT}\/${SLUG}$"
+
           if [[ ! "$BRANCH" =~ $REGEX ]]; then
-            echo "❌ Branch '$BRANCH' does not match naming convention."
-            echo "Expected: <type>/<surface>/<phase>/<slug>"
+            echo "❌ Branch '$BRANCH' does NOT match the SOC Framework naming convention."
+            echo ""
+            echo "Expected format:"
+            echo "  <type>/<module>/<component>/<slug>"
+            echo ""
+            echo "Example:"
+            echo "  feat/upon-trigger/entity-mapping/improve-user-resolution"
+            echo ""
+            echo "Allowed types: $TYPE"
+            echo "Allowed modules: $MODULE"
             exit 1
           fi
+
           echo "✅ Branch name looks good: $BRANCH"
