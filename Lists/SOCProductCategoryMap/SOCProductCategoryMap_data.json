@@ -1,0 +1,117 @@
+{
+    "ds_paloaltonetworks_cloud_identity_engine_directory": {
+        "category": "Identity",
+        "type": "Directory",
+        "confidence": "high"
+    },
+    "ds_microsoft_defender_identity": {
+        "category": "Identity",
+        "type": "IDP",
+        "confidence": "high"
+    },
+    "ds_okta_systemlog": {
+        "category": "Identity",
+        "type": "IDP",
+        "confidence": "high"
+    },
+    "ds_cisco_ise": {
+        "category": "Identity",
+        "type": "NAC",
+        "confidence": "high"
+    },
+    "ds_cyberark": {
+        "category": "Identity",
+        "type": "PAM",
+        "confidence": "high"
+    },
+    "ds_microsoft_defender_email": {
+        "category": "EmailSecurity",
+        "type": "SEG",
+        "confidence": "high"
+    },
+    "ds_abnormalsecurity_abx": {
+        "category": "EmailSecurity",
+        "type": "BEC/ML",
+        "confidence": "high"
+    },
+    "ds_paloaltonetworks_emailsecurity": {
+        "category": "EmailSecurity",
+        "type": "SEG",
+        "confidence": "high"
+    },
+    "ds_proofpoint_tap": {
+        "category": "EmailSecurity",
+        "type": "SEG",
+        "confidence": "high"
+    },
+    "ds_paloaltonetworks_firewall_threat": {
+        "category": "Network",
+        "type": "NGFW",
+        "confidence": "high"
+    },
+    "ds_paloaltonetworks_firewall_traffic": {
+        "category": "Network",
+        "type": "NGFW",
+        "confidence": "high"
+    },
+    "ds_cisco_asa_vpn": {
+        "category": "Network",
+        "type": "VPN",
+        "confidence": "high"
+    },
+    "ds_fortinet_fortigate": {
+        "category": "Network",
+        "type": "NGFW",
+        "confidence": "high"
+    },
+    "ds_zscaler_zia": {
+        "category": "Network",
+        "type": "Proxy",
+        "confidence": "high"
+    },
+    "ds_aws_cloudtrail": {
+        "category": "Cloud",
+        "type": "CSPM",
+        "confidence": "high"
+    },
+    "ds_azure_activity": {
+        "category": "Cloud",
+        "type": "CSPM",
+        "confidence": "high"
+    },
+    "ds_gcp_audit": {
+        "category": "Cloud",
+        "type": "CSPM",
+        "confidence": "high"
+    },
+    "ds_alibaba_actiontrail": {
+        "category": "Cloud",
+        "type": "CSPM",
+        "confidence": "high"
+    },
+    "ds_crowdstrike_falcon_event": {
+        "category": "Endpoint",
+        "type": "EDR",
+        "confidence": "high"
+    },
+    "ds_microsoft_defender_endpoint": {
+        "category": "Endpoint",
+        "type": "EDR",
+        "confidence": "high"
+    },
+    "ds_paloaltonetworks_xdr_analytics": {
+        "category": "Endpoint",
+        "type": "XDR",
+        "confidence": "high"
+    },
+    "ds_sentinelone_event": {
+        "category": "Endpoint",
+        "type": "EDR",
+        "confidence": "high"
+    },
+    "ds_trend_micro_vision_one_v3_generic_alert": {
+        "category": "Endpoint",
+        "type": "EDR",
+        "confidence": "high"
+    }
+}

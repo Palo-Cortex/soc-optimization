@@ -1,0 +1,280 @@
+{
+    "VendorCapabilities": {
+        "Cortex XDR - IR": {
+            "isolate_endpoint": {
+                "command": "xdr-endpoint-isolate",
+                "args": [
+                    "endpoint_id"
+                ]
+            },
+            "un_isolate_endpoint": {
+                "command": "xdr-endpoint-unisolate",
+                "args": [
+                    "endpoint_id"
+                ]
+            },
+            "terminate_process": {
+                "command": "xdr-terminate-process",
+                "args": [
+                    "endpoint_id",
+                    "process_id"
+                ]
+            },
+            "block_hash": {
+                "command": "xdr-blocklist-add",
+                "args": [
+                    "hash"
+                ]
+            },
+            "allow_hash": {
+                "command": "xdr-blocklist-remove",
+                "args": [
+                    "hash"
+                ]
+            }
+        },
+        "Microsoft 365 Defender": {
+            "isolate_device": {
+                "command": "microsoft-atp-isolate-machine",
+                "args": [
+                    "machine_id"
+                ]
+            },
+            "un_isolate_device": {
+                "command": "microsoft-atp-unisolate-machine",
+                "args": [
+                    "machine_id"
+                ]
+            },
+            "run_av_scan": {
+                "command": "microsoft-atp-run-av-scan",
+                "args": [
+                    "machine_id"
+                ]
+            },
+            "restrict_app_execution": {
+                "command": "microsoft-atp-restrict-app-execution",
+                "args": [
+                    "machine_id"
+                ]
+            }
+        },
+        "Microsoft Graph User": {
+            "disable_user": {
+                "command": "msgraph-user-block",
+                "args": [
+                    "user_id"
+                ]
+            },
+            "enable_user": {
+                "command": "msgraph-user-unblock",
+                "args": [
+                    "user_id"
+                ]
+            }
+        },
+        "Trend Micro Vision One": {
+            "isolate_endpoint": {
+                "command": "trendmicro-isolate-endpoint",
+                "args": [
+                    "endpoint_id"
+                ]
+            },
+            "un_isolate_endpoint": {
+                "command": "trendmicro-unisolate-endpoint",
+                "args": [
+                    "endpoint_id"
+                ]
+            },
+            "terminate_process": {
+                "command": "trendmicro-terminate-process",
+                "args": [
+                    "endpoint_id",
+                    "process_id"
+                ]
+            }
+        },
+        "CrowdStrike Falcon": {
+            "contain_host": {
+                "command": "cs-falcon-contain-host",
+                "args": [
+                    "device_id"
+                ]
+            },
+            "lift_containment": {
+                "command": "cs-falcon-lift-host-containment",
+                "args": [
+                    "device_id"
+                ]
+            }
+        },
+        "SentinelOne v2": {
+            "isolate_device": {
+                "command": "sentinelone-isolate-agent",
+                "args": [
+                    "agent_id"
+                ]
+            },
+            "un_isolate_device": {
+                "command": "sentinelone-connect-agent",
+                "args": [
+                    "agent_id"
+                ]
+            },
+            "kill_process": {
+                "command": "sentinelone-kill-process",
+                "args": [
+                    "agent_id",
+                    "process_name"
+                ]
+            },
+            "quarantine_file": {
+                "command": "sentinelone-quarantine-file",
+                "args": [
+                    "agent_id",
+                    "file_path"
+                ]
+            }
+        },
+        "Palo Alto Networks - Email Security": {
+            "quarantine_email": {
+                "command": "pan-emailsecurity-quarantine-message",
+                "args": [
+                    "message_id"
+                ]
+            },
+            "release_email": {
+                "command": "pan-emailsecurity-release-message",
+                "args": [
+                    "message_id"
+                ]
+            }
+        },
+        "Abnormal Security": {
+            "quarantine_message": {
+                "command": "abnormal-quarantine-message",
+                "args": [
+                    "message_id"
+                ]
+            },
+            "restore_message": {
+                "command": "abnormal-restore-message",
+                "args": [
+                    "message_id"
+                ]
+            }
+        },
+        "Proofpoint TAP v2": {
+            "quarantine_message": {
+                "command": "proofpoint-quarantine-message",
+                "args": [
+                    "guid"
+                ]
+            },
+            "release_message": {
+                "command": "proofpoint-release-message",
+                "args": [
+                    "guid"
+                ]
+            }
+        },
+        "Okta": {
+            "suspend_user": {
+                "command": "okta-suspend-user",
+                "args": [
+                    "user_id"
+                ]
+            },
+            "unsuspend_user": {
+                "command": "okta-unsuspend-user",
+                "args": [
+                    "user_id"
+                ]
+            }
+        },
+        "Cisco ISE": {
+            "quarantine_endpoint": {
+                "command": "ise-anc-endpoint",
+                "args": [
+                    "mac_address"
+                ]
+            },
+            "unquarantine_endpoint": {
+                "command": "ise-clear-anc-endpoint",
+                "args": [
+                    "mac_address"
+                ]
+            }
+        },
+        "Zscaler ZIA": {
+            "block_url": {
+                "command": "zscaler-blacklist-url",
+                "args": [
+                    "url"
+                ]
+            },
+            "unblock_url": {
+                "command": "zscaler-unblacklist-url",
+                "args": [
+                    "url"
+                ]
+            }
+        },
+        "Palo Alto Networks Panorama": {
+            "block_ip": {
+                "command": "panorama-ban-ip",
+                "args": [
+                    "ip"
+                ]
+            },
+            "unblock_ip": {
+                "command": "panorama-unban-ip",
+                "args": [
+                    "ip"
+                ]
+            }
+        },
+        "Palo Alto Networks Firewall": {
+            "block_ip": {
+                "command": "pan-os-ban-ip",
+                "args": [
+                    "ip"
+                ]
+            },
+            "unblock_ip": {
+                "command": "pan-os-unban-ip",
+                "args": [
+                    "ip"
+                ]
+            }
+        },
+        "Fortinet FortiGate": {
+            "block_ip": {
+                "command": "fortigate-ban-ip",
+                "args": [
+                    "ip"
+                ]
+            },
+            "unblock_ip": {
+                "command": "fortigate-unban-ip",
+                "args": [
+                    "ip"
+                ]
+            }
+        },
+        "Prisma Cloud Compute": {
+            "quarantine_container": {
+                "command": "prismacloudcompute-container-quarantine",
+                "args": [
+                    "container_id"
+                ]
+            },
+            "stop_container": {
+                "command": "prismacloudcompute-container-stop",
+                "args": [
+                    "container_id"
+                ]
+            }
+        }
+    }
+}
