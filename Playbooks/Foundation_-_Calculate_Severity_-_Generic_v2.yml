@@ -1,4 +1,4 @@
-id: 9ab98066-2224-4d76-8121-6f24622d9103
+id: Foundation - Calculate Severity - Generic v2
 version: 5
 contentitemexportablefields:
   contentitemfields:
@@ -40,7 +40,7 @@ tasks:
       name: ""
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "16"
@@ -78,7 +78,7 @@ tasks:
       type: regular
       iscommand: true
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -115,7 +115,7 @@ tasks:
       type: regular
       iscommand: true
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -152,7 +152,7 @@ tasks:
       type: regular
       iscommand: true
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -187,7 +187,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     separatecontext: false
     continueonerrortype: ""
     view: |-
@@ -217,7 +217,7 @@ tasks:
       type: regular
       iscommand: true
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -254,7 +254,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "25"
@@ -562,7 +562,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "15"
@@ -605,7 +605,7 @@ tasks:
       type: regular
       iscommand: true
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -643,7 +643,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "15"
@@ -682,7 +682,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "15"
@@ -724,7 +724,7 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "15"
@@ -768,7 +768,7 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "15"
@@ -800,7 +800,7 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "15"
@@ -832,7 +832,7 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "15"
@@ -881,25 +881,25 @@ inputs:
       - operator: uniq
   required: false
   description: 'Array of all indicator values associated with the incident. '
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: CriticalUsers
   value:
     simple: admin,administrator
   required: false
   description: CSV of usernames of critical users.
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: CriticalEndpoints
   value:
     simple: admin
   required: false
   description: CSV of hostnames of critical endpoints.
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: CriticalGroups
   value:
     simple: admins,administrators
   required: false
   description: CSV of DN names of critical AD groups.
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: Account
   value:
     complex:
@@ -908,7 +908,7 @@ inputs:
       - operator: uniq
   required: false
   description: User accounts to check against the critical lists.
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: Endpoint
   value:
     complex:
@@ -917,7 +917,7 @@ inputs:
       - operator: uniq
   required: false
   description: Endpoints to check against the CriticalEndpoints list.
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: EmailAuthenticityCheck
   value:
     complex:
@@ -928,7 +928,7 @@ inputs:
   required: false
   description: 'Indicates the email authenticity resulting from the EmailAuthenticityCheck
     script. Possible values are: Pass, Fail, Suspicious, and Undetermined.'
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: MicrosoftHeadersSeverityCheck
   value:
     simple: ${Email.MicrosoftHeadersSeverityCheck}
@@ -936,7 +936,7 @@ inputs:
   description: The value is set by the "Process Microsoft's Anti-Spam Headers" Playbook,
     which calculates the severity after processing the PCL, BCL and PCL values inside
     Microsoft's headers.
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: XDRRiskyUsers
   value:
     complex:
@@ -947,7 +947,7 @@ inputs:
   required: false
   description: An object of risky users and their corresponding scores, as outputted
     by the "xdr-list-risky-users" command.
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: XDRRiskyHosts
   value:
     complex:
@@ -958,7 +958,7 @@ inputs:
   required: false
   description: An object of risky hosts and their corresponding scores, as outputted
     by the "xdr-list-risky-hosts" command.
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: DBotScoreMaxScore
   value:
     complex:
@@ -974,7 +974,7 @@ inputs:
       - operator: FirstArrayElement
   required: false
   description: The highest score (number) that was given to a DBotScore indicator.
-  playbookInputQuery: null
+  playbookInputQuery:
 outputs:
 - contextPath: CriticalAssets
   description: All critical assets involved in the incident.
@@ -993,3 +993,4 @@ outputs:
   type: unknown
 sourceplaybookid: Calculate Severity - Generic v2
 adopted: true
+fromversion: 5.0.0

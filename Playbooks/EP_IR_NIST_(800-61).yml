@@ -42,7 +42,7 @@ tasks:
       name: ""
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "17"
@@ -73,7 +73,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     separatecontext: false
     continueonerrortype: ""
     view: |-
@@ -120,7 +120,7 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "3"
@@ -160,7 +160,7 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "15"
@@ -204,7 +204,7 @@ inputs:
     simple: EP_InitialAccess
   required: false
   description: ""
-  playbookInputQuery: null
+  playbookInputQuery:
 inputSections:
 - inputs:
   - EntryPoint
@@ -218,3 +218,4 @@ outputs: []
 sourceplaybookid: 51ffcd5a-f5bb-4e09-84ae-e1efdc5165ac
 dirtyInputs: true
 adopted: true
+fromversion: 5.0.0

@@ -1,4 +1,4 @@
-id: Calculate Severity By Email Authenticity
+id: Foundation - Calculate Severity By Email Authenticity
 version: 7
 contentitemexportablefields:
   contentitemfields:
@@ -32,7 +32,7 @@ tasks:
       name: ""
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "23"
@@ -63,7 +63,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     separatecontext: false
     continueonerrortype: ""
     view: |-
@@ -94,7 +94,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "24"
@@ -135,7 +135,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "30"
@@ -168,7 +168,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       Fail:
       - "27"
@@ -280,7 +280,7 @@ tasks:
       type: regular
       iscommand: false
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -319,7 +319,7 @@ tasks:
       type: regular
       iscommand: false
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -358,7 +358,7 @@ tasks:
       type: regular
       iscommand: false
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -397,7 +397,7 @@ tasks:
       type: regular
       iscommand: false
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -452,7 +452,7 @@ inputs:
   required: false
   description: The verdict regarding the authenticity of the investigated email. Returned
     from CheckEmailAuthenticity script.
-  playbookInputQuery: null
+  playbookInputQuery:
 inputSections:
 - inputs:
   - EmailAuthenticityCheck
@@ -470,3 +470,4 @@ outputs:
   type: number
 dirtyInputs: true
 adopted: true
+fromversion: 5.0.0

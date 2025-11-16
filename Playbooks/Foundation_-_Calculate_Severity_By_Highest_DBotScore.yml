@@ -1,4 +1,4 @@
-id: Calculate Severity By Highest DBotScore
+id: Foundation - Calculate Severity By Highest DBotScore
 version: 12
 contentitemexportablefields:
   contentitemfields:
@@ -31,7 +31,7 @@ tasks:
       name: ""
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "23"
@@ -62,7 +62,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     separatecontext: false
     continueonerrortype: ""
     view: |-
@@ -91,7 +91,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "24"
@@ -133,7 +133,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "30"
@@ -170,7 +170,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "30"
@@ -308,7 +308,7 @@ tasks:
       type: regular
       iscommand: false
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -348,7 +348,7 @@ tasks:
       type: regular
       iscommand: false
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -388,7 +388,7 @@ tasks:
       type: regular
       iscommand: false
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -429,7 +429,7 @@ tasks:
       type: regular
       iscommand: false
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -468,7 +468,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "25"
@@ -523,7 +523,7 @@ inputs:
       - operator: uniq
   required: false
   description: 'Array of all DBotScore indicator values associated with the incident. '
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: DBotScoreMaxScore
   value:
     complex:
@@ -539,10 +539,11 @@ inputs:
       - operator: FirstArrayElement
   required: false
   description: The highest score that was given to a DBotScore indicator.
-  playbookInputQuery: null
+  playbookInputQuery:
 outputs:
 - contextPath: Severities.DBotScoreSeverity
   description: The severity level of the incident identified and set in the Calculate
     Severity By Highest DBotScore playbook.
   type: string
 adopted: true
+fromversion: 5.0.0

@@ -30,7 +30,7 @@ tasks:
       name: ""
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "1"
@@ -63,7 +63,7 @@ tasks:
       type: regular
       iscommand: true
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "3"
@@ -97,7 +97,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     separatecontext: false
     continueonerrortype: ""
     view: |-
@@ -132,3 +132,4 @@ outputs: []
 sourceplaybookid: Foundation Common - Extract Indicators from alerts
 quiet: true
 adopted: true
+fromversion: 5.0.0

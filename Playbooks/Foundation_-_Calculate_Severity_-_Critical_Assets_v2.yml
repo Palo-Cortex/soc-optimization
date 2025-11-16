@@ -1,4 +1,4 @@
-id: Calculate Severity - Critical Assets v2
+id: Foundation - Calculate Severity - Critical Assets v2
 version: 12
 contentitemexportablefields:
   contentitemfields:
@@ -33,7 +33,7 @@ tasks:
       name: ""
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "21"
@@ -68,7 +68,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "43"
@@ -117,7 +117,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "43"
@@ -169,7 +169,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     separatecontext: false
     continueonerrortype: ""
     view: |-
@@ -199,7 +199,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "42"
@@ -251,7 +251,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "8"
@@ -282,7 +282,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "37"
@@ -313,7 +313,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "27"
@@ -346,7 +346,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "23"
@@ -420,7 +420,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "44"
@@ -473,7 +473,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "44"
@@ -517,7 +517,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "44"
@@ -562,7 +562,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "36"
@@ -609,7 +609,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "44"
@@ -652,7 +652,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "30"
@@ -725,7 +725,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "44"
@@ -779,7 +779,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "9"
@@ -820,7 +820,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "25"
@@ -851,7 +851,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "24"
@@ -884,7 +884,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "42"
@@ -935,7 +935,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "13"
@@ -976,7 +976,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -1007,7 +1007,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -1038,7 +1038,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -1071,7 +1071,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "55"
@@ -1110,7 +1110,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "13"
@@ -1157,7 +1157,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "9"
@@ -1205,7 +1205,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "46"
@@ -1258,7 +1258,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "46"
@@ -1311,7 +1311,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "46"
@@ -1363,7 +1363,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "46"
@@ -1416,7 +1416,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "10"
@@ -1481,19 +1481,19 @@ inputs:
     simple: admin,administrator
   required: false
   description: CSV of critical users.
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: CriticalEndpoints
   value:
     simple: AdminPC
   required: false
   description: CSV of critical endpoints.
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: CriticalGroups
   value:
     simple: Administrators, Domain Admins, Enterprise Admins, Schema Admins
   required: false
   description: CSV of DN names of critical AD groups.
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: Account
   value:
     complex:
@@ -1502,7 +1502,7 @@ inputs:
       - operator: uniq
   required: false
   description: User accounts to check against the critical lists.
-  playbookInputQuery: null
+  playbookInputQuery:
 - key: Endpoint
   value:
     complex:
@@ -1511,7 +1511,7 @@ inputs:
       - operator: uniq
   required: false
   description: Endpoints to check against the CriticalEndpoints list.
-  playbookInputQuery: null
+  playbookInputQuery:
 outputs:
 - contextPath: Severities.CriticalAssetsSeverity
   description: The score returned by the Calculate Severity - Critical Assets v2 playbook.
@@ -1532,3 +1532,4 @@ outputs:
   description: Critical user-groups involved in the incident.
   type: unknown
 adopted: true
+fromversion: 5.0.0

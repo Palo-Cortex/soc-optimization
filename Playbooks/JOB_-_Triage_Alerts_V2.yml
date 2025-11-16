@@ -1,8 +1,8 @@
-id: JOB - Triage Incidents
-version: 4
+id: JOB - Triage Alerts V2
+version: 2
 contentitemexportablefields:
   contentitemfields:
-    packID: soc-optimization
+    packID: ""
     packName: SOC Framework
     itemVersion: 2.1.16
     fromServerVersion: 5.0.0
@@ -12,7 +12,7 @@ contentitemexportablefields:
     isoverridable: false
     supportedModules: []
 vcShouldKeepItemLegacyProdMachine: false
-name: JOB - Triage Alerts
+name: JOB - Triage Alerts V2
 tags:
 - SOC
 - SOC_Framework
@@ -28,7 +28,7 @@ tasks:
       name: ""
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "3"
@@ -61,7 +61,7 @@ tasks:
       type: regular
       iscommand: true
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#error#':
       - "6"
@@ -107,7 +107,7 @@ tasks:
       type: regular
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#error#':
       - "6"
@@ -162,7 +162,7 @@ tasks:
       type: condition
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#default#':
       - "9"
@@ -206,7 +206,7 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "9"
@@ -237,7 +237,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     separatecontext: false
     continueonerrortype: ""
     view: |-
@@ -266,7 +266,7 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "9"
@@ -308,7 +308,7 @@ tasks:
       type: regular
       iscommand: true
       brand: Builtin
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "7"
@@ -328,7 +328,6 @@ tasks:
     quietmode: 0
     isoversize: false
     isautoswitchedtoquietmode: false
-system: true
 view: |-
   {
     "linkLabelsPosition": {
@@ -345,5 +344,7 @@ view: |-
   }
 inputs: []
 outputs: []
+sourceplaybookid: JOB - Triage Incidents
 dirtyInputs: true
 adopted: true
+fromversion: 5.0.0
