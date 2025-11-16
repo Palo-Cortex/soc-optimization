@@ -32,7 +32,7 @@ inputSections:
 inputs:
 - description: ""
   key: EntryPoint
-  playbookInputQuery:
+  playbookInputQuery: null
   required: false
   value:
     simple: EP_InitialAccess
@@ -68,7 +68,7 @@ tasks:
       id: c6580e49-dceb-4340-8867-666b7738078e
       iscommand: false
       name: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
       version: -1
     taskid: c6580e49-dceb-4340-8867-666b7738078e
     timertriggers: []
@@ -95,7 +95,7 @@ tasks:
       id: d8799f66-e47d-409b-82e2-478b0708e021
       iscommand: false
       name: Done
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
       type: title
       version: -1
     taskid: d8799f66-e47d-409b-82e2-478b0708e021
@@ -132,7 +132,7 @@ tasks:
       iscommand: false
       name: Foundation - Upon Trigger
       playbookId: Foundation - Upon Trigger
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
       type: playbook
       version: -1
     taskid: dcaf2712-d746-4f70-a174-ab0d981e50e1
@@ -190,7 +190,7 @@ tasks:
       iscommand: false
       name: SOC NIST IR (800-61)
       playbookId: SOC NIST IR (800-61)
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
       type: playbook
       version: -1
     taskid: cd14c308-db43-4c73-85e2-23bc1d26553f
@@ -232,7 +232,7 @@ tasks:
       iscommand: false
       name: Foundation - Load Configuration
       playbookId: Foundation - Load Configuration
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
       type: playbook
       version: -1
     taskid: 94bacc9a-d338-4191-8688-470d9a3df2af
@@ -258,4 +258,3 @@ view: |-
       }
     }
   }
-fromversion: 5.0.0

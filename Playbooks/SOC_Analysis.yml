@@ -1,0 +1,369 @@
+adopted: true
+description: |-
+  Identify potential security events, determine whether they represent true incidents, understand their scope and impact, and establish the actionable context needed to respond effectively.
+
+  What this phase includes:
+
+  Monitoring security telemetry from logs, alerts, sensors, EDR, SIEM/XSIAM analytics, threat intel, and user reports.
+
+  Triaging events to distinguish benign activity, false positives, and true security incidents.
+
+  Enriching indicators and artifacts (e.g., IPs, hashes, domains, user accounts, processes, network connections) using internal data and external threat intelligence.
+
+  Correlating events across systems to understand the timeline, root cause, attack vector, and potential lateral movement.
+
+  Assigning incident classification, severity, priority, and category for consistent response.
+
+  Documenting findings, evidence, and hypotheses while preserving forensic integrity.
+
+  Determining the initial scope and business impact to decide how aggressive containment must be.
+
+  Outcome:
+  A validated and well-understood security incident with clear context, severity, indicators, and scope—enabling the organization to transition into Containment with confidence and accuracy.
+id: 'SOC Analysis'
+inputs: []
+name: SOC Analysis
+outputs: []
+sourceplaybookid: 'SOC Containment'
+starttaskid: "0"
+tags:
+- SOC
+- SOC_Framework
+- NIST 800-61
+- Analysis
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+      - "3"
+      - "2"
+      - "4"
+      - "6"
+      - "8"
+      - "7"
+      - "5"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2d9b464e-b61d-4ff1-8425-1dec11c5d731
+      iscommand: false
+      name: ""
+      playbooktaskmissingcomponent:
+      version: -1
+    taskid: 2d9b464e-b61d-4ff1-8425-1dec11c5d731
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 1555,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "9"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 57a5da65-400a-4cd5-826c-3436a01618f8
+      iscommand: false
+      name: SOC Data Analysis
+      playbookId: 'SOC Data Analysis'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 57a5da65-400a-4cd5-826c-3436a01618f8
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 220
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "9"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: b5e2241d-e7c3-4e8f-87eb-82d6198a5129
+      iscommand: false
+      name: SOC Email Analysis
+      playbookId: 'SOC Email Analysis'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: b5e2241d-e7c3-4e8f-87eb-82d6198a5129
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 2200,
+          "y": 220
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "9"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2d8a3634-3ca8-4460-86dd-885d0aa67af6
+      iscommand: false
+      name: SOC EndPoint Analysis
+      playbookId: 'SOC EndPoint Analysis'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 2d8a3634-3ca8-4460-86dd-885d0aa67af6
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 1770,
+          "y": 220
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "9"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 24ff8232-e9a9-4cf4-8a6c-d80ca1c4f0c0
+      iscommand: false
+      name: SOC Eradication
+      playbookId: 'SOC Eradication'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 24ff8232-e9a9-4cf4-8a6c-d80ca1c4f0c0
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 3060,
+          "y": 220
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "9"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: d7385c3a-2283-4938-81b3-58ea63cc75f2
+      iscommand: false
+      name: SOC Identity Analysis
+      playbookId: 'SOC Identity Analysis'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: d7385c3a-2283-4938-81b3-58ea63cc75f2
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 220
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "9"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: e2089744-16e7-4227-8a13-0c65f8278895
+      iscommand: false
+      name: SOC Network Analysis
+      playbookId: 'SOC Network Analysis'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: e2089744-16e7-4227-8a13-0c65f8278895
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 2630,
+          "y": 220
+        }
+      }
+  "7":
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "9"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 4b7573be-bd91-4fe6-8959-2bc5d4aaa78c
+      iscommand: false
+      name: SOC SaaS Analysis
+      playbookId: 'SOC SaaS Analysis'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 4b7573be-bd91-4fe6-8959-2bc5d4aaa78c
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 1340,
+          "y": 220
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "9"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 3d8bf25e-863c-4ee5-8a18-47d621adbc11
+      iscommand: false
+      name: SOC Workload Analysis
+      playbookId: 'SOC Workload Analysis'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 3d8bf25e-863c-4ee5-8a18-47d621adbc11
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 220
+        }
+      }
+  "9":
+    continueonerrortype: ""
+    id: "9"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 8ceb5aed-c39b-452d-8fd8-f5f2ed8eb896
+      iscommand: false
+      name: Done
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: 8ceb5aed-c39b-452d-8fd8-f5f2ed8eb896
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 1555,
+          "y": 400
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 410,
+        "width": 3390,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+fromversion: 5.0.0

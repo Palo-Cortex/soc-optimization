@@ -1,0 +1,202 @@
+adopted: true
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    isoverridable: false
+    itemVersion: 2.1.13
+    packID: ""
+    packName: SOC Framework
+    prevname: ""
+    supportedModules: []
+    toServerVersion: ""
+description: |
+  Core fields are evaluated
+  Unpopulated core fields refer to alternatives for values
+  Field values are evaluated for formatting and syntax
+dirtyInputs: true
+id: 'Foundation - Data Integrity'
+inputs: []
+name: Foundation - Data Integrity
+outputs: []
+sourceplaybookid: Foundation - Upon Trigger
+starttaskid: "0"
+tags:
+- SOC
+- SOC_Framework
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "18"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+      iscommand: false
+      name: ""
+      playbooktaskmissingcomponent:
+      version: -1
+    taskid: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2eb08148-d069-489a-83e1-1ab88016aac3
+      iscommand: false
+      name: Done
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: 2eb08148-d069-489a-83e1-1ab88016aac3
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 760
+        }
+      }
+  "18":
+    continueonerrortype: ""
+    id: "18"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "20"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: This is a common playbook intended to integrate the Indicator Extraction
+        to all automated alerts.
+      id: 1461c9ee-69e3-4a9c-834e-669805e36a97
+      iscommand: false
+      name: Foundation Common - Extract Indicators from alerts
+      playbookId: Foundation Common - Extract Indicators from alerts
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 1461c9ee-69e3-4a9c-834e-669805e36a97
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 220
+        }
+      }
+  "19":
+    continueonerrortype: ""
+    id: "19"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: fbc00391-76e6-4933-83c7-aff9a2539847
+      iscommand: false
+      name: Foundation - Normalization
+      playbookId: 'Foundation - Normalization'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: fbc00391-76e6-4933-83c7-aff9a2539847
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 580
+        }
+      }
+  "20":
+    continueonerrortype: ""
+    id: "20"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "19"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 35f86391-417c-43a0-8b79-adfa3c6e7fda
+      iscommand: false
+      name: Foundation - Issue Hydration
+      playbookId: 'Foundation - Issue Hydration'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 35f86391-417c-43a0-8b79-adfa3c6e7fda
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 400
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 770,
+        "width": 380,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+fromversion: 5.0.0

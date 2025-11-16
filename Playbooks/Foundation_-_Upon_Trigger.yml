@@ -1,0 +1,606 @@
+adopted: true
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    isoverridable: false
+    itemVersion: 2.1.13
+    packID: ""
+    packName: SOC Framework
+    prevname: ""
+    supportedModules: []
+    toServerVersion: ""
+dirtyInputs: true
+id: 'Foundation - Upon Trigger'
+inputSections:
+- description: Generic group for inputs
+  inputs: []
+  name: General (Inputs group)
+inputs: []
+name: Foundation - Upon Trigger
+outputSections:
+- description: Generic group for outputs
+  name: General (Outputs group)
+  outputs:
+  - Shadow
+outputs:
+- contextPath: Shadow
+  type: boolean
+sourceplaybookid: Foundation - Upon Trigger
+starttaskid: "0"
+tags:
+- SOC
+- SOC_Framework
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 5206068f-fdf3-4829-8cc2-c3ada7b5516b
+      iscommand: false
+      name: ""
+      playbooktaskmissingcomponent:
+      version: -1
+    taskid: 5206068f-fdf3-4829-8cc2-c3ada7b5516b
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "27"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 40483694-723e-4f42-a682-69890ad386d8
+      iscommand: false
+      name: Environment Detection
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: 40483694-723e-4f42-a682-69890ad386d8
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 220
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "28"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: eaffbc30-3533-483b-80c1-82bdd0e73dd3
+      iscommand: false
+      name: Data Integrity
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: eaffbc30-3533-483b-80c1-82bdd0e73dd3
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 570
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "29"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 71b92494-1f98-4832-bbe4-ada8dfe119fb
+      iscommand: false
+      name: Issue Sync (Ledger / Owner Notification)
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: 71b92494-1f98-4832-bbe4-ada8dfe119fb
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 920
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "22"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 4bc7c9d9-c8d2-4e49-8f24-1e964e9ad270
+      iscommand: false
+      name: Dedup
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: 4bc7c9d9-c8d2-4e49-8f24-1e964e9ad270
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1270
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "23"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 63d48ee5-6442-48a4-9258-8b2e3edaafe0
+      iscommand: false
+      name: Enrichment
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: 63d48ee5-6442-48a4-9258-8b2e3edaafe0
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1620
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "30"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 35c54f0f-e1e7-48a9-8aed-57d322ddf9c7
+      iscommand: false
+      name: Assessment
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: 35c54f0f-e1e7-48a9-8aed-57d322ddf9c7
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1970
+        }
+      }
+  "7":
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "31"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 76dd4bf8-4839-4846-8cc2-95492ce2721a
+      iscommand: false
+      name: Escalation
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: 76dd4bf8-4839-4846-8cc2-95492ce2721a
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 2320
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: d6a23a94-520a-4ff6-8146-c309f064e6ed
+      iscommand: false
+      name: Done
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: d6a23a94-520a-4ff6-8146-c309f064e6ed
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 2670
+        }
+      }
+  "22":
+    continueonerrortype: ""
+    id: "22"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |
+        Uses our alert fingerprinting - and compares the alert to the alert ledger
+        If a duplicate is identified - the parent alert is recorded, and the alert resolves
+      id: 7565e2ce-5b00-465c-8b19-409824aaf7f5
+      iscommand: false
+      name: Foundation - Dedup
+      playbookId: Foundation - Dedup
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 7565e2ce-5b00-465c-8b19-409824aaf7f5
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1440
+        }
+      }
+  "23":
+    continueonerrortype: ""
+    id: "23"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |
+        Identifies the core fields present and starts tailored enrichment pipelines
+        Generates threat flags based on findings (ex: if we identify a domain controller or admin account)
+      id: 2193603d-bd95-4ae7-922e-0c6436361228
+      iscommand: false
+      name: Foundation - Enrichment
+      playbookId: Foundation - Enrichment
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 2193603d-bd95-4ae7-922e-0c6436361228
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1790
+        }
+      }
+  "27":
+    continueonerrortype: ""
+    id: "27"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |
+        Identify Non-Production Use Cases
+        Keeps downstream playbooks from performing ‘hazardous tasks’
+      id: b636c02d-7aeb-41b9-bcd4-6f13b17ccb1d
+      iscommand: false
+      name: Foundation - Environment Detection
+      playbookId: 'Foundation - Environment Detection'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: b636c02d-7aeb-41b9-bcd4-6f13b17ccb1d
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 390
+        }
+      }
+  "28":
+    continueonerrortype: ""
+    id: "28"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |
+        Core fields are evaluated
+        Unpopulated core fields refer to alternatives for values
+        Field values are evaluated for formatting and syntax
+      id: d1f23017-516e-4106-b780-79c92de36058
+      iscommand: false
+      name: Foundation - Data Integrity
+      playbookId: 'Foundation - Data Integrity'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: d1f23017-516e-4106-b780-79c92de36058
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 740
+        }
+      }
+  "29":
+    continueonerrortype: ""
+    id: "29"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |+
+        Generates/Updates the Case Alert Ledger
+        Notifies incident owner of new issue addition
+
+      id: 2c175c0c-272d-41f1-9ace-5d09d1ba18a2
+      iscommand: false
+      name: Foundation - Case Sync
+      playbookId: 'Foundation - Case Sync'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 2c175c0c-272d-41f1-9ace-5d09d1ba18a2
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1090
+        }
+      }
+  "30":
+    continueonerrortype: ""
+    id: "30"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "7"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |+
+        Evaluates our enrichment flags, and severity value(s) to formalize a final severity score
+        Creates human readable summary of severity assessment reasoning
+
+      id: a2c5dc7c-7b2b-46cb-a6f7-da0f96641710
+      iscommand: false
+      name: Foundation - Assessment
+      playbookId: 'Foundation - Assessment'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: a2c5dc7c-7b2b-46cb-a6f7-da0f96641710
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 2140
+        }
+      }
+  "31":
+    continueonerrortype: ""
+    id: "31"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |
+        Handles dispatching pagerduty alert / SOC email
+        Identifies if another alert within the incident already paged
+      id: 8743190f-97e3-4db4-911c-924895c4b9a9
+      iscommand: false
+      name: Foundation - Escalation
+      playbookId: 'Foundation - Escalation'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 8743190f-97e3-4db4-911c-924895c4b9a9
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 2490
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 2680,
+        "width": 380,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+fromversion: 5.0.0

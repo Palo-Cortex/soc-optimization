@@ -1,0 +1,171 @@
+adopted: true
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    isoverridable: false
+    itemVersion: 2.1.13
+    packID: ""
+    packName: SOC Framework
+    prevname: ""
+    supportedModules: []
+    toServerVersion: ""
+description: |
+  Identify Non-Production Use Cases
+  Keeps downstream playbooks from performing ‘hazardous tasks’
+dirtyInputs: true
+id: 'Foundation - Environment Detection'
+inputs: []
+name: Foundation - Environment Detection
+outputs: []
+sourceplaybookid: Foundation - Upon Trigger
+starttaskid: "0"
+tags:
+- SOC
+- SOC_Framework
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "18"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+      iscommand: false
+      name: ""
+      playbooktaskmissingcomponent:
+      version: -1
+    taskid: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 50
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2eb08148-d069-489a-83e1-1ab88016aac3
+      iscommand: false
+      name: Done
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: 2eb08148-d069-489a-83e1-1ab88016aac3
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 580
+        }
+      }
+  "17":
+    continueonerrortype: ""
+    id: "17"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: c9a53716-a57b-4fae-8e00-d3508d482f51
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: Foundation - Error Handling
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: c9a53716-a57b-4fae-8e00-d3508d482f51
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 400
+        }
+      }
+  "18":
+    continueonerror: true
+    continueonerrortype: errorPath
+    id: "18"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#error#':
+      - "17"
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: shadow_mode
+      value:
+        simple: ${SOCOptimizeConfig.[3].enabled}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Set a value in context under the key you entered.
+      id: a4dc1fb9-04a4-4166-a2d7-ecc8cd82d79f
+      iscommand: false
+      name: Set Shadow Mode / Full Run
+      playbooktaskmissingcomponent:
+      script: Set
+      type: regular
+      version: -1
+    taskid: a4dc1fb9-04a4-4166-a2d7-ecc8cd82d79f
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 220
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 590,
+        "width": 492.5,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+fromversion: 5.0.0

@@ -1,0 +1,333 @@
+adopted: true
+description: |-
+  Limit the damage, stop the attacker’s ability to continue harmful activity, and prevent the incident from spreading while preserving evidence and keeping essential business operations running.
+
+  What this phase includes:
+
+  Isolating affected systems, users, networks, or applications to prevent lateral movement or continued exploitation.
+
+  Applying short-term tactical controls (e.g., block IPs, disable accounts, quarantine hosts, isolate network segments).
+
+  Implementing longer-term containment strategies where immediate eradication is not feasible (e.g., temporary config changes, firewall rules, forced MFA resets).
+
+  Capturing forensic data before making changes that would alter volatile evidence (memory, network traffic, logs, etc.).
+
+  Ensuring containment actions do not disrupt critical business processes unless absolutely necessary.
+
+  Coordinating with stakeholders to select the right containment strategy (e.g., monitor, disconnect, shutdown, or redirect).
+
+  Outcome:
+  The incident is stabilized, the attacker’s ability to cause further harm is limited, and the environment is safe enough to begin eradication and recovery without losing essential evidence.
+id: 'SOC Containment'
+inputs: []
+name: SOC Containment
+outputs: []
+starttaskid: "0"
+tags:
+- SOC
+- SOC_Framework
+- Containment
+- NIST 800-61
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "5"
+      - "6"
+      - "7"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2d9b464e-b61d-4ff1-8425-1dec11c5d731
+      iscommand: false
+      name: ""
+      playbooktaskmissingcomponent:
+      version: -1
+    taskid: 2d9b464e-b61d-4ff1-8425-1dec11c5d731
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 1340,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: bb69d761-3233-480c-8391-02db0f7da9e2
+      iscommand: false
+      name: SOC Data Containment
+      playbookId: 'SOC Data Containment'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: bb69d761-3233-480c-8391-02db0f7da9e2
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 220
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: a2786a59-ca22-439f-8b0e-95768261ab21
+      iscommand: false
+      name: SOC Email Containment
+      playbookId: 'SOC Email Containment'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: a2786a59-ca22-439f-8b0e-95768261ab21
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 220
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 17cdad38-684b-4018-8c2c-f1b716b237c3
+      iscommand: false
+      name: SOC Endpoint Containment
+      playbookId: 'SOC Endpoint Containment'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 17cdad38-684b-4018-8c2c-f1b716b237c3
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 220
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 67ab4066-0704-4497-8278-e199489811fd
+      iscommand: false
+      name: SOC Identity Containment
+      playbookId: 'SOC Identity Containment'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 67ab4066-0704-4497-8278-e199489811fd
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 1340,
+          "y": 220
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f5b0d0e5-32ce-4d9b-80c4-46106556bab9
+      iscommand: false
+      name: SOC Network Containment
+      playbookId: 'SOC Network Containment'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: f5b0d0e5-32ce-4d9b-80c4-46106556bab9
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 1770,
+          "y": 220
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 5dcbf4a8-21e4-4ddf-8323-5e6780cb370a
+      iscommand: false
+      name: SOC SaaS Containment
+      playbookId: 'SOC SaaS Containment'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 5dcbf4a8-21e4-4ddf-8323-5e6780cb370a
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 2200,
+          "y": 220
+        }
+      }
+  "7":
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 8b26a6cf-2770-48b7-8e1e-c82c86e12557
+      iscommand: false
+      name: SOC Workload Containment
+      playbookId: 'SOC Workload Containment'
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 8b26a6cf-2770-48b7-8e1e-c82c86e12557
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 2630,
+          "y": 220
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 65f28176-2b84-4727-961b-54aaae7a2dd7
+      iscommand: false
+      name: Done
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: 65f28176-2b84-4727-961b-54aaae7a2dd7
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 1370,
+          "y": 510
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 520,
+        "width": 2960,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+fromversion: 5.0.0

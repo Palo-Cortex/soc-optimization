@@ -1,11 +1,23 @@
-description: A simple Dedup to insure alerts are not executed on more than once.
+adopted: true
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    isoverridable: false
+    itemVersion: 2.1.13
+    packID: ""
+    packName: SOC Framework
+    prevname: ""
+    supportedModules: []
+    toServerVersion: ""
+description: |
+  Uses our alert fingerprinting - and compares the alert to the alert ledger
+  If a duplicate is identified - the parent alert is recorded, and the alert resolves
 dirtyInputs: true
-id: Foundation - Dedup
+id: 'Foundation - Dedup'
 inputs: []
 name: Foundation - Dedup
-fromversion: 5.0.0
 outputs: []
-quiet: true
 sourceplaybookid: Foundation - Upon Trigger
 starttaskid: "0"
 tags:
@@ -20,7 +32,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "18"
+      - "10"
     note: false
     quietmode: 0
     separatecontext: false
@@ -30,6 +42,7 @@ tasks:
       id: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
       iscommand: false
       name: ""
+      playbooktaskmissingcomponent:
       version: -1
     taskid: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
     timertriggers: []
@@ -56,6 +69,7 @@ tasks:
       id: 2eb08148-d069-489a-83e1-1ab88016aac3
       iscommand: false
       name: Done
+      playbooktaskmissingcomponent:
       type: title
       version: -1
     taskid: 2eb08148-d069-489a-83e1-1ab88016aac3
@@ -64,8 +78,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 195.25,
-          "y": 1230
+          "x": 162.5,
+          "y": 1120
         }
       }
   "10":
@@ -98,11 +112,12 @@ tasks:
     task:
       brand: ""
       description: |-
-        Finds past similar incidents based on incident fields' similarity. Includes an option to also display indicators similarity.
+        Finds past similar alerts based on alert fields' similarity. Includes an option to also display indicators similarity.
         Note: For the similarity calculation, at least one field must be provided in one of the "similarTextField", "similarCategoricalField", or "similarJsonField" arguments.
       id: 5b020eeb-07e2-4ead-b9c8-f41fddc7d10f
       iscommand: false
       name: DeDup Alerts from the Last "1 days ago"
+      playbooktaskmissingcomponent:
       script: DBotFindSimilarAlerts
       type: regular
       version: -1
@@ -113,7 +128,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 380
+          "y": 220
         }
       }
   "14":
@@ -145,6 +160,7 @@ tasks:
       id: ddcf8da0-3949-415f-8bbb-6c440ff050ee
       iscommand: true
       name: Close As Duplicates
+      playbooktaskmissingcomponent:
       script: Builtin|||closeInvestigation
       type: regular
       version: -1
@@ -154,8 +170,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 485.75,
-          "y": 890
+          "x": 387.5,
+          "y": 760
         }
       }
   "15":
@@ -183,6 +199,7 @@ tasks:
       id: 4f2a3250-61d8-4556-aea2-4612ac251ad6
       iscommand: false
       name: Print Duplicate Alerts
+      playbooktaskmissingcomponent:
       script: Print
       type: regular
       version: -1
@@ -192,8 +209,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 340.5,
-          "y": 720
+          "x": 275,
+          "y": 580
         }
       }
   "16":
@@ -226,6 +243,7 @@ tasks:
       id: 7adad498-fc30-4def-818b-a1d7198474c8
       iscommand: false
       name: Are there any similar alerts?
+      playbooktaskmissingcomponent:
       type: condition
       version: -1
     taskid: 7adad498-fc30-4def-818b-a1d7198474c8
@@ -234,8 +252,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 195.25,
-          "y": 550
+          "x": 162.5,
+          "y": 400
         }
       }
   "17":
@@ -257,6 +275,7 @@ tasks:
       iscommand: false
       name: Foundation - Error Handling
       playbookId: Foundation - Error Handling
+      playbooktaskmissingcomponent:
       type: playbook
       version: -1
     taskid: c9a53716-a57b-4fae-8e00-d3508d482f51
@@ -265,49 +284,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 195.25,
-          "y": 1060
-        }
-      }
-  "18":
-    continueonerrortype: ""
-    id: "18"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    loop:
-      exitCondition: ""
-      iscommand: false
-      max: 100
-      wait: 1
-    nexttasks:
-      '#none#':
-      - "10"
-    note: false
-    quietmode: 0
-    scriptarguments:
-      keyName:
-        simple: SOCOptimizeConfig
-      listName:
-        simple: SOCOptimizationConfig
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 2a2f1b31-590d-43a2-9840-9fcc749bdc8c
-      iscommand: false
-      name: Foundation - Load Configuration
-      playbookId: 'Foundation - Load Configuration'
-      type: playbook
-      version: -1
-    taskid: 2a2f1b31-590d-43a2-9840-9fcc749bdc8c
-    timertriggers: []
-    type: playbook
-    view: |-
-      {
-        "position": {
-          "x": 50,
-          "y": 210
+          "x": 162.5,
+          "y": 940
         }
       }
 version: -1
@@ -316,11 +294,11 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 1240,
-        "width": 816.75,
+        "height": 1130,
+        "width": 717.5,
         "x": 50,
         "y": 50
       }
     }
   }
-adopted: true
+fromversion: 5.0.0

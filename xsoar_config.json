@@ -8,7 +8,7 @@
     "custom_packs": [
         {
             "id": "SOCOptimization.zip",
-            "url": "https://github.com/Palo-Cortex/soc-optimization/archive/refs/tags/V2.1.15.zip",
+            "url": "https://github.com/Palo-Cortex/soc-optimization/archive/refs/tags/V2.1.16.zip",
             "system": "yes"
         }
     ],
