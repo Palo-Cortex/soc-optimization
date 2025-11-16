@@ -1,31 +1,31 @@
 {
-    "name": "SOC Framework",
-    "id": "soc-optimization",
-    "description": "This contents the content used to leverage processes that the Palo SOC uses including: Playbooks, integrations, layouts, etc.",
-    "support": "xsoar",
-    "currentVersion": "2.1.16",
-    "author": "Cortex XSOAR",
-    "url": "https://www.paloaltonetworks.com/cortex",
-    "email": "",
-    "categories": [
-        "Utilities"
-    ],
-    "tags": [
-        "SOC",
-        "SOC_Framework",
-        "Utility",
-        "Palo Alto Networks Products"
-    ],
-    "useCases": [],
-    "keywords": [],
-    "dependencies": {
-        "SOC Common Playbooks": {
-            "mandatory": true,
-            "minVersion": "2.7.18",
-            "display_name": "SOC Common Playbooks"
-        }
-    },
-    "marketplaces": [
-        "marketplacev2"
-    ]
+  "name": "SOC Framework",
+  "id": "soc-optimization",
+  "description": "This contents the content used to leverage processes that the Palo SOC uses including: Playbooks, integrations, layouts, etc.",
+  "support": "xsoar",
+  "currentVersion": "2.1.17",
+  "author": "Cortex XSOAR",
+  "url": "https://www.paloaltonetworks.com/cortex",
+  "email": "",
+  "categories": [
+    "Utilities"
+  ],
+  "tags": [
+    "SOC",
+    "SOC_Framework",
+    "Utility",
+    "Palo Alto Networks Products"
+  ],
+  "useCases": [],
+  "keywords": [],
+  "dependencies": {
+    "SOC Common Playbooks": {
+      "mandatory": true,
+      "minVersion": "2.7.18",
+      "display_name": "SOC Common Playbooks"
+    }
+  },
+  "marketplaces": [
+    "marketplacev2"
+  ]
 }
