@@ -1,0 +1,324 @@
+id: Foundation - Dedup
+version: 9
+contentitemexportablefields:
+  contentitemfields:
+    packID: soc-optimization
+    packName: SOC Framework
+    itemVersion: 2.1.16
+    fromServerVersion: 5.0.0
+    toServerVersion: ""
+    definitionid: ""
+    prevname: ""
+    isoverridable: false
+    supportedModules: []
+vcShouldKeepItemLegacyProdMachine: false
+name: Foundation - Dedup
+description: |
+  Uses our alert fingerprinting - and compares the alert to the alert ledger
+  If a duplicate is identified - the parent alert is recorded, and the alert resolves
+tags:
+- SOC
+- SOC_Framework
+starttaskid: "0"
+tasks:
+  "0":
+    id: "0"
+    taskid: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+    type: start
+    task:
+      id: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "10"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "8":
+    id: "8"
+    taskid: 2eb08148-d069-489a-83e1-1ab88016aac3
+    type: title
+    task:
+      id: 2eb08148-d069-489a-83e1-1ab88016aac3
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 1120
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "10":
+    id: "10"
+    taskid: fe98508c-87a9-4233-8e42-9418191678b4
+    type: regular
+    task:
+      id: fe98508c-87a9-4233-8e42-9418191678b4
+      version: -1
+      name: DeDup Alerts from the Last "1 days ago"
+      description: |-
+        Finds past similar alerts based on alert fields' similarity. Includes an option to also display indicators similarity.
+        Note: For the similarity calculation, at least one field must be provided in one of the "similarTextField", "similarCategoricalField", or "similarJsonField" arguments.
+      scriptName: DBotFindSimilarAlerts
+      type: regular
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#error#':
+      - "17"
+      '#none#':
+      - "16"
+    scriptarguments:
+      fromDate:
+        complex:
+          root: lists
+          accessor: SOCOptimizationConfig
+          transformers:
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: Dedup
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: fields
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: DedupWindow
+      minimunIncidentSimilarity:
+        simple: "0.8"
+      query:
+        simple: case_id=${parentIncidentFields.incident_id}
+      similarJsonField:
+        simple: username,hostip
+      similarTextField:
+        simple: name,type
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: errorPath
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 220
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "14":
+    id: "14"
+    taskid: ddcf8da0-3949-415f-8bbb-6c440ff050ee
+    type: regular
+    task:
+      id: ddcf8da0-3949-415f-8bbb-6c440ff050ee
+      version: -1
+      name: Close As Duplicates
+      description: commands.local.cmd.close.inv
+      script: Builtin|||closeInvestigation
+      type: regular
+      iscommand: true
+      brand: Builtin
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#error#':
+      - "17"
+      '#none#':
+      - "8"
+    scriptarguments:
+      closeNotes:
+        simple: Auto-Close Duplicate
+      closeReason:
+        simple: Resolved - Duplicate Alert
+      id:
+        simple: ${DBotFindSimilarIncidents.similarIncident.id}
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: errorPath
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 760
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 2
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "15":
+    id: "15"
+    taskid: 4f2a3250-61d8-4556-aea2-4612ac251ad6
+    type: regular
+    task:
+      id: 4f2a3250-61d8-4556-aea2-4612ac251ad6
+      version: -1
+      name: Print Duplicate Alerts
+      description: Prints text to war room (Markdown supported)
+      scriptName: Print
+      type: regular
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#error#':
+      - "17"
+      '#none#':
+      - "14"
+    scriptarguments:
+      value:
+        simple: ${DBotFindSimilarIncidents.similarIncident.id}
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: errorPath
+    view: |-
+      {
+        "position": {
+          "x": 275,
+          "y": 580
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "16":
+    id: "16"
+    taskid: 7adad498-fc30-4def-818b-a1d7198474c8
+    type: condition
+    task:
+      id: 7adad498-fc30-4def-818b-a1d7198474c8
+      version: -1
+      name: Are there any similar alerts?
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#default#':
+      - "8"
+      "yes":
+      - "15"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isTrue
+          left:
+            value:
+              simple: DBotFindSimilarIncidents.isSimilarIncidentFound
+            iscontext: true
+          right:
+            value: {}
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "17":
+    id: "17"
+    taskid: c9a53716-a57b-4fae-8e00-d3508d482f51
+    type: playbook
+    task:
+      id: c9a53716-a57b-4fae-8e00-d3508d482f51
+      version: -1
+      name: Foundation - Error Handling
+      playbookName: Foundation - Error Handling
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 940
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+system: true
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 1130,
+        "width": 717.5,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+inputs: []
+outputs: []
+sourceplaybookid: Foundation - Upon Trigger
+dirtyInputs: true
+adopted: true
+fromversion: 5.0.0
