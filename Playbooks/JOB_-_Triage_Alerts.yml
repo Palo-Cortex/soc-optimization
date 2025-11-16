@@ -1,0 +1,349 @@
+id: JOB - Triage Incidents
+version: 4
+contentitemexportablefields:
+  contentitemfields:
+    packID: soc-optimization
+    packName: SOC Framework
+    itemVersion: 2.1.16
+    fromServerVersion: 5.0.0
+    toServerVersion: ""
+    definitionid: ""
+    prevname: ""
+    isoverridable: false
+    supportedModules: []
+vcShouldKeepItemLegacyProdMachine: false
+name: JOB - Triage Alerts
+tags:
+- SOC
+- SOC_Framework
+starttaskid: "0"
+tasks:
+  "0":
+    id: "0"
+    taskid: dc73a190-a2e4-4e6e-8a57-badb11c62e1b
+    type: start
+    task:
+      id: dc73a190-a2e4-4e6e-8a57-badb11c62e1b
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent: null
+    nexttasks:
+      '#none#':
+      - "3"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 290.5,
+          "y": 50
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "1":
+    id: "1"
+    taskid: 993570fa-2548-4e9c-af63-478189b6c22b
+    type: regular
+    task:
+      id: 993570fa-2548-4e9c-af63-478189b6c22b
+      version: -1
+      name: Get Alerts
+      description: send HTTP POST request.
+      script: '|||core-api-post'
+      type: regular
+      iscommand: true
+      brand: ""
+      playbooktaskmissingcomponent: null
+    nexttasks:
+      '#error#':
+      - "6"
+      '#none#':
+      - "5"
+    scriptarguments:
+      body:
+        simple: '{"request_data" : {"filters" : [{"field": "status","operator": "eq","value":
+          "New"},{"operator": "lte", "value": ${TimeNowUnix}, "field": "modification_time"},{"operator":
+          "eq", "value": false, "field": "starred"}]}}'
+      extend-context:
+        simple: Found=.
+      uri:
+        simple: /public_api/v1/incidents/get_incidents
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: errorPath
+    view: |-
+      {
+        "position": {
+          "x": 481,
+          "y": 550
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "3":
+    id: "3"
+    taskid: 54999d0f-718c-4ba0-b9d3-18e0137a1f03
+    type: regular
+    task:
+      id: 54999d0f-718c-4ba0-b9d3-18e0137a1f03
+      version: -1
+      name: Get Time
+      description: |
+        Retrieves the current date and time.
+      scriptName: GetTime
+      type: regular
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent: null
+    nexttasks:
+      '#error#':
+      - "6"
+      '#none#':
+      - "1"
+    scriptarguments:
+      hoursAgo:
+        complex:
+          root: lists
+          accessor: SOCOptimizationConfig
+          transformers:
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: Triage Incidents JOB
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: fields
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: TriageWindowHours
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: errorPath
+    view: |-
+      {
+        "position": {
+          "x": 290.5,
+          "y": 380
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "5":
+    id: "5"
+    taskid: 11786de0-5a13-412d-8a8a-1ab69922d510
+    type: condition
+    task:
+      id: 11786de0-5a13-412d-8a8a-1ab69922d510
+      version: -1
+      name: Alerts to Triage?
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent: null
+    nexttasks:
+      '#default#':
+      - "9"
+      "yes":
+      - "8"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isExists
+          left:
+            value:
+              simple: Found.response.reply.incidents.incident_id
+            iscontext: true
+          right:
+            value: {}
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 531,
+          "y": 720
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "6":
+    id: "6"
+    taskid: 907d148a-f017-4c11-8d8d-b65ee05375b9
+    type: playbook
+    task:
+      id: 907d148a-f017-4c11-8d8d-b65ee05375b9
+      version: -1
+      name: Foundation - Error Handling
+      playbookName: Foundation - Error Handling
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent: null
+    nexttasks:
+      '#none#':
+      - "9"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 720
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "7":
+    id: "7"
+    taskid: 6ae6dff9-3719-4b2e-8758-d1cf54a24c13
+    type: title
+    task:
+      id: 6ae6dff9-3719-4b2e-8758-d1cf54a24c13
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent: null
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 340.5,
+          "y": 1230
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "8":
+    id: "8"
+    taskid: 481cd8d5-7bca-4923-8cd0-77d48d883e8f
+    type: playbook
+    task:
+      id: 481cd8d5-7bca-4923-8cd0-77d48d883e8f
+      version: -1
+      name: Close Alerts
+      playbookName: Close Alerts
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent: null
+    nexttasks:
+      '#none#':
+      - "9"
+    scriptarguments:
+      incident_id:
+        simple: ${Found.response.reply.incidents.incident_id}
+    separatecontext: true
+    continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+      forEach: true
+    view: |-
+      {
+        "position": {
+          "x": 676.25,
+          "y": 890
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "9":
+    id: "9"
+    taskid: ecad854e-0b30-4494-8c61-183d70ee7952
+    type: regular
+    task:
+      id: ecad854e-0b30-4494-8c61-183d70ee7952
+      version: -1
+      name: Close Job
+      description: commands.local.cmd.close.inv
+      script: Builtin|||closeInvestigation
+      type: regular
+      iscommand: true
+      brand: Builtin
+      playbooktaskmissingcomponent: null
+    nexttasks:
+      '#none#':
+      - "7"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 340.5,
+          "y": 1060
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+system: true
+view: |-
+  {
+    "linkLabelsPosition": {
+      "5_9_#default#": 0.82
+    },
+    "paper": {
+      "dimensions": {
+        "height": 1240,
+        "width": 1006.25,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+inputs: []
+outputs: []
+dirtyInputs: true
+adopted: true

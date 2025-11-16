@@ -1,5 +1,5 @@
 id: Foundation - Data Integrity
-version: 22
+version: 23
 contentitemexportablefields:
   contentitemfields:
     packID: soc-optimization
@@ -32,7 +32,7 @@ tasks:
       name: ""
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "21"
@@ -63,7 +63,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     separatecontext: false
     continueonerrortype: ""
     view: |-
@@ -82,10 +82,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "18":
     id: "18"
-    taskid: c4ced9e2-5029-4313-a61d-d6c876a38757
+    taskid: d946d1a6-1e49-4f3f-bb84-cb106bab39dd
     type: playbook
     task:
-      id: c4ced9e2-5029-4313-a61d-d6c876a38757
+      id: d946d1a6-1e49-4f3f-bb84-cb106bab39dd
       version: -1
       name: Foundation Common - Extract Indicators from alerts
       description: This is a common playbook intended to integrate the Indicator Extraction
@@ -94,11 +94,11 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "20"
-    separatecontext: false
+    separatecontext: true
     continueonerrortype: ""
     loop:
       iscommand: false
@@ -121,10 +121,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "19":
     id: "19"
-    taskid: 1b74fdde-8aed-4259-9b11-72429da230cb
+    taskid: a2767adb-a472-4a7b-b240-895d788d897a
     type: playbook
     task:
-      id: 1b74fdde-8aed-4259-9b11-72429da230cb
+      id: a2767adb-a472-4a7b-b240-895d788d897a
       version: -1
       name: Foundation - Normalization
       description: |2+
@@ -133,7 +133,7 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "8"
@@ -160,10 +160,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "20":
     id: "20"
-    taskid: 2159f596-5574-46d9-b121-d964ec65f0ae
+    taskid: 16c223ec-f610-4b37-b3b3-a769926c35c6
     type: playbook
     task:
-      id: 2159f596-5574-46d9-b121-d964ec65f0ae
+      id: 16c223ec-f610-4b37-b3b3-a769926c35c6
       version: -1
       name: Foundation - Issue Hydration
       description: Pulling in the full native alert payload from the product that
@@ -172,7 +172,7 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "19"
@@ -210,7 +210,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "27"
@@ -232,10 +232,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "27":
     id: "27"
-    taskid: e65de601-0557-4902-aded-438420f0f41e
+    taskid: 715519e1-9024-4cd7-a7a6-09693160cf0f
     type: playbook
     task:
-      id: e65de601-0557-4902-aded-438420f0f41e
+      id: 715519e1-9024-4cd7-a7a6-09693160cf0f
       version: -1
       name: Foundation - Product Classification
       description: Designed to get the product category (EndPoint, Network, Cloud
@@ -244,7 +244,7 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "28"
@@ -283,7 +283,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "18"
@@ -329,4 +329,3 @@ outputs: []
 sourceplaybookid: Foundation - Upon Trigger
 dirtyInputs: true
 adopted: true
-fromversion: 5.0.0

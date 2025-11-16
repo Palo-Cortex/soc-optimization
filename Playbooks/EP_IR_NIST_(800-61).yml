@@ -1,5 +1,5 @@
 id: EP_IR_NIST (800-61)
-version: 10
+version: 13
 contentitemexportablefields:
   contentitemfields:
     packID: soc-optimization
@@ -42,10 +42,10 @@ tasks:
       name: ""
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
-      - "16"
+      - "17"
     separatecontext: false
     continueonerrortype: ""
     view: |-
@@ -73,14 +73,14 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     separatecontext: false
     continueonerrortype: ""
     view: |-
       {
         "position": {
           "x": 50,
-          "y": 760
+          "y": 580
         }
       }
     note: false
@@ -120,7 +120,7 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "3"
@@ -138,7 +138,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 580
+          "y": 400
         }
       }
     note: false
@@ -148,27 +148,22 @@ tasks:
     quietmode: 0
     isoversize: false
     isautoswitchedtoquietmode: false
-  "16":
-    id: "16"
-    taskid: 94bacc9a-d338-4191-8688-470d9a3df2af
+  "17":
+    id: "17"
+    taskid: 2f777788-a89f-46bf-9843-172851700b07
     type: playbook
     task:
-      id: 94bacc9a-d338-4191-8688-470d9a3df2af
+      id: 2f777788-a89f-46bf-9843-172851700b07
       version: -1
-      name: Foundation - Load Configuration
-      playbookName: Foundation - Load Configuration
+      name: Foundation - Upon Trigger V2
+      playbookName: Foundation - Upon Trigger V2
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
-      - "17"
-    scriptarguments:
-      keyName:
-        simple: SOCOptimizeConfig
-      listName:
-        simple: SOCOptimizationConfig
+      - "15"
     separatecontext: false
     continueonerrortype: ""
     loop:
@@ -190,45 +185,13 @@ tasks:
     quietmode: 0
     isoversize: false
     isautoswitchedtoquietmode: false
-  "17":
-    id: "17"
-    taskid: 4ff7e8a0-51ed-4830-8caf-9abf81e2ace2
-    type: playbook
-    task:
-      id: 4ff7e8a0-51ed-4830-8caf-9abf81e2ace2
-      version: -1
-      name: Foundation - Upon Trigger V2
-      playbookName: Foundation - Upon Trigger V2
-      type: playbook
-      iscommand: false
-      brand: ""
-      playbooktaskmissingcomponent:
-    nexttasks:
-      '#none#':
-      - "15"
-    separatecontext: true
-    continueonerrortype: ""
-    view: |-
-      {
-        "position": {
-          "x": 50,
-          "y": 400
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
 system: true
 view: |-
   {
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 770,
+        "height": 590,
         "width": 380,
         "x": 50,
         "y": 50
@@ -241,7 +204,7 @@ inputs:
     simple: EP_InitialAccess
   required: false
   description: ""
-  playbookInputQuery:
+  playbookInputQuery: null
 inputSections:
 - inputs:
   - EntryPoint
@@ -255,4 +218,3 @@ outputs: []
 sourceplaybookid: 51ffcd5a-f5bb-4e09-84ae-e1efdc5165ac
 dirtyInputs: true
 adopted: true
-fromversion: 5.0.0

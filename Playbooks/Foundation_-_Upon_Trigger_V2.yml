@@ -1,5 +1,5 @@
-id: Foundation - Upon Trigger V2
-version: 2
+id: 34ef4529-30b3-406a-8e6a-f178fdbe5fbb
+version: 10
 contentitemexportablefields:
   contentitemfields:
     packID: ""
@@ -28,7 +28,7 @@ tasks:
       name: ""
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "1"
@@ -37,7 +37,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
+          "x": 50,
           "y": 50
         }
       }
@@ -59,7 +59,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "27"
@@ -68,7 +68,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
+          "x": 50,
           "y": 220
         }
       }
@@ -90,7 +90,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "28"
@@ -99,7 +99,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
+          "x": 50,
           "y": 570
         }
       }
@@ -121,16 +121,16 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
-      - "26"
+      - "32"
     separatecontext: false
     continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 265,
+          "x": 50,
           "y": 920
         }
       }
@@ -152,7 +152,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "22"
@@ -162,7 +162,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1800
+          "y": 1620
         }
       }
     note: false
@@ -183,7 +183,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "23"
@@ -192,7 +192,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
+          "x": 50,
           "y": 1270
         }
       }
@@ -214,17 +214,17 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
-      - "7"
+      - "30"
     separatecontext: false
     continueonerrortype: ""
     view: |-
       {
         "position": {
           "x": 50,
-          "y": 2150
+          "y": 1970
         }
       }
     note: false
@@ -245,17 +245,17 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
-      - "8"
+      - "31"
     separatecontext: false
     continueonerrortype: ""
     view: |-
       {
         "position": {
           "x": 50,
-          "y": 2325
+          "y": 2320
         }
       }
     note: false
@@ -276,14 +276,14 @@ tasks:
       type: title
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     separatecontext: false
     continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 265,
-          "y": 2500
+          "x": 50,
+          "y": 2670
         }
       }
     note: false
@@ -306,7 +306,7 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "6"
@@ -321,7 +321,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1970
+          "y": 1790
         }
       }
     note: false
@@ -343,10 +343,10 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
-      - "25"
+      - "4"
     separatecontext: false
     continueonerrortype: ""
     loop:
@@ -357,107 +357,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
+          "x": 50,
           "y": 1440
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
-  "24":
-    id: "24"
-    taskid: bba69d32-a3b9-4a81-8d58-1be1e99e119f
-    type: playbook
-    task:
-      id: bba69d32-a3b9-4a81-8d58-1be1e99e119f
-      version: -1
-      name: Foundation - Error Handling
-      playbookName: Foundation - Error Handling
-      type: playbook
-      iscommand: false
-      brand: ""
-      playbooktaskmissingcomponent:
-    nexttasks:
-      '#none#':
-      - "8"
-    separatecontext: true
-    continueonerrortype: ""
-    view: |-
-      {
-        "position": {
-          "x": 480,
-          "y": 2320
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
-  "25":
-    id: "25"
-    taskid: bf887616-5d6e-4bef-a464-c77550593897
-    type: regular
-    task:
-      id: bf887616-5d6e-4bef-a464-c77550593897
-      version: -1
-      name: Normalize Entities in Context
-      scriptName: SOC_NormalizeContext
-      type: regular
-      iscommand: false
-      brand: ""
-      playbooktaskmissingcomponent:
-    nexttasks:
-      '#error#':
-      - "24"
-      '#none#':
-      - "4"
-    separatecontext: false
-    continueonerror: true
-    continueonerrortype: errorPath
-    view: |-
-      {
-        "position": {
-          "x": 265,
-          "y": 1620
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
-  "26":
-    id: "26"
-    taskid: 4b283a1f-a5d4-42fa-8601-6f219d573515
-    type: playbook
-    task:
-      id: 4b283a1f-a5d4-42fa-8601-6f219d573515
-      version: -1
-      name: Foundation Common - Extract Indicators from alerts
-      playbookName: Foundation Common - Extract Indicators from alerts
-      type: playbook
-      iscommand: false
-      brand: ""
-      playbooktaskmissingcomponent:
-    nexttasks:
-      '#none#':
-      - "5"
-    separatecontext: true
-    continueonerrortype: ""
-    view: |-
-      {
-        "position": {
-          "x": 265,
-          "y": 1090
         }
       }
     note: false
@@ -469,10 +370,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "27":
     id: "27"
-    taskid: e287c7dc-bbe3-451a-9926-dcbe8040e0fa
+    taskid: e7fb3a47-a406-4aae-8dc2-db183be1d0a7
     type: playbook
     task:
-      id: e287c7dc-bbe3-451a-9926-dcbe8040e0fa
+      id: e7fb3a47-a406-4aae-8dc2-db183be1d0a7
       version: -1
       name: Foundation - Environment Detection
       description: |
@@ -482,13 +383,10 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "2"
-    scriptarguments:
-      SOC Optimize Config:
-        simple: ${SOCOptimizeConfig.[3].enabled}
     separatecontext: false
     continueonerrortype: ""
     loop:
@@ -499,7 +397,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
+          "x": 50,
           "y": 390
         }
       }
@@ -512,10 +410,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "28":
     id: "28"
-    taskid: c03e6c3f-0a1c-4a73-9071-24b3a78e1285
+    taskid: a659e0eb-4d52-4b3d-bfca-d072c8b33d04
     type: playbook
     task:
-      id: c03e6c3f-0a1c-4a73-9071-24b3a78e1285
+      id: a659e0eb-4d52-4b3d-bfca-d072c8b33d04
       version: -1
       name: Foundation - Data Integrity
       description: |
@@ -526,7 +424,7 @@ tasks:
       type: playbook
       iscommand: false
       brand: ""
-      playbooktaskmissingcomponent:
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "3"
@@ -540,8 +438,120 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 265,
+          "x": 50,
           "y": 740
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "30":
+    id: "30"
+    taskid: 0b8ac779-46fc-4fd0-81f7-b353236b24c3
+    type: playbook
+    task:
+      id: 0b8ac779-46fc-4fd0-81f7-b353236b24c3
+      version: -1
+      name: Foundation - Assessment
+      description: |+
+        Evaluates our enrichment flags, and severity value(s) to formalize a final severity score
+        Creates human readable summary of severity assessment reasoning
+
+      playbookName: Foundation - Assessment
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent: null
+    nexttasks:
+      '#none#':
+      - "7"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 2140
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "31":
+    id: "31"
+    taskid: 11861ffc-38b6-4bda-8a82-4657bd1ceeff
+    type: playbook
+    task:
+      id: 11861ffc-38b6-4bda-8a82-4657bd1ceeff
+      version: -1
+      name: Foundation - Escalation
+      description: |
+        Handles dispatching pagerduty alert / SOC email
+        Identifies if another alert within the alert already paged
+      playbookName: Foundation - Escalation
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent: null
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 2490
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "32":
+    id: "32"
+    taskid: f21ef304-0199-4462-b3f9-2a67cb579af3
+    type: playbook
+    task:
+      id: f21ef304-0199-4462-b3f9-2a67cb579af3
+      version: -1
+      name: Foundation - Case Sync
+      description: |+
+        Generates/Updates the Case Alert Ledger
+        Notifies alert owner of new issue addition
+
+      playbookName: Foundation - Case Sync
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent: null
+    nexttasks:
+      '#none#':
+      - "5"
+    separatecontext: true
+    continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1090
         }
       }
     note: false
@@ -556,8 +566,8 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 2510,
-        "width": 810,
+        "height": 2680,
+        "width": 380,
         "x": 50,
         "y": 50
       }
@@ -569,15 +579,11 @@ inputSections:
   name: General (Inputs group)
   description: Generic group for inputs
 outputSections:
-- outputs:
-  - Shadow
+- outputs: []
   name: General (Outputs group)
   description: Generic group for outputs
-outputs:
-- contextPath: Shadow
-  type: boolean
+outputs: []
 sourceplaybookid: Foundation - Upon Trigger
 quiet: true
 dirtyInputs: true
 adopted: true
-fromversion: 5.0.0

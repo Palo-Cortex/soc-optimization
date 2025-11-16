@@ -1,51 +1,41 @@
-adopted: true
+id: Foundation Common - Extract Indicators from alerts
+version: 7
 contentitemexportablefields:
   contentitemfields:
-    definitionid: ""
-    fromServerVersion: 5.0.0
-    isoverridable: false
-    itemVersion: 2.1.11
-    packID: ""
+    packID: soc-optimization
     packName: SOC Framework
-    prevname: ""
-    supportedModules: []
+    itemVersion: 2.1.16
+    fromServerVersion: 5.0.0
     toServerVersion: ""
+    definitionid: ""
+    prevname: ""
+    isoverridable: false
+    supportedModules: []
+vcShouldKeepItemLegacyProdMachine: false
+name: Foundation Common - Extract Indicators from alerts
 description: This is a common playbook intended to integrate the Indicator Extraction
   to all automated alerts.
-id: 'Foundation Common - Extract Indicators from alerts'
-inputs: []
-name: Foundation Common - Extract Indicators from alerts
 tags:
-  - SOC
-  - SOC_Framework
-outputs: []
-quiet: true
-sourceplaybookid: Foundation Common - Extract Indicators from alerts
+- SOC
+- SOC_Framework
 starttaskid: "0"
 tasks:
   "0":
-    continueonerrortype: ""
     id: "0"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
+    taskid: 775ef611-299c-4899-87c7-60d32884730a
+    type: start
+    task:
+      id: 775ef611-299c-4899-87c7-60d32884730a
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent: null
     nexttasks:
       '#none#':
       - "1"
-    note: false
-    quietmode: 0
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 775ef611-299c-4899-87c7-60d32884730a
-      iscommand: false
-      name: ""
-      playbooktaskmissingcomponent:
-      version: -1
-    taskid: 775ef611-299c-4899-87c7-60d32884730a
-    timertriggers: []
-    type: start
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -53,35 +43,35 @@ tasks:
           "y": 50
         }
       }
-  "1":
-    continueonerrortype: ""
-    id: "1"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "4"
     note: false
-    quietmode: 0
-    scriptarguments:
-      text:
-        simple: ${alert}
-    separatecontext: false
+    timertriggers: []
+    ignoreworker: false
     skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "1":
+    id: "1"
+    taskid: 5acfdb6d-b65e-4b7d-896a-8d57c21733cd
+    type: regular
     task:
-      brand: Builtin
+      id: 5acfdb6d-b65e-4b7d-896a-8d57c21733cd
+      version: -1
+      name: Extract indicators from Issue
       description: Extract all indicators according to server indicators configuration
-      id: acb6a086-80f0-4193-949d-05b7da8a52a9
-      iscommand: true
-      name: Extract indicators from Alert
-      playbooktaskmissingcomponent:
       script: Builtin|||extractIndicators
       type: regular
-      version: -1
-    taskid: acb6a086-80f0-4193-949d-05b7da8a52a9
-    timertriggers: []
-    type: regular
+      iscommand: true
+      brand: Builtin
+      playbooktaskmissingcomponent: null
+    nexttasks:
+      '#none#':
+      - "3"
+    scriptarguments:
+      text:
+        simple: ${issue}
+    separatecontext: false
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -89,59 +79,27 @@ tasks:
           "y": 220
         }
       }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
   "3":
-    continueonerrortype: ""
     id: "3"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    note: false
-    quietmode: 0
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 0c830526-70e7-4df8-bffc-214c075794ba
-      iscommand: false
-      name: End Playbook
-      playbooktaskmissingcomponent:
-      type: title
-      version: -1
     taskid: 0c830526-70e7-4df8-bffc-214c075794ba
-    timertriggers: []
     type: title
-    view: |-
-      {
-        "position": {
-          "x": 50,
-          "y": 580
-        }
-      }
-  "4":
-    continueonerrortype: ""
-    id: "4"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "3"
-    note: false
-    quietmode: 0
-    separatecontext: true
-    skipunavailable: false
     task:
-      brand: ""
-      id: b44ef3d5-a65e-4227-8f0d-a4606447ca1e
-      iscommand: false
-      name: SOC Calculate Severity - Generic v2
-      playbookId: 'SOC Calculate Severity - Generic v2'
-      playbooktaskmissingcomponent:
-      type: playbook
+      id: 0c830526-70e7-4df8-bffc-214c075794ba
       version: -1
-    taskid: b44ef3d5-a65e-4227-8f0d-a4606447ca1e
-    timertriggers: []
-    type: playbook
+      name: End Playbook
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent: null
+    separatecontext: false
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -149,17 +107,28 @@ tasks:
           "y": 400
         }
       }
-version: -1
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+system: true
 view: |-
   {
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 590,
+        "height": 410,
         "width": 380,
         "x": 50,
         "y": 50
       }
     }
   }
-fromversion: 5.0.0
+inputs: []
+outputs: []
+sourceplaybookid: Foundation Common - Extract Indicators from alerts
+quiet: true
+adopted: true
