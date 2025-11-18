@@ -1,107 +1,138 @@
 {
     "VendorCapabilities": {
         "Cortex XDR - IR": {
-            "isolate_endpoint": {
+            "soc-enrich-alert": {
+                "command": "xdr-get-alert-details",
+                "args": [
+                    "alert_id"
+                ]
+            },
+            "soc-isolate-endpoint": {
                 "command": "xdr-endpoint-isolate",
                 "args": [
                     "endpoint_id"
                 ]
             },
-            "un_isolate_endpoint": {
+            "soc-unisolate-endpoint": {
                 "command": "xdr-endpoint-unisolate",
                 "args": [
                     "endpoint_id"
                 ]
             },
-            "terminate_process": {
+            "soc-terminate-process": {
                 "command": "xdr-terminate-process",
                 "args": [
                     "endpoint_id",
                     "process_id"
                 ]
             },
-            "block_hash": {
-                "command": "xdr-blocklist-add",
+            "soc-quarantine-file": {
+                "command": "xdr-quarantine-file",
                 "args": [
-                    "hash"
+                    "endpoint_id",
+                    "file_path"
                 ]
             },
-            "allow_hash": {
-                "command": "xdr-blocklist-remove",
+            "soc-block-hash": {
+                "command": "xdr-blocklist-add",
                 "args": [
                     "hash"
                 ]
             }
         },
         "Microsoft 365 Defender": {
-            "isolate_device": {
+            "soc-enrich-alert": {
+                "command": "microsoft-atp-get-alert-by-id",
+                "args": [
+                    "alert_id"
+                ]
+            },
+            "soc-isolate-endpoint": {
                 "command": "microsoft-atp-isolate-machine",
                 "args": [
                     "machine_id"
                 ]
             },
-            "un_isolate_device": {
+            "soc-unisolate-endpoint": {
                 "command": "microsoft-atp-unisolate-machine",
                 "args": [
                     "machine_id"
                 ]
             },
-            "run_av_scan": {
-                "command": "microsoft-atp-run-av-scan",
-                "args": [
-                    "machine_id"
-                ]
-            },
-            "restrict_app_execution": {
+            "soc-terminate-process": {
                 "command": "microsoft-atp-restrict-app-execution",
                 "args": [
                     "machine_id"
                 ]
-            }
-        },
-        "Microsoft Graph User": {
-            "disable_user": {
-                "command": "msgraph-user-block",
+            },
+            "soc-quarantine-file": {
+                "command": "microsoft-atp-quarantine-file",
                 "args": [
-                    "user_id"
+                    "machine_id",
+                    "file_path"
                 ]
             },
-            "enable_user": {
-                "command": "msgraph-user-unblock",
+            "soc-block-hash": {
+                "command": "microsoft-atp-block-indicator",
                 "args": [
-                    "user_id"
+                    "hash"
                 ]
             }
         },
         "Trend Micro Vision One": {
-            "isolate_endpoint": {
+            "soc-enrich-alert": {
+                "command": "trendmicro-get-alert-details",
+                "args": [
+                    "alert_id"
+                ]
+            },
+            "soc-isolate-endpoint": {
                 "command": "trendmicro-isolate-endpoint",
                 "args": [
                     "endpoint_id"
                 ]
             },
-            "un_isolate_endpoint": {
+            "soc-unisolate-endpoint": {
                 "command": "trendmicro-unisolate-endpoint",
                 "args": [
                     "endpoint_id"
                 ]
             },
-            "terminate_process": {
+            "soc-terminate-process": {
                 "command": "trendmicro-terminate-process",
                 "args": [
                     "endpoint_id",
                     "process_id"
                 ]
+            },
+            "soc-quarantine-file": {
+                "command": "trendmicro-quarantine-file",
+                "args": [
+                    "endpoint_id",
+                    "file_path"
+                ]
             }
         },
         "CrowdStrike Falcon": {
-            "contain_host": {
+            "soc-enrich-alert": {
+                "command": "cs-falcon-get-incident-details",
+                "args": [
+                    "incident_id"
+                ]
+            },
+            "soc-fetch-forensics": {
+                "command": "cs-falcon-get-behaviors",
+                "args": [
+                    "device_id"
+                ]
+            },
+            "soc-isolate-endpoint": {
                 "command": "cs-falcon-contain-host",
                 "args": [
                     "device_id"
                 ]
             },
-            "lift_containment": {
+            "soc-unisolate-endpoint": {
                 "command": "cs-falcon-lift-host-containment",
                 "args": [
                     "device_id"
@@ -109,26 +140,32 @@
             }
         },
         "SentinelOne v2": {
-            "isolate_device": {
+            "soc-enrich-alert": {
+                "command": "sentinelone-get-threat-details",
+                "args": [
+                    "threat_id"
+                ]
+            },
+            "soc-isolate-endpoint": {
                 "command": "sentinelone-isolate-agent",
                 "args": [
                     "agent_id"
                 ]
             },
-            "un_isolate_device": {
+            "soc-unisolate-endpoint": {
                 "command": "sentinelone-connect-agent",
                 "args": [
                     "agent_id"
                 ]
             },
-            "kill_process": {
+            "soc-terminate-process": {
                 "command": "sentinelone-kill-process",
                 "args": [
                     "agent_id",
                     "process_name"
                 ]
             },
-            "quarantine_file": {
+            "soc-quarantine-file": {
                 "command": "sentinelone-quarantine-file",
                 "args": [
                     "agent_id",
@@ -136,70 +173,174 @@
                 ]
             }
         },
-        "Palo Alto Networks - Email Security": {
-            "quarantine_email": {
-                "command": "pan-emailsecurity-quarantine-message",
+        "Microsoft Graph User": {
+            "soc-enrich-alert": {
+                "command": "msgraph-user-get",
                 "args": [
-                    "message_id"
+                    "user_id"
                 ]
             },
-            "release_email": {
-                "command": "pan-emailsecurity-release-message",
+            "soc-disable-identity": {
+                "command": "msgraph-user-block",
                 "args": [
-                    "message_id"
-                ]
-            }
-        },
-        "Abnormal Security": {
-            "quarantine_message": {
-                "command": "abnormal-quarantine-message",
-                "args": [
-                    "message_id"
+                    "user_id"
                 ]
             },
-            "restore_message": {
-                "command": "abnormal-restore-message",
+            "soc-enable-identity": {
+                "command": "msgraph-user-unblock",
                 "args": [
-                    "message_id"
-                ]
-            }
-        },
-        "Proofpoint TAP v2": {
-            "quarantine_message": {
-                "command": "proofpoint-quarantine-message",
-                "args": [
-                    "guid"
+                    "user_id"
                 ]
             },
-            "release_message": {
-                "command": "proofpoint-release-message",
+            "soc-reset-password": {
+                "command": "msgraph-user-reset-password",
                 "args": [
-                    "guid"
+                    "user_id"
+                ]
+            },
+            "soc-revoke-sessions": {
+                "command": "msgraph-user-revoke-sessions",
+                "args": [
+                    "user_id"
                 ]
             }
         },
         "Okta": {
-            "suspend_user": {
+            "soc-enrich-alert": {
+                "command": "okta-get-events",
+                "args": [
+                    "user_id"
+                ]
+            },
+            "soc-disable-identity": {
                 "command": "okta-suspend-user",
                 "args": [
                     "user_id"
                 ]
             },
-            "unsuspend_user": {
+            "soc-enable-identity": {
                 "command": "okta-unsuspend-user",
+                "args": [
+                    "user_id"
+                ]
+            },
+            "soc-reset-password": {
+                "command": "okta-reset-password",
+                "args": [
+                    "user_id"
+                ]
+            },
+            "soc-revoke-sessions": {
+                "command": "okta-clear-user-sessions",
                 "args": [
                     "user_id"
                 ]
             }
         },
+        "Palo Alto Networks - Email Security": {
+            "soc-enrich-alert": {
+                "command": "pan-emailsecurity-get-message-details",
+                "args": [
+                    "message_id"
+                ]
+            },
+            "soc-quarantine-email": {
+                "command": "pan-emailsecurity-quarantine-message",
+                "args": [
+                    "message_id"
+                ]
+            },
+            "soc-release-email": {
+                "command": "pan-emailsecurity-release-message",
+                "args": [
+                    "message_id"
+                ]
+            },
+            "soc-delete-email": {
+                "command": "pan-emailsecurity-delete-message",
+                "args": [
+                    "message_id"
+                ]
+            },
+            "soc-block-sender": {
+                "command": "pan-emailsecurity-block-sender",
+                "args": [
+                    "sender"
+                ]
+            },
+            "soc-search-email": {
+                "command": "pan-emailsecurity-search-messages",
+                "args": [
+                    "query"
+                ]
+            }
+        },
+        "Abnormal Security": {
+            "soc-enrich-alert": {
+                "command": "abnormal-get-message-details",
+                "args": [
+                    "message_id"
+                ]
+            },
+            "soc-quarantine-email": {
+                "command": "abnormal-quarantine-message",
+                "args": [
+                    "message_id"
+                ]
+            },
+            "soc-release-email": {
+                "command": "abnormal-restore-message",
+                "args": [
+                    "message_id"
+                ]
+            },
+            "soc-search-email": {
+                "command": "abnormal-search-messages",
+                "args": [
+                    "query"
+                ]
+            }
+        },
+        "Proofpoint TAP v2": {
+            "soc-fetch-forensics": {
+                "command": "proofpoint-get-forensics",
+                "args": [
+                    "guid"
+                ]
+            },
+            "soc-quarantine-email": {
+                "command": "proofpoint-quarantine-message",
+                "args": [
+                    "guid"
+                ]
+            },
+            "soc-release-email": {
+                "command": "proofpoint-release-message",
+                "args": [
+                    "guid"
+                ]
+            },
+            "soc-search-email": {
+                "command": "proofpoint-search-message",
+                "args": [
+                    "query"
+                ]
+            }
+        },
         "Cisco ISE": {
-            "quarantine_endpoint": {
+            "soc-enrich-alert": {
+                "command": "ise-get-endpoint",
+                "args": [
+                    "mac_address"
+                ]
+            },
+            "soc-disable-network-asset": {
                 "command": "ise-anc-endpoint",
                 "args": [
                     "mac_address"
                 ]
             },
-            "unquarantine_endpoint": {
+            "soc-enable-network-asset": {
                 "command": "ise-clear-anc-endpoint",
                 "args": [
                     "mac_address"
@@ -207,13 +348,19 @@
             }
         },
         "Zscaler ZIA": {
-            "block_url": {
+            "soc-enrich-alert": {
+                "command": "zscaler-get-url-info",
+                "args": [
+                    "url"
+                ]
+            },
+            "soc-block-url": {
                 "command": "zscaler-blacklist-url",
                 "args": [
                     "url"
                 ]
             },
-            "unblock_url": {
+            "soc-unblock-url": {
                 "command": "zscaler-unblacklist-url",
                 "args": [
                     "url"
@@ -221,13 +368,17 @@
             }
         },
         "Palo Alto Networks Panorama": {
-            "block_ip": {
+            "soc-enrich-alert": {
+                "command": "panorama-list-addresses",
+                "args": []
+            },
+            "soc-block-ip": {
                 "command": "panorama-ban-ip",
                 "args": [
                     "ip"
                 ]
             },
-            "unblock_ip": {
+            "soc-unblock-ip": {
                 "command": "panorama-unban-ip",
                 "args": [
                     "ip"
@@ -235,13 +386,17 @@
             }
         },
         "Palo Alto Networks Firewall": {
-            "block_ip": {
+            "soc-enrich-alert": {
+                "command": "pan-os-list-addresses",
+                "args": []
+            },
+            "soc-block-ip": {
                 "command": "pan-os-ban-ip",
                 "args": [
                     "ip"
                 ]
             },
-            "unblock_ip": {
+            "soc-unblock-ip": {
                 "command": "pan-os-unban-ip",
                 "args": [
                     "ip"
@@ -249,13 +404,19 @@
             }
         },
         "Fortinet FortiGate": {
-            "block_ip": {
+            "soc-enrich-alert": {
+                "command": "fortigate-get-logs",
+                "args": [
+                    "ip"
+                ]
+            },
+            "soc-block-ip": {
                 "command": "fortigate-ban-ip",
                 "args": [
                     "ip"
                 ]
             },
-            "unblock_ip": {
+            "soc-unblock-ip": {
                 "command": "fortigate-unban-ip",
                 "args": [
                     "ip"
@@ -263,13 +424,19 @@
             }
         },
         "Prisma Cloud Compute": {
-            "quarantine_container": {
+            "soc-enrich-alert": {
+                "command": "prismacloudcompute-audit-events",
+                "args": [
+                    "resource_id"
+                ]
+            },
+            "soc-quarantine-cloud": {
                 "command": "prismacloudcompute-container-quarantine",
                 "args": [
                     "container_id"
                 ]
             },
-            "stop_container": {
+            "soc-disable-cloud-session": {
                 "command": "prismacloudcompute-container-stop",
                 "args": [
                     "container_id"

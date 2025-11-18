@@ -25,22 +25,22 @@
         "confidence": "high"
     },
     "ds_microsoft_defender_email": {
-        "category": "EmailSecurity",
+        "category": "Email",
         "type": "SEG",
         "confidence": "high"
     },
     "ds_abnormalsecurity_abx": {
-        "category": "EmailSecurity",
+        "category": "Email",
         "type": "BEC/ML",
         "confidence": "high"
     },
-    "ds_paloaltonetworks_emailsecurity": {
-        "category": "EmailSecurity",
+    "ds_paloaltonetworks_Email": {
+        "category": "Email",
         "type": "SEG",
         "confidence": "high"
     },
-    "ds_proofpoint_tap": {
-        "category": "EmailSecurity",
+    "ds_proofpoint_tap_v2": {
+        "category": "Email",
         "type": "SEG",
         "confidence": "high"
     },

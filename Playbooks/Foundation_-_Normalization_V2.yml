@@ -1,8 +1,8 @@
-id: SOC SaaS Recovery
-version: 4
+id: Foundation - Normalization V2
+version: 15
 contentitemexportablefields:
   contentitemfields:
-    packID: soc-optimization
+    packID: ""
     packName: SOC Framework
     itemVersion: 2.1.16
     fromServerVersion: 5.0.0
@@ -12,25 +12,22 @@ contentitemexportablefields:
     isoverridable: false
     supportedModules: []
 vcShouldKeepItemLegacyProdMachine: false
-name: SOC SaaS Recovery
-description: |-
-  Primary owners: IT Ops, IR leads.
+name: Foundation - Normalization V2
+description: |2+
 
-  Analyst role: Verify that systems are restored, monitor for recurrence, and close out alert documentation.
 tags:
 - SOC
 - SOC_Framework
-- NIST 800-61
-- Recovery
-- Cloud SaaS
+- Normalization
+- Upon Trigger
 starttaskid: "0"
 tasks:
   "0":
     id: "0"
-    taskid: 7e6a701e-667b-4a70-8a74-14564da75fc7
+    taskid: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
     type: start
     task:
-      id: 7e6a701e-667b-4a70-8a74-14564da75fc7
+      id: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
       version: -1
       name: ""
       iscommand: false
@@ -38,13 +35,14 @@ tasks:
       playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
-      - "2"
+      - "8"
+      - "18"
     separatecontext: false
     continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 450,
+          "x": 50,
           "y": 50
         }
       }
@@ -55,41 +53,12 @@ tasks:
     quietmode: 0
     isoversize: false
     isautoswitchedtoquietmode: false
-  "1":
-    id: "1"
-    taskid: 7fad044e-60c9-4baa-8bb6-316d5aea8cfa
-    type: playbook
-    task:
-      id: 7fad044e-60c9-4baa-8bb6-316d5aea8cfa
-      version: -1
-      name: Foundation - Error Handling
-      playbookName: Foundation - Error Handling
-      type: playbook
-      iscommand: false
-      brand: ""
-      playbooktaskmissingcomponent:
-    separatecontext: true
-    continueonerrortype: ""
-    view: |-
-      {
-        "position": {
-          "x": 740,
-          "y": 290
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
-  "2":
-    id: "2"
-    taskid: 6944e944-2ade-4f6d-b6e0-0f6b8e2c3253
+  "8":
+    id: "8"
+    taskid: 2eb08148-d069-489a-83e1-1ab88016aac3
     type: title
     task:
-      id: 6944e944-2ade-4f6d-b6e0-0f6b8e2c3253
+      id: 2eb08148-d069-489a-83e1-1ab88016aac3
       version: -1
       name: Done
       type: title
@@ -101,8 +70,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 430,
-          "y": 470
+          "x": 50,
+          "y": 580
         }
       }
     note: false
@@ -112,29 +81,100 @@ tasks:
     quietmode: 0
     isoversize: false
     isautoswitchedtoquietmode: false
-system: true
+  "17":
+    id: "17"
+    taskid: c9a53716-a57b-4fae-8e00-d3508d482f51
+    type: playbook
+    task:
+      id: c9a53716-a57b-4fae-8e00-d3508d482f51
+      version: -1
+      name: Foundation - Error Handling
+      playbookName: Foundation - Error Handling
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "18":
+    id: "18"
+    taskid: 8991eb21-ffab-448b-9707-c8e9d73b1be9
+    type: regular
+    task:
+      id: 8991eb21-ffab-448b-9707-c8e9d73b1be9
+      version: -1
+      name: Normalization
+      scriptName: SOCFramework-NormalizeKeyToArtifacts
+      type: regular
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#error#':
+      - "17"
+      '#none#':
+      - "8"
+    scriptarguments:
+      key:
+        simple: ${inputs.keys}
+    results:
+    - SOCFramework
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: errorPath
+    view: |-
+      {
+        "position": {
+          "x": 160,
+          "y": 220
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: true
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
 view: |-
   {
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 480,
-        "width": 690,
-        "x": 430,
+        "height": 590,
+        "width": 490,
+        "x": 50,
         "y": 50
       }
     }
   }
 inputs:
-- key: ShadowMode
+- key: keys
   value:
-    simple: SOCFramework.shadow_mode
+    simple: ExtractedIndicators
   required: true
   description: ""
   playbookInputQuery:
 inputSections:
 - inputs:
-  - ShadowMode
+  - keys
   name: General (Inputs group)
   description: Generic group for inputs
 outputSections:
@@ -142,7 +182,7 @@ outputSections:
   name: General (Outputs group)
   description: Generic group for outputs
 outputs: []
-sourceplaybookid: SOC Data Analysis
+sourceplaybookid: Foundation - Upon Trigger
 dirtyInputs: true
 adopted: true
 fromversion: 5.0.0

@@ -1,5 +1,5 @@
 id: EP_IR_NIST (800-61)
-version: 13
+version: 14
 contentitemexportablefields:
   contentitemfields:
     packID: soc-optimization
@@ -92,10 +92,10 @@ tasks:
     isautoswitchedtoquietmode: false
   "15":
     id: "15"
-    taskid: cd14c308-db43-4c73-85e2-23bc1d26553f
+    taskid: b7646310-99ef-43b2-a843-a63a15dc6d0d
     type: playbook
     task:
-      id: cd14c308-db43-4c73-85e2-23bc1d26553f
+      id: b7646310-99ef-43b2-a843-a63a15dc6d0d
       version: -1
       name: SOC NIST IR (800-61)
       description: |-
@@ -126,7 +126,7 @@ tasks:
       - "3"
     scriptarguments:
       ShadowMode:
-        simple: "True"
+        simple: SOCFramework.shadow_mode
     separatecontext: false
     continueonerrortype: ""
     loop:

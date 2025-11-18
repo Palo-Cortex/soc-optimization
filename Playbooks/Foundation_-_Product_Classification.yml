@@ -1,10 +1,10 @@
 id: Foundation - Product Classification
-version: 26
+version: 18
 contentitemexportablefields:
   contentitemfields:
-    packID: ""
+    packID: soc-optimization
     packName: SOC Framework
-    itemVersion: 2.1.16
+    itemVersion: 2.1.19
     fromServerVersion: 5.0.0
     toServerVersion: ""
     definitionid: ""
@@ -31,6 +31,7 @@ tasks:
       iscommand: false
       brand: ""
       playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
     nexttasks:
       '#none#':
       - "21"
@@ -62,13 +63,14 @@ tasks:
       iscommand: false
       brand: ""
       playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
     separatecontext: false
     continueonerrortype: ""
     view: |-
       {
         "position": {
           "x": 705,
-          "y": 1110
+          "y": 1315
         }
       }
     note: false
@@ -92,6 +94,7 @@ tasks:
       iscommand: false
       brand: ""
       playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
     nexttasks:
       '#none#':
       - "24"
@@ -113,24 +116,25 @@ tasks:
     isautoswitchedtoquietmode: false
   "22":
     id: "22"
-    taskid: 266ba5a3-0231-43cc-9536-f69b16ea030e
+    taskid: cf53f551-0737-4de5-a8cd-f9f6e9452992
     type: regular
     task:
-      id: 266ba5a3-0231-43cc-9536-f69b16ea030e
+      id: cf53f551-0737-4de5-a8cd-f9f6e9452992
       version: -1
-      name: Build ProductKey
+      name: Set New ProductKey from issue.tags
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
         the default Limited User role, unless you explicitly change the permissions.\n
         For more information, see the section about permissions here:\n- For Cortex
-        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
-        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       scriptName: SetAndHandleEmpty
       type: regular
       iscommand: false
       brand: ""
       playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
     nexttasks:
       '#error#':
       - "26"
@@ -139,31 +143,36 @@ tasks:
       - "28"
       - "29"
     scriptarguments:
+      append:
+        simple: "false"
       key:
         simple: SOCFramework.Product.key
       value:
         complex:
-          root: inputs.ProductKey
+          root: issue.tags
+          filters:
+          - - operator: containsGeneral
+              left:
+                value:
+                  simple: issue.tags
+                iscontext: true
+              right:
+                value:
+                  simple: 'DS:'
           transformers:
           - operator: toLowerCase
-          - operator: replace
+          - operator: RegexReplace
             args:
-              limit: {}
-              replaceWith:
+              action_dt: {}
+              ignore_case: {}
+              multi_line: {}
+              output_format:
                 value:
                   simple: _
-              toReplace:
+              period_matches_newline: {}
+              regex:
                 value:
-                  simple: /
-          - operator: replace
-            args:
-              limit: {}
-              replaceWith:
-                value:
-                  simple: _
-              toReplace:
-                value:
-                  simple: ':'
+                  simple: (?<=.)[^A-Za-z0-9](?=.)
     separatecontext: false
     continueonerror: true
     continueonerrortype: errorPath
@@ -171,7 +180,7 @@ tasks:
       {
         "position": {
           "x": 490,
-          "y": 570
+          "y": 760
         }
       }
     note: false
@@ -194,11 +203,12 @@ tasks:
       iscommand: false
       brand: ""
       playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
     nexttasks:
       '#default#':
       - "8"
       "yes":
-      - "22"
+      - "30"
     separatecontext: false
     conditions:
     - label: "yes"
@@ -236,6 +246,7 @@ tasks:
       iscommand: false
       brand: ""
       playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
     nexttasks:
       '#none#':
       - "8"
@@ -245,7 +256,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 930
+          "y": 1130
         }
       }
     note: false
@@ -257,24 +268,25 @@ tasks:
     isautoswitchedtoquietmode: false
   "27":
     id: "27"
-    taskid: 497a54a1-3edb-48e6-b383-5366b6e894f8
+    taskid: 92cb6752-c0cd-442f-9ae7-d6160582a917
     type: regular
     task:
-      id: 497a54a1-3edb-48e6-b383-5366b6e894f8
+      id: 92cb6752-c0cd-442f-9ae7-d6160582a917
       version: -1
       name: Set Product Type
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
         the default Limited User role, unless you explicitly change the permissions.\n
         For more information, see the section about permissions here:\n- For Cortex
-        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
-        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       scriptName: SetAndHandleEmpty
       type: regular
       iscommand: false
       brand: ""
       playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
     nexttasks:
       '#error#':
       - "26"
@@ -306,7 +318,7 @@ tasks:
       {
         "position": {
           "x": 275,
-          "y": 750
+          "y": 945
         }
       }
     note: false
@@ -318,24 +330,25 @@ tasks:
     isautoswitchedtoquietmode: false
   "28":
     id: "28"
-    taskid: e2301053-a930-4b70-9cca-a3f5c4d20c7e
+    taskid: 4a70ffd7-16be-429b-a161-71a8d8ae5d0b
     type: regular
     task:
-      id: e2301053-a930-4b70-9cca-a3f5c4d20c7e
+      id: 4a70ffd7-16be-429b-a161-71a8d8ae5d0b
       version: -1
       name: Set Product Confidence
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
         the default Limited User role, unless you explicitly change the permissions.\n
         For more information, see the section about permissions here:\n- For Cortex
-        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
-        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       scriptName: SetAndHandleEmpty
       type: regular
       iscommand: false
       brand: ""
       playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
     nexttasks:
       '#error#':
       - "26"
@@ -367,7 +380,7 @@ tasks:
       {
         "position": {
           "x": 705,
-          "y": 750
+          "y": 945
         }
       }
     note: false
@@ -379,24 +392,25 @@ tasks:
     isautoswitchedtoquietmode: false
   "29":
     id: "29"
-    taskid: d42d6c76-b855-4d7d-97ca-b114ebdf4108
+    taskid: f7151db9-c773-4090-87ba-5d4c6dd351c2
     type: regular
     task:
-      id: d42d6c76-b855-4d7d-97ca-b114ebdf4108
+      id: f7151db9-c773-4090-87ba-5d4c6dd351c2
       version: -1
       name: Set Product Category2
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
         the default Limited User role, unless you explicitly change the permissions.\n
         For more information, see the section about permissions here:\n- For Cortex
-        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
-        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       scriptName: SetAndHandleEmpty
       type: regular
       iscommand: false
       brand: ""
       playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
     nexttasks:
       '#error#':
       - "26"
@@ -428,7 +442,7 @@ tasks:
       {
         "position": {
           "x": 1135,
-          "y": 750
+          "y": 945
         }
       }
     note: false
@@ -438,12 +452,55 @@ tasks:
     quietmode: 0
     isoversize: false
     isautoswitchedtoquietmode: false
+  "30":
+    id: "30"
+    taskid: a5a42856-294a-43ed-94df-7719a96037ac
+    type: regular
+    task:
+      id: a5a42856-294a-43ed-94df-7719a96037ac
+      version: -1
+      name: Remove SOCFramework.Product to clean up.
+      description: "Delete field from context.\n\nThis automation runs using the default
+        Limited User role, unless you explicitly change the permissions.\nFor more
+        information, see the section about permissions here:\n- For Cortex XSOAR 6
+        see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+      scriptName: DeleteContext
+      type: regular
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
+    nexttasks:
+      '#none#':
+      - "22"
+    scriptarguments:
+      key:
+        simple: SOCFramework.Product.
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 490,
+          "y": 575
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+system: true
 view: |-
   {
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 1120,
+        "height": 1325,
         "width": 1465,
         "x": 50,
         "y": 50

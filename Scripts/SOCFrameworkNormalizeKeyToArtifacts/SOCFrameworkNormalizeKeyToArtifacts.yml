@@ -1,12 +1,14 @@
+args:
+- name: key
+  required: true
 commonfields:
-  id: 'SOC_NormalizeContext'
+  id: 'SOCFramework-NormalizeKeyToArtifacts'
   version: -1
-dockerimage: demisto/python3:3.12.11.4508456
+dockerimage: demisto/python3:3.12.12.5490952
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
-name: SOC_NormalizeContext
-fromversion: 5.0.0
+name: SOCFramework-NormalizeKeyToArtifacts
 pswd: ""
 runas: DBotWeakRole
 runonce: false
@@ -17,3 +19,4 @@ tags:
 - SOC
 - SOC_Framework
 type: python
+fromversion: 5.0.0

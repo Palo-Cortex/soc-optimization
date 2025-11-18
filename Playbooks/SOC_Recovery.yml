@@ -1,6 +1,20 @@
-adopted: true
+id: SOC Recovery
+version: 5
+contentitemexportablefields:
+  contentitemfields:
+    packID: soc-optimization
+    packName: SOC Framework
+    itemVersion: 2.1.16
+    fromServerVersion: 5.0.0
+    toServerVersion: ""
+    definitionid: ""
+    prevname: ""
+    isoverridable: false
+    supportedModules: []
+vcShouldKeepItemLegacyProdMachine: false
+name: SOC Recovery
 description: |-
-  Remove the root cause of the incident, eliminate the attacker’s foothold, and ensure no additional malicious components remain in the environment.
+  Remove the root cause of the alert, eliminate the attacker’s foothold, and ensure no additional malicious components remain in the environment.
 
   What this phase includes:
 
@@ -16,299 +30,157 @@ description: |-
 
   Outcome:
   The environment is clean, the attack vector is neutralized, and systems are prepared for restoration and safe reintroduction into production.
-id: 'SOC Recovery'
-inputs: []
-name: SOC Recovery
-outputs: []
-sourceplaybookid: 'SOC Containment'
-starttaskid: "0"
 tags:
 - SOC
 - SOC_Framework
 - NIST 800-61
 - Recovery
+starttaskid: "0"
 tasks:
   "0":
-    continueonerrortype: ""
     id: "0"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
+    taskid: 2d9b464e-b61d-4ff1-8425-1dec11c5d731
+    type: start
+    task:
+      id: 2d9b464e-b61d-4ff1-8425-1dec11c5d731
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
-      - "1"
-      - "3"
-      - "2"
-      - "5"
-      - "4"
-      - "7"
-      - "6"
-    note: false
-    quietmode: 0
+      - "9"
     separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 2d9b464e-b61d-4ff1-8425-1dec11c5d731
-      iscommand: false
-      name: ""
-      playbooktaskmissingcomponent:
-      version: -1
-    taskid: 2d9b464e-b61d-4ff1-8425-1dec11c5d731
-    timertriggers: []
-    type: start
+    continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 1340,
+          "x": 1555,
           "y": 50
         }
       }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
   "1":
-    continueonerrortype: ""
     id: "1"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "8"
-    note: false
-    quietmode: 0
-    separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 032e0048-adf5-4061-801d-7b66275d2014
-      iscommand: false
-      name: SOC Data Recovery
-      playbookId: 'SOC Data Recovery'
-      playbooktaskmissingcomponent:
-      type: playbook
-      version: -1
     taskid: 032e0048-adf5-4061-801d-7b66275d2014
-    timertriggers: []
     type: playbook
-    view: |-
-      {
-        "position": {
-          "x": 2630,
-          "y": 220
-        }
-      }
-  "2":
-    continueonerrortype: ""
-    id: "2"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
+    task:
+      id: 032e0048-adf5-4061-801d-7b66275d2014
+      version: -1
+      name: SOC Data Recovery
+      playbookName: SOC Data Recovery
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "8"
-    note: false
-    quietmode: 0
     separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 213fe4f3-430d-47db-8989-fe67ee4d3adc
-      iscommand: false
-      name: SOC Email Recovery
-      playbookId: 'SOC Email Recovery'
-      playbooktaskmissingcomponent:
-      type: playbook
-      version: -1
-    taskid: 213fe4f3-430d-47db-8989-fe67ee4d3adc
-    timertriggers: []
-    type: playbook
-    view: |-
-      {
-        "position": {
-          "x": 910,
-          "y": 220
-        }
-      }
-  "3":
     continueonerrortype: ""
-    id: "3"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "8"
-    note: false
-    quietmode: 0
-    separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 12df920c-dbb5-40cc-8b1e-301ddbda5479
-      iscommand: false
-      name: SOC EndPoint Recovery
-      playbookId: 'SOC EndPoint Recovery'
-      playbooktaskmissingcomponent:
-      type: playbook
-      version: -1
-    taskid: 12df920c-dbb5-40cc-8b1e-301ddbda5479
-    timertriggers: []
-    type: playbook
-    view: |-
-      {
-        "position": {
-          "x": 1340,
-          "y": 220
-        }
-      }
-  "4":
-    continueonerrortype: ""
-    id: "4"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "8"
-    note: false
-    quietmode: 0
-    separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 8baba563-091a-46d1-8bb8-5307a059126d
-      iscommand: false
-      name: SOC Identity Recovery
-      playbookId: 'SOC Identity Recovery'
-      playbooktaskmissingcomponent:
-      type: playbook
-      version: -1
-    taskid: 8baba563-091a-46d1-8bb8-5307a059126d
-    timertriggers: []
-    type: playbook
-    view: |-
-      {
-        "position": {
-          "x": 480,
-          "y": 220
-        }
-      }
-  "5":
-    continueonerrortype: ""
-    id: "5"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "8"
-    note: false
-    quietmode: 0
-    separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 803b50b3-b491-4b59-8ec7-30053c91c9db
-      iscommand: false
-      name: SOC Network Recovery
-      playbookId: 'SOC Network Recovery'
-      playbooktaskmissingcomponent:
-      type: playbook
-      version: -1
-    taskid: 803b50b3-b491-4b59-8ec7-30053c91c9db
-    timertriggers: []
-    type: playbook
     view: |-
       {
         "position": {
           "x": 50,
-          "y": 220
+          "y": 400
         }
       }
-  "6":
-    continueonerrortype: ""
-    id: "6"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "2":
+    id: "2"
+    taskid: 213fe4f3-430d-47db-8989-fe67ee4d3adc
+    type: playbook
+    task:
+      id: 213fe4f3-430d-47db-8989-fe67ee4d3adc
+      version: -1
+      name: SOC Email Recovery
+      playbookName: SOC Email Recovery
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "8"
-    note: false
-    quietmode: 0
     separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: d80b8048-88e5-4f60-8612-76a5dd54bd65
-      iscommand: false
-      name: SOC SaaS Recovery
-      playbookId: 'SOC SaaS Recovery'
-      playbooktaskmissingcomponent:
-      type: playbook
-      version: -1
-    taskid: d80b8048-88e5-4f60-8612-76a5dd54bd65
-    timertriggers: []
-    type: playbook
+    continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 1770,
-          "y": 220
+          "x": 480,
+          "y": 400
         }
       }
-  "7":
-    continueonerrortype: ""
-    id: "7"
+    note: false
+    timertriggers: []
     ignoreworker: false
-    isautoswitchedtoquietmode: false
+    skipunavailable: false
+    quietmode: 0
     isoversize: false
+    isautoswitchedtoquietmode: false
+  "3":
+    id: "3"
+    taskid: 12df920c-dbb5-40cc-8b1e-301ddbda5479
+    type: playbook
+    task:
+      id: 12df920c-dbb5-40cc-8b1e-301ddbda5479
+      version: -1
+      name: SOC EndPoint Recovery
+      playbookName: SOC EndPoint Recovery
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
       - "8"
-    note: false
-    quietmode: 0
     separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: fda09207-89a5-4b5e-89dc-18bc271d7c5b
-      iscommand: false
-      name: SOC Workload Recovery
-      playbookId: 'SOC Workload Recovery'
-      playbooktaskmissingcomponent:
-      type: playbook
-      version: -1
-    taskid: fda09207-89a5-4b5e-89dc-18bc271d7c5b
-    timertriggers: []
-    type: playbook
+    continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 2200,
-          "y": 220
+          "x": 910,
+          "y": 400
         }
       }
-  "8":
-    continueonerrortype: ""
-    id: "8"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
     note: false
-    quietmode: 0
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 8c548e35-c05e-416f-8320-1e18de46e19e
-      iscommand: false
-      name: Done
-      playbooktaskmissingcomponent:
-      type: title
-      version: -1
-    taskid: 8c548e35-c05e-416f-8320-1e18de46e19e
     timertriggers: []
-    type: title
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "4":
+    id: "4"
+    taskid: 8baba563-091a-46d1-8bb8-5307a059126d
+    type: playbook
+    task:
+      id: 8baba563-091a-46d1-8bb8-5307a059126d
+      version: -1
+      name: SOC Identity Recovery
+      playbookName: SOC Identity Recovery
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
     view: |-
       {
         "position": {
@@ -316,17 +188,284 @@ tasks:
           "y": 400
         }
       }
-version: -1
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "5":
+    id: "5"
+    taskid: 803b50b3-b491-4b59-8ec7-30053c91c9db
+    type: playbook
+    task:
+      id: 803b50b3-b491-4b59-8ec7-30053c91c9db
+      version: -1
+      name: SOC Network Recovery
+      playbookName: SOC Network Recovery
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 1770,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "6":
+    id: "6"
+    taskid: d80b8048-88e5-4f60-8612-76a5dd54bd65
+    type: playbook
+    task:
+      id: d80b8048-88e5-4f60-8612-76a5dd54bd65
+      version: -1
+      name: SOC SaaS Recovery
+      playbookName: SOC SaaS Recovery
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 2200,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "7":
+    id: "7"
+    taskid: fda09207-89a5-4b5e-89dc-18bc271d7c5b
+    type: playbook
+    task:
+      id: fda09207-89a5-4b5e-89dc-18bc271d7c5b
+      version: -1
+      name: SOC Workload Recovery
+      playbookName: SOC Workload Recovery
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 2630,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "8":
+    id: "8"
+    taskid: 8c548e35-c05e-416f-8320-1e18de46e19e
+    type: title
+    task:
+      id: 8c548e35-c05e-416f-8320-1e18de46e19e
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 1555,
+          "y": 580
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "9":
+    id: "9"
+    taskid: 6f2a9f73-91ef-4542-b1f4-f03b540d5ea6
+    type: condition
+    task:
+      id: 6f2a9f73-91ef-4542-b1f4-f03b540d5ea6
+      version: -1
+      name: Product Category
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#default#':
+      - "8"
+      Data:
+      - "1"
+      Email:
+      - "2"
+      Endpoint:
+      - "3"
+      Identity:
+      - "4"
+      Network:
+      - "5"
+      SaaS:
+      - "6"
+      Workload:
+      - "7"
+    separatecontext: false
+    conditions:
+    - label: Network
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: ${SOCFramework.Product.category}
+            iscontext: true
+          right:
+            value:
+              simple: Network
+    - label: Identity
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: ${SOCFramework.Product.category}
+            iscontext: true
+          right:
+            value:
+              simple: Identity
+    - label: Email
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: ${SOCFramework.Product.category}
+            iscontext: true
+          right:
+            value:
+              simple: Email
+    - label: Endpoint
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: ${SOCFramework.Product.category}
+            iscontext: true
+          right:
+            value:
+              simple: Endpoint
+    - label: SaaS
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: ${SOCFramework.Product.category}
+            iscontext: true
+          right:
+            value:
+              simple: SaaS
+    - label: Workload
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: ${SOCFramework.Product.category}
+            iscontext: true
+          right:
+            value:
+              simple: Workload
+    - label: Data
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: ${SOCFramework.Product.category}
+            iscontext: true
+          right:
+            value:
+              simple: Data
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 1555,
+          "y": 220
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+system: true
 view: |-
   {
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 410,
+        "height": 590,
         "width": 2960,
         "x": 50,
         "y": 50
       }
     }
   }
+inputs:
+- key: ShadowMode
+  value:
+    simple: SOCFramework.shadow_mode
+  required: true
+  description: ""
+  playbookInputQuery:
+inputSections:
+- inputs:
+  - ShadowMode
+  name: General (Inputs group)
+  description: Generic group for inputs
+outputSections:
+- outputs: []
+  name: General (Outputs group)
+  description: Generic group for outputs
+outputs: []
+sourceplaybookid: SOC Containment
+dirtyInputs: true
+adopted: true
 fromversion: 5.0.0
