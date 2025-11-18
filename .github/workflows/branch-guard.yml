@@ -2,17 +2,30 @@ name: Branch name guard
 on:
   pull_request:
     types: [opened, synchronize, reopened, edited]
+
 jobs:
   validate-branch:
     runs-on: ubuntu-latest
     steps:
-      - name: Check branch naming convention
+      - name: Validate SOC Framework branch naming
         run: |
           BRANCH="${{ github.head_ref }}"
-          REGEX='^(feat|fix|chore|docs|refactor)\/(data|network|identity|cloud|endpoint|email|siem|core|playbooks)\/(trigger|analysis|containment|eradication|recovery|communication)\/[a-z0-9\-]+$'
+
+          TYPE='(feat|fix|chore|docs|refactor)'
+
+          # Added "project" here
+          MODULE='(entrypoint|upon-trigger|hydration|normalization|enrichment|containment|eradication|recovery|communication|data-modeling|correlation|playbooks|lists|common-utils|dashboards|project)'
+
+          COMPONENT='[a-z0-9\-]+'
+          SLUG='[a-z0-9\-]+'
+
+          REGEX="^${TYPE}\/${MODULE}\/${COMPONENT}\/${SLUG}$"
+
           if [[ ! "$BRANCH" =~ $REGEX ]]; then
-            echo "❌ Branch '$BRANCH' does not match naming convention."
-            echo "Expected: <type>/<surface>/<phase>/<slug>"
+            echo "❌ Invalid branch name: $BRANCH"
+            echo "Expected: <type>/<module>/<component>/<slug>"
+            echo "Allowed modules include 'project' for workflow/infra updates."
             exit 1
           fi
-          echo "✅ Branch name looks good: $BRANCH"
+
+          echo "✅ Branch name valid: $BRANCH"
