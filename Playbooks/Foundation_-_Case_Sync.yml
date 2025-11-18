@@ -1,0 +1,131 @@
+adopted: true
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    isoverridable: false
+    itemVersion: 2.1.13
+    packID: ""
+    packName: SOC Framework
+    prevname: ""
+    supportedModules: []
+    toServerVersion: ""
+description: |+
+  Generates/Updates the Case Alert Ledger
+  Notifies incident owner of new issue addition
+
+dirtyInputs: true
+id: 'Foundation - Case Sync'
+inputs: []
+name: Foundation - Case Sync
+outputs: []
+sourceplaybookid: Foundation - Upon Trigger
+starttaskid: "0"
+tags:
+- SOC
+- SOC_Framework
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+      iscommand: false
+      name: ""
+      playbooktaskmissingcomponent:
+      version: -1
+    taskid: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2eb08148-d069-489a-83e1-1ab88016aac3
+      iscommand: false
+      name: Done
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: 2eb08148-d069-489a-83e1-1ab88016aac3
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 400
+        }
+      }
+  "17":
+    continueonerrortype: ""
+    id: "17"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: c9a53716-a57b-4fae-8e00-d3508d482f51
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: Foundation - Error Handling
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: c9a53716-a57b-4fae-8e00-d3508d482f51
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 220
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 410,
+        "width": 380,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+fromversion: 5.0.0

@@ -1,0 +1,471 @@
+id: SOC Eradication
+version: 5
+contentitemexportablefields:
+  contentitemfields:
+    packID: soc-optimization
+    packName: SOC Framework
+    itemVersion: 2.1.16
+    fromServerVersion: 5.0.0
+    toServerVersion: ""
+    definitionid: ""
+    prevname: ""
+    isoverridable: false
+    supportedModules: []
+vcShouldKeepItemLegacyProdMachine: false
+name: SOC Eradication
+description: |-
+  Remove the root cause of the alert, eliminate the attacker’s foothold, and ensure no additional malicious components remain in the environment.
+
+  What this phase includes:
+
+  Identifying and removing malware, malicious code, unauthorized user accounts, persistence mechanisms, and compromised artifacts.
+
+  Disabling or removing compromised services, processes, or software.
+
+  Applying patches, hotfixes, configuration changes, or control improvements that eliminate the vulnerability or weakness exploited.
+
+  Hardening systems to prevent reinfection (e.g., secure configuration, MFA enforcement, disabling unnecessary services).
+
+  Validating that no traces of the attacker’s presence remain (malware scans, script-based checks, log analysis).
+
+  Outcome:
+  The environment is clean, the attack vector is neutralized, and systems are prepared for restoration and safe reintroduction into production.
+tags:
+- SOC
+- SOC_Framework
+- NIST 800-61
+- Eradication
+starttaskid: "0"
+tasks:
+  "0":
+    id: "0"
+    taskid: 2d9b464e-b61d-4ff1-8425-1dec11c5d731
+    type: start
+    task:
+      id: 2d9b464e-b61d-4ff1-8425-1dec11c5d731
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "9"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 1555,
+          "y": 50
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "1":
+    id: "1"
+    taskid: c967b414-b9d5-484f-8f2a-ca7b6a89605f
+    type: playbook
+    task:
+      id: c967b414-b9d5-484f-8f2a-ca7b6a89605f
+      version: -1
+      name: SOC Data Eradication
+      playbookName: SOC Data Eradication
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "2":
+    id: "2"
+    taskid: 092a1375-c25a-45bb-8bf9-ab5184bbb6a0
+    type: playbook
+    task:
+      id: 092a1375-c25a-45bb-8bf9-ab5184bbb6a0
+      version: -1
+      name: SOC Email Eradication
+      playbookName: SOC Email Eradication
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "3":
+    id: "3"
+    taskid: f9783e26-0b62-4b32-8789-d9dfda18f227
+    type: playbook
+    task:
+      id: f9783e26-0b62-4b32-8789-d9dfda18f227
+      version: -1
+      name: SOC EndPoint Eradication
+      playbookName: SOC EndPoint Eradication
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "4":
+    id: "4"
+    taskid: 61cdb2a0-1b19-4dbf-8f6c-891b5bd77328
+    type: playbook
+    task:
+      id: 61cdb2a0-1b19-4dbf-8f6c-891b5bd77328
+      version: -1
+      name: SOC Identity Eradication
+      playbookName: SOC Identity Eradication
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 1340,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "5":
+    id: "5"
+    taskid: e8ef2e8c-0829-4068-84ad-7621843a6925
+    type: playbook
+    task:
+      id: e8ef2e8c-0829-4068-84ad-7621843a6925
+      version: -1
+      name: SOC Network Eradication
+      playbookName: SOC Network Eradication
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 1770,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "6":
+    id: "6"
+    taskid: f938f343-8542-44c0-8400-06efc699913f
+    type: playbook
+    task:
+      id: f938f343-8542-44c0-8400-06efc699913f
+      version: -1
+      name: SOC SaaS Eradication
+      playbookName: SOC SaaS Eradication
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 2200,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "7":
+    id: "7"
+    taskid: da3a7549-7dff-43c5-819e-0c6fdda9e224
+    type: playbook
+    task:
+      id: da3a7549-7dff-43c5-819e-0c6fdda9e224
+      version: -1
+      name: SOC Workload Eradication
+      playbookName: SOC Workload Eradication
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 2630,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "8":
+    id: "8"
+    taskid: befba2d4-ec6a-4f2a-9ac0-efc5ab4bea3e
+    type: title
+    task:
+      id: befba2d4-ec6a-4f2a-9ac0-efc5ab4bea3e
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 1555,
+          "y": 580
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "9":
+    id: "9"
+    taskid: 58ddef46-fd19-436e-99cb-d4a4e2389bbf
+    type: condition
+    task:
+      id: 58ddef46-fd19-436e-99cb-d4a4e2389bbf
+      version: -1
+      name: Product Category
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#default#':
+      - "8"
+      Data:
+      - "1"
+      Email:
+      - "2"
+      Endpoint:
+      - "3"
+      Identity:
+      - "4"
+      Network:
+      - "5"
+      SaaS:
+      - "6"
+      Workload:
+      - "7"
+    separatecontext: false
+    conditions:
+    - label: SaaS
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: ${SOCFramework.Product.category}
+            iscontext: true
+          right:
+            value:
+              simple: SaaS
+    - label: Workload
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: ${SOCFramework.Product.category}
+            iscontext: true
+          right:
+            value:
+              simple: Workload
+    - label: Identity
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: ${SOCFramework.Product.category}
+            iscontext: true
+          right:
+            value:
+              simple: Identity
+    - label: Network
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: ${SOCFramework.Product.category}
+            iscontext: true
+          right:
+            value:
+              simple: Network
+    - label: Email
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: ${SOCFramework.Product.category}
+            iscontext: true
+          right:
+            value:
+              simple: Email
+    - label: Endpoint
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: ${SOCFramework.Product.category}
+            iscontext: true
+          right:
+            value:
+              simple: Endpoint
+    - label: Data
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: ${SOCFramework.Product.category}
+            iscontext: true
+          right:
+            value:
+              simple: Data
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 1555,
+          "y": 220
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+system: true
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 590,
+        "width": 2960,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+inputs:
+- key: ShadowMode
+  value:
+    simple: SOCFramework.shadow_mode
+  required: true
+  description: ""
+  playbookInputQuery:
+inputSections:
+- inputs:
+  - ShadowMode
+  name: General (Inputs group)
+  description: Generic group for inputs
+outputSections:
+- outputs: []
+  name: General (Outputs group)
+  description: Generic group for outputs
+outputs: []
+sourceplaybookid: SOC Containment
+dirtyInputs: true
+adopted: true
+fromversion: 5.0.0

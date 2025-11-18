@@ -1,0 +1,375 @@
+id: Foundation - Data Integrity
+version: 28
+contentitemexportablefields:
+  contentitemfields:
+    packID: soc-optimization
+    packName: SOC Framework
+    itemVersion: 2.1.16
+    fromServerVersion: 5.0.0
+    toServerVersion: ""
+    definitionid: ""
+    prevname: ""
+    isoverridable: false
+    supportedModules: []
+vcShouldKeepItemLegacyProdMachine: false
+name: Foundation - Data Integrity
+description: |
+  Core fields are evaluated
+  Unpopulated core fields refer to alternatives for values
+  Field values are evaluated for formatting and syntax
+tags:
+- SOC
+- SOC_Framework
+starttaskid: "0"
+tasks:
+  "0":
+    id: "0"
+    taskid: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+    type: start
+    task:
+      id: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "21"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "8":
+    id: "8"
+    taskid: 2eb08148-d069-489a-83e1-1ab88016aac3
+    type: title
+    task:
+      id: 2eb08148-d069-489a-83e1-1ab88016aac3
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1460
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "18":
+    id: "18"
+    taskid: d946d1a6-1e49-4f3f-bb84-cb106bab39dd
+    type: playbook
+    task:
+      id: d946d1a6-1e49-4f3f-bb84-cb106bab39dd
+      version: -1
+      name: Foundation Common - Extract Indicators from alerts
+      description: This is a common playbook intended to integrate the Indicator Extraction
+        to all automated alerts.
+      playbookName: Foundation Common - Extract Indicators from alerts
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "20"
+    separatecontext: true
+    continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 740
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: true
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "20":
+    id: "20"
+    taskid: 16c223ec-f610-4b37-b3b3-a769926c35c6
+    type: playbook
+    task:
+      id: 16c223ec-f610-4b37-b3b3-a769926c35c6
+      version: -1
+      name: Foundation - Issue Hydration
+      description: Pulling in the full native alert payload from the product that
+        generated the issue/alert.
+      playbookName: Foundation - Issue Hydration
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "29"
+    separatecontext: true
+    continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 920
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: true
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "21":
+    id: "21"
+    taskid: 6c69403f-3987-4921-93b0-59b803e8ab06
+    type: title
+    task:
+      id: 6c69403f-3987-4921-93b0-59b803e8ab06
+      version: -1
+      name: Product Category
+      description: Is this an EndPoint, Network, Cloud SaaS, Cloud Workload, Identity,
+        etc?  This is used downstream for automations based on product category.
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "27"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 220
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "27":
+    id: "27"
+    taskid: 715519e1-9024-4cd7-a7a6-09693160cf0f
+    type: playbook
+    task:
+      id: 715519e1-9024-4cd7-a7a6-09693160cf0f
+      version: -1
+      name: Foundation - Product Classification
+      description: Designed to get the product category (EndPoint, Network, Cloud
+        SaaS, Cloud Workload, etc) from the list SOC_ProductCategoryMap
+      playbookName: Foundation - Product Classification
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "28"
+    scriptarguments:
+      ProductKey:
+        simple: ${issue.tags.[0]}
+    separatecontext: true
+    continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 390
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: true
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "28":
+    id: "28"
+    taskid: 8951326c-3b3f-412d-94b0-da4f88c02844
+    type: title
+    task:
+      id: 8951326c-3b3f-412d-94b0-da4f88c02844
+      version: -1
+      name: Artifact Extraction
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "18"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 570
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "29":
+    id: "29"
+    taskid: 9429bf61-3b46-4fec-a25b-69539844b6ae
+    type: playbook
+    task:
+      id: 9429bf61-3b46-4fec-a25b-69539844b6ae
+      version: -1
+      name: Foundation - Normalization (Extracted Indicators)
+      playbookName: Foundation - Normalization V2
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "30"
+    scriptarguments:
+      keys:
+        simple: ExtractedIndicators
+    separatecontext: true
+    continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1100
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "30":
+    id: "30"
+    taskid: 7f07d36e-dc5b-4bdf-b023-4dc98e839f7a
+    type: playbook
+    task:
+      id: 7f07d36e-dc5b-4bdf-b023-4dc98e839f7a
+      version: -1
+      name: Foundation - Normalization (Issue)
+      description: |2+
+
+      playbookName: Foundation - Normalization V2
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    scriptarguments:
+      keys:
+        simple: issue
+    separatecontext: true
+    continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1280
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+system: true
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 1470,
+        "width": 380,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+inputs: []
+inputSections:
+- inputs: []
+  name: General (Inputs group)
+  description: Generic group for inputs
+outputSections:
+- outputs: []
+  name: General (Outputs group)
+  description: Generic group for outputs
+outputs: []
+sourceplaybookid: Foundation - Upon Trigger
+dirtyInputs: true
+adopted: true
+fromversion: 5.0.0

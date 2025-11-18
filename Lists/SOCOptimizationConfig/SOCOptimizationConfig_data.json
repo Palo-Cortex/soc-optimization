@@ -1,14 +1,12 @@
-[
-    {
-        "name": "Triage Incidents JOB",
+{
+    "Triage Incidents JOB": {
         "enabled": true,
         "playbook": "JOB - Triage Incidents",
         "fields": {
             "TriageWindowHours": "6"
         }
     },
-    {
-        "name": "Store Playbook Metrics in Dataset JOB",
+    "Store Playbook Metrics in Dataset JOB": {
         "enabled": true,
         "playbook": "JOB - Store Playbook Metrics in Dataset",
         "fields": {
@@ -16,12 +14,15 @@
             "AlertLimit": "500"
         }
     },
-    {
-        "name": "Dedup",
+    "Dedup": {
         "enabled": true,
         "playbook": "Foundation - Dedup",
         "fields": {
             "DedupWindow": "1 days ago"
         }
+    },
+    "ShadowMode": {
+        "enabled": true,
+        "playbook": "Foundation - Environment Detection"
     }
-]
+}

@@ -1,8 +1,8 @@
-id: Foundation - Dedup
-version: 9
+id: JOB - Store Playbook Metrics in Dataset V2
+version: 2
 contentitemexportablefields:
   contentitemfields:
-    packID: soc-optimization
+    packID: ""
     packName: SOC Framework
     itemVersion: 2.1.16
     fromServerVersion: 5.0.0
@@ -12,21 +12,20 @@ contentitemexportablefields:
     isoverridable: false
     supportedModules: []
 vcShouldKeepItemLegacyProdMachine: false
-name: Foundation - Dedup
-description: |
-  Uses our alert fingerprinting - and compares the alert to the alert ledger
-  If a duplicate is identified - the parent alert is recorded, and the alert resolves
+name: JOB - Store Playbook Metrics in Dataset V2
 tags:
-- SOC
 - SOC_Framework
+- SOC
+- JOBS
+- Metrics
 starttaskid: "0"
 tasks:
   "0":
     id: "0"
-    taskid: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+    taskid: 70ae04ac-deed-4719-8f9a-d689a1125612
     type: start
     task:
-      id: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+      id: 70ae04ac-deed-4719-8f9a-d689a1125612
       version: -1
       name: ""
       iscommand: false
@@ -34,13 +33,13 @@ tasks:
       playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
-      - "10"
+      - "1"
     separatecontext: false
     continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 162.5,
           "y": 50
         }
       }
@@ -51,57 +50,32 @@ tasks:
     quietmode: 0
     isoversize: false
     isautoswitchedtoquietmode: false
-  "8":
-    id: "8"
-    taskid: 2eb08148-d069-489a-83e1-1ab88016aac3
-    type: title
-    task:
-      id: 2eb08148-d069-489a-83e1-1ab88016aac3
-      version: -1
-      name: Done
-      type: title
-      iscommand: false
-      brand: ""
-      playbooktaskmissingcomponent:
-    separatecontext: false
-    continueonerrortype: ""
-    view: |-
-      {
-        "position": {
-          "x": 162.5,
-          "y": 1120
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
-  "10":
-    id: "10"
-    taskid: fe98508c-87a9-4233-8e42-9418191678b4
+  "1":
+    id: "1"
+    taskid: b85839af-8195-486b-b01d-1610680b42a0
     type: regular
     task:
-      id: fe98508c-87a9-4233-8e42-9418191678b4
+      id: b85839af-8195-486b-b01d-1610680b42a0
       version: -1
-      name: DeDup Alerts from the Last "1 days ago"
+      name: Search Alerts
       description: |-
-        Finds past similar alerts based on alert fields' similarity. Includes an option to also display indicators similarity.
-        Note: For the similarity calculation, at least one field must be provided in one of the "similarTextField", "similarCategoricalField", or "similarJsonField" arguments.
-      scriptName: DBotFindSimilarAlerts
+        Searches Demisto alerts. A summarized version of this scrips is available with the summarizedversion argument.
+
+        This automation runs using the default Limited User role, unless you explicitly change the permissions.
+        For more information, see the section about permissions here:
+        https://docs-cortex.paloaltonetworks.com/r/Cortex-XSIAM/Cortex-XSIAM-Administrator-Guide/Permission-Management
+      scriptName: SearchAlertsV2
       type: regular
       iscommand: false
       brand: ""
       playbooktaskmissingcomponent:
     nexttasks:
       '#error#':
-      - "17"
+      - "4"
       '#none#':
-      - "16"
+      - "6"
     scriptarguments:
-      fromDate:
+      fromdate:
         complex:
           root: lists
           accessor: SOCOptimizationConfig
@@ -110,7 +84,7 @@ tasks:
             args:
               field:
                 value:
-                  simple: Dedup
+                  simple: Store Playbook Metrics in Dataset JOB
           - operator: getField
             args:
               field:
@@ -120,22 +94,34 @@ tasks:
             args:
               field:
                 value:
-                  simple: DedupWindow
-      minimunIncidentSimilarity:
-        simple: "0.8"
-      query:
-        simple: case_id=${parentIncidentFields.incident_id}
-      similarJsonField:
-        simple: username,hostip
-      similarTextField:
-        simple: name,type
+                  simple: LookBack
+      limit:
+        complex:
+          root: lists
+          accessor: SOCOptimizationConfig
+          transformers:
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: Store Playbook Metrics in Dataset JOB
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: fields
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: AlertLimit
     separatecontext: false
     continueonerror: true
     continueonerrortype: errorPath
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 162.5,
           "y": 220
         }
       }
@@ -146,14 +132,14 @@ tasks:
     quietmode: 0
     isoversize: false
     isautoswitchedtoquietmode: false
-  "14":
-    id: "14"
-    taskid: ddcf8da0-3949-415f-8bbb-6c440ff050ee
+  "3":
+    id: "3"
+    taskid: 2338a1f5-43e7-41a8-89ce-52b874c47e2f
     type: regular
     task:
-      id: ddcf8da0-3949-415f-8bbb-6c440ff050ee
+      id: 2338a1f5-43e7-41a8-89ce-52b874c47e2f
       version: -1
-      name: Close As Duplicates
+      name: Close Investigation
       description: commands.local.cmd.close.inv
       script: Builtin|||closeInvestigation
       type: regular
@@ -162,55 +148,9 @@ tasks:
       playbooktaskmissingcomponent:
     nexttasks:
       '#error#':
-      - "17"
+      - "4"
       '#none#':
-      - "8"
-    scriptarguments:
-      closeNotes:
-        simple: Auto-Close Duplicate
-      closeReason:
-        simple: Resolved - Duplicate Alert
-      id:
-        simple: ${DBotFindSimilarIncidents.similarIncident.id}
-    separatecontext: false
-    continueonerror: true
-    continueonerrortype: errorPath
-    view: |-
-      {
-        "position": {
-          "x": 387.5,
-          "y": 760
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 2
-    isoversize: false
-    isautoswitchedtoquietmode: false
-  "15":
-    id: "15"
-    taskid: 4f2a3250-61d8-4556-aea2-4612ac251ad6
-    type: regular
-    task:
-      id: 4f2a3250-61d8-4556-aea2-4612ac251ad6
-      version: -1
-      name: Print Duplicate Alerts
-      description: Prints text to war room (Markdown supported)
-      scriptName: Print
-      type: regular
-      iscommand: false
-      brand: ""
-      playbooktaskmissingcomponent:
-    nexttasks:
-      '#error#':
-      - "17"
-      '#none#':
-      - "14"
-    scriptarguments:
-      value:
-        simple: ${DBotFindSimilarIncidents.similarIncident.id}
+      - "5"
     separatecontext: false
     continueonerror: true
     continueonerrortype: errorPath
@@ -228,55 +168,12 @@ tasks:
     quietmode: 0
     isoversize: false
     isautoswitchedtoquietmode: false
-  "16":
-    id: "16"
-    taskid: 7adad498-fc30-4def-818b-a1d7198474c8
-    type: condition
-    task:
-      id: 7adad498-fc30-4def-818b-a1d7198474c8
-      version: -1
-      name: Are there any similar alerts?
-      type: condition
-      iscommand: false
-      brand: ""
-      playbooktaskmissingcomponent:
-    nexttasks:
-      '#default#':
-      - "8"
-      "yes":
-      - "15"
-    separatecontext: false
-    conditions:
-    - label: "yes"
-      condition:
-      - - operator: isTrue
-          left:
-            value:
-              simple: DBotFindSimilarIncidents.isSimilarIncidentFound
-            iscontext: true
-          right:
-            value: {}
-    continueonerrortype: ""
-    view: |-
-      {
-        "position": {
-          "x": 162.5,
-          "y": 400
-        }
-      }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
-  "17":
-    id: "17"
-    taskid: c9a53716-a57b-4fae-8e00-d3508d482f51
+  "4":
+    id: "4"
+    taskid: 1d0c04dc-71bc-4667-8b3e-49b4339eb081
     type: playbook
     task:
-      id: c9a53716-a57b-4fae-8e00-d3508d482f51
+      id: 1d0c04dc-71bc-4667-8b3e-49b4339eb081
       version: -1
       name: Foundation - Error Handling
       playbookName: Foundation - Error Handling
@@ -286,8 +183,36 @@ tasks:
       playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
-      - "8"
+      - "5"
     separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 760
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "5":
+    id: "5"
+    taskid: 455bc6dc-2b02-4b09-8faf-9d84988ac0fe
+    type: title
+    task:
+      id: 455bc6dc-2b02-4b09-8faf-9d84988ac0fe
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    separatecontext: false
     continueonerrortype: ""
     view: |-
       {
@@ -303,14 +228,53 @@ tasks:
     quietmode: 0
     isoversize: false
     isautoswitchedtoquietmode: false
-system: true
+  "6":
+    id: "6"
+    taskid: 367553c1-9597-4413-88e5-39b5b6814fa3
+    type: playbook
+    task:
+      id: 367553c1-9597-4413-88e5-39b5b6814fa3
+      version: -1
+      name: Get Alert Tasks and Store to Dataset
+      playbookName: Get Alert Tasks and Store to Dataset
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "3"
+    scriptarguments:
+      Alert:
+        simple: ${foundIncidents}
+    separatecontext: true
+    continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 275,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
 view: |-
   {
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 1130,
-        "width": 717.5,
+        "height": 950,
+        "width": 605,
         "x": 50,
         "y": 50
       }
@@ -318,7 +282,7 @@ view: |-
   }
 inputs: []
 outputs: []
-sourceplaybookid: Foundation - Upon Trigger
+sourceplaybookid: JOB - Store Playbook Metrics in Dataset
 dirtyInputs: true
 adopted: true
 fromversion: 5.0.0

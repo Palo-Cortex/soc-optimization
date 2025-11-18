@@ -1,0 +1,191 @@
+{
+    "Artifacts": {
+        "endpoint.id": {
+            "description": "Primary identifier for an endpoint/host used for containment and process actions.",
+            "examples": [
+                "endpoint_id",
+                "machine_id",
+                "device_id",
+                "agent_id"
+            ],
+            "product_categories": [
+                "Endpoint",
+                "Network"
+            ],
+            "sources": [
+                "SOCFramework.Artifacts.Host.endpoint_id",
+                "SOCFramework.Artifacts.Host.device_id",
+                "SOCFramework.Artifacts.Host.agent_id"
+            ]
+        },
+        "endpoint.process.id": {
+            "description": "Process identifier for termination / suspension.",
+            "examples": [
+                "process_id",
+                "process_name"
+            ],
+            "product_categories": [
+                "Endpoint"
+            ],
+            "sources": [
+                "SOCFramework.Artifacts.Process.pid",
+                "SOCFramework.Artifacts.Process.name"
+            ]
+        },
+        "file.hash": {
+            "description": "File hash used for blocklist/allowlist actions.",
+            "examples": [
+                "hash",
+                "sha256",
+                "md5"
+            ],
+            "product_categories": [
+                "Endpoint"
+            ],
+            "sources": [
+                "SOCFramework.Artifacts.File.sha256",
+                "SOCFramework.Artifacts.File.md5"
+            ]
+        },
+        "file.path": {
+            "description": "File path used for quarantine/removal.",
+            "examples": [
+                "file_path"
+            ],
+            "product_categories": [
+                "Endpoint"
+            ],
+            "sources": [
+                "SOCFramework.Artifacts.File.path"
+            ]
+        },
+        "user.id": {
+            "description": "User identifier for identity actions.",
+            "examples": [
+                "user_id",
+                "username",
+                "upn"
+            ],
+            "product_categories": [
+                "Identity"
+            ],
+            "sources": [
+                "SOCFramework.Artifacts.User.id",
+                "SOCFramework.Artifacts.User.username",
+                "SOCFramework.Artifacts.User.email"
+            ]
+        },
+        "email.message_id": {
+            "description": "Email message ID used to search, quarantine, release, or delete.",
+            "examples": [
+                "message_id",
+                "guid"
+            ],
+            "product_categories": [
+                "EmailSecurity"
+            ],
+            "sources": [
+                "SOCFramework.Artifacts.Email.message_id",
+                "SOCFramework.Artifacts.Email.guid"
+            ]
+        },
+        "ip.address": {
+            "description": "IP address used for blocking/unblocking in firewalls and proxies.",
+            "examples": [
+                "ip"
+            ],
+            "product_categories": [
+                "Network",
+                "Cloud"
+            ],
+            "sources": [
+                "SOCFramework.Artifacts.IPAddresses.[].ip"
+            ]
+        },
+        "url.value": {
+            "description": "URL used for proxy/filter block/unblock.",
+            "examples": [
+                "url"
+            ],
+            "product_categories": [
+                "Network",
+                "EmailSecurity"
+            ],
+            "sources": [
+                "SOCFramework.Artifacts.URLs.[].value"
+            ]
+        },
+        "cloud.resource_id": {
+            "description": "Cloud resource ID / container / instance identifier.",
+            "examples": [
+                "resource_id",
+                "container_id"
+            ],
+            "product_categories": [
+                "Cloud"
+            ],
+            "sources": [
+                "SOCFramework.Artifacts.Cloud.resource_id",
+                "SOCFramework.Artifacts.Cloud.container_id"
+            ]
+        },
+        "alert.id": {
+            "description": "Primary alert, incident, or threat identifier used for enrichment.",
+            "examples": [
+                "alert_id",
+                "incident_id",
+                "threat_id"
+            ],
+            "product_categories": [
+                "Endpoint",
+                "EmailSecurity",
+                "Identity",
+                "Network",
+                "Cloud"
+            ],
+            "sources": [
+                "SOCFramework.Artifacts.Alert.alert_id",
+                "SOCFramework.Artifacts.Alert.incident_id",
+                "SOCFramework.Artifacts.Alert.threat_id"
+            ]
+        },
+        "email.sender.address": {
+            "description": "Sender email address used for blocking.",
+            "examples": [
+                "sender"
+            ],
+            "product_categories": [
+                "EmailSecurity"
+            ],
+            "sources": [
+                "SOCFramework.Artifacts.Email.sender"
+            ]
+        },
+        "email.search.query": {
+            "description": "Search query string used by email security products.",
+            "examples": [
+                "query"
+            ],
+            "product_categories": [
+                "EmailSecurity"
+            ],
+            "sources": [
+                "SOCFramework.Artifacts.Email.search_query"
+            ]
+        },
+        "network.asset.mac": {
+            "description": "MAC address used in NAC and network asset control.",
+            "examples": [
+                "mac_address"
+            ],
+            "product_categories": [
+                "Network",
+                "Identity"
+            ],
+            "sources": [
+                "SOCFramework.Artifacts.Network.mac_address",
+                "SOCFramework.Artifacts.Host.mac_address"
+            ]
+        }
+    }
+}

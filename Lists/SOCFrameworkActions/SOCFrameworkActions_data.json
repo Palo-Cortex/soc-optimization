@@ -1,0 +1,124 @@
+{
+    "Actions": {
+        "soc-enrich-alert": {
+            "required_artifacts": [
+                "alert.id"
+            ]
+        },
+        "soc-isolate-endpoint": {
+            "required_artifacts": [
+                "endpoint.id"
+            ]
+        },
+        "soc-unisolate-endpoint": {
+            "required_artifacts": [
+                "endpoint.id"
+            ]
+        },
+        "soc-terminate-process": {
+            "required_artifacts": [
+                "endpoint.id",
+                "endpoint.process.id"
+            ]
+        },
+        "soc-quarantine-file": {
+            "required_artifacts": [
+                "endpoint.id",
+                "file.path"
+            ]
+        },
+        "soc-block-hash": {
+            "required_artifacts": [
+                "file.hash"
+            ]
+        },
+        "soc-disable-identity": {
+            "required_artifacts": [
+                "user.id"
+            ]
+        },
+        "soc-enable-identity": {
+            "required_artifacts": [
+                "user.id"
+            ]
+        },
+        "soc-reset-password": {
+            "required_artifacts": [
+                "user.id"
+            ]
+        },
+        "soc-revoke-sessions": {
+            "required_artifacts": [
+                "user.id"
+            ]
+        },
+        "soc-quarantine-email": {
+            "required_artifacts": [
+                "email.message_id"
+            ]
+        },
+        "soc-release-email": {
+            "required_artifacts": [
+                "email.message_id"
+            ]
+        },
+        "soc-delete-email": {
+            "required_artifacts": [
+                "email.message_id"
+            ]
+        },
+        "soc-block-sender": {
+            "required_artifacts": [
+                "email.sender.address"
+            ]
+        },
+        "soc-search-email": {
+            "required_artifacts": [
+                "email.search.query"
+            ]
+        },
+        "soc-fetch-forensics": {
+            "required_artifacts": []
+        },
+        "soc-disable-network-asset": {
+            "required_artifacts": [
+                "network.asset.mac"
+            ]
+        },
+        "soc-enable-network-asset": {
+            "required_artifacts": [
+                "network.asset.mac"
+            ]
+        },
+        "soc-block-url": {
+            "required_artifacts": [
+                "url.value"
+            ]
+        },
+        "soc-unblock-url": {
+            "required_artifacts": [
+                "url.value"
+            ]
+        },
+        "soc-block-ip": {
+            "required_artifacts": [
+                "ip.address"
+            ]
+        },
+        "soc-unblock-ip": {
+            "required_artifacts": [
+                "ip.address"
+            ]
+        },
+        "soc-quarantine-cloud": {
+            "required_artifacts": [
+                "cloud.resource_id"
+            ]
+        },
+        "soc-disable-cloud-session": {
+            "required_artifacts": [
+                "cloud.resource_id"
+            ]
+        }
+    }
+}

@@ -10,17 +10,16 @@ contentitemexportablefields:
     prevname: ""
     supportedModules: []
     toServerVersion: ""
-description: |
-  Identifies the core fields present and starts tailored enrichment pipelines
-  Generates threat flags based on findings (ex: if we identify a domain controller or admin account)
+description: Pulling in the full native alert payload from the product that generated
+  the issue/alert.
 dirtyInputs: true
-id: 'Foundation - Enrichment'
+id: 'Foundation - Issue Hydration'
 inputSections:
 - description: Generic group for inputs
   inputs: []
   name: General (Inputs group)
 inputs: []
-name: Foundation - Enrichment
+name: Foundation - Issue Hydration
 outputSections:
 - description: Generic group for outputs
   name: General (Outputs group)
@@ -64,47 +63,6 @@ tasks:
           "y": 50
         }
       }
-  "2":
-    conditions:
-    - condition:
-      - - left:
-            iscontext: true
-            value:
-              simple: alert.sourceip
-          operator: isExists
-      label: "yes"
-    continueonerrortype: ""
-    id: "2"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#default#':
-      - "5"
-      "yes":
-      - "10"
-    note: false
-    quietmode: 0
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: ba15e72f-a381-4b97-8e51-7937092bfaf6
-      iscommand: false
-      name: Is Source IP Defined?
-      playbooktaskmissingcomponent:
-      type: condition
-      version: -1
-    taskid: ba15e72f-a381-4b97-8e51-7937092bfaf6
-    timertriggers: []
-    type: condition
-    view: |-
-      {
-        "position": {
-          "x": 976.25,
-          "y": 710
-        }
-      }
   "4":
     continueonerrortype: ""
     id: "4"
@@ -133,49 +91,6 @@ tasks:
           "y": 1560
         }
       }
-  "5":
-    conditions:
-    - condition:
-      - - left:
-            iscontext: true
-            value:
-              simple: alert.destinationip
-          operator: isExists
-          right:
-            value: {}
-      label: "yes"
-    continueonerrortype: ""
-    id: "5"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#default#':
-      - "4"
-      "yes":
-      - "11"
-    note: false
-    quietmode: 0
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 2eae8f2e-1cc9-4120-88e0-1e70e0be6069
-      iscommand: false
-      name: Is Destination IP Defined?
-      playbooktaskmissingcomponent:
-      type: condition
-      version: -1
-    taskid: 2eae8f2e-1cc9-4120-88e0-1e70e0be6069
-    timertriggers: []
-    type: condition
-    view: |-
-      {
-        "position": {
-          "x": 781,
-          "y": 1050
-        }
-      }
   "8":
     continueonerrortype: ""
     id: "8"
@@ -188,13 +103,13 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 921bdd5d-2fab-4996-8682-a5e6f80b9aca
+      id: 61926975-3c4d-4354-8e24-60ce689d034e
       iscommand: false
-      name: Email Enrichment
+      name: Email Hydration
       playbooktaskmissingcomponent:
       type: title
       version: -1
-    taskid: 921bdd5d-2fab-4996-8682-a5e6f80b9aca
+    taskid: 61926975-3c4d-4354-8e24-60ce689d034e
     timertriggers: []
     type: title
     view: |-
@@ -210,22 +125,19 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
-    nexttasks:
-      '#none#':
-      - "2"
     note: false
     quietmode: 0
     separatecontext: false
     skipunavailable: false
     task:
       brand: ""
-      id: 02dc9df5-d1cf-4475-83a6-dc33e09fc4fe
+      id: 0ffea025-1487-4de4-89ef-be88451c6b1c
       iscommand: false
-      name: IP Enrichment
+      name: Network Hydration
       playbooktaskmissingcomponent:
       type: title
       version: -1
-    taskid: 02dc9df5-d1cf-4475-83a6-dc33e09fc4fe
+    taskid: 0ffea025-1487-4de4-89ef-be88451c6b1c
     timertriggers: []
     type: title
     view: |-
@@ -233,84 +145,6 @@ tasks:
         "position": {
           "x": 976.25,
           "y": 550
-        }
-      }
-  "10":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "10"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#error#':
-      - "16"
-      '#none#':
-      - "5"
-    note: false
-    quietmode: 0
-    scriptarguments:
-      ip:
-        simple: ${alert.sourceip}
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: Provides data enrichment for ips.
-      id: 98cf7f6d-4237-45d4-b120-8f3cf46a73d2
-      iscommand: true
-      name: Enrich Source IP
-      playbooktaskmissingcomponent:
-      script: '|||ip'
-      type: regular
-      version: -1
-    taskid: 98cf7f6d-4237-45d4-b120-8f3cf46a73d2
-    timertriggers: []
-    type: regular
-    view: |-
-      {
-        "position": {
-          "x": 1412,
-          "y": 880
-        }
-      }
-  "11":
-    continueonerror: true
-    continueonerrortype: errorPath
-    id: "11"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#error#':
-      - "16"
-      '#none#':
-      - "4"
-    note: false
-    quietmode: 0
-    scriptarguments:
-      ip:
-        simple: ${alert.destinationip}
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: Provides data enrichment for ips.
-      id: f8b98182-0fae-49fb-b0f2-28b4194942a9
-      iscommand: true
-      name: Enrich Destination IP
-      playbooktaskmissingcomponent:
-      script: '|||ip'
-      type: regular
-      version: -1
-    taskid: f8b98182-0fae-49fb-b0f2-28b4194942a9
-    timertriggers: []
-    type: regular
-    view: |-
-      {
-        "position": {
-          "x": 1021.5,
-          "y": 1220
         }
       }
   "16":
@@ -356,19 +190,22 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    nexttasks:
+      '#none#':
+      - "19"
     note: false
     quietmode: 0
     separatecontext: false
     skipunavailable: false
     task:
       brand: ""
-      id: 7654576b-eded-482f-bec2-270055ebde0c
+      id: e2ffa32a-2285-47c2-8756-75f5f80bd793
       iscommand: false
-      name: User Enrichment
+      name: EndPoint Hydration
       playbooktaskmissingcomponent:
       type: title
       version: -1
-    taskid: 7654576b-eded-482f-bec2-270055ebde0c
+    taskid: e2ffa32a-2285-47c2-8756-75f5f80bd793
     timertriggers: []
     type: title
     view: |-
@@ -378,6 +215,120 @@ tasks:
           "y": 550
         }
       }
+  "19":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: issue.tags
+          operator: containsString
+          right:
+            value:
+              simple: DS:Trend Micro Vision One V3
+      label: "yes"
+    continueonerrortype: ""
+    id: "19"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "4"
+      "yes":
+      - "20"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2648e64a-af9c-4805-b000-b266ac6eca20
+      iscommand: false
+      name: Trend Micro Vision One V3
+      playbooktaskmissingcomponent:
+      type: condition
+      version: -1
+    taskid: 2648e64a-af9c-4805-b000-b266ac6eca20
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 1870,
+          "y": 870
+        }
+      }
+  "20":
+    continueonerrortype: ""
+    id: "20"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "21"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: ab047d18-69d1-45ff-8523-e3fe2d7a49d7
+      iscommand: false
+      name: Alert Details from Trend Micro
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: ab047d18-69d1-45ff-8523-e3fe2d7a49d7
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 1870,
+          "y": 1140
+        }
+      }
+  "21":
+    continueonerrortype: ""
+    id: "21"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: true
+    task:
+      brand: ""
+      description: Read-only adapter to enrich an alert from Trend Micro Vision One
+        (Workbench) and normalize into Alert.Enrichment.*.
+      id: 2f46bf8a-6979-4c48-8a35-3a035c535eb0
+      iscommand: false
+      name: SOC Trend Micro Alert Enrichment
+      playbookId: SOC Trend Micro Alert Enrichment
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 2f46bf8a-6979-4c48-8a35-3a035c535eb0
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 1870,
+          "y": 1320
+        }
+      }
 version: -1
 view: |-
   {
@@ -385,7 +336,7 @@ view: |-
     "paper": {
       "dimensions": {
         "height": 1570,
-        "width": 1731,
+        "width": 1859,
         "x": 391,
         "y": 50
       }

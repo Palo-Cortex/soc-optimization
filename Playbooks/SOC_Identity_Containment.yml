@@ -1,0 +1,735 @@
+id: SOC Identity Containment
+version: 5
+contentitemexportablefields:
+  contentitemfields:
+    packID: ""
+    packName: SOC Common Playbooks
+    itemVersion: 2.7.19
+    fromServerVersion: 5.0.0
+    toServerVersion: ""
+    definitionid: ""
+    prevname: ""
+    isoverridable: false
+    supportedModules: []
+vcShouldKeepItemLegacyProdMachine: false
+name: SOC Identity Containment
+description: "This playbook handles the main containment actions available with Cortex
+  XSIAM, including the following sub-playbooks:  \n* Containment Plan - Isolate endpoint\n
+  * Containment Plan - Disable account\n* Containment Plan - Quarantine file\n* Containment
+  Plan - Block indicators\n* Containment Plan - Clear user session (currently, the
+  playbook supports only Okta)\n\nNote: The playbook inputs enable manipulating the
+  execution flow. Read the input descriptions for details."
+tags:
+- SOC
+- SOC_Framework
+- Containment
+- Identity
+starttaskid: "0"
+tasks:
+  "0":
+    id: "0"
+    taskid: 8b859cdc-d653-40d8-88b5-856b497221a5
+    type: start
+    task:
+      id: 8b859cdc-d653-40d8-88b5-856b497221a5
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "138"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 285,
+          "y": 50
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "49":
+    id: "49"
+    taskid: c1bd31ee-eb02-4d8c-87e1-ccdd6b893660
+    type: title
+    task:
+      id: c1bd31ee-eb02-4d8c-87e1-ccdd6b893660
+      version: -1
+      name: Disable Account
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "164"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 750
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "58":
+    id: "58"
+    taskid: 9ab00fc9-7241-4b38-83b8-d1bf0c1bf328
+    type: title
+    task:
+      id: 9ab00fc9-7241-4b38-83b8-d1bf0c1bf328
+      version: -1
+      name: Clear User Sessions
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "166"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 622.5,
+          "y": 750
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "138":
+    id: "138"
+    taskid: cb628d2d-29f6-4d2b-8250-f7d20b163239
+    type: condition
+    task:
+      id: cb628d2d-29f6-4d2b-8250-f7d20b163239
+      version: -1
+      name: Should containment automatically?
+      description: |+
+        Whether to perform containment actions automatically or manually.
+
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#default#':
+      - "139"
+      "yes":
+      - "147"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              complex:
+                root: inputs.AutoContainment
+            iscontext: true
+          right:
+            value:
+              simple: "True"
+          ignorecase: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 285,
+          "y": 220
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "139":
+    id: "139"
+    taskid: 1e2a11f2-86d5-4949-b4a2-647966d5366c
+    type: collection
+    task:
+      id: 1e2a11f2-86d5-4949-b4a2-647966d5366c
+      version: -1
+      name: Which containment actions would you like to perform?
+      description: Select which indicators to block.
+      type: collection
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "147"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 172.5,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    message:
+      to:
+      subject:
+      body:
+      methods: []
+      format: ""
+      bcc:
+      cc:
+      timings:
+        retriescount: 2
+        retriesinterval: 360
+        completeafterreplies: 1
+        completeafterv2: true
+        completeaftersla: false
+    form:
+      questions:
+      - id: "0"
+        label: ""
+        labelarg:
+          simple: Select Users to disable
+        required: false
+        gridcolumns: []
+        defaultrows: []
+        type: multiSelect
+        options: []
+        optionsarg:
+        - complex:
+            root: inputs.Username
+            transformers:
+            - operator: uniq
+        fieldassociated: ""
+        placeholder: ""
+        tooltip: ""
+        readonly: false
+      - id: "1"
+        label: ""
+        labelarg:
+          simple: Select Users to clear their sessions
+        required: false
+        gridcolumns: []
+        defaultrows: []
+        type: multiSelect
+        options: []
+        optionsarg:
+        - complex:
+            root: inputs.Username
+            transformers:
+            - operator: uniq
+        fieldassociated: ""
+        placeholder: ""
+        tooltip: ""
+        readonly: false
+      title: Which containment actions would you like to perform?
+      description: Select which containment actions to perform
+      sender: ""
+      expired: false
+      totalanswers: 0
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "147":
+    id: "147"
+    taskid: f486236e-11d4-4d91-8f9d-252577239705
+    type: title
+    task:
+      id: f486236e-11d4-4d91-8f9d-252577239705
+      version: -1
+      name: Containment
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "49"
+      - "58"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 285,
+          "y": 580
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "148":
+    id: "148"
+    taskid: 48ad472b-5301-4524-899a-41e29d38151d
+    type: title
+    task:
+      id: 48ad472b-5301-4524-899a-41e29d38151d
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 1460
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "152":
+    id: "152"
+    taskid: bbc1c9b5-3abb-4b20-acab-b19c36485fde
+    type: playbook
+    task:
+      id: bbc1c9b5-3abb-4b20-acab-b19c36485fde
+      version: -1
+      name: SOC Containment Plan - Disable Account
+      description: |-
+        ## Containment Plan - Disable Account
+
+        This playbook is a sub-playbook within the containment plan playbook.
+        The playbook disables users by utilizing the sub-playbook "Block Account - Generic v2"
+      playbookName: SOC Containment Plan - Disable Account
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "148"
+    scriptarguments:
+      ShadowMode:
+        simple: ${inputs.ShadowMode}
+      UserContainment:
+        simple: "True"
+      UserVerification:
+        simple: "True"
+      Username:
+        simple: ${inputs.Username}
+    separatecontext: true
+    continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 275,
+          "y": 1280
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "154":
+    id: "154"
+    taskid: 6db2a243-bb8c-41ae-ad4b-d398c3bdd469
+    type: playbook
+    task:
+      id: 6db2a243-bb8c-41ae-ad4b-d398c3bdd469
+      version: -1
+      name: SOC Containment Plan - Clear User Sessions
+      description: |-
+        ## Containment Plan - Clear User Sessions
+
+        This playbook is a sub-playbook within the containment plan playbook.
+        The playbook uses the 'Okta v2' and 'MSGraph User' integrations to clear user sessions.
+      playbookName: SOC Containment Plan - Clear User Sessions
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "148"
+    scriptarguments:
+      ClearUserSessions:
+        simple: "True"
+      IAMUserDomain:
+        simple: ${inputs.IAMUserDomain}
+      ShadowMode:
+        simple: ${inputs.ShadowMode}
+      Username:
+        simple: ${inputs.Username}
+    separatecontext: true
+    continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 847.5,
+          "y": 1280
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "157":
+    id: "157"
+    taskid: 27724d31-2a6c-4301-8d4a-53cbe0a9e2af
+    type: condition
+    task:
+      id: 27724d31-2a6c-4301-8d4a-53cbe0a9e2af
+      version: -1
+      name: Disable Account?
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      "No":
+      - "148"
+      "Yes":
+      - "152"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 1100
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    message:
+      to:
+      subject:
+      body:
+        simple: Would you like to Disable the account
+      methods: []
+      format: ""
+      bcc:
+      cc:
+      timings:
+        retriescount: 2
+        retriesinterval: 360
+        completeafterreplies: 1
+        completeafterv2: true
+        completeaftersla: false
+      replyOptions:
+      - "Yes"
+      - "No"
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "159":
+    id: "159"
+    taskid: d483fe6a-0a36-450f-8467-9de7bdf3c71e
+    type: condition
+    task:
+      id: d483fe6a-0a36-450f-8467-9de7bdf3c71e
+      version: -1
+      name: Clear User Sessions?
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      "No":
+      - "148"
+      "Yes":
+      - "154"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 735,
+          "y": 1100
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    message:
+      to:
+      subject:
+      body:
+        simple: Would you like to clear the users sessions?
+      methods: []
+      format: ""
+      bcc:
+      cc:
+      timings:
+        retriescount: 2
+        retriesinterval: 360
+        completeafterreplies: 1
+        completeafterv2: true
+        completeaftersla: false
+      replyOptions:
+      - "Yes"
+      - "No"
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "164":
+    id: "164"
+    taskid: 6e17162a-b3bf-4324-861b-a3fee0bf791c
+    type: condition
+    task:
+      id: 6e17162a-b3bf-4324-861b-a3fee0bf791c
+      version: -1
+      name: Miter Technique for user account disablement
+      description: |-
+        Techniques Covered
+        T1078 – Valid Accounts
+        T1110 – Brute Force
+        T1136 – Create Account
+        T1098 – Account Manipulation
+        T1556 – Modify Authentication Process
+        T1021 – Remote Services
+        T1041 – Exfiltration Over C2 Channel
+        T1070.001 – Clear Windows Event Logs
+        T1486 – Data Encrypted for Impact
+        T1087 – Account Discovery
+        T1496 – Resource Hijacking
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#default#':
+      - "148"
+      "yes":
+      - "157"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: match
+          left:
+            value:
+              simple: issue.mitreattcktechnique
+            iscontext: true
+          right:
+            value:
+              simple: (T1078|T1110|T1136|T1098|T1556|T1021|T1041|T1070\.001|T1486|T1087|T1496)
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 920
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "166":
+    id: "166"
+    taskid: c7bcb661-d702-44b3-8f74-0192cfe976d5
+    type: condition
+    task:
+      id: c7bcb661-d702-44b3-8f74-0192cfe976d5
+      version: -1
+      name: Miter Technique for clearing user session
+      description: |-
+        Techniques Covered
+        T1078 – Valid Accounts
+        T1110 – Brute Force
+        T1136 – Create Account
+        T1098 – Account Manipulation
+        T1556 – Modify Authentication Process
+        T1021 – Remote Services
+        T1041 – Exfiltration Over C2 Channel
+        T1070.001 – Clear Windows Event Logs
+        T1486 – Data Encrypted for Impact
+        T1087 – Account Discovery
+        T1496 – Resource Hijacking
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#default#':
+      - "148"
+      "yes":
+      - "159"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: match
+          left:
+            value:
+              simple: issue.mitreattcktechnique
+            iscontext: true
+          right:
+            value:
+              simple: (T1078|T1110|T1136|T1098|T1556|T1021|T1041|T1070\.001|T1486|T1087|T1496)
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 622.5,
+          "y": 920
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+view: |-
+  {
+    "linkLabelsPosition": {
+      "138_139_#default#": 0.64
+    },
+    "paper": {
+      "dimensions": {
+        "height": 1470,
+        "width": 1177.5,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+inputs:
+- key: AutoContainment
+  value:
+    simple: "False"
+  required: false
+  description: |-
+    Whether to execute containment plan (except isolation) automatically.
+    The specific containment playbook inputs should also be set to 'True'.
+  playbookInputQuery:
+- key: UserContainment
+  value:
+    simple: "True"
+  required: false
+  description: Set to 'True' to disable the user account.
+  playbookInputQuery:
+- key: ClearUserSessions
+  value:
+    simple: "True"
+  required: false
+  description: Set to 'True' to clear the user active Okta sessions.
+  playbookInputQuery:
+- key: Username
+  value: {}
+  required: false
+  description: The username to disable.
+  playbookInputQuery:
+- key: IAMUserDomain
+  value: {}
+  required: false
+  description: The Okta IAM users domain. The domain will be appended to the username.
+    e.g. username@IAMUserDomain.
+  playbookInputQuery:
+- key: ShadowMode
+  value:
+    simple: SOCFramework.shadow_mode
+  required: false
+  description: ""
+  playbookInputQuery:
+- key: FeaturedUser
+  value:
+    simple: "False"
+  required: false
+  description: Is this a Featured User?
+  playbookInputQuery:
+- key: FeaturedAD
+  value:
+    simple: "False"
+  required: false
+  description: Is this a Featured Active Directory Group?
+  playbookInputQuery:
+inputSections:
+- inputs:
+  - AutoContainment
+  - UserContainment
+  - ClearUserSessions
+  - Username
+  - IAMUserDomain
+  - ShadowMode
+  - FeaturedUser
+  - FeaturedAD
+  name: General (Inputs group)
+  description: Generic group for inputs
+outputSections:
+- outputs:
+  - Blocklist.Final
+  - QuarantinedFilesFromEndpoints
+  - Core.blocklist.added_hashes
+  - Core.Isolation.endpoint_id
+  name: General (Outputs group)
+  description: Generic group for outputs
+outputs:
+- contextPath: Blocklist.Final
+  description: The blocked accounts.
+  type: unknown
+- contextPath: QuarantinedFilesFromEndpoints
+  description: The quarantined files from endpoint.
+  type: unknown
+- contextPath: Core.blocklist.added_hashes
+  description: The file Hash that was added to the blocklist.
+- contextPath: Core.Isolation.endpoint_id
+  description: The isolated endpoint ID.
+sourceplaybookid: Containment Plan
+dirtyInputs: true
+adopted: true
+fromversion: 5.0.0

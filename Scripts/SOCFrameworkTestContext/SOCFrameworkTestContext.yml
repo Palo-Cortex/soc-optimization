@@ -1,0 +1,50 @@
+args:
+- auto: PREDEFINED
+  defaultValue: phishing
+  description: Select a scenario for the attack like Phishing, Malware, Identity
+  name: scenario
+  predefined:
+  - phishing
+  - malware
+  - identity
+  - endpoint
+  - cloud
+- name: productcategory
+- defaultValue: Detection & Analysis
+  name: phase
+- name: tester
+- defaultValue: "True"
+  description: Set Shadow Mode False if you want containment, eradication, and recovery
+    to actually work.
+  name: shadowmode
+- name: dataset
+- description: The Automation Source Brand.  Can be found in issue.sourceBrand
+  name: SourceBrand
+- auto: PREDEFINED
+  defaultValue: marvel
+  description: Theme for the data
+  name: theme
+  predefined:
+  - marvel
+  - starwars
+  - lotr
+  - harrypotter
+commonfields:
+  id: 'SOCFramework-TestContext'
+  version: -1
+dockerimage: demisto/python3:3.12.12.5490952
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: SOCFramework-TestContext
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: ''
+scripttarget: 0
+subtype: python3
+tags:
+- SOC
+- SOC_Framework
+type: python
+fromversion: 5.0.0

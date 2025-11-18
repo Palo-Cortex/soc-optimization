@@ -1,0 +1,188 @@
+id: Foundation - Normalization V2
+version: 15
+contentitemexportablefields:
+  contentitemfields:
+    packID: ""
+    packName: SOC Framework
+    itemVersion: 2.1.16
+    fromServerVersion: 5.0.0
+    toServerVersion: ""
+    definitionid: ""
+    prevname: ""
+    isoverridable: false
+    supportedModules: []
+vcShouldKeepItemLegacyProdMachine: false
+name: Foundation - Normalization V2
+description: |2+
+
+tags:
+- SOC
+- SOC_Framework
+- Normalization
+- Upon Trigger
+starttaskid: "0"
+tasks:
+  "0":
+    id: "0"
+    taskid: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+    type: start
+    task:
+      id: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+      - "18"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "8":
+    id: "8"
+    taskid: 2eb08148-d069-489a-83e1-1ab88016aac3
+    type: title
+    task:
+      id: 2eb08148-d069-489a-83e1-1ab88016aac3
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 580
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "17":
+    id: "17"
+    taskid: c9a53716-a57b-4fae-8e00-d3508d482f51
+    type: playbook
+    task:
+      id: c9a53716-a57b-4fae-8e00-d3508d482f51
+      version: -1
+      name: Foundation - Error Handling
+      playbookName: Foundation - Error Handling
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "18":
+    id: "18"
+    taskid: 8991eb21-ffab-448b-9707-c8e9d73b1be9
+    type: regular
+    task:
+      id: 8991eb21-ffab-448b-9707-c8e9d73b1be9
+      version: -1
+      name: Normalization
+      scriptName: SOCFramework-NormalizeKeyToArtifacts
+      type: regular
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#error#':
+      - "17"
+      '#none#':
+      - "8"
+    scriptarguments:
+      key:
+        simple: ${inputs.keys}
+    results:
+    - SOCFramework
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: errorPath
+    view: |-
+      {
+        "position": {
+          "x": 160,
+          "y": 220
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: true
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 590,
+        "width": 490,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+inputs:
+- key: keys
+  value:
+    simple: ExtractedIndicators
+  required: true
+  description: ""
+  playbookInputQuery:
+inputSections:
+- inputs:
+  - keys
+  name: General (Inputs group)
+  description: Generic group for inputs
+outputSections:
+- outputs: []
+  name: General (Outputs group)
+  description: Generic group for outputs
+outputs: []
+sourceplaybookid: Foundation - Upon Trigger
+dirtyInputs: true
+adopted: true
+fromversion: 5.0.0

@@ -1,0 +1,119 @@
+adopted: true
+description: |-
+  Primary owners: Incident responders, platform engineers.
+
+  Analyst role: Provide forensic details (malware hash, registry paths, C2 domains) to guide eradication efforts.
+id: 'SOC Identity Eradication'
+inputs: []
+name: SOC Identity Eradication
+outputs: []
+sourceplaybookid: 'SOC Data Analysis'
+starttaskid: "0"
+tags:
+- SOC
+- SOC_Framework
+- NIST 800-61
+- Eradication
+- Identity
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 7e6a701e-667b-4a70-8a74-14564da75fc7
+      iscommand: false
+      name: ""
+      playbooktaskmissingcomponent:
+      version: -1
+    taskid: 7e6a701e-667b-4a70-8a74-14564da75fc7
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 7fad044e-60c9-4baa-8bb6-316d5aea8cfa
+      iscommand: false
+      name: Foundation - Error Handling
+      playbookId: Foundation - Error Handling
+      playbooktaskmissingcomponent:
+      type: playbook
+      version: -1
+    taskid: 7fad044e-60c9-4baa-8bb6-316d5aea8cfa
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 740,
+          "y": 290
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 6944e944-2ade-4f6d-b6e0-0f6b8e2c3253
+      iscommand: false
+      name: Done
+      playbooktaskmissingcomponent:
+      type: title
+      version: -1
+    taskid: 6944e944-2ade-4f6d-b6e0-0f6b8e2c3253
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 430,
+          "y": 470
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 480,
+        "width": 690,
+        "x": 430,
+        "y": 50
+      }
+    }
+  }
+fromversion: 5.0.0

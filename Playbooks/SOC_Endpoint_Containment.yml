@@ -1,0 +1,939 @@
+id: SOC Endpoint Containment
+version: 6
+contentitemexportablefields:
+  contentitemfields:
+    packID: soc-optimization
+    packName: SOC Framework
+    itemVersion: 2.1.16
+    fromServerVersion: 5.0.0
+    toServerVersion: ""
+    definitionid: ""
+    prevname: ""
+    isoverridable: false
+    supportedModules: []
+vcShouldKeepItemLegacyProdMachine: false
+name: SOC Endpoint Containment
+description: |-
+  Primary owners: Alert responders, automation, endpoint/network teams.
+
+  Analyst role: May initiate or recommend containment actions (isolate host, disable account, block IP), often via playbook automation or escalation.
+tags:
+- SOC
+- SOC_Framework
+- Containment
+- NIST 800-61
+- EndPoint
+starttaskid: "0"
+tasks:
+  "0":
+    id: "0"
+    taskid: 8b859cdc-d653-40d8-88b5-856b497221a5
+    type: start
+    task:
+      id: 8b859cdc-d653-40d8-88b5-856b497221a5
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "150"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 295,
+          "y": 50
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "48":
+    id: "48"
+    taskid: 5683bb61-e50c-4fee-8006-76a9d2cd15e6
+    type: title
+    task:
+      id: 5683bb61-e50c-4fee-8006-76a9d2cd15e6
+      version: -1
+      name: Isolate Device
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "165"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 622.5,
+          "y": 1110
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "50":
+    id: "50"
+    taskid: 1cc8a082-9506-43d3-86ed-50836d2be721
+    type: title
+    task:
+      id: 1cc8a082-9506-43d3-86ed-50836d2be721
+      version: -1
+      name: Quarantine File
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "168"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1110
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "138":
+    id: "138"
+    taskid: cb628d2d-29f6-4d2b-8250-f7d20b163239
+    type: condition
+    task:
+      id: cb628d2d-29f6-4d2b-8250-f7d20b163239
+      version: -1
+      name: Should containment automatically?
+      description: |+
+        Whether to perform containment actions automatically or manually.
+
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#default#':
+      - "139"
+      "yes":
+      - "147"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              complex:
+                root: inputs.AutoContainment
+            iscontext: true
+          right:
+            value:
+              simple: "True"
+          ignorecase: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 285,
+          "y": 580
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "139":
+    id: "139"
+    taskid: eeedc27d-be4e-4065-adb7-cf22d2f6a75d
+    type: collection
+    task:
+      id: eeedc27d-be4e-4065-adb7-cf22d2f6a75d
+      version: -1
+      name: Which containment actions would you like to perform?
+      description: Select which indicators to block.
+      type: collection
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "147"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 172.5,
+          "y": 760
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    message:
+      to:
+      subject:
+      body:
+      methods: []
+      format: ""
+      bcc:
+      cc:
+      timings:
+        retriescount: 2
+        retriesinterval: 360
+        completeafterreplies: 1
+        completeafterv2: true
+        completeaftersla: false
+    form:
+      questions:
+      - id: "0"
+        label: ""
+        labelarg:
+          simple: Select the Endpoint to isolate by Endpoint name
+        required: false
+        gridcolumns: []
+        defaultrows: []
+        type: multiSelect
+        options: []
+        optionsarg:
+        - complex:
+            root: Core.Endpoint
+            accessor: endpoint_name
+            transformers:
+            - operator: uniq
+        fieldassociated: ""
+        placeholder: ""
+        tooltip: ""
+        readonly: false
+      - id: "1"
+        label: ""
+        labelarg:
+          simple: Select Endpoint to isolate by Endpoint ID
+        required: false
+        gridcolumns: []
+        defaultrows: []
+        type: multiSelect
+        options: []
+        optionsarg:
+        - complex:
+            root: inputs.EndpointID
+            transformers:
+            - operator: uniq
+        fieldassociated: ""
+        placeholder: ""
+        tooltip: ""
+        readonly: false
+      - id: "2"
+        label: ""
+        labelarg:
+          simple: Select Files to quarantine
+        required: false
+        gridcolumns: []
+        defaultrows: []
+        type: multiSelect
+        options: []
+        optionsarg:
+        - complex:
+            root: FilesList
+            transformers:
+            - operator: uniq
+            - operator: SetIfEmpty
+              args:
+                applyIfEmpty: {}
+                defaultValue:
+                  value:
+                    simple: inputs.FilePath
+                  iscontext: true
+        fieldassociated: ""
+        placeholder: ""
+        tooltip: ""
+        readonly: false
+      - id: "3"
+        label: ""
+        labelarg:
+          simple: 'Select Files Hash to block '
+        required: false
+        gridcolumns: []
+        defaultrows: []
+        type: multiSelect
+        options: []
+        optionsarg:
+        - complex:
+            root: inputs.FileHash
+            transformers:
+            - operator: uniq
+        - {}
+        fieldassociated: ""
+        placeholder: ""
+        tooltip: ""
+        readonly: false
+      title: Which containment actions would you like to perform?
+      description: Select which containment actions to perform
+      sender: ""
+      expired: false
+      totalanswers: 0
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "147":
+    id: "147"
+    taskid: f486236e-11d4-4d91-8f9d-252577239705
+    type: title
+    task:
+      id: f486236e-11d4-4d91-8f9d-252577239705
+      version: -1
+      name: Containment
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "50"
+      - "48"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 285,
+          "y": 940
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "148":
+    id: "148"
+    taskid: 48ad472b-5301-4524-899a-41e29d38151d
+    type: title
+    task:
+      id: 48ad472b-5301-4524-899a-41e29d38151d
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 1820
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "149":
+    id: "149"
+    taskid: f93cc26a-6b45-420b-8ec8-c33e920be3a7
+    type: regular
+    task:
+      id: f93cc26a-6b45-420b-8ec8-c33e920be3a7
+      version: -1
+      name: Set Process list
+      description: Set a value in context under the key you entered.
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#error#':
+      - "151"
+      '#none#':
+      - "138"
+    scriptarguments:
+      key:
+        simple: FilesList
+      stringify:
+        simple: "false"
+      value:
+        complex:
+          root: inputs.FilePath
+          transformers:
+          - operator: MakePair
+            args:
+              array1_key:
+                iscontext: true
+              array2:
+                value:
+                  simple: inputs.FileHash
+                iscontext: true
+              array2_key: {}
+              determine_output_length_by: {}
+              merge_dict: {}
+              output_name1:
+                value:
+                  simple: Path
+              output_name2:
+                value:
+                  simple: Hash
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: errorPath
+    view: |-
+      {
+        "position": {
+          "x": 510,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "150":
+    id: "150"
+    taskid: d3750674-0c66-4ecc-8c51-8d01487249d7
+    type: condition
+    task:
+      id: d3750674-0c66-4ecc-8c51-8d01487249d7
+      version: -1
+      name: The file path and file hash defined?
+      description: Check if the file path and file hash are defined.
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#default#':
+      - "138"
+      "yes":
+      - "149"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isNotEmpty
+          left:
+            value:
+              complex:
+                root: inputs.FilePath
+            iscontext: true
+          right:
+            value: {}
+      - - operator: isNotEmpty
+          left:
+            value:
+              complex:
+                root: inputs.FileHash
+            iscontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 295,
+          "y": 220
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "151":
+    id: "151"
+    taskid: 2bd9441a-09d2-4286-8c0f-b3bfec13291e
+    type: playbook
+    task:
+      id: 2bd9441a-09d2-4286-8c0f-b3bfec13291e
+      version: -1
+      name: Foundation - Error Handling
+      playbookName: Foundation - Error Handling
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    separatecontext: true
+    continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 715,
+          "y": 580
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: true
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "156":
+    id: "156"
+    taskid: a23bdec7-a283-472e-8f0e-e2b5a9de1900
+    type: playbook
+    task:
+      id: a23bdec7-a283-472e-8f0e-e2b5a9de1900
+      version: -1
+      name: SOC Containment Plan - Quarantine File
+      description: |-
+        ## Containment Plan - Quarantine File
+
+        This playbook is a sub-playbook within the containment plan playbook.
+        The playbook quarantines files using core commands.
+      playbookName: SOC Containment Plan - Quarantine File
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "148"
+    scriptarguments:
+      AutoContainment:
+        simple: "True"
+      EndpointID:
+        simple: ${inputs.EndpointID}
+      FileContainment:
+        simple: "True"
+      FileHash:
+        simple: ${inputs.FileHash}
+      FilePath:
+        simple: ${inputs.FilePath}
+      FileRemediation:
+        simple: Quarantine
+      ShadowMode:
+        simple: ${inputs.ShadowMode}
+    separatecontext: true
+    continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 285,
+          "y": 1640
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "158":
+    id: "158"
+    taskid: 6276c905-eedb-4266-8544-042d9051abb3
+    type: condition
+    task:
+      id: 6276c905-eedb-4266-8544-042d9051abb3
+      version: -1
+      name: Isolate Device?
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      "No":
+      - "148"
+      "Yes":
+      - "169"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 745,
+          "y": 1460
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    message:
+      to:
+      subject:
+      body:
+        simple: Would you like to Isolate the device ${inputs.Hostname}
+      methods: []
+      format: ""
+      bcc:
+      cc:
+      timings:
+        retriescount: 2
+        retriesinterval: 360
+        completeafterreplies: 1
+        completeafterv2: true
+        completeaftersla: false
+      replyOptions:
+      - "Yes"
+      - "No"
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "161":
+    id: "161"
+    taskid: dff486ba-3e4f-42f0-8c29-d767f19b36e2
+    type: condition
+    task:
+      id: dff486ba-3e4f-42f0-8c29-d767f19b36e2
+      version: -1
+      name: Quarantine File?
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      "No":
+      - "148"
+      "Yes":
+      - "156"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 1460
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    message:
+      to:
+      subject:
+      body:
+        simple: Should we quarantine the file ${issue.filename}
+      methods: []
+      format: ""
+      bcc:
+      cc:
+      timings:
+        retriescount: 2
+        retriesinterval: 360
+        completeafterreplies: 1
+        completeafterv2: true
+        completeaftersla: false
+      replyOptions:
+      - "Yes"
+      - "No"
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "165":
+    id: "165"
+    taskid: ee42b9d3-f370-49c5-8a4e-ca754a7c2211
+    type: condition
+    task:
+      id: ee42b9d3-f370-49c5-8a4e-ca754a7c2211
+      version: -1
+      name: Miter Technique for Isolation
+      description: |-
+        Techniques Covered
+        T1059 – Command & Scripting Interpreter
+        T1486 – Data Encrypted for Impact
+        T1071 – Application Layer Protocol
+        T1095 – Non-Application Layer Protocol
+        T1068 – Exploitation for Privilege Escalation
+        T1021 – Remote Services
+        T1027 – Obfuscated Files or Information
+        T1003 – OS Credential Dumping
+        T1547 – Boot or Logon Autostart Execution
+        T1074 – Data Staged
+        T1485 – Data Destruction
+        T1046 – Network Service Discovery
+        T1498 – Network Denial of Service
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#default#':
+      - "148"
+      "yes":
+      - "158"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: match
+          left:
+            value:
+              simple: issue.mitreattcktechnique
+            iscontext: true
+          right:
+            value:
+              simple: (T1059|T1486|T1071|T1095|T1068|T1021|T1027|T1003|T1547|T1074|T1485|T1046|T1498)
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 622.5,
+          "y": 1280
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "168":
+    id: "168"
+    taskid: fe29a7f1-1dd7-4fb3-81af-00704151f661
+    type: condition
+    task:
+      id: fe29a7f1-1dd7-4fb3-81af-00704151f661
+      version: -1
+      name: Quarantine file needed?
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#default#':
+      - "148"
+      "yes":
+      - "161"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isEqualString
+          left:
+            value:
+              simple: inputs.FileVerdict
+            iscontext: true
+          right:
+            value:
+              simple: Suspicious
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1280
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "169":
+    id: "169"
+    taskid: a81256dd-ecc9-409b-9b9f-bea93c3844ab
+    type: playbook
+    task:
+      id: a81256dd-ecc9-409b-9b9f-bea93c3844ab
+      version: -1
+      name: SOC Isolation Router
+      description: Determine the correct playbook to run for the correct endpoint
+        product.
+      playbookName: SOC Isolation Router
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "148"
+    scriptarguments:
+      Endpoint ID:
+        simple: ${inputs.EndpointID}
+      Endpoint IP:
+        simple: ${inputs.IP}
+      Endpoint hostname:
+        simple: ${inputs.Hostname}
+      ShadowMode:
+        simple: ${inputs.ShadowMode}
+    separatecontext: true
+    continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 857.5,
+          "y": 1640
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+system: true
+view: |-
+  {
+    "linkLabelsPosition": {
+      "138_139_#default#": 0.64,
+      "150_138_#default#": 0.9
+    },
+    "paper": {
+      "dimensions": {
+        "height": 1830,
+        "width": 1187.5,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+inputs:
+- key: AutoContainment
+  value:
+    simple: "False"
+  required: false
+  description: |-
+    Whether to execute containment plan (except isolation) automatically.
+    The specific containment playbook inputs should also be set to 'True'.
+  playbookInputQuery:
+- key: HostContainment
+  value:
+    simple: "True"
+  required: false
+  description: Whether to execute endpoint isolation.
+  playbookInputQuery:
+- key: FileContainment
+  value:
+    simple: "True"
+  required: false
+  description: Set to 'True' to quarantine the identified file.
+  playbookInputQuery:
+- key: EndpointID
+  value: {}
+  required: false
+  description: The endpoint ID to run commands over.
+  playbookInputQuery:
+- key: FileHash
+  value: {}
+  required: false
+  description: The file hash to block.
+  playbookInputQuery:
+- key: FilePath
+  value: {}
+  required: false
+  description: The path of the file to block.
+  playbookInputQuery:
+- key: FileRemediation
+  value:
+    simple: Quarantine
+  required: false
+  description: "Choose 'Quarantine' or 'Delete'  to avoid file remediation conflicts.
+    \nFor example, choosing 'Quarantine' ignores the 'Delete file' task under the
+    eradication playbook and will execute only file quarantine."
+  playbookInputQuery:
+- key: ShadowMode
+  value:
+    simple: SOCFramework.shadow_mode
+  required: false
+  description: ""
+  playbookInputQuery:
+- key: Hostname
+  value: {}
+  required: false
+  description: ""
+  playbookInputQuery:
+- key: FeaturedHost
+  value:
+    simple: "False"
+  required: false
+  description: Is this a Featured Host?
+  playbookInputQuery:
+- key: FileVerdict
+  value: {}
+  required: false
+  description: File Verdict from Enrichment
+  playbookInputQuery:
+inputSections:
+- inputs:
+  - AutoContainment
+  - HostContainment
+  - FileContainment
+  - EndpointID
+  - FileHash
+  - FilePath
+  - FileRemediation
+  - ShadowMode
+  - Hostname
+  - FeaturedHost
+  - FileVerdict
+  name: General (Inputs group)
+  description: Generic group for inputs
+outputSections:
+- outputs:
+  - Blocklist.Final
+  - QuarantinedFilesFromEndpoints
+  - Core.blocklist.added_hashes
+  - Core.Isolation.endpoint_id
+  name: General (Outputs group)
+  description: Generic group for outputs
+outputs:
+- contextPath: Blocklist.Final
+  description: The blocked accounts.
+  type: unknown
+- contextPath: QuarantinedFilesFromEndpoints
+  description: The quarantined files from endpoint.
+  type: unknown
+- contextPath: Core.blocklist.added_hashes
+  description: The file Hash that was added to the blocklist.
+- contextPath: Core.Isolation.endpoint_id
+  description: The isolated endpoint ID.
+sourceplaybookid: Containment Plan
+dirtyInputs: true
+adopted: true
+fromversion: 5.0.0

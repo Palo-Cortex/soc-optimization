@@ -1,0 +1,548 @@
+id: Foundation - Product Classification
+version: 18
+contentitemexportablefields:
+  contentitemfields:
+    packID: soc-optimization
+    packName: SOC Framework
+    itemVersion: 2.1.19
+    fromServerVersion: 5.0.0
+    toServerVersion: ""
+    definitionid: ""
+    prevname: ""
+    isoverridable: false
+    supportedModules: []
+vcShouldKeepItemLegacyProdMachine: false
+name: Foundation - Product Classification
+description: Designed to get the product category (EndPoint, Network, Cloud SaaS,
+  Cloud Workload, etc) from the list SOC_ProductCategoryMap
+tags:
+- SOC
+- SOC_Framework
+starttaskid: "0"
+tasks:
+  "0":
+    id: "0"
+    taskid: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+    type: start
+    task:
+      id: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
+    nexttasks:
+      '#none#':
+      - "21"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 50
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "8":
+    id: "8"
+    taskid: 2eb08148-d069-489a-83e1-1ab88016aac3
+    type: title
+    task:
+      id: 2eb08148-d069-489a-83e1-1ab88016aac3
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 705,
+          "y": 1315
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "21":
+    id: "21"
+    taskid: 6c69403f-3987-4921-93b0-59b803e8ab06
+    type: title
+    task:
+      id: 6c69403f-3987-4921-93b0-59b803e8ab06
+      version: -1
+      name: Product Category
+      description: Is this an EndPoint, Network, Cloud SaaS, Cloud Workload, Identity,
+        etc?  This is used downstream for automations based on product category.
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
+    nexttasks:
+      '#none#':
+      - "24"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 220
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "22":
+    id: "22"
+    taskid: cf53f551-0737-4de5-a8cd-f9f6e9452992
+    type: regular
+    task:
+      id: cf53f551-0737-4de5-a8cd-f9f6e9452992
+      version: -1
+      name: Set New ProductKey from issue.tags
+      description: "Set a value in context under the key you entered. If no value
+        is entered, the script doesn't do anything.\n\nThis automation runs using
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+      scriptName: SetAndHandleEmpty
+      type: regular
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
+    nexttasks:
+      '#error#':
+      - "26"
+      '#none#':
+      - "27"
+      - "28"
+      - "29"
+    scriptarguments:
+      append:
+        simple: "false"
+      key:
+        simple: SOCFramework.Product.key
+      value:
+        complex:
+          root: issue.tags
+          filters:
+          - - operator: containsGeneral
+              left:
+                value:
+                  simple: issue.tags
+                iscontext: true
+              right:
+                value:
+                  simple: 'DS:'
+          transformers:
+          - operator: toLowerCase
+          - operator: RegexReplace
+            args:
+              action_dt: {}
+              ignore_case: {}
+              multi_line: {}
+              output_format:
+                value:
+                  simple: _
+              period_matches_newline: {}
+              regex:
+                value:
+                  simple: (?<=.)[^A-Za-z0-9](?=.)
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: errorPath
+    view: |-
+      {
+        "position": {
+          "x": 490,
+          "y": 760
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "24":
+    id: "24"
+    taskid: ea108651-9f73-4d60-85d2-32e110fb573e
+    type: condition
+    task:
+      id: ea108651-9f73-4d60-85d2-32e110fb573e
+      version: -1
+      name: Does List Product Category List Exist?
+      description: Check if list exist in demisto lists.
+      type: condition
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
+    nexttasks:
+      '#default#':
+      - "8"
+      "yes":
+      - "30"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isNotEmpty
+          left:
+            value:
+              simple: lists.SOC_ProductCategoryMap
+            iscontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 390
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "26":
+    id: "26"
+    taskid: 2665edd0-55b1-4425-86c4-1e13d790a4a1
+    type: playbook
+    task:
+      id: 2665edd0-55b1-4425-86c4-1e13d790a4a1
+      version: -1
+      name: Foundation - Error Handling
+      playbookName: Foundation - Error Handling
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1130
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "27":
+    id: "27"
+    taskid: 92cb6752-c0cd-442f-9ae7-d6160582a917
+    type: regular
+    task:
+      id: 92cb6752-c0cd-442f-9ae7-d6160582a917
+      version: -1
+      name: Set Product Type
+      description: "Set a value in context under the key you entered. If no value
+        is entered, the script doesn't do anything.\n\nThis automation runs using
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+      scriptName: SetAndHandleEmpty
+      type: regular
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
+    nexttasks:
+      '#error#':
+      - "26"
+      '#none#':
+      - "8"
+    scriptarguments:
+      key:
+        simple: SOCFramework.Product.type
+      value:
+        complex:
+          root: lists
+          accessor: SOC_ProductCategoryMap
+          transformers:
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: SOCFramework.Product.key
+                iscontext: true
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: type
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: errorPath
+    view: |-
+      {
+        "position": {
+          "x": 275,
+          "y": 945
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "28":
+    id: "28"
+    taskid: 4a70ffd7-16be-429b-a161-71a8d8ae5d0b
+    type: regular
+    task:
+      id: 4a70ffd7-16be-429b-a161-71a8d8ae5d0b
+      version: -1
+      name: Set Product Confidence
+      description: "Set a value in context under the key you entered. If no value
+        is entered, the script doesn't do anything.\n\nThis automation runs using
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+      scriptName: SetAndHandleEmpty
+      type: regular
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
+    nexttasks:
+      '#error#':
+      - "26"
+      '#none#':
+      - "8"
+    scriptarguments:
+      key:
+        simple: SOCFramework.Product.confidence
+      value:
+        complex:
+          root: lists
+          accessor: SOC_ProductCategoryMap
+          transformers:
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: SOCFramework.Product.key
+                iscontext: true
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: confidence
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: errorPath
+    view: |-
+      {
+        "position": {
+          "x": 705,
+          "y": 945
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "29":
+    id: "29"
+    taskid: f7151db9-c773-4090-87ba-5d4c6dd351c2
+    type: regular
+    task:
+      id: f7151db9-c773-4090-87ba-5d4c6dd351c2
+      version: -1
+      name: Set Product Category2
+      description: "Set a value in context under the key you entered. If no value
+        is entered, the script doesn't do anything.\n\nThis automation runs using
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+      scriptName: SetAndHandleEmpty
+      type: regular
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
+    nexttasks:
+      '#error#':
+      - "26"
+      '#none#':
+      - "8"
+    scriptarguments:
+      key:
+        simple: SOCFramework.Product.category
+      value:
+        complex:
+          root: lists
+          accessor: SOC_ProductCategoryMap
+          transformers:
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: SOCFramework.Product.key
+                iscontext: true
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: category
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: errorPath
+    view: |-
+      {
+        "position": {
+          "x": 1135,
+          "y": 945
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "30":
+    id: "30"
+    taskid: a5a42856-294a-43ed-94df-7719a96037ac
+    type: regular
+    task:
+      id: a5a42856-294a-43ed-94df-7719a96037ac
+      version: -1
+      name: Remove SOCFramework.Product to clean up.
+      description: "Delete field from context.\n\nThis automation runs using the default
+        Limited User role, unless you explicitly change the permissions.\nFor more
+        information, see the section about permissions here:\n- For Cortex XSOAR 6
+        see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+      scriptName: DeleteContext
+      type: regular
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+      istaskmissingcomponenterrordismissed: false
+    nexttasks:
+      '#none#':
+      - "22"
+    scriptarguments:
+      key:
+        simple: SOCFramework.Product.
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 490,
+          "y": 575
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+system: true
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 1325,
+        "width": 1465,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+inputs:
+- key: ProductKey
+  value:
+    simple: ${issue.tags.[0]}
+  required: true
+  description: Pass the product Data Source typically found here (i.e. issue.tags.[0])
+  playbookInputQuery:
+inputSections:
+- inputs:
+  - ProductKey
+  name: General (Inputs group)
+  description: Generic group for inputs
+outputSections:
+- outputs:
+  - SOCFramework.Product.key
+  - SOCFramework.Product.category
+  - SOCFramework.Product.type
+  - SOCFramework.Product.confidence
+  name: General (Outputs group)
+  description: Generic group for outputs
+outputs:
+- contextPath: SOCFramework.Product.key
+  description: Canonical resolved product key
+  type: string
+- contextPath: SOCFramework.Product.category
+  description: High-level product category used for SOC routing (e.g. Endpoint, Identity,
+    Network).
+  type: string
+- contextPath: SOCFramework.Product.type
+  description: More specific product type (e.g. EDR, NGFW, IDP, PAM).
+  type: string
+- contextPath: SOCFramework.Product.confidence
+  description: Confidence level of the product classification (e.g. high, medium,
+    low).
+  type: string
+sourceplaybookid: Foundation - Upon Trigger
+dirtyInputs: true
+adopted: true
+fromversion: 5.0.0

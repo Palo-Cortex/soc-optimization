@@ -1,18 +1,15 @@
-id: EP_IR_NIST (800-61)
-version: 14
+adopted: true
 contentitemexportablefields:
   contentitemfields:
-    packID: soc-optimization
-    packName: SOC Framework
-    itemVersion: 2.1.16
-    fromServerVersion: 5.0.0
-    toServerVersion: ""
     definitionid: ""
-    prevname: ""
+    fromServerVersion: 5.0.0
     isoverridable: false
+    itemVersion: 2.1.13
+    packID: ""
+    packName: SOC Framework
+    prevname: ""
     supportedModules: []
-vcShouldKeepItemLegacyProdMachine: false
-name: EP_IR_NIST (800-61)
+    toServerVersion: ""
 description: |-
   This Entry Point playbook acts as the first stage of the alert response pipeline. It is designed to be assigned directly to the automation trigger so that every new alert entering the SOC Framework is handled in a standardized way.
 
@@ -25,29 +22,57 @@ description: |-
   Routing to Lifecycle – Once classified, passes control to the top-level SOC NIST IR (800-61) playbook, which orchestrates the NIST alert response phases (Preparation, Detection & Analysis, Containment, Eradication, Recovery, and Post-Alert).
 
   This playbook ensures that every alert begins consistently, with normalization and routing handled before entering the NIST IR lifecycle. It effectively connects the raw automation trigger to the structured NIST response process, enabling modular blue/green deployment and tool-agnostic playbook execution
+dirtyInputs: true
+id: 'EP_IR_NIST (800-61)'
+inputSections:
+- description: Generic group for inputs
+  inputs:
+  - EntryPoint
+  name: General (Inputs group)
+inputs:
+- description: ""
+  key: EntryPoint
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: EP_InitialAccess
+name: EP_IR_NIST (800-61)
+outputSections:
+- description: Generic group for outputs
+  name: General (Outputs group)
+  outputs: []
+outputs: []
+sourceplaybookid: 51ffcd5a-f5bb-4e09-84ae-e1efdc5165ac
+starttaskid: "0"
 tags:
 - MITRE
 - SOC
 - SOC_Framework
 - NIST 800-61
-starttaskid: "0"
 tasks:
   "0":
+    continueonerrortype: ""
     id: "0"
-    taskid: c6580e49-dceb-4340-8867-666b7738078e
-    type: start
-    task:
-      id: c6580e49-dceb-4340-8867-666b7738078e
-      version: -1
-      name: ""
-      iscommand: false
-      brand: ""
-      playbooktaskmissingcomponent:
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
     nexttasks:
       '#none#':
-      - "17"
+      - "16"
+    note: false
+    quietmode: 0
     separatecontext: false
-    continueonerrortype: ""
+    skipunavailable: false
+    task:
+      brand: ""
+      id: c6580e49-dceb-4340-8867-666b7738078e
+      iscommand: false
+      name: ""
+      playbooktaskmissingcomponent: null
+      version: -1
+    taskid: c6580e49-dceb-4340-8867-666b7738078e
+    timertriggers: []
+    type: start
     view: |-
       {
         "position": {
@@ -55,49 +80,94 @@ tasks:
           "y": 50
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
   "3":
-    id: "3"
-    taskid: d8799f66-e47d-409b-82e2-478b0708e021
-    type: title
-    task:
-      id: d8799f66-e47d-409b-82e2-478b0708e021
-      version: -1
-      name: Done
-      type: title
-      iscommand: false
-      brand: ""
-      playbooktaskmissingcomponent:
-    separatecontext: false
     continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: d8799f66-e47d-409b-82e2-478b0708e021
+      iscommand: false
+      name: Done
+      playbooktaskmissingcomponent: null
+      type: title
+      version: -1
+    taskid: d8799f66-e47d-409b-82e2-478b0708e021
+    timertriggers: []
+    type: title
     view: |-
       {
         "position": {
           "x": 50,
-          "y": 580
+          "y": 760
         }
       }
-    note: false
-    timertriggers: []
+  "4":
+    continueonerrortype: ""
+    id: "4"
     ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
     isautoswitchedtoquietmode: false
-  "15":
-    id: "15"
-    taskid: b7646310-99ef-43b2-a843-a63a15dc6d0d
-    type: playbook
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "15"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
     task:
-      id: b7646310-99ef-43b2-a843-a63a15dc6d0d
+      brand: ""
+      id: dcaf2712-d746-4f70-a174-ab0d981e50e1
+      iscommand: false
+      name: Foundation - Upon Trigger
+      playbookId: Foundation - Upon Trigger
+      playbooktaskmissingcomponent: null
+      type: playbook
       version: -1
-      name: SOC NIST IR (800-61)
+    taskid: dcaf2712-d746-4f70-a174-ab0d981e50e1
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 400
+        }
+      }
+  "15":
+    continueonerrortype: ""
+    id: "15"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      ShadowMode:
+        simple: "True"
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
       description: |-
         This playbook implements the NIST SP 800-61 Alert Response lifecycle in a structured, repeatable way. It serves as the top-level controller, orchestrating all downstream playbooks and automations that align to the four NIST phases:
 
@@ -116,61 +186,58 @@ tasks:
         Normalization (Upon Trigger of the EntryPoint) ensures entities (hosts, users, IPs, processes, etc.) are handled consistently.
 
         This top-level playbook is the backbone of the SOC Framework: it receives the alert trigger, applies the NIST 800-61 model, and routes execution to the appropriate detection, containment, and response sub-playbooks for standardized alert handling
-      playbookName: SOC NIST IR (800-61)
+      id: cd14c308-db43-4c73-85e2-23bc1d26553f
+      iscommand: false
+      name: SOC NIST IR (800-61)
+      playbookId: SOC NIST IR (800-61)
+      playbooktaskmissingcomponent: null
       type: playbook
-      iscommand: false
-      brand: ""
-      playbooktaskmissingcomponent:
-    nexttasks:
-      '#none#':
-      - "3"
-    scriptarguments:
-      ShadowMode:
-        simple: SOCFramework.shadow_mode
-    separatecontext: false
-    continueonerrortype: ""
-    loop:
-      iscommand: false
-      exitCondition: ""
-      wait: 1
-      max: 100
+      version: -1
+    taskid: cd14c308-db43-4c73-85e2-23bc1d26553f
+    timertriggers: []
+    type: playbook
     view: |-
       {
         "position": {
           "x": 50,
-          "y": 400
+          "y": 580
         }
       }
-    note: false
-    timertriggers: []
+  "16":
+    continueonerrortype: ""
+    id: "16"
     ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
     isautoswitchedtoquietmode: false
-  "17":
-    id: "17"
-    taskid: 2f777788-a89f-46bf-9843-172851700b07
-    type: playbook
-    task:
-      id: 2f777788-a89f-46bf-9843-172851700b07
-      version: -1
-      name: Foundation - Upon Trigger V2
-      playbookName: Foundation - Upon Trigger V2
-      type: playbook
+    isoversize: false
+    loop:
+      exitCondition: ""
       iscommand: false
-      brand: ""
-      playbooktaskmissingcomponent:
+      max: 100
+      wait: 1
     nexttasks:
       '#none#':
-      - "15"
+      - "4"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      keyName:
+        simple: SOCOptimizeConfig
+      listName:
+        simple: SOCOptimizationConfig
     separatecontext: false
-    continueonerrortype: ""
-    loop:
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 94bacc9a-d338-4191-8688-470d9a3df2af
       iscommand: false
-      exitCondition: ""
-      wait: 1
-      max: 100
+      name: Foundation - Load Configuration
+      playbookId: Foundation - Load Configuration
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 94bacc9a-d338-4191-8688-470d9a3df2af
+    timertriggers: []
+    type: playbook
     view: |-
       {
         "position": {
@@ -178,44 +245,16 @@ tasks:
           "y": 220
         }
       }
-    note: false
-    timertriggers: []
-    ignoreworker: false
-    skipunavailable: false
-    quietmode: 0
-    isoversize: false
-    isautoswitchedtoquietmode: false
-system: true
+version: -1
 view: |-
   {
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 590,
+        "height": 770,
         "width": 380,
         "x": 50,
         "y": 50
       }
     }
   }
-inputs:
-- key: EntryPoint
-  value:
-    simple: EP_InitialAccess
-  required: false
-  description: ""
-  playbookInputQuery:
-inputSections:
-- inputs:
-  - EntryPoint
-  name: General (Inputs group)
-  description: Generic group for inputs
-outputSections:
-- outputs: []
-  name: General (Outputs group)
-  description: Generic group for outputs
-outputs: []
-sourceplaybookid: 51ffcd5a-f5bb-4e09-84ae-e1efdc5165ac
-dirtyInputs: true
-adopted: true
-fromversion: 5.0.0

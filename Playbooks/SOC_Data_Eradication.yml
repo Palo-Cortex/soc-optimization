@@ -1,5 +1,5 @@
-id: Foundation Common - Extract Indicators from alerts
-version: 7
+id: SOC Data Eradication
+version: 4
 contentitemexportablefields:
   contentitemfields:
     packID: soc-optimization
@@ -12,20 +12,25 @@ contentitemexportablefields:
     isoverridable: false
     supportedModules: []
 vcShouldKeepItemLegacyProdMachine: false
-name: Foundation Common - Extract Indicators from alerts
-description: This is a common playbook intended to integrate the Indicator Extraction
-  to all automated alerts.
+name: SOC Data Eradication
+description: |-
+  Primary owners: Alert responders, platform engineers.
+
+  Analyst role: Provide forensic details (malware hash, registry paths, C2 domains) to guide eradication efforts.
 tags:
 - SOC
 - SOC_Framework
+- Data
+- NIST 800-61
+- Eradication
 starttaskid: "0"
 tasks:
   "0":
     id: "0"
-    taskid: 775ef611-299c-4899-87c7-60d32884730a
+    taskid: 7e6a701e-667b-4a70-8a74-14564da75fc7
     type: start
     task:
-      id: 775ef611-299c-4899-87c7-60d32884730a
+      id: 7e6a701e-667b-4a70-8a74-14564da75fc7
       version: -1
       name: ""
       iscommand: false
@@ -33,13 +38,13 @@ tasks:
       playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
-      - "1"
+      - "2"
     separatecontext: false
     continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 50,
+          "x": 450,
           "y": 50
         }
       }
@@ -52,31 +57,24 @@ tasks:
     isautoswitchedtoquietmode: false
   "1":
     id: "1"
-    taskid: 5acfdb6d-b65e-4b7d-896a-8d57c21733cd
-    type: regular
+    taskid: 7fad044e-60c9-4baa-8bb6-316d5aea8cfa
+    type: playbook
     task:
-      id: 5acfdb6d-b65e-4b7d-896a-8d57c21733cd
+      id: 7fad044e-60c9-4baa-8bb6-316d5aea8cfa
       version: -1
-      name: Extract indicators from Issue
-      description: Extract all indicators according to server indicators configuration
-      script: Builtin|||extractIndicators
-      type: regular
-      iscommand: true
-      brand: Builtin
+      name: Foundation - Error Handling
+      playbookName: Foundation - Error Handling
+      type: playbook
+      iscommand: false
+      brand: ""
       playbooktaskmissingcomponent:
-    nexttasks:
-      '#none#':
-      - "3"
-    scriptarguments:
-      text:
-        simple: ${issue}
-    separatecontext: false
+    separatecontext: true
     continueonerrortype: ""
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 220
+          "x": 740,
+          "y": 290
         }
       }
     note: false
@@ -86,14 +84,14 @@ tasks:
     quietmode: 0
     isoversize: false
     isautoswitchedtoquietmode: false
-  "3":
-    id: "3"
-    taskid: 0c830526-70e7-4df8-bffc-214c075794ba
+  "2":
+    id: "2"
+    taskid: 6944e944-2ade-4f6d-b6e0-0f6b8e2c3253
     type: title
     task:
-      id: 0c830526-70e7-4df8-bffc-214c075794ba
+      id: 6944e944-2ade-4f6d-b6e0-0f6b8e2c3253
       version: -1
-      name: End Playbook
+      name: Done
       type: title
       iscommand: false
       brand: ""
@@ -103,8 +101,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 50,
-          "y": 400
+          "x": 430,
+          "y": 470
         }
       }
     note: false
@@ -120,16 +118,31 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 410,
-        "width": 380,
-        "x": 50,
+        "height": 480,
+        "width": 690,
+        "x": 430,
         "y": 50
       }
     }
   }
-inputs: []
+inputs:
+- key: ShadowMode
+  value:
+    simple: SOCFramework.shadow_mode
+  required: true
+  description: ""
+  playbookInputQuery:
+inputSections:
+- inputs:
+  - ShadowMode
+  name: General (Inputs group)
+  description: Generic group for inputs
+outputSections:
+- outputs: []
+  name: General (Outputs group)
+  description: Generic group for outputs
 outputs: []
-sourceplaybookid: Foundation Common - Extract Indicators from alerts
-quiet: true
+sourceplaybookid: SOC Data Analysis
+dirtyInputs: true
 adopted: true
 fromversion: 5.0.0

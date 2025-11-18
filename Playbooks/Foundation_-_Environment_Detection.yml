@@ -1,0 +1,198 @@
+id: Foundation - Environment Detection
+version: 16
+contentitemexportablefields:
+  contentitemfields:
+    packID: soc-optimization
+    packName: SOC Framework
+    itemVersion: 2.1.16
+    fromServerVersion: 5.0.0
+    toServerVersion: ""
+    definitionid: ""
+    prevname: ""
+    isoverridable: false
+    supportedModules: []
+vcShouldKeepItemLegacyProdMachine: false
+name: Foundation - Environment Detection
+description: |
+  Identify Non-Production Use Cases
+  Keeps downstream playbooks from performing ‘hazardous tasks’
+tags:
+- SOC
+- SOC_Framework
+starttaskid: "0"
+tasks:
+  "0":
+    id: "0"
+    taskid: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+    type: start
+    task:
+      id: 4bb50423-9a1a-4c0e-88ba-c31e26fdf280
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "19"
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 50
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "8":
+    id: "8"
+    taskid: 2eb08148-d069-489a-83e1-1ab88016aac3
+    type: title
+    task:
+      id: 2eb08148-d069-489a-83e1-1ab88016aac3
+      version: -1
+      name: Done
+      type: title
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    separatecontext: false
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 580
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "17":
+    id: "17"
+    taskid: c9a53716-a57b-4fae-8e00-d3508d482f51
+    type: playbook
+    task:
+      id: c9a53716-a57b-4fae-8e00-d3508d482f51
+      version: -1
+      name: Foundation - Error Handling
+      playbookName: Foundation - Error Handling
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: true
+    continueonerrortype: ""
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 400
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+  "19":
+    id: "19"
+    taskid: 64b7af01-0eaa-495f-a2b9-a4c0a395bc05
+    type: regular
+    task:
+      id: 64b7af01-0eaa-495f-a2b9-a4c0a395bc05
+      version: -1
+      name: Set Shadow Mode / Full Run
+      description: Set a value in context under the key you entered.
+      scriptName: Set
+      type: regular
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#error#':
+      - "17"
+      '#none#':
+      - "8"
+    scriptarguments:
+      key:
+        simple: SOCFramework.shadow_mode
+      value:
+        complex:
+          root: lists
+          accessor: SOCOptimizationConfig
+          transformers:
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: ShadowMode
+          - operator: getField
+            args:
+              field:
+                value:
+                  simple: enabled
+    separatecontext: false
+    continueonerror: true
+    continueonerrortype: errorPath
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 220
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+system: true
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 590,
+        "width": 492.5,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+inputs: []
+inputSections:
+- inputs: []
+  name: General (Inputs group)
+  description: Generic group for inputs
+outputSections:
+- outputs:
+  - SOCFramework.shadow_mode
+  name: General (Outputs group)
+  description: Generic group for outputs
+outputs:
+- contextPath: SOCFramework.shadow_mode
+  description: Are all playbooks running in Full Mode or Shadow Mode
+  type: boolean
+sourceplaybookid: Foundation - Upon Trigger
+dirtyInputs: true
+adopted: true
+fromversion: 5.0.0
