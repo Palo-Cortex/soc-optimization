@@ -1,0 +1,37 @@
+args:
+- description: The integration's sourceBrand value.
+  name: brand_source
+  required: true
+- description: The SOC action to map (e.g. soc-quarantine-email).
+  name: action
+  required: true
+commonfields:
+  id: 'SOCFramework-GetBrandCommand'
+  version: -1
+dockerimage: demisto/python3:3.12.12.5490952
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: SOCFramework-GetBrandCommand
+outputs:
+- contextPath: SOCFramework.BrandCommand
+  description: '{ "command": "...", "args": [...] }'
+- contextPath: success
+  description: True/false if action supported for this brand.
+  type: boolean
+- contextPath: command
+  description: Vendor command name.
+  type: string
+- contextPath: args
+  description: The expected argument keys.
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: ''
+scripttarget: 0
+subtype: python3
+tags:
+- SOC
+- SOC_Framework
+- Commands
+type: python

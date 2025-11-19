@@ -1,0 +1,41 @@
+args:
+- description: 'Category: Email, Identity, Endpoint, etc.'
+  name: product_category
+  required: true
+- description: Integration brand.
+  name: brand_source
+  required: true
+- description: SOC action key.
+  name: action
+  required: true
+- description: Vendor command name.
+  name: command
+- description: Output from SOC_CommandWrapper.
+  name: output
+commonfields:
+  id: 'SOCFramework-ActionHistoryAdd'
+  version: -1
+dockerimage: demisto/python3:3.12.12.5490952
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: SOCFramework-ActionHistoryAdd
+outputs:
+- contextPath: SOCFramework.ActionHistory[]
+  description: Appended array of action history entries.
+- contextPath: success
+  description: Always true unless exception.
+  type: boolean
+- contextPath: entry_added
+  description: The exact entry appended.
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: ''
+scripttarget: 0
+subtype: python3
+tags:
+- Commands
+- SOC
+- SOC_Framework
+type: python

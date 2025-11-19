@@ -1,0 +1,465 @@
+adopted: true
+description: |
+  Full SOC Framework Generic Command Test Suite Playbook.
+id: SOCFramework-TestSuite
+inputs: []
+name: SOCFramework Test Suite
+outputs: []
+starttaskid: "0"
+tags:
+- SOC
+- SOC_Framework
+- Testing
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "111"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: d686af4e-549f-4939-8740-793ba0ec5d3a
+      iscommand: false
+      name: Start
+      playbooktaskmissingcomponent: null
+      version: -1
+    taskid: d686af4e-549f-4939-8740-793ba0ec5d3a
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+  "20":
+    continueonerrortype: ""
+    id: "20"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "30"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      scenario:
+        simple: phishing
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: e4213db8-46b9-4cb4-8813-c6f4e276c651
+      iscommand: false
+      name: Generate Scenario (Phishing)
+      playbooktaskmissingcomponent: null
+      script: 'SOCFramework-TestScenario'
+      version: -1
+    taskid: e4213db8-46b9-4cb4-8813-c6f4e276c651
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 400
+        }
+      }
+  "30":
+    continueonerrortype: ""
+    id: "30"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "40"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      action:
+        simple: soc-quarantine-email
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 7f9ff36c-d7c8-4dc8-9e08-748723ee8b86
+      iscommand: false
+      name: Test GetRequiredArtifacts
+      playbooktaskmissingcomponent: null
+      script: 'SOCFramework-GetRequiredArtifacts'
+      type: regular
+      version: -1
+    taskid: 7f9ff36c-d7c8-4dc8-9e08-748723ee8b86
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 580
+        }
+      }
+  "40":
+    continueonerrortype: ""
+    id: "40"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "50"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      artifacts:
+        simple: ${SOCFramework.Artifacts}
+      required:
+        simple: ${SOCFramework.RequiredArtifacts}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 95da6c3a-afca-4439-87b6-8ebd094d87d3
+      iscommand: false
+      name: Validate Artifacts
+      playbooktaskmissingcomponent: null
+      script: 'SOCFramework-ValidateArtifacts'
+      version: -1
+    taskid: 95da6c3a-afca-4439-87b6-8ebd094d87d3
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 760
+        }
+      }
+  "50":
+    continueonerrortype: ""
+    id: "50"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "60"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      action:
+        simple: soc-quarantine-email
+      brand_source:
+        simple: Proofpoint TAP v2
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 3acaa304-5367-41c7-8f41-fd79ac357bd9
+      iscommand: false
+      name: Test Brand Command Lookup
+      playbooktaskmissingcomponent: null
+      script: 'SOCFramework-GetBrandCommand'
+      version: -1
+    taskid: 3acaa304-5367-41c7-8f41-fd79ac357bd9
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 940
+        }
+      }
+  "60":
+    continueonerrortype: ""
+    id: "60"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "70"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      args_map:
+        simple: ${SOCFramework.BrandCommand.args}
+      artifacts:
+        simple: ${SOCFramework.Artifacts}
+      command:
+        simple: ${SOCFramework.BrandCommand.command}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 8e9d3f56-34cc-41d7-8143-6cb80c7acc69
+      iscommand: false
+      name: Test Command Wrapper
+      playbooktaskmissingcomponent: null
+      script: 'SOC_CommandWrapper'
+      version: -1
+    taskid: 8e9d3f56-34cc-41d7-8143-6cb80c7acc69
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1120
+        }
+      }
+  "70":
+    continueonerrortype: ""
+    id: "70"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "112"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      action:
+        simple: soc-quarantine-email
+      brand_source:
+        simple: Proofpoint TAP v2
+      command:
+        simple: ${SOCFramework.BrandCommand.command}
+      output:
+        simple: ${SOCFramework.ActionOutput}
+      product_category:
+        simple: Email
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 0c24f969-85ed-4754-8c74-ef9cca51a14f
+      iscommand: false
+      name: Test Action History
+      playbooktaskmissingcomponent: null
+      script: 'SOCFramework-ActionHistoryAdd'
+      version: -1
+    taskid: 0c24f969-85ed-4754-8c74-ef9cca51a14f
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1300
+        }
+      }
+  "90":
+    continueonerrortype: ""
+    id: "90"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "100"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: SOCFramework.Artifacts.Email.Email_MessageID
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: "Delete field from context.\n\nThis automation runs using the default
+        Limited User role, unless you explicitly change the permissions.\nFor more
+        information, see the section about permissions here:\n- For Cortex XSOAR 6
+        see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
+        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+      id: b95f1aa4-9d79-4be8-8c8e-ee7c040f2096
+      iscommand: false
+      name: Negative Test - Remove message_id
+      playbooktaskmissingcomponent: null
+      script: DeleteContext
+      type: regular
+      version: -1
+    taskid: b95f1aa4-9d79-4be8-8c8e-ee7c040f2096
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1660
+        }
+      }
+  "100":
+    continueonerrortype: ""
+    id: "100"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "110"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      artifacts:
+        simple: ${SOCFramework.Artifacts}
+      required:
+        simple: email.message_id
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 8641884c-d326-45eb-8142-d911542b4646
+      iscommand: false
+      name: ValidateArtifacts (Expect Fail)
+      playbooktaskmissingcomponent: null
+      script: 'SOCFramework-ValidateArtifacts'
+      version: -1
+    taskid: 8641884c-d326-45eb-8142-d911542b4646
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1840
+        }
+      }
+  "110":
+    continueonerrortype: ""
+    id: "110"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 68a890e6-f064-48e3-89dc-a9abca863862
+      iscommand: false
+      name: Complete
+      playbooktaskmissingcomponent: null
+      version: -1
+    taskid: 68a890e6-f064-48e3-89dc-a9abca863862
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 2020
+        }
+      }
+  "111":
+    continueonerrortype: ""
+    id: "111"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "20"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      listName:
+        simple: SOC_FrameworkActions
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.list.get
+      id: 65e3fe94-71ba-4ffa-8989-178ca34647f9
+      iscommand: true
+      name: Verify Lists - SOC_FrameworkActions
+      playbooktaskmissingcomponent: null
+      script: Builtin|||getList
+      type: regular
+      version: -1
+    taskid: 65e3fe94-71ba-4ffa-8989-178ca34647f9
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 220
+        }
+      }
+  "112":
+    continueonerrortype: ""
+    id: "112"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "90"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      action:
+        simple: soc-quarantine-email
+      artifacts:
+        simple: ${SOCFramework.Artifacts}
+      brand_source:
+        simple: Proofpoint TAP v2
+      product_category:
+        simple: Email
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Executes a SOC Framework action using brand_source mappings and
+        SOCFramework.Artifacts.
+      id: 1c8bc214-cd89-400a-8c2c-9cd7e71f8517
+      iscommand: false
+      name: End-to-End Generic Action Test
+      playbookId: soc_generic_action
+      playbooktaskmissingcomponent: null
+      type: playbook
+      version: -1
+    taskid: 1c8bc214-cd89-400a-8c2c-9cd7e71f8517
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1480
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 2030,
+        "width": 380,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }

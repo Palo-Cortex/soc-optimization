@@ -1,0 +1,40 @@
+args:
+- description: Integration command name (e.g., proofpoint-quarantine-message).
+  name: command
+  required: true
+- description: List of vendor-specific argument names (e.g., ["guid"]).
+  name: args_map
+  required: true
+- description: Raw artifact object from context (same passed into ValidateArtifacts).
+  name: artifacts
+  required: true
+commonfields:
+  id: 'SOC_CommandWrapper'
+  version: -1
+dockerimage: demisto/python3:3.12.12.5490952
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: SOC_CommandWrapper
+outputs:
+- contextPath: SOCFramework.ActionOutput
+  description: Raw result returned by the integration command.
+- contextPath: success
+  description: True if execution succeeded.
+  type: boolean
+- contextPath: command_executed
+  description: The command actually run.
+  type: string
+- contextPath: args_used
+  description: The arguments passed to the executed command.
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: ''
+scripttarget: 0
+subtype: python3
+tags:
+- Commands
+- SOC
+- SOC_Framework
+type: python

@@ -1,0 +1,28 @@
+args:
+- description: SOC action key (e.g. soc-quarantine-email)
+  name: action
+  required: true
+commonfields:
+  id: 'SOCFramework-GetRequiredArtifacts'
+  version: -1
+dockerimage: demisto/python3:3.12.12.5490952
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: SOCFramework-GetRequiredArtifacts
+outputs:
+- contextPath: SOCFramework.RequiredArtifacts
+  description: The standardized artifact keys required for the action (e.g. ["email.message_id"]).
+- contextPath: required_artifacts
+  description: Output for debugging.
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: ''
+scripttarget: 0
+subtype: python3
+tags:
+- Commands
+- SOC
+- SOC_Framework
+type: python

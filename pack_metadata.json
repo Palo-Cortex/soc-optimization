@@ -3,7 +3,7 @@
   "id": "soc-optimization",
   "description": "This contents the content used to leverage processes that the Palo SOC uses including: Playbooks, integrations, layouts, etc.",
   "support": "xsoar",
-  "currentVersion": "2.1.19",
+  "currentVersion": "2.1.20",
   "author": "Cortex XSOAR",
   "url": "https://www.paloaltonetworks.com/cortex",
   "email": "",

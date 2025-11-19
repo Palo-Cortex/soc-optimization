@@ -1,0 +1,25 @@
+args:
+- name: key
+  required: true
+- name: value
+  required: true
+commonfields:
+  id: 'SOCFramework-Test-SetContext'
+  version: -1
+dockerimage: demisto/python3:3.12.12.5490952
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: SOCFramework-Test-SetContext
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: ''
+scripttarget: 0
+subtype: python3
+tags:
+- Commands
+- SOC
+- SOC_Framework
+- Testing
+type: python

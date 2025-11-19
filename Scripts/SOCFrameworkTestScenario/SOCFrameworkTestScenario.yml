@@ -1,0 +1,25 @@
+args:
+- name: scenario
+- name: dataset
+- name: shadowmode
+commonfields:
+  id: 'SOCFramework-TestScenario'
+  version: -1
+dockerimage: demisto/python3:3.12.12.5490952
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: SOCFramework-TestScenario
+outputs:
+- contextPath: SOCFramework.Artifacts
+- contextPath: SOCFramework.Product
+- contextPath: SOCFramework.shadow_mode
+  type: boolean
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: ''
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
