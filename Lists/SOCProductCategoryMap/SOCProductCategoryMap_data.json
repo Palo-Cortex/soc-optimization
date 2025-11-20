@@ -29,6 +29,11 @@
         "type": "SEG",
         "confidence": "high"
     },
+    "ds_microsoftgraphmail": {
+        "category": "Email",
+        "type": "SEG",
+        "confidence": "high"
+    },
     "ds_abnormalsecurity_abx": {
         "category": "Email",
         "type": "BEC/ML",
@@ -99,7 +104,7 @@
         "type": "EDR",
         "confidence": "high"
     },
-    "ds_paloaltonetworks_xdr_analytics": {
+    "ds_panw_xdr_agent": {
         "category": "Endpoint",
         "type": "XDR",
         "confidence": "high"

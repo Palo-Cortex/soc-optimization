@@ -4,7 +4,7 @@ contentitemexportablefields:
   contentitemfields:
     packID: soc-optimization
     packName: SOC Framework
-    itemVersion: 2.1.16
+    itemVersion: 2.1.19
     fromServerVersion: 5.0.0
     toServerVersion: ""
     definitionid: ""
@@ -855,17 +855,20 @@ inputs:
   description: Set to 'True' to quarantine the identified file.
   playbookInputQuery:
 - key: EndpointID
-  value: {}
+  value:
+    simple: ${SOCFramework.Primary.Endpoint.value}
   required: false
   description: The endpoint ID to run commands over.
   playbookInputQuery:
 - key: FileHash
-  value: {}
+  value:
+    simple: ${SOCFramework.Primary.File_Hash.value}
   required: false
   description: The file hash to block.
   playbookInputQuery:
 - key: FilePath
-  value: {}
+  value:
+    simple: ${SOCFramework.Primary.File_Path.value}
   required: false
   description: The path of the file to block.
   playbookInputQuery:
@@ -879,12 +882,13 @@ inputs:
   playbookInputQuery:
 - key: ShadowMode
   value:
-    simple: SOCFramework.shadow_mode
+    simple: ${SOCFramework.shadow_mode}
   required: false
   description: ""
   playbookInputQuery:
 - key: Hostname
-  value: {}
+  value:
+    simple: ${SOCFramework.Primary.Host.value}
   required: false
   description: ""
   playbookInputQuery:

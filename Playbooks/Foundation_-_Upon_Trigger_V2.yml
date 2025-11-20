@@ -1,10 +1,10 @@
 id: Foundation - Upon Trigger V2
-version: 10
+version: 3
 contentitemexportablefields:
   contentitemfields:
-    packID: ""
+    packID: soc-optimization
     packName: SOC Framework
-    itemVersion: 2.1.16
+    itemVersion: 2.1.19
     fromServerVersion: 5.0.0
     toServerVersion: ""
     definitionid: ""
@@ -162,7 +162,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1620
+          "y": 1800
         }
       }
     note: false
@@ -224,7 +224,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1970
+          "y": 2150
         }
       }
     note: false
@@ -255,7 +255,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 2320
+          "y": 2500
         }
       }
     note: false
@@ -283,7 +283,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 2670
+          "y": 2850
         }
       }
     note: false
@@ -321,7 +321,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 1790
+          "y": 1970
         }
       }
     note: false
@@ -346,7 +346,7 @@ tasks:
       playbooktaskmissingcomponent:
     nexttasks:
       '#none#':
-      - "4"
+      - "33"
     separatecontext: false
     continueonerrortype: ""
     loop:
@@ -475,7 +475,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 2140
+          "y": 2320
         }
       }
     note: false
@@ -510,7 +510,7 @@ tasks:
       {
         "position": {
           "x": 50,
-          "y": 2490
+          "y": 2670
         }
       }
     note: false
@@ -561,12 +561,50 @@ tasks:
     quietmode: 0
     isoversize: false
     isautoswitchedtoquietmode: false
+  "33":
+    id: "33"
+    taskid: 8bdfe7d9-f2a1-4e48-9057-9dd30bf9e012
+    type: playbook
+    task:
+      id: 8bdfe7d9-f2a1-4e48-9057-9dd30bf9e012
+      version: -1
+      name: Foundation - Normalize Enrichements
+      playbookName: Foundation - Normalize Enrichments
+      type: playbook
+      iscommand: false
+      brand: ""
+      playbooktaskmissingcomponent:
+    nexttasks:
+      '#none#':
+      - "4"
+    separatecontext: true
+    continueonerrortype: ""
+    loop:
+      iscommand: false
+      exitCondition: ""
+      wait: 1
+      max: 100
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1620
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+    isoversize: false
+    isautoswitchedtoquietmode: false
+system: true
 view: |-
   {
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 2680,
+        "height": 2860,
         "width": 380,
         "x": 50,
         "y": 50

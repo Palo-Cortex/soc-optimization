@@ -1,7 +1,7 @@
 adopted: true
 description: |
   Full SOC Framework Generic Command Test Suite Playbook.
-id: SOCFramework-TestSuite
+id: SOCFramework Test Suite
 inputs: []
 name: SOCFramework Test Suite
 outputs: []
@@ -29,7 +29,7 @@ tasks:
       id: d686af4e-549f-4939-8740-793ba0ec5d3a
       iscommand: false
       name: Start
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       version: -1
     taskid: d686af4e-549f-4939-8740-793ba0ec5d3a
     timertriggers: []
@@ -62,7 +62,7 @@ tasks:
       id: e4213db8-46b9-4cb4-8813-c6f4e276c651
       iscommand: false
       name: Generate Scenario (Phishing)
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       script: 'SOCFramework-TestScenario'
       version: -1
     taskid: e4213db8-46b9-4cb4-8813-c6f4e276c651
@@ -96,7 +96,7 @@ tasks:
       id: 7f9ff36c-d7c8-4dc8-9e08-748723ee8b86
       iscommand: false
       name: Test GetRequiredArtifacts
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       script: 'SOCFramework-GetRequiredArtifacts'
       type: regular
       version: -1
@@ -133,7 +133,7 @@ tasks:
       id: 95da6c3a-afca-4439-87b6-8ebd094d87d3
       iscommand: false
       name: Validate Artifacts
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       script: 'SOCFramework-ValidateArtifacts'
       version: -1
     taskid: 95da6c3a-afca-4439-87b6-8ebd094d87d3
@@ -169,7 +169,7 @@ tasks:
       id: 3acaa304-5367-41c7-8f41-fd79ac357bd9
       iscommand: false
       name: Test Brand Command Lookup
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       script: 'SOCFramework-GetBrandCommand'
       version: -1
     taskid: 3acaa304-5367-41c7-8f41-fd79ac357bd9
@@ -207,7 +207,7 @@ tasks:
       id: 8e9d3f56-34cc-41d7-8143-6cb80c7acc69
       iscommand: false
       name: Test Command Wrapper
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       script: 'SOC_CommandWrapper'
       version: -1
     taskid: 8e9d3f56-34cc-41d7-8143-6cb80c7acc69
@@ -249,7 +249,7 @@ tasks:
       id: 0c24f969-85ed-4754-8c74-ef9cca51a14f
       iscommand: false
       name: Test Action History
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       script: 'SOCFramework-ActionHistoryAdd'
       version: -1
     taskid: 0c24f969-85ed-4754-8c74-ef9cca51a14f
@@ -284,12 +284,12 @@ tasks:
         Limited User role, unless you explicitly change the permissions.\nFor more
         information, see the section about permissions here:\n- For Cortex XSOAR 6
         see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: b95f1aa4-9d79-4be8-8c8e-ee7c040f2096
       iscommand: false
       name: Negative Test - Remove message_id
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       script: DeleteContext
       type: regular
       version: -1
@@ -326,7 +326,7 @@ tasks:
       id: 8641884c-d326-45eb-8142-d911542b4646
       iscommand: false
       name: ValidateArtifacts (Expect Fail)
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       script: 'SOCFramework-ValidateArtifacts'
       version: -1
     taskid: 8641884c-d326-45eb-8142-d911542b4646
@@ -354,7 +354,7 @@ tasks:
       id: 68a890e6-f064-48e3-89dc-a9abca863862
       iscommand: false
       name: Complete
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       version: -1
     taskid: 68a890e6-f064-48e3-89dc-a9abca863862
     timertriggers: []
@@ -388,7 +388,7 @@ tasks:
       id: 65e3fe94-71ba-4ffa-8989-178ca34647f9
       iscommand: true
       name: Verify Lists - SOC_FrameworkActions
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       script: Builtin|||getList
       type: regular
       version: -1
@@ -437,7 +437,7 @@ tasks:
       iscommand: false
       name: End-to-End Generic Action Test
       playbookId: soc_generic_action
-      playbooktaskmissingcomponent: null
+      playbooktaskmissingcomponent:
       type: playbook
       version: -1
     taskid: 1c8bc214-cd89-400a-8c2c-9cd7e71f8517
@@ -463,3 +463,4 @@ view: |-
       }
     }
   }
+fromversion: 5.0.0
