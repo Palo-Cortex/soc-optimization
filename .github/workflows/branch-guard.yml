@@ -1,31 +1,45 @@
-name: Branch name guard
+name: Enforce Branch Naming Convention
+
 on:
   pull_request:
-    types: [opened, synchronize, reopened, edited]
+    types: [opened, edited, synchronize, reopened]
 
 jobs:
-  validate-branch:
+  check-branch-name:
     runs-on: ubuntu-latest
     steps:
-      - name: Validate SOC Framework branch naming
+      - name: Get branch name
+        id: branch
         run: |
-          BRANCH="${{ github.head_ref }}"
+          # For pull_request events, the source branch is in GITHUB_HEAD_REF
+          echo "name=${GITHUB_HEAD_REF}" >> "$GITHUB_OUTPUT"
 
-          TYPE='(feat|fix|chore|docs|refactor)'
+      - name: Validate branch name against convention
+        run: |
+          BRANCH_NAME="${{ steps.branch.outputs.name }}"
 
-          # Added "project" here
-          MODULE='(entrypoint|upon-trigger|hydration|normalization|enrichment|containment|eradication|recovery|communication|data-modeling|correlation|playbooks|lists|common-utils|dashboards|project)'
+          echo "Branch name: $BRANCH_NAME"
 
-          COMPONENT='[a-z0-9\-]+'
-          SLUG='[a-z0-9\-]+'
+          # Allowed kinds and areas
+          REGEX='^(feat|fix|chore|refactor|docs|hotfix)\/(core|endpoint|email|identity|network|pov|tooling)-[a-z0-9-]+$'
 
-          REGEX="^${TYPE}\/${MODULE}\/${COMPONENT}\/${SLUG}$"
-
-          if [[ ! "$BRANCH" =~ $REGEX ]]; then
-            echo "❌ Invalid branch name: $BRANCH"
-            echo "Expected: <type>/<module>/<component>/<slug>"
-            echo "Allowed modules include 'project' for workflow/infra updates."
+          if [[ "$BRANCH_NAME" =~ $REGEX ]]; then
+            echo "✅ Branch name matches required pattern."
+            exit 0
+          else
+            echo "❌ Invalid branch name: $BRANCH_NAME"
+            echo ""
+            echo "Required pattern:"
+            echo "  <kind>/<area>-<short-slug>"
+            echo ""
+            echo "Where:"
+            echo "  kind  ∈  feat | fix | chore | refactor | docs | hotfix"
+            echo "  area  ∈  core | endpoint | email | identity | network | pov | tooling"
+            echo "  slug  ∈  lowercase letters, numbers, dashes (e.g. 'normalizer-file-artifacts')"
+            echo ""
+            echo "Examples:"
+            echo "  feat/core-normalizer-file-artifacts"
+            echo "  fix/endpoint-containment-timeout-bug"
+            echo "  feat/pov-turla-carbon-scenario"
             exit 1
           fi
-
-          echo "✅ Branch name valid: $BRANCH"
