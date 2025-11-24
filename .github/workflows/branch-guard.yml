@@ -9,6 +9,7 @@ jobs:
     # ⬇️ Skip this job when the source branch is main or develop
     if: >
       github.event.pull_request.head.ref != 'main' &&
+      github.event.pull_request.head.ref != 'staging' &&
       github.event.pull_request.head.ref != 'develop'
     runs-on: ubuntu-latest
     steps:
