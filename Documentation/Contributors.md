@@ -1,225 +1,140 @@
-# SOC Optimization Framework — Contributor Guide
+# Contributing to the SOC Optimization Framework
 
-This guide explains how to contribute correctly to the SOC Optimization Framework.  
-It includes the full contribution workflow, branch naming rules, modular coding standards, and PR requirements.
+Most contributors will use the **GitHub Web interface**.
 
-Maintainers: @Palo-Cortex/soc-framework-maintainers
-
----
-
-# 1. Contribution Workflow
-
-1. Fork the repository  
-2. Clone your fork:
-
-       git clone https://github.com/<your-username>/soc-optimization.git
-       cd soc-optimization
-
-3. Create a branch using the SOC Framework naming convention  
-4. Make your changes following the Modular Coding Standards  
-5. Commit and push your branch  
-6. Open a Pull Request  
-7. Tag reviewers: @Palo-Cortex/soc-framework-maintainers  
-8. Maintainers review → validate → merge  
+You do **not** need Git, the command line, or SDK tools to make basic changes.  
+This guide explains the simplest way to contribute using the GitHub GUI.  
+More advanced options are linked at the bottom.
 
 ---
 
-# 2. Branch Naming Convention (Required)
+## ⭐ How to Make a Simple Change (GitHub Web GUI)
 
-Branches also function as feature flags, so correct naming is mandatory.
+Use this when you want to update an existing file (playbook, rule, script, modeling rule, installer, documentation, etc.).
 
-Format:
+1. Open the file you want to change in GitHub  
+2. Click the **✏️ Edit** button  
+3. GitHub will prompt you to create a new branch  
+4. Enter a branch name using this format:
+   ```
+   <type>/<area>-<short-description>
+   ```
+   Examples:
+   ```
+   feat/email-improve-phishing-flow
+   fix/core-normalizer-hash-bug
+   docs/core-update-readme
+   ```
+5. Click **Create branch and start editing**  
+6. Make your changes in the editor  
+7. Scroll down and click **Commit changes**  
+8. On the next screen, click **Create pull request**  
+9. In the PR description, briefly describe what you changed  
+10. Tag the maintainers:
+    ```
+    @Palo-Cortex/soc-framework-maintainers
+    ```
 
-       <type>/<module>/<component>/<slug>
-
-## Types
-
-       feat | fix | chore | docs | refactor
-
-## SOC Framework Modules
-
-       entrypoint
-       upon-trigger
-       hydration
-       normalization
-       enrichment
-       containment
-       eradication
-       recovery
-       communication
-       data-modeling
-       correlation
-       playbooks
-       lists
-       common-utils
-       dashboards
-       project          ← for workflows, CI/CD, repo structure, governance
-
-## Component
-
-A sub-area within a module. Must be kebab-case.
-
-Examples:
-
-       entity-mapping
-       artifact-extraction
-       email
-       endpoint
-       crowdstrike
-       case-init
-       severity
-       workflows
-       ci
-       docs
-       maintenance
-
-## Slug
-
-Short, clear, kebab-case description of the change.
-
-## Examples
-
-       feat/upon-trigger/entity-mapping/auto-resolve-user
-       fix/data-modeling/crowdstrike/fix-process-lineage
-       feat/containment/endpoint/auto-isolate-host
-       docs/playbooks/phishing/update-docs
-       chore/project/workflows/update-branch-guard
+The maintainers will review your changes and follow up if anything else is needed.
 
 ---
 
-# 3. Modular Coding Standards (Required)
+## ⭐ How to Upload or Replace a File (From XSIAM → GitHub)
 
-All contributions must follow the SOC Framework’s modular architecture and FieldOps design principles.
+Use this flow when you exported a file from XSIAM and want to update it in the repository.
 
-## 3.1 Build “Lego Bricks”
+1. Navigate to the folder where the file belongs  
+2. Click **Add file → Upload files**  
+3. Drag your exported file into the upload area  
+4. If GitHub shows a message about replacing an existing file with the same name, confirm the replacement  
+5. In the commit section:
+   - Make sure **“Commit directly to the `<your-branch-name>` branch”** is selected  
+   - Add a short commit message  
+   - Click **Commit changes**  
+6. If you haven’t opened a Pull Request yet, click **Compare & pull request**, or use the **Pull requests** tab  
+7. Describe what you uploaded and why  
+8. Tag the maintainers
 
-Each contribution must be:
-
-- Reusable  
-- Composable  
-- Self-contained  
-- Single-purpose  
-- Vendor-agnostic unless intentionally vendor-specific  
-- Free of customer-specific data  
-
-## 3.2 Place code in the correct SOC Framework layer
-
-Primary architecture:
-
-       Entry Point
-         → Upon Trigger
-             → Hydration
-             → Normalization
-             → Entity Mapping
-             → Artifact Extraction
-             → Severity / Priority
-             → Ownership
-         → Enrichment
-         → Containment
-         → Eradication
-         → Recovery
-         → Communication
-
-Supporting modules:
-
-       Data Modeling
-       Correlation
-       Playbooks
-       Lists
-       Dashboards
-       Common Utils
-       Project (for workflows, CI/CD, governance)
-
-Your contribution must live in the correct directory for the module it supports.
-
-## 3.3 Vendor Logic Must Be Isolated
-
-Examples:
-
-       data-modeling/crowdstrike/...
-       data-modeling/microsoft/...
-       data-modeling/trendmicro/...
-
-Never mix core logic with vendor-specific code.
-
-## 3.4 Never Include Customer-Specific Data
-
-Do NOT commit:
-
-- Customer usernames  
-- Domains  
-- IP addresses  
-- Tenant identifiers  
-- Integration instance names  
-
-Always use variables, normalized fields, or lists.
-
-## 3.5 Development Sequence: Normalize → Correlate → Playbook
-
-The correct build order:
-
-1. Model your fields  
-2. Build correlation logic  
-3. Develop playbooks that consume normalized context  
-
-Never build playbooks on raw data.
-
-## 3.6 Documentation Required
-
-Each new module or component must include:
-
-- Purpose  
-- Inputs  
-- Outputs  
-- Dependencies  
-- Example behavior  
+If you're unsure where a file belongs, upload it in the PR and mention it — we will help place it correctly.
 
 ---
 
-# 4. Pull Request Requirements
+## ⭐ Branch Naming (Required)
 
-Every PR must include:
+Use this pattern:
 
-## ✔ Proper branch name
+```
+<type>/<area>-<short-description>
+```
 
-       <type>/<module>/<component>/<slug>
+**Types:**
 
-## ✔ PR checklist completed
-- Affected modules selected  
-- Testing described  
-- Dependencies listed  
-- Documentation updated if needed  
+- `feat` – new feature or behavior  
+- `fix` – bug fix  
+- `docs` – documentation changes  
+- `chore` – maintenance or cleanup  
+- `refactor` – internal restructuring without changing behavior  
 
-## ✔ Maintainers tagged
+**Areas:**
 
-       @Palo-Cortex/soc-framework-maintainers
+- `core`  
+- `endpoint`  
+- `email`  
+- `identity`  
+- `network`  
+- `pov`  
+- `tooling`  
 
-## ✔ Clean commit messages
+**Examples:**
 
-Examples:
+```
+feat/core-add-file-artifact
+fix/endpoint-containment-timeout
+docs/email-update-phishing-docs
+chore/tooling-update-ci-workflow
+```
 
-       feat(upon-trigger/entity-mapping): improve user identity resolution
-       fix(data-modeling/crowdstrike): correct process lineage parsing
-       docs(playbooks/phishing): update flow and explanation
-       chore(project/workflows): optimize validation workflow
+More details:  
+➡️ `docs/BRANCH_NAMING.md`
 
 ---
 
-# 5. Governance Summary
+## ⭐ What Is a Pull Request? (Short Version)
 
-- Maintainers team is **visible**, role = **Maintain**
-- Admin team is **private**, minimal membership
-- All contributors use forks + PRs
-- CODEOWNERS enforces mandatory review
-- Branch naming validated automatically
-- Feature flags generated from branch names
+A **Pull Request (PR)** is simply a request to merge your changes into the main project.
+
+When you open a PR:
+
+- Maintainners can review your changes  
+- They can comment and suggest improvements  
+- When everything looks good, they approve and merge your branch  
+
+You do not need to know how Git works behind the scenes.
+
+More details:  
+➡️ `docs/WHAT_IS_A_PR.md`
 
 ---
 
-# 6. Need Help?
+## ⭐ Additional Helpful Guides (Optional)
 
-If you get stuck, tag:
+These are **optional** and meant for contributors who want to go deeper:
 
-       @Palo-Cortex/soc-framework-maintainers
+- ➡️ `docs/MULTI_FILE_EDITS.md` – How to edit multiple files in one branch using the GUI  
+- ➡️ `docs/CONTRIBUTING_ADVANCED.md` – Forking, local development, validation tools  
+- ➡️ `docs/COMPONENT_DESIGN_GUIDE.md` – How to describe the purpose, inputs, outputs, and test strategy of your component  
+- ➡️ `docs/WORKFLOW_OVERVIEW.md` – Internal `dev → staging → main` promotion model  
 
-We’re here to help guide contributors and maintain high standards for the SOC Optimization Framework.
+Most contributors can ignore these.
+
+---
+
+## ⭐ Need Help?
+
+If you’re unsure at any point, open a Pull Request and add:
+
+```
+@Palo-Cortex/soc-framework-maintainers
+```
+
+We’re here to help contributors of all experience levels.
