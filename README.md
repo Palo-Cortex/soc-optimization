@@ -1,4 +1,8 @@
-# ⚙️ SOC Optimization Framework for Cortex XSIAM
+# ⚙️ SOC Optimization Framework for Cortex XSIAM (DEPRECATED)
+
+
+This repo has moved: https://github.com/Palo-Cortex/secops-framework
+
 
 This repository outlines a scalable SOC optimization approach tailored for Palo Alto Networks Cortex XSIAM. The goal is to reduce analyst fatigue, improve response time, and enable data-driven visibility into automation value. The solution is based on three core patterns and enhanced by modular design and operational safeguards.
 
